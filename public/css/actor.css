@@ -1,0 +1,256 @@
+.actor-main {
+    width: 360px;
+    margin: auto;
+    border: 1px solid rgba(0, 0, 0, .125);
+    padding: 10px;
+}
+
+.actor-card {
+    display: flex;
+    width: 100%;
+}
+
+.part-one img {
+    width: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.part-one {
+    width: 35%;
+}
+
+.part-two {
+    display: flex;
+    flex-direction: column;
+    width: 65%;
+    padding: 5px;
+    overflow: hidden;
+    justify-content: space-between;
+}
+
+.button-part {
+    width: 100%;
+}
+
+.button-part button {
+    width: 48%;
+}
+
+.name-part {
+    width: 100%;
+}
+
+.name-part h1 {
+    margin: 0;
+    font-size: 19px;
+    font-weight: 600;
+    font-family: 'Varela Round', sans-serif;
+}
+
+.name-part p {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: 'Varela Round', sans-serif;
+}
+
+.center-part {
+    width: 100%;
+    background-color: #efefef;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    padding: 5px;
+}
+
+.center-part p {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 500;
+    font-family: 'Varela Round', sans-serif;
+    margin-right: 5px;
+}
+
+hr {
+
+    margin: 0.4rem 0;
+    color: inherit;
+    border: 0;
+    border-top: 1px solid;
+    opacity: .25;
+
+}
+
+.actor-dettails {
+    display: flex;
+    width: 100%;
+    height: 35px;
+    overflow: hidden;
+    justify-content: center;
+    align-items: center;
+}
+
+.about-dettails {
+    display: flex;
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+    justify-content: center;
+
+}
+
+.about-dettails .dettails {
+    width: 100%;
+}
+
+.dettails-name {
+    width: 30%;
+}
+
+.dettails-name h2 {
+    margin: 0;
+    margin-left: 5px;
+    font-size: 16px;
+    font-weight: 500;
+    font-family: 'Poppins', sans-serif;
+}
+
+.dettails {
+    width: 70%;
+}
+
+.dettails h3 {
+    font-size: 16px;
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    --mdb-text-opacity: 1;
+    color: #757575 !important;
+    font-weight: 400;
+}
+
+
+.scd-sec {
+    width: 100%;
+    margin-top: 10px;
+}
+
+.about-head {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.about-head h2 {
+    margin: 0;
+    margin-left: 5px;
+    font-size: 16px;
+    font-weight: 500;
+    font-family: 'Poppins', sans-serif;
+}
+
+.dettails p {
+    font-size: 16px;
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    --mdb-text-opacity: 1;
+    color: #757575 !important;
+    font-weight: 400;
+}
+.movies-list {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+}
+
+.movie {
+    width: 30%;
+    margin: 5px;
+    border: 1px solid rgba(0, 0, 0, .125);
+}
+
+.movie a {
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+    font-family: 'Poppins', sans-serif;
+}
+
+.movie-body {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 160px;
+    overflow: hidden;
+}
+
+.movie-img img {
+    width: 100%;
+    object-fit: cover;
+    height: 100%;
+}
+
+.movie-text {
+    display: flex;
+    flex-direction: column;
+justify-content: center;
+    align-items: center;
+    height: 40px;
+}
+
+.movie-text h3 {
+    margin: 0;
+    margin-left: 5px;
+    font-size: 12px;
+    font-weight: 500;
+    font-family: 'Poppins', sans-serif;
+    color: #007bff;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 90px;
+    text-align: center;
+}
+
+.movie-text p {
+    font-size: 9px;
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    --mdb-text-opacity: 1;
+    color: #757575 !important;
+    font-weight: 400;
+}
+
+.movie-img {
+    height: 120px;
+}
+.actor-dettails a{
+    text-decoration: none;
+    margin-left: -55px;
+    color: #007bff;
+    font-family: 'Poppins', sans-serif;
+}
+
+@media(min-width: 767px) {
+    .img-sec{
+      width: 650px;
+    }
+    .other-sec{
+        width: 650px;
+      }
+    .actor-main {
+        width: 650px;
+    }
+    .part-two{
+        justify-content: start;
+    }
+    .movie{
+        width: 100px;
+    }
+
+  }

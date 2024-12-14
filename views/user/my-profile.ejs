@@ -1,0 +1,36 @@
+
+
+<%- include('../partials/header'); -%>
+<title><%= user.name%> Profile -Dramalite</title>
+<meta name="description" content="<%= user.name%> Profile">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+crossorigin="anonymous">
+<link rel="stylesheet" href="/css/user.css">
+
+<div class="container-fluid">
+    <div class="container profile-container">
+        <div class="row">
+            <div id="menu-jk" class="menu">
+                <div class="pro-s-cover">
+                    <img src="<%= user.profilePic%>" alt="">
+                    <h6><%= user.name%></h6>
+                    <hp><%= user.email%></p>
+                    <% if(user.instaLink){%>
+                    <div class="connect-with">
+                        <span>Connect </span> 
+                        <a href="<h6><%= user.instaLink%></h6>"><i class="fab fa-instagram"></i></a>
+                    </div>
+                    <% } %>
+                    <!-- <p>Web Designer</p>  border-bottom: 1px solid #CCC;-->
+                    <div class="msg-box buttons">
+                        <a href="/user/edit-profile" class="btn btn-success">Edit Profile</a>
+                        <a href="/#" class="btn  btn-primary">My Reviews</a>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+ </div> 
+
+ <%- include('../partials/footer'); -%>

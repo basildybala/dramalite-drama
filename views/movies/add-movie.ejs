@@ -1,0 +1,270 @@
+<%- include('../partials/admin-header'); -%>
+<link rel="stylesheet" href="/css/auth.css">
+<title>Add movie -Dramalite</title>
+<meta name="description" content="Malayalam Movies and Tamil Telugu Hindi Webseries  Release Date Reviews Videos  Cast & Crew  Film Poster">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/auth.css">
+    <script src="https://cdn.ckeditor.com/4.20.1/standard/ckeditor.js"></script>
+    <div class="signup-form">
+        <form enctype="multipart/form-data" id="signup-form" action="/movie/add-movie" method="post">
+            <h2>Add Movie</h2>
+            <hr>
+            <div class="form-group">
+                <label for="name">Movie Name:</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" name="name" placeholder="Movie Name" required="required">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="name">Seo Name:</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" name="engname" placeholder="Seo Name" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="name">Category</label>
+                <div class="input-group">
+                    <select class="form-control" name="category" required>
+                        <option value="">Default Name</option>
+                        <option value="Malayalam">Malayalam</option>
+                        <option value="Tamil">Tamil</option>
+                        <option value="Hindi">Hindi</option>
+                        <option value="Telugu">Telugu</option>
+                        <option value="Kannada">Kannada</option>
+                        <option value="English">English</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="name">Year:</label>
+                <div class="input-group">
+                    <input type="number" class="form-control" name="year" placeholder="Year">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="name">Release Date not date:</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" name="releasedate" placeholder="Release Date">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="name">OTT Release Date:</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" name="ottreleasedate" placeholder="Release Date">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="name">Genre:</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" name="genre" placeholder="genre">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="name">Duration:</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" name="duration" placeholder="Duration">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="name">Director:</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" name="director" placeholder="Director Name">
+                    <input type="text" class="form-control" name="directorlink" placeholder="Director Link">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="name">Wriiten:</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" name="written" placeholder="Wriiten Name">
+                    <input type="text" class="form-control" name="writtenlink" placeholder="Written Link">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="name">Producer:</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" name="producedby" placeholder="Producer Name">
+                    <input type="text" class="form-control" name="producedbylink" placeholder="Producer Link">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="name">Youtube Trailer:</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" name="ytlink" placeholder="Producer Name">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="name">Tags</label>
+                <div class="cate-array">
+                    <div class="cate-div">
+                        <input type="text" class="form-control" placeholder="Tag" name="tags" />
+                        <button class="btn btn-danger remove-btn m-2"><i class="fa-solid fa-trash"></i></button>
+                    </div>
+                </div>
+            </div>
+            <button id="add-label" class="btn btn-success mb-2">Add</button>
+            <div class="form-group">
+                <label for="name">Ott:</label>
+                <select class="form-control" name="ottName">
+                    <option value="">Default Name</option>
+                    <% for(var i=0; i<ott.length; i++){%>
+                        <option value="<%= ott[i].name %> ">
+                            <%= ott[i].name %>
+                        </option>
+                        <% } %>
+                </select>
+                <select class="form-control" name="ottImg" style="margin: 7px 0px;">
+                    <option value="">Ott Image </option>
+                    <% for(var i=0; i<ott.length; i++){%>
+                        <option value="<%= ott[i].img %> ">
+                            <%= ott[i].name %>
+                        </option>
+                        <% } %>
+                </select>
+                <div class="input-group">
+                    <input type="text" class="form-control" name="ottUrl" placeholder="OTT url">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="name">Story:</label>
+                <div class="input-group">
+                    <textarea name="story"></textarea>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="name">Actor 1:</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" name="actid1" placeholder="ID">
+                    <input type="text" class="form-control" name="actorname1" placeholder="Name">
+
+                </div>
+                <div class="input-group" style="margin: 5px 0px;">
+                    <input type="text" class="form-control" name="actimg1" placeholder="Img Url">
+                    <input type="text" class="form-control" name="mvactorname1" placeholder="Mv Name">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="name">Actor 2:</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" name="actid2" placeholder="ID">
+                    <input type="text" class="form-control" name="actorname2" placeholder="Name">
+                </div>
+                <div class="input-group" style="margin: 5px 0px;">
+                    <input type="text" class="form-control" name="actimg2" placeholder="Img Url">
+                    <input type="text" class="form-control" name="mvactorname2" placeholder="Mv Name">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="name">Actor 3:</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" name="actid3" placeholder="ID">
+                    <input type="text" class="form-control" name="actorname3" placeholder="Name">
+                </div>
+                <div class="input-group" style="margin: 5px 0px;">
+                    <input type="text" class="form-control" name="actimg3" placeholder="Img Url">
+                    <input type="text" class="form-control" name="mvactorname3" placeholder="Mv Name">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="name">Actor 4:</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" name="actid4" placeholder="ID">
+                    <input type="text" class="form-control" name="actorname4" placeholder="Name">
+
+                </div>
+                <div class="input-group" style="margin: 5px 0px;">
+                    <input type="text" class="form-control" name="actimg4" placeholder="Img Url">
+                    <input type="text" class="form-control" name="mvactorname4" placeholder="Mv Name">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="name">Actor 5:</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" name="actid5" placeholder="ID">
+                    <input type="text" class="form-control" name="actorname5" placeholder="Name">
+
+                </div>
+                <div class="input-group" style="margin: 5px 0px;">
+                    <input type="text" class="form-control" name="actimg5" placeholder="Img Url">
+                    <input type="text" class="form-control" name="mvactorname5" placeholder="Mv Name">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="name">Actor 6:</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" name="actid6" placeholder="ID">
+                    <input type="text" class="form-control" name="actorname6" placeholder="Name">
+
+                </div>
+                <div class="input-group" style="margin: 5px 0px;">
+                    <input type="text" class="form-control" name="actimg6" placeholder="Img Url">
+                    <input type="text" class="form-control" name="mvactorname6" placeholder="Mv Name">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="name">Actor 7:</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" name="actid7" placeholder="ID">
+                    <input type="text" class="form-control" name="actorname7" placeholder="Name">
+
+                </div>
+                <div class="input-group" style="margin: 5px 0px;">
+                    <input type="text" class="form-control" name="actimg7" placeholder="Img Url">
+                    <input type="text" class="form-control" name="mvactorname7" placeholder="Mv Name">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="name">Movie Poster:</label>
+                <div class="input-group">
+
+                    <input type="file" class="form-control" name="moviePoster" placeholder="moviePoster">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="name">Images:</label>
+                <div class="input-group">
+                    <input type="file" class="form-control" name="movieImages" placeholder="Images" multiple>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary btn-lg blue-backgroud">Add Movie</button>
+        </form>
+    </div>
+    =
+    <script>
+        CKEDITOR.replace('story');
+
+        let addBtn = document.getElementById('add-label');
+        let cateArray = document.querySelector('.cate-array');
+        let CateDiv = document.querySelectorAll('.cate-div')[0];
+
+        addBtn.addEventListener('click', function (e) {
+            e.preventDefault()
+            let value = CateDiv.cloneNode(true);
+            let input = value.getElementsByTagName('input')[0];
+            input.value = '';
+            cateArray.appendChild(value);
+        });
+        $(document).on('click', '.remove-btn', function (e) {
+            e.preventDefault();
+            let rowItem = $(this).parent();
+            $(rowItem).remove();
+        })
+        let addIngredientsBtn = document.getElementById('addIngredientsBtn');
+        let ingredientList = document.querySelector('.ingredientList');
+        let ingredeintDiv = document.querySelectorAll('.ingredeintDiv')[0];
+        addIngredientsBtn.addEventListener('click', function () {
+            let newIngredients = ingredeintDiv.cloneNode(true);
+            let input = newIngredients.getElementsByTagName('input')[0];
+            input.value = '';
+            ingredientList.appendChild(newIngredients);
+        });
+    </script>
+
+    <%- include('../partials/footer'); -%>

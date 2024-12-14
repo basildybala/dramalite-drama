@@ -1,0 +1,99 @@
+<%- include('../partials/admin-header'); -%>
+<link rel="stylesheet" href="/css/auth.css">
+<title>Add Celebrity</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+crossorigin="anonymous">
+<link rel="stylesheet" href="css/auth.css">
+<script src="https://cdn.ckeditor.com/4.20.1/standard/ckeditor.js"></script>
+<div class="signup-form">
+    <form enctype="multipart/form-data" id="signup-form" action="/celebs/add-celebrity" method="post">
+		<h2>Add Actor</h2>
+	<hr>
+        <div class="form-group">
+            <label for="name">Actor Name:</label>
+			<div class="input-group">
+				<input type="text" class="form-control" name="actorname" placeholder="Actor Name"  required="required">
+			</div>
+        </div>
+        <div class="form-group">
+            <label for="name">Nick Name:</label>
+			<div class="input-group">
+				<input type="text" class="form-control" name="nickname" placeholder="Nick Name" >
+			</div>
+        </div>
+        <div class="form-group">
+            <label for="name">Nationality:</label>
+			<div class="input-group">
+				<input type="text" class="form-control" name="nationality" placeholder="Nationality">
+			</div>
+        </div>
+        <div class="form-group">
+            <label for="name">Language:</label>
+			<div class="input-group">
+				<input type="text" class="form-control" name="language" placeholder="Language" >
+			</div>
+        </div>
+        <div class="form-group">
+            <label for="name">Born:</label>
+			<div class="input-group">
+				<input type="text" class="form-control" name="age" placeholder="Born" >
+			</div>
+        </div>
+        <div class="form-group">
+            <label for="name">Year of active:</label>
+			<div class="input-group">
+				<input type="number" class="form-control" name="yearactive" placeholder="Year of active" >
+			</div>
+        </div>
+        <div class="form-group">
+            <label for="name">Occupation:</label>
+			<div class="input-group">
+				<input type="text" class="form-control" name="occupation" placeholder="Occupation" >
+			</div>
+        </div>
+        <div class="form-group">
+            <label for="name">Home town:</label>
+			<div class="input-group">
+				<input type="text" class="form-control" name="hometown" placeholder="Home Town" >
+			</div>
+        </div>
+        <div class="form-group">
+            <label for="name">Instagram Link:</label>
+			<div class="input-group">
+				<input type="text" class="form-control" name="instalink" placeholder="Instagram Link" >
+			</div>
+        </div>
+        <div class="form-group">
+            <label for="name">Twitter Link:</label>
+			<div class="input-group">
+				<input type="text" class="form-control" name="twitlink" placeholder="Twitter Link" >
+			</div>
+        </div>
+        <div class="form-group">
+            <label for="name">Biography:</label>
+			<div class="input-group">
+				<textarea name="biography"></textarea>
+			</div>
+        </div>
+		<div class="form-group">
+            <label for="name">Actor Profile Picture:</label>
+			<div class="input-group">
+
+				<input type="file" class="form-control" name="actorProfilePic" placeholder="Profile Pic">
+			</div>
+        </div>
+        <div class="form-group">
+            <label for="name">Images:</label>
+			<div class="input-group">
+				<input type="file" class="form-control" name="actorImages" placeholder="Images" multiple>
+			</div>
+        </div>
+        <button type="submit" class="btn btn-primary btn-lg blue-backgroud">Add Celebrity</button>
+    </form>
+</div>
+
+<script>
+    CKEDITOR.replace( 'biography' );
+</script>
+
+<%- include('../partials/footer'); -%>

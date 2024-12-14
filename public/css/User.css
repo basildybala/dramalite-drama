@@ -1,0 +1,246 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    list-style: none; }
+  
+
+  
+  a {
+    text-decoration: none;
+    outline: none;
+    color: #444; }
+  
+  a:hover {
+    color: #444; }
+  
+  ul {
+    margin-bottom: 0;
+    padding-left: 0; }
+  
+  a:hover,
+  a:focus,
+  input,
+  textarea {
+    text-decoration: none;
+    outline: none; }
+  
+  .center {
+    text-align: center; }
+  
+  .left {
+    text-align: left; }
+  
+    .right {
+        text-align: right; }
+      
+      .cp {
+        cursor: pointer; }
+      
+      html, body {
+        height: 100%; }
+      
+      p {
+        margin-bottom: 0px;
+        width: 100%; }
+      
+        .no-padding {
+            padding: 0px; }
+          
+          .no-margin {
+            margin: 0px; }
+          
+          .hid {
+            display: none; }
+          
+          .top-mar {
+            margin-top: 15px; }
+          
+          .h-100 {
+            height: 100%; }
+          
+          ::placeholder {
+            color: #747f8a !important;
+            font-size: 13px;
+            opacity: .5 !important; }
+          
+          .container-fluid {
+            padding: 0px; }
+  
+
+  
+  body {
+
+    font-family: "mouse-300", Arial, Helvetica, sans-serif;
+    color: #6A6A6A; }
+  
+  .session-title {
+    padding: 30px;
+    margin: 0px; }
+    .session-title h2 {
+      width: 100%;
+      text-align: center; }
+    .session-title p {
+      max-width: 850px;
+      text-align: center;
+      float: none;
+      margin: auto; }
+    .session-title span {
+      float: right;
+      font-style: italic; }
+  
+  .inner-title {
+    padding: 20px;
+    padding-left: 0px;
+    margin-bottom: 30px; }
+    .inner-title h2 {
+      width: 100%;
+      text-align: center;
+      font-size: 2rem;
+      font-family: "slab", Arial, Helvetica, sans-serif; }
+    .inner-title p {
+      width: 100%;
+      text-align: center; }
+  
+  .page-nav {
+    padding: 40px;
+    text-align: center;
+    padding-top: 160px; }
+    .page-nav ul {
+      float: none;
+      margin: auto; }
+    .page-nav h2 {
+      font-size: 36px;
+      width: 100%;
+      color: #444; }
+
+  
+  .btn {
+    box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+    border-radius: 2px; }
+  
+
+  
+  /* ===================================== Header CSS ================================== */
+  .profile-container {
+    max-width: 1050px;
+    margin-top: 30px; }
+    .profile-container .pro-s-cover {
+      background-color: #FFF;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 2px 6px 0 rgba(218, 218, 253, 0.65), 0 2px 6px 0 rgba(206, 206, 238, 0.54); }
+      .profile-container .pro-s-cover img {
+        max-width: 75%;
+        border-radius: 50px; }
+      .profile-container .pro-s-cover h6 {
+        font-family: "mouse-300", Arial, Helvetica, sans-serif;
+        font-size: 1.3rem;
+        margin-top: 10px;
+        margin-bottom: 0px; }
+      .profile-container .pro-s-cover span {
+        font-size: .8rem; }
+
+      .profile-container .pro-s-cover .num-box {
+        width: 100%;
+        border-top: 1px solid #CCC;
+        margin-top: 10px; }
+        .profile-container .pro-s-cover .num-box .hire {
+          flex: 1;
+          text-align: center;
+          border-right: 1px solid #CCC;
+          padding: 10px 0px; }
+          .profile-container .pro-s-cover .num-box .hire span {
+            font-size: .9rem; }
+
+
+    .profile-container .data-box {
+      padding: 20px;
+      background-color: #FFF;
+      box-shadow: 0 2px 6px 0 rgba(218, 218, 253, 0.65), 0 2px 6px 0 rgba(206, 206, 238, 0.54);
+      margin-bottom: 20px; }
+      .profile-container .data-box h2 {
+        font-size: 1.2rem;
+        border-bottom: 1px solid #CCC;
+        padding-bottom: 10px;
+        margin-bottom: 10px; }
+      .profile-container .data-box p {
+        text-indent: 20px;
+        text-align: justify;
+        font-size: .9rem; }
+      .profile-container .data-box .btn-link li {
+        float: left;
+        margin-top: 15px;
+        padding: 5px 10px;
+        border-radius: 15px;
+        border: 1px solid #888;
+        margin-right: 10px;
+        color: #888; }
+        .profile-container .data-box .btn-link li i {
+          margin-top: 5px; }
+        .profile-container .data-box .btn-link li a {
+          color: #888; }
+      .profile-container .data-box .exp-row {
+        margin: 0px;
+        border-bottom: 1px solid #CCC;
+        padding-bottom: 10px;
+        margin-bottom: 10px; }
+        .profile-container .data-box .exp-row h6 {
+          width: 100%;
+          font-size: .9rem;
+          margin-bottom: 5px; }
+        .profile-container .data-box .exp-row i {
+          margin-left: 10px;
+          font-size: .8rem; }
+        .profile-container .data-box .exp-row span {
+          color: #009b7f;
+          font-size: .8rem;
+          font-family: "mouse-500", Arial, Helvetica, sans-serif; }
+        .profile-container .data-box .exp-row p {
+          margin-top: 5px;
+          text-indent: 15px; }
+      .profile-container .data-box .last {
+        margin-bottom: 0px;
+        padding-bottom: 0px;
+        border: 0px; }
+    .profile-container .education-detail .sec-title {
+      padding: 20px 0px;
+      text-align: center;
+      font-size: 22px; }
+    .profile-container .education-detail .resume-dat {
+      text-align: center;
+      margin: auto; }
+    .menu{
+        width: 370px;
+    margin: auto;
+    }
+    .connect-with a{
+        font-size: 22px;
+        color: blue;
+        margin-left: 5px;
+    }
+    .connect-with{
+        display: flex;
+    justify-content: center;
+    align-items: center;
+    }
+
+    .pro-s-cover .coonect-with i{
+        font-size: 22px;
+        color: #555;
+        margin-right: 5px;
+    }
+    .buttons{
+        display: flex;
+        align-items: center;
+        justify-content: center ;
+    }
+
+    .buttons a{
+        font-family: 'Varela Round', sans-serif;
+        font-size: 16px;
+        font-weight: 500;
+        margin: 5px;
+    }
+
+  
+  /*# sourceMappingURL=style.css.map */

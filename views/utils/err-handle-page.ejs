@@ -1,0 +1,15 @@
+<%- include('../partials/header'); -%>
+<title>Something wrong-Dramalite</title>
+
+<% if(error){%> 
+    <div class="err-msg">
+        <div class="msg error"> 
+            <%= error.msg%> 
+            <% if(error.link){%> 
+                <a href=" <%= error.link %> ">Back To Page</a>
+            <% }%>
+        </div>
+    </div>
+<% }%>
+
+<%- include('../partials/footer'); -%>

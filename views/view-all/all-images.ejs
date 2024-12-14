@@ -1,0 +1,28 @@
+<%- include('../partials/header'); -%>
+<title><%= movie.name %> Hd Images and movie stills -Dramalite</title>
+<meta name="description" content="<%= movie.engname %> movie hd images and posters download and view">
+    <link rel="stylesheet" href="/css/movie.css">
+
+    <div class="other-sec">
+        <div class="left-blue-header">
+            <h2>Images</h2>
+            <a href="">View all</a>
+        </div>
+        <div class="images">
+            <% if(movie.images.length >0) { %>
+            <% for(var i=0; i<movie.images.length; i++){%>
+            <div class="image">
+                <a href="/image/download?imgUrl=<%= movie.images[i] %>"><img data-src="/<%= movie.images[i] %>" alt="" class="lazy-photo"></a>
+            </div>
+            <% } %>
+            <% }else{ %>
+                <p>Images not uploaded</p>
+            <% } %>
+        </div>
+    </div>
+
+
+
+
+
+<%- include('../partials/footer'); -%>

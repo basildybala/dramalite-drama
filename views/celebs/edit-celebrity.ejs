@@ -1,0 +1,134 @@
+<%- include('../partials/admin-header'); -%>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/auth.css">
+    <script src="https://cdn.ckeditor.com/4.20.1/standard/ckeditor.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.2/js/lightbox.min.js"></script>
+    <title>Edit Celebrity</title>
+    <div class="signup-form">
+        <form enctype="multipart/form-data" id="signup-form" action="/celebs/edit-celebrity/<%= celebrity._id%>"
+            method="post">
+            <h2>Edit Celebrity</h2>
+            <hr>
+            <div class="form-group">
+                <label for="name">Actor Name:</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" name="actorname" placeholder="Actor Name"
+                        value="<%= celebrity.actorname %>" required="required">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="name">Nick Name:</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" name="nickname" placeholder="Nick Name"
+                        value="<%= celebrity.nickname %>">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="name">Nationality:</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" name="nationality" placeholder="Nationality"
+                        value="<%= celebrity.nationality %>">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="name">Language:</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" name="language" placeholder="Language"
+                        value="<%= celebrity.language %>">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="name">Born:</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" name="age" placeholder="Born" value="<%= celebrity.age %>">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="name">Year of active:</label>
+                <div class="input-group">
+                    <input type="number" class="form-control" name="yearactive" placeholder="Year of active"
+                        value="<%= celebrity.yearactive %>">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="name">Occupation:</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" name="occupation" placeholder="Occupation"
+                        value="<%= celebrity.occupation %>">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="name">Home Town:</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" name="hometown" placeholder="hometown"
+                        value="<%= celebrity.hometown %>">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="name">Instagram Link:</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" name="instalink" placeholder="Instagram Link"
+                        value="<%= celebrity.instalink %>">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="name">Twitter Link:</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" name="twitlink" placeholder="Twitter Link"
+                        value="<%= celebrity.twitlink %>">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="name">Biography:</label>
+                <div class="input-group">
+                    <textarea name="biography"><%= celebrity.biography %></textarea>
+                </div>
+            </div>
+            <div class="Images-1">
+                <img src="/<%= celebrity.profilePic %>" alt="" srcset="">
+            </div>
+            <div class="form-group">
+                <label for="name">Actor Profile Picture:</label>
+                <div class="input-group">
+
+                    <input type="file" class="form-control" name="actorProfilePic" placeholder="Profile Pic">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="name">Images:</label>
+                <div class="input-group">
+                    <input type="file" class="form-control" name="actorImages" placeholder="Images" multiple>
+                </div>
+            </div>
+                <div class="photos">
+                    <div class="img">
+                        <% for(var i=0; i<celebrity.images.length; i++){%>
+                            <div class="Images-1">
+                                <img src="/<%= celebrity.images[i] %>" alt="" srcset="">
+                                <input type="text" name="actorImages" value="<%= celebrity.images[i] %>" hidden>
+                                <i class="fa-solid fa-rectangle-xmark remove-btn"></i>
+                                <!-- <a href="" class="remove-btn">R</a> -->
+                                <!-- <button class="btn btn-danger remove-btn m-2">Delete</button> -->
+                            </div>
+                        <% }%>
+                    </div>
+                </div>
+            <button type="submit" class="btn btn-primary btn-lg blue-backgroud" style="margin-top: 10px;">Edit Celebrity</button>
+        </form>
+    </div>
+
+    <script>
+        CKEDITOR.replace('biography');
+
+        $(document).on('click', '.remove-btn', function (e) {
+            e.preventDefault();
+            let rowItem = $(this).parent();
+            $(rowItem).remove();
+        })
+    </script>
+
+    <%- include('../partials/footer'); -%>

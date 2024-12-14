@@ -1,0 +1,100 @@
+<%- include('../partials/header'); -%>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+crossorigin="anonymous">
+<title>Verify Otp -Dramalite</title>
+<link rel="stylesheet" href="/css/auth.css">
+<div class="err-msg">
+	<div class="msg "></div>
+</div>
+<div class="signup-form">
+
+    <!-- <div class="blue-header"><h1>Sign Up</h1></div> -->
+    <form id="verify-form" action="/api/user/create" method="post">
+        <!-- <input type="text" name="name">
+        <button type="submit">
+            ADD
+        </button> -->
+
+		<h2>Verify Otp</h2>
+		<div class="otp-msg">
+			<p>Otp sented to <span><%= userDetails.email%></span> <a onclick="resendOtp('<%= userDetails.id%>')" style="color: blue;" >Resend</a></p> 
+			
+		</div>
+		<hr>
+        <div class="form-group">
+			<div class="input-group">
+				<div class="input-group-prepend">
+					<span class="input-group-text">
+						<span class="fa fa-lock"></span>
+					</span>                    
+				</div>
+				<input type="number" class="form-control" name="OTP" placeholder="Otp" required="required">
+				<input type="text" class="form-control" name="userId" required="required" value="<%= userDetails.id%>" hidden>
+				<!-- <input type="text" class="form-control" name="userId" required="required" placeholder="<%= userDetails.id%>" value="<%= userDetails.id%>"> -->
+			</div>
+        </div>
+        <button type="submit" class="btn btn-primary  dark-blue-background" >Verify OTP</button>
+
+    </form>
+</div>
+
+<script>
+
+    $(document).ready(function (){
+        $('#verify-form').submit(function(event){
+            event.preventDefault()
+			// var pathname = window.location.pathname; // Returns path only (/path/example.html)
+			// userId=pathname.slice(14)
+			// // var url      = window.location.href;     // Returns full URL (https://example.com/path/example.html)
+			// // var origin   = window.location.origin; 
+			// console.log("userId",userId,data)
+            var formData=$(this).serialize();
+            $.ajax({
+                url:'/auth/verify-otp',
+               type:'POST',
+               data:formData,
+               success:function(data){
+                 if(data.complete){
+					$('.msg').addClass('success').text(data.msg);
+					setTimeout(function(){
+						window.location.replace(`/auth/login`)
+					},2000)
+
+					// localStorage.setItem(data)
+                    //$.redirect('/token-verify', {'arg1': 'value1', 'arg2': 'value2'});
+                    console.log(data)
+                 }else{
+					$('.msg').addClass('error').text(data.msg);
+					// $('.err-msg').removeClass('error','msg').text('')
+
+                 }
+
+               }
+            })
+        })
+    })
+
+	function resendOtp(userId){
+		$.ajax({
+            	url:`/auth/resend-otp/${userId}`,
+               type:'GET',
+               success:function(data){
+                 if(data.complete){
+					$('.msg').addClass('success').text(data.msg);
+					// setTimeout(function(){
+					// 	$('.err-msg').removeClass('error','msg').text('')
+					// },5000)
+					// localStorage.setItem(data)
+                    //$.redirect('/token-verify', {'arg1': 'value1', 'arg2': 'value2'});
+                    // console.log(data)
+                 }else{
+					$('.msg').addClass('error').text(data.msg);
+					// setTimeout(function(){
+					// 	$('.err-msg').removeClass('msg').text('')
+					// },5000)
+                 }
+               }
+            })
+	}
+</script>
+<%- include('../partials/footer'); -%>

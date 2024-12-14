@@ -1,0 +1,29 @@
+<title><%= user.name%> Profile image insta-Dramalite</title>
+<meta name="description" content="<%= user.name%> Dettails ">
+<%- include('../partials/header'); -%>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+crossorigin="anonymous">
+<link rel="stylesheet" href="/css/user.css">
+
+<div class="container-fluid">
+    <div class="container profile-container">
+        <div class="row">
+            <div id="menu-jk" class="menu">
+                <div class="pro-s-cover">
+                    <img src="<%= user.profilePic%>" alt="">
+                    <h6><%= user.name%></h6>
+                    <% if(user.instaLink){%>
+                    <div class="connect-with">
+                        <span>Connect </span> 
+                        <a href="<h6><%= user.instaLink%></h6>"><i class="fab fa-instagram"></i></a>
+                    </div>
+                    <% } %>
+                    <!-- <p>Web Designer</p>  border-bottom: 1px solid #CCC;-->
+                </div>
+            </div>
+            
+        </div>
+    </div>
+ </div> 
+
+ <%- include('../partials/footer'); -%>

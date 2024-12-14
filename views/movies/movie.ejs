@@ -1,0 +1,686 @@
+<%- include('../partials/header'); -%>
+    <link rel="stylesheet" href="/css/movie.css">
+
+
+    <title><%= movie.engname %> Movie Cast, Story, Review, Photos, Videos,OTT Watch</title>
+<meta name="title" content="<%= movie.engname %> Movie Cast, Story, Review, Photos, Videos,OTT Watch"/>
+<meta name="description" content="<%= movie.story %> <%= movie.engname %> Ott Release Date Movie ">
+<meta name="keywords" content="<%= movie.engname %>, <%= movie.engname %> <%= movie.category %>Movie, <%= movie.engname %> <%= movie.year %>, <%= movie.engname %> movie, <%= movie.actorname1 %> <%= movie.engname %>, <%= movie.actorname1 %> <%= movie.engname %> Movie, <%= movie.engname %> Download"/>
+<meta name="news_keywords" content="<%= movie.engname %>, <%= movie.engname %> <%= movie.category %> Movie, <%= movie.engname %> <%= movie.year %>, <%= movie.engname %> movie, <%= movie.actorname1 %> <%= movie.engname %>, <%= movie.actorname1 %> <%= movie.engname %> Movie, <%= movie.engname %> Download"/>
+<meta property="og:title" content="<%= movie.engname %> Movie Cast, Story, Review, Photos, Videos, Watch">
+<meta property="og:site_name" content="DramaLite.Com ">
+<meta property="og:url" content="https://dramalite.com/movie/<%= movie._id %>">
+<meta property="og:description" content="<%= movie.name %> <%= movie.actorname1 %> <%= movie.engname %> Movie Story: <%= movie.story %> <%= movie.engname %> Movie">
+<meta property="og:type" content="video.movie">
+<meta property="og:image" itemid="image" content="https://dramalite.com/public/images/movies/poster/<%= movie.moviePoster %>">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="Dramalite.com">
+<meta name="twitter:title" content="<%= movie.engname %> Movie Cast, Story, Review, Photos, Videos, Watch">
+<meta name="twitter:description" content="<%= movie.name %> <%= movie.actorname1 %> <%= movie.engname %> Movie Story: <%= movie.story %> <%= movie.engname %> Movie">
+<meta name="twitter:image" content="<%= movie.name %>">
+<meta name="twitter:url" content="https://dramalite.com/movie/<%= movie._id %>">
+<link rel="canonical" href="https://dramalite.com/movie/<%= movie._id %>"/>
+
+
+<script type="application/ld+json">
+    {"@context":"http://schema.org",
+    "@type":"Movie",
+    "url":"https://dramalite.com/movie/<%= movie._id %>",
+    "name":"<%= movie.name %>",
+    "image":" <% if(movie.moviePoster ) { %>/<%= movie.moviePoster %><% }else { %>/images/movies/id/<%= movie._id  %>.jpg<% } %>",
+    "description":"<%= movie.story %>",
+     "countryOfOrigin":{"@type":"Country","name":"India"},
+     "contentLocation":{"@type":"Place","name":"India"},
+     "alternateName":"<%= movie.engname %>",
+     "genre":"<%= movie.genre %>",
+     "datePublished":"<% if(movie.releasedate ){ %><%= movie.releasedate %>
+<% }else{ %>Date not Announced<% } %>",
+     "keywords":["<%= movie.tags %>"],
+     <% if(rating.rating){ %>
+     "aggregateRating":{"@type":"AggregateRating",
+     "ratingCount":<% if(rating.ratingCount){ %><%= rating.ratingCount %> 
+    <% }else{ %>0
+    <% } %>,
+     "bestRating":10,
+     "worstRating":1,
+     "ratingValue":<% if(rating.rating){ %><%= rating.rating %>
+        <% }else{ %>0.0<% } %>},<% } %> 
+     "actor":[
+     {"@type":"Person","name":"<%= movie.actorname1 %>","url":"/celebs/<%= movie.actid1 %>"}<% if(movie.actorname2){ %>,
+     {"@type":"Person","name":"<%= movie.actorname2 %>","url":"/celebs/<%= movie.actid2 %>"}
+     <% } %><% if(movie.actorname3){ %> ,
+     {"@type":"Person","name":"<%= movie.actorname3 %>","url":"/celebs/<%= movie.actid3 %>"}
+     <% } %><% if(movie.actorname4) { %> ,
+     {"@type":"Person","name":"<%= movie.actorname4 %>","url":"/celebs/<%= movie.actid4 %>"}
+     <% } %><% if(movie.actorname5) { %> ,
+     {"@type":"Person","name":"<%= movie.actorname5 %>","url":"/celebs/<%= movie.actid5 %>"}
+     <% } %><% if(movie.actorname6) { %> ,
+     {"@type":"Person","name":"<%= movie.actorname6 %>","url":"/celebs/<%= movie.actid6 %>""}
+     <% } %>  
+     ]}
+    </script>
+
+    <div class="err-msg">
+        <div class="msg "></div>
+    </div>
+    <div class="movie-main">
+        <div class="blue-header">
+            <h1>
+                <%= movie.name %>
+            </h1>
+        </div>
+        <div class="fst-sec">
+            <div class="movie-poster">
+                <% if(movie.moviePoster ) { %>
+                    <img data-src="/<%= movie.moviePoster %>" alt=" <%= movie.name %> Poster" class="lazy-photo">
+                    <% }else { %>
+                        <img data-src="/images/movies/id/<%= movie._id  %>.jpg" alt=" <%= movie.name %> Poster"
+                            class="lazy-photo">
+                <% } %>
+            </div>
+            <% if(movie.releaseDate < dateNow){%>
+            <!--------RATE SECTION-------------------------------->
+          
+                <div class="rate-section">
+                    <div class="rate-number">
+                        <div class="number">
+                            <h4>
+                                <% if(rating.rating){ %>
+                                    <%= rating.rating %>
+                                <% }else{ %>
+                                    0.0
+                                <% } %>
+                                
+                            </h4>
+                        </div>
+                    </div>
+                    <div class="rate-dettails">
+                        <div class="rate-form">
+                            <form id="movie-rating-form" action="" method="post">
+                                <input id="movie-rating" type="range" min="5" max="10" step="0.5" class="form-control-rate"
+                                    name="ratingValue" required="required">
+                                <div id="movie-rating-value" class="value">
+                                    100
+                                </div>
+                                <input type="text" name="movieId" value="<%= movie._id%>" hidden>
+                                <button type="submit"> Rate</button>
+                            </form>
+                        </div>
+                        <div class="rate-d">
+                            <p>Ratings: <span>
+                                <% if(rating.rating){ %>
+                                    <%= rating.rating %>
+                                <% }else{ %>
+                                    0
+                                <% } %>
+                                </span> from
+                                <% if(rating.ratingCount){ %>
+                                    <%= rating.ratingCount %> 
+                                <% }else{ %>
+                                    0
+                                <% } %>
+                                 
+                                 users</p>
+                        </div>
+                        <div class="rate-d">
+                            <p>Reviews: </p>
+                            <a href="#"><%= reviews.length %> users</a>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <%}%>
+
+                    <!-----------STORY SECTION----------------->
+                    <div class="story-sec">
+                        <p>
+                            <%- movie.story %>
+                                <% if(movie.readmorestory ) { %>
+                                    <%= movie.readmorestory %>
+                                        <% } %>
+
+                                            <% if(movie.storyenglish ) { %>
+                                                <%= movie.storyenglish %>
+                                                    <% } %>
+                        </p>
+
+                    </div>
+
+                    <hr>
+
+                    <div class="dettails-section">
+                        <div class="movie-dettails">
+                            <div class="dettails-name">
+                                <h4>Movie Name</h4>
+                            </div>
+                            <div class="dettails">
+                                <p>
+                                    <%= movie.name %>
+                                </p>
+                            </div>
+                        </div>
+                        <hr>
+
+                        <div class="movie-dettails">
+                            <div class="dettails-name">
+                                <h4>Language</h4>
+                            </div>
+                            <div class="dettails">
+                                <p>
+                                    <%= movie.category %>
+                                </p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="movie-dettails">
+                            <div class="dettails-name">
+                                <h4>Release Date</h4>
+                            </div>
+                            <div class="dettails">
+                                <% if(movie.releasedate ) { %>
+                                    <p>
+                                        <%= movie.releasedate %>
+                                    </p>
+                                    <% }else{ %>
+                                         <p>Date not Announced</p>      
+                                <% } %>
+                            </div>
+                        </div>
+                        <hr>
+                        <% if(movie.ottreleasedate ) { %>
+                        <div class="movie-dettails">
+                            <div class="dettails-name">
+                                <h4>OTT Date</h4>
+                            </div>
+                            <div class="dettails">
+                                    <p>
+                                        <%= movie.ottreleasedate %>
+                                    </p> 
+                          
+                            </div>
+                        </div>
+                        <hr>
+                        <% } %>
+                        <div class="movie-dettails">
+                            <div class="dettails-name">
+                                <h4>Genres</h4>
+                            </div>
+                            <div class="dettails">
+                                <p><%= movie.genre %></p>
+                            </div>
+                        </div>
+                        <hr>
+                        <% if(movie.director) { %>
+                        <div class="movie-dettails">
+                            <div class="dettails-name">
+                                <h4>Director</h4>
+                            </div>
+                            <div class="dettails">
+                                <% if(movie.directorlink ) { %>
+                                    <a href=" <%= movie.directorlink %>"> <%= movie.director %></a>
+                                    <% }else{%>
+                                        <p>
+                                            <%= movie.director %>
+                                        </p>
+                                    <% } %>
+                            </div>
+                        </div>
+                        <hr>
+                        <% } %>
+                        <% if(movie.written) { %>
+                        <div class="movie-dettails">
+                            <div class="dettails-name">
+                                <h4>Writer</h4>
+                            </div>
+                            <div class="dettails">
+                                <% if(movie.writtenlink ) { %>
+                                    <a href=" <%= movie.writtenlink %>"> <%= movie.written %></a>
+                                    <% }else{%>
+                                        <p>
+                                            <%= movie.written %>
+                                        </p>
+                                    <% } %>
+                            </div>
+                        </div>
+                        <hr>
+                        <% } %>
+                        <% if(movie.producedby) { %>
+                        <div class="movie-dettails">
+                            <div class="dettails-name">
+                                <h4>Producer</h4>
+                            </div>
+                            <div class="dettails">
+                                <% if(movie.producedbylink ) { %>
+                                    <a href=" <%= movie.producedbylink %>"> <%= movie.producedby %></a>
+                                    <% }else{%>
+                                        <p>
+                                            <%= movie.producedby %>
+                                        </p>
+                                    <% } %>
+                            </div>
+                        </div>
+                        <hr>
+                        <% } %>
+                        <% if(movie.duration) { %>
+                        <div class="movie-dettails">
+                            <div class="dettails-name">
+                                <h4>Duration</h4>
+                            </div>
+                            <div class="dettails">
+                                <p><%= movie.duration %></p>
+                            </div>
+                        </div>
+                        <hr>
+                        <% } %>
+                        <% if(movie.tags.length>1) { %>
+                        <div class="movie-dettails">
+                            <div class="dettails-name">
+                                <h4>Tags</h4>
+                            </div>
+                            <div class="dettails-tag">
+                                <% for(var i=0; i<movie.tags.length; i++){ %>
+                                    <a href="/tags/tag= <%= movie.tags[i]%>"><%= movie.tags[i] %> </a>,
+                                <% } %>
+                            </div>
+                        </div>
+                        <% } %>
+                    </div>
+        </div>
+    </div>
+
+    <!-------------------CAST SECTION------------------------>
+    <div class="other-sec">
+        <div class="left-blue-header">
+            <h2>Cast</h2>
+        </div>
+
+        <div class="swiper">
+            <div class="actor-swp">
+                <% if(movie.actorname1) { %>
+                <div class="actorswp">
+                    <% if(movie.actid1) { %>
+                    <a href="/celebs/<%= movie.actid1 %>" title="{{movie.actorname1}} Page">
+                        <% if(movie.actimg1) { %>
+                        <img class="lazy-photo" data-src="/<%= movie.actimg1 %>" alt=" {{movie.actorname1}}.jpg" />
+                        <% }else{ %>
+                            <img class="lazy-photo" data-src="/images/actor/id/<%= movie.actid1 %>.jpg" alt=" {{movie.actorname1}}.jpg" />
+                        <% } %>   
+                        <h6><%= movie.actorname1 %></h6>
+                        <p><%= movie.mvactorname1 %></p>
+                    </a>
+                    <% } else{%>
+                        <a href="#" title="{{movie.actorname1}} Page">
+                            <img class="lazy-photo" data-src="<%= movie.actimg1 %>" alt=" {{movie.actorname1}}.jpg" />
+                            <h6><%= movie.actorname1 %></h6>
+                            <p><%= movie.mvactorname1 %></p>
+                        </a>
+                    <% } %>   
+                </div>
+                <% } %>
+                <% if(movie.actorname2) { %>
+                    <div class="actorswp">
+                        <% if(movie.actid2) { %>
+                        <a href="/celebs/<%= movie.actid2 %>" title="{{movie.actorname2}} Page">
+                            <% if(movie.actimg2) { %>
+                            <img class="lazy-photo" data-src="/<%= movie.actimg2 %>" alt=" {{movie.actorname2}}.jpg" />
+                            <% }else{ %>
+                                <img class="lazy-photo" data-src="/images/actor/id/<%= movie.actid2 %>.jpg" alt=" {{movie.actorname2}}.jpg" />
+                            <% } %>   
+                            <h6><%= movie.actorname2 %></h6>
+                            <p><%= movie.mvactorname2 %></p>
+                        </a>
+                        <% } else{%>
+                            <a href="#" title="{{movie.actorname2}} Page">
+                                <img class="lazy-photo" data-src="<%= movie.actimg2 %>" alt=" {{movie.actorname2}}.jpg" />
+                                <h6><%= movie.actorname2 %></h6>
+                                <p><%= movie.mvactorname2 %></p>
+                            </a>
+                        <% } %>   
+                    </div>
+                <% } %>
+                <% if(movie.actorname3) { %>
+                    <div class="actorswp">
+                        <% if(movie.actid3) { %>
+                        <a href="/celebs/<%= movie.actid3 %>" title="{{movie.actorname3}} Page">
+                            <% if(movie.actimg3) { %>
+                            <img class="lazy-photo" data-src="/<%= movie.actimg3 %>" alt=" {{movie.actorname3}}.jpg" />
+                            <% }else{ %>
+                                <img class="lazy-photo" data-src="/images/actor/id/<%= movie.actid3 %>.jpg" alt=" {{movie.actorname3}}.jpg" />
+                            <% } %>   
+                            <h6><%= movie.actorname3 %></h6>
+                            <p><%= movie.mvactorname3 %></p>
+                        </a>
+                        <% } else{%>
+                            <a href="#" title="{{movie.actorname3}} Page">
+                                <img class="lazy-photo" data-src="<%= movie.actimg3 %>" alt=" {{movie.actorname3}}.jpg" />
+                                <h6><%= movie.actorname3 %></h6>
+                                <p><%= movie.mvactorname3 %></p>
+                            </a>
+                        <% } %>   
+                    </div>
+                    <% } %>
+                <% if(movie.actorname4) { %>
+                    <div class="actorswp">
+                        <% if(movie.actid4) { %>
+                        <a href="/celebs/<%= movie.actid4 %>" title="{{movie.actorname4}} Page">
+                            <% if(movie.actimg4) { %>
+                            <img class="lazy-photo" data-src="/<%= movie.actimg4 %>" alt=" {{movie.actorname4}}.jpg" />
+                            <% }else{ %>
+                                <img class="lazy-photo" data-src="/images/actor/id/<%= movie.actid4 %>.jpg" alt=" {{movie.actorname4}}.jpg" />
+                            <% } %>   
+                            <h6><%= movie.actorname4 %></h6>
+                            <p><%= movie.mvactorname4 %></p>
+                        </a>
+                        <% } %>
+                    </div>
+                <% } %>
+                <% if(movie.actorname5) { %>
+                    <div class="actorswp">
+                        <% if(movie.actid5) { %>
+                        <a href="/celebs/<%= movie.actid5 %>" title="{{movie.actorname5}} Page">
+                            <% if(movie.actimg5) { %>
+                            <img class="lazy-photo" data-src="/<%= movie.actimg5 %>" alt=" {{movie.actorname5}}.jpg" />
+                            <% }else{ %>
+                                <img class="lazy-photo" data-src="/images/actor/id/<%= movie.actid5 %>.jpg" alt=" {{movie.actorname5}}.jpg" />
+                            <% } %>   
+                            <h6><%= movie.actorname5 %></h6>
+                            <p><%= movie.mvactorname5 %></p>
+                        </a>
+                        <% } %>
+                    </div>
+                <% } %>
+                <% if(movie.actorname6) { %>
+                    <div class="actorswp">
+                        <% if(movie.actid6) { %>
+                        <a href="/celebs/<%= movie.actid6 %>" title="{{movie.actorname6}} Page">
+                            <% if(movie.actimg6) { %>
+                            <img class="lazy-photo" data-src="/<%= movie.actimg6 %>" alt=" {{movie.actorname6}}.jpg" />
+                            <% }else{ %>
+                                <img class="lazy-photo" data-src="/images/actor/id/<%= movie.actid6 %>.jpg" alt=" {{movie.actorname6}}.jpg" />
+                            <% } %>   
+                            <h6><%= movie.actorname6 %></h6>
+                            <p><%= movie.mvactorname6 %></p>
+                        </a>
+                        <% } %>
+                    </div>
+                <% } %>
+                <% if(movie.actorname7) { %>
+                    <div class="actorswp">
+                        <% if(movie.actid7) { %>
+                        <a href="/celebs/<%= movie.actid7 %>" title="{{movie.actorname7}} Page">
+                            <% if(movie.actimg7) { %>
+                            <img class="lazy-photo" data-src="/<%= movie.actimg7 %>" alt=" {{movie.actorname7}}.jpg" />
+                            <% }else{ %>
+                                <img class="lazy-photo" data-src="/images/actor/id/<%= movie.actid7 %>.jpg" alt=" {{movie.actorname47}.jpg" />
+                            <% } %>   
+                            <h6><%= movie.actorname7 %></h6>
+                            <p><%= movie.mvactorname7 %></p>
+                        </a>
+                        <% } %>
+                    </div>
+                <% } %>
+            </div>
+        </div>
+
+    </div>
+
+    <!--------------------------IMAGE SECTION-->
+    <div class="other-sec">
+        <div class="left-blue-header">
+            <h2>Images</h2>
+            <a href="/movie/all-images/<%= movie._id%>">View all</a>
+        </div>
+        <div class="images">
+            <% if(movie.images.length >0) { %>
+                <% var length= movie.images.length >6?6:movie.images.length %>
+            <% for(var i=0; i<length; i++){%>
+            <div class="image">
+                <a href="/image/download?imgUrl=<%= movie.images[i] %>"><img data-src="/<%= movie.images[i] %>" alt="" class="lazy-photo"></a>
+            </div>
+            <% } %>
+            <% }else{ %>
+                <p>Images not uploaded</p>
+            <% } %>
+        </div>
+    </div>
+
+<!-------------------------------WHERE TO EATCH------------>
+    <div class="other-sec">
+        <div class="left-blue-header">
+            <h2>Where to watch</h2>
+        </div>
+        <div class="whereToWatch">
+            <% if(movie.moviePoster) { %>
+            <% if(movie.whereToWatch.ottName) { %>
+            <div class="where-img">
+                <a href="<%= movie.whereToWatch.ottUrl %>" >
+                    <img class="lazy-photo" data-src="<%= movie.whereToWatch.ottImg%>" alt="">
+                    <%= movie.whereToWatch.ottName%>
+                </a>
+            </div>
+            <% }else { %>
+                <h7>Not available </h7>
+            <% } %>  
+            <% } %>  
+
+        </div>
+    </div>
+    
+    <!-----------------------TRAILER SECTION------------------->
+    <% if(movie.ytlink) { %>
+    <div class="other-sec">
+        <div class="left-blue-header">
+            <h2>Trailer</h2>
+        </div>
+    <div class="movie-trailer">
+        <iframe 
+        data-src="<%= movie.ytlink%>" class="lazy-photo"> 
+        </iframe>
+    </div>
+    </div>
+    <% } %>
+    <% if(movie.releaseDate < dateNow){%>
+    <!--------------------REVIEW SECATION------------------------------>
+    <div class="other-sec" id="review">
+        <div class="left-blue-header">
+            <h2>Reviews</h2>
+            <a href="/movie/write-review/<%= movie._id%>">Write Review</a>
+        </div>
+        <% if(review.length>0) { %>
+            <div class="review-section">
+                <% for(var i=0; i<review.length; i++){%>
+                <div class="review">
+                    <div class="user-dettails">
+                        <a href="/user/profile/<%= review[i].userDettails[0]._id %>" class="user-pic">
+                            <img data-src="<%= review[i].userDettails[0].profilePic %>" class="lazy-photo" alt="User Profile pic">
+                        </a>
+                        <div class="user-name">
+                            <a href="/user/profile/<%= review[i].userDettails[0]._id %>"><%= review[i].userDettails[0].name %></a>
+                            <p><span><%= review[i].helpfulCount %></span> people liked this review</p>
+                            <div class="user-like">
+                                <div class="like">
+                                    <form id="like-form" action="/movie/like-review" method="post">
+                                        <input type="text" value="<%= movie._id%>" name="movieId" hidden>
+                                        <input type="text" value="<%= review[i].userDettails[0]._id %>" name="reviewUserId" hidden>
+                                        <button type="submit"><i class="fa-solid fa-thumbs-up"></i></button>
+                                    </form>
+                                   
+                                    <span><%= review[i].helpfulCount %></span>
+                                </div>
+                                <div class="dislike">
+                                    <form id="unlike-form" action="/movie/dislike-review" method="post">
+                                        <input type="text" value="<%= movie._id%>" name="movieId" hidden>
+                                        <input type="text" value="<%= review[i].userDettails[0]._id %>" name="reviewUserId" hidden>
+                                        <button type="submit"><i class="fa-solid fa-thumbs-down"></i></button>
+                                    </form>
+                                    <span><%= review[i].notHelpfulCount %></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="review-rating">
+                            <div class="rating-box">
+                                <div class="rating-head">
+                                    <h4>Overall</h4>
+                                    <p><%= review[i].notHelpfulCount %></p>
+                                </div>
+                                <div class="rating-body">
+                                    <div class="review-rating-body">
+                                        <h4>Story</h4>
+                                        <p><%= review[i].storyRating %></p>
+                                    </div>
+                                    <div class="review-rating-body">
+                                        <h4>Cast</h4>
+                                        <p><%= review[i].castRating %></p>
+                                    </div>
+                                    <div class="review-rating-body">
+                                        <h4>Rewatch </h4>
+                                        <p><%= review[i].rewatchValueRating %></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="review-dettails">
+                        <div class="review-text">
+                            <h3><%= review[i].reviewHead %></h3>
+                            <p><%- review[i].reviewContent %></p>
+                        </div>
+    
+                    </div>
+                </div>
+                <% } %>
+                <div class="reivew-all">
+                    <a href="/movie/all-review/<%= movie._id%>">View All</a>
+                </div>
+            </div>
+        <% }else{ %>
+            <h7>Reviews not added</h7>
+        <%}%>
+    </div>
+    <% } %>
+    <div class="di">
+
+    </div>
+    <style>
+
+
+    </style>
+<!-------------------------------LATEST UPDATE---------------------------->
+<div class="other-sec">
+    <div class="left-blue-header">
+        <h2>Latest Update</h2>
+        <a href="/latest-update">View all</a>
+    </div>
+    <div class="swiper">
+        <div class="movie-swape">
+            <% for(var i=0; i<latestUpdate.length; i++){%>
+        <div class="movies">
+          <a  href="/movie/<%= latestUpdate[i]._id %>">
+          <div class="movie-s">
+            <img data-src="/<%= latestUpdate[i].moviePoster %>" class="lazy-photo" alt="<%= latestUpdate[i].name %>.jpg">
+            <h2><%= latestUpdate[i].name %></h2>
+            <p><%= latestUpdate[i].category %></p>
+          </div>
+          </a>
+        </div>
+        <% } %>
+    </div>
+    </div>  
+</div>  
+
+<!-------------------------------NEXT RELEASE---------------------------->
+<div class="other-sec">
+    <div class="left-blue-header">
+        <h2>Next Release</h2>
+        <a href="/upcoming-releases">View all</a>
+    </div>
+    <div class="swiper">
+        <div class="movie-swape">
+            <% for(var i=0; i<nextRelease.length; i++){%>
+        <div class="movies">
+          <a  href="/movie/<%= nextRelease[i]._id %>">
+          <div class="movie-s">
+            <img data-src="/<%= nextRelease[i].moviePoster %>" class="lazy-photo" alt="<%= nextRelease[i].name %>.jpg">
+            <h2><%= nextRelease[i].name %></h2>
+            <p><%= nextRelease[i].releasedate %></p>
+          </div>
+          </a>
+        </div>
+        <% } %>
+    </div>
+    </div>  
+</div>  
+<!-------------------------------Last RELEASEd MOVIES---------------------------->
+<div class="other-sec">
+    <div class="left-blue-header">
+        <h2>Last Released Movies</h2>
+        <a href="/last-released-movies">View all</a>
+    </div>
+    <div class="swiper">
+        <div class="movie-swape">
+            <% for(var i=0; i<lastReleasedMovies.length; i++){%>
+        <div class="movies">
+          <a  href="/movie/<%= lastReleasedMovies[i]._id %>">
+          <div class="movie-s">
+            <img src="/<%= lastReleasedMovies[i].moviePoster %>" alt="">
+            <h2><%= lastReleasedMovies[i].name %></h2>
+            <p><%= lastReleasedMovies[i].releasedate %></p>
+          </div>
+          </a>
+        </div>
+        <% } %>
+    </div>
+    </div>  
+</div> 
+
+
+
+
+
+    <script>
+        const movieRating = document.getElementById('movie-rating')
+        const movieRatingValue = document.getElementById('movie-rating-value')
+        movieRatingValue.textContent = movieRating.value
+        movieRating.oninput = function () {
+            movieRatingValue.textContent = this.value
+        }
+
+        $(document).ready(function () {
+            $('#movie-rating-form').submit(function (event) {
+                event.preventDefault()
+                var formData = $(this).serialize();
+                $.ajax({
+                    url: `/movie/add-rating`,
+                    type: 'POST',
+                    headers:"Authorization",
+                    data: formData,
+                    success: function (data) {
+                        console.log(data)
+                        
+                        if (data.complete) {
+                            $('.msg').addClass('success').text(data.msg);
+                            setTimeout(function () {
+                                $('.msg').removeClass('success').text('');
+                            }, 1500)
+                        } else if(data.auth){
+                            $('.msg').addClass('error').text(data.msg);
+                            setTimeout(function(){
+                            	window.location.replace(`/auth/login`)
+                            },2000)
+                        } else{
+                            $('.msg').addClass('error').text(data.msg);
+                            setTimeout(function () {
+                                $('.msg').removeClass('error').text('');
+                            }, 3000)
+                        }
+
+                    }
+                })
+            })
+        })
+
+    </script>
+
+
+
+    <%- include('../partials/footer'); -%>

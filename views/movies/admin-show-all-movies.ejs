@@ -1,0 +1,78 @@
+<%- include('../partials/admin-header'); -%>
+<title>Show all movies-Dramalite</title>
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/dataTables.bootstrap4.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css">
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
+<link rel="stylesheet" href="/css/auth.css">
+
+<style>
+    .paging_simple_numbers{
+        display: grid;
+    }
+    .admin-headerL{
+        width: 20px;
+    }
+    .td-class a{
+        text-decoration:none ;
+    }
+</style>
+
+
+
+<table id="example" class="table table-striped table-bordered" style="width:100%">
+    <thead>
+    <tr>
+      <th class="admin-header"> Name</th>
+      <th class="admin-headerL "> Lang</th>
+      <th class="admin-header"> OBID</th>
+      <th class="admin-header"> Options</th>
+    </tr>
+    </thead>
+    <tbody>
+        <% movie.forEach (function (m){%>
+    <tr>
+      <td class="td-class" style="font-weight: 600;"><%= m.name %></td>
+      <td class="td-class"><%= m.category %></td>
+       <td class="td-class"><input style="width: 90%;" type="text" value="<%= m._id %>"> </td>
+      <td class="td-class">
+          <a style="color: green;margin-right: 5px;" href="/movie/edit-movie/<%= m._id %>"><i class="fas fa-user-edit"></i>Edit</a>
+          <a href="/movie/delete-movie/<%= m._id %>" onclick="return confirm('Are You SHure to Delete ')"><i class="fas fa-trash"></i></a>
+       </td>
+    </tr>
+    <% });%>
+    </tbody>
+    <tfoot>
+        <tr>
+            <th>Name</th>
+            <th>lag</th>
+            <th>ID</th>
+            <th>Option</th>
+        </tr>
+    </tfoot>
+  </table>
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+<script>
+  $(function(){
+    $('#example').DataTable();
+  });
+</script>
+
+<%- include('../partials/footer'); -%>

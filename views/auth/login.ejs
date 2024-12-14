@@ -1,0 +1,120 @@
+<%- include('../partials/header'); -%>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+crossorigin="anonymous">
+<link rel="stylesheet" href="/css/auth.css">
+<title>Login -Dramalite</title>
+<style>
+
+	.signup-form{
+		width: 370px;
+		overflow: hidden;
+		margin: 20px auto;
+		background: #fff;
+		box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.3);
+		padding: 20px 10px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-direction: column;
+		position: relative;
+	}
+	.signup-form form{
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+ 
+	}
+    .signup-form a{
+        text-decoration: none;
+    }
+    .dont-have-account a{
+        text-decoration: none;
+        color: blue;
+    }
+
+
+</style>
+<div class="err-msg">
+	<div class="msg "></div>
+</div>
+<div class="signup-form">
+
+    <!-- <div class="blue-header"><h1>Sign Up</h1></div> -->
+    <form id="verify-form" method="post">
+		<h2>Sign in</h2>
+
+		<hr>
+        <div class="form-group">
+			<div class="input-group">
+				<div class="input-group-prepend">
+					<span class="input-group-text">
+						<span class="fa fa-user"></span>
+					</span>                    
+				</div>
+				<input type="email" class="form-control" name="email" placeholder="Email" required="required">
+
+			</div>
+            <br>
+            <div class="input-group">
+				<div class="input-group-prepend">
+					<span class="input-group-text">
+						<span class="fa fa-lock"></span>
+					</span>                    
+				</div>
+				<input type="password" class="form-control" name="password" placeholder="Password" required="required">
+                
+			</div>
+			<div class="forgot-pass">
+				<a href="/auth/forget-password">Forgot your password ?</a>
+			</div>
+
+        </div>
+        <button type="submit" class="btn btn-primary  dark-blue-background">Sign In</button>
+
+    </form>
+
+        <a href="/auth/google" class="btn btn-primary dark-blue-background  sign-with-g">
+			<img src="/images/logo/google-login.svg" alt="" srcset="">
+           Sign in with Google+
+        </a>
+		<div class="dont-have-account">
+			<p>Dont't have an account?</p>
+			<a href="/auth/signup">Sign Up</a>
+		</div>
+
+</div>
+
+<script>
+	    $(document).ready(function (){
+        $('#verify-form').submit(function(event){
+            event.preventDefault()
+            var formData=$(this).serialize();
+            $.ajax({
+            	url:'/auth/login',
+               type:'POST',
+               data:formData,
+               success:function(data){
+                 if(data.complete){
+                    $('.msg').addClass('success').text(data.msg);
+					setTimeout(function(){
+                        window.location.replace(data.url)
+					},1500)
+                 }else{
+                    console.log(data)
+                    if(data.msg==="email not verified"){
+                        $('.msg').addClass('error').text(data.msg);
+                        setTimeout(function(){
+                            window.location.replace(`/auth/verify-otp/${data.id}`)
+                        },2000)
+                    }else{
+                        $('.msg').addClass('error').text(data.msg);
+                    }
+                 }
+
+               }
+            })
+        })
+    })
+</script>
+
+<%- include('../partials/footer'); -%>

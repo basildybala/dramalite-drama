@@ -1,0 +1,90 @@
+<%- include('../partials/header'); -%>
+<title>Malayalam Tamil Hindi Hollywood Movies New Download Cast Story Free -Dramalite</title>
+<meta name="description" content="Malayalam Movies and Tamil Telugu Hindi Webseries  Release Date Reviews Videos  Cast & Crew  Film Poster">
+<link rel="canonical" href="https://dramalite.com">
+<!-------------------------------LATEST UPDATE---------------------------->
+<div class="other-sec">
+    <div class="left-blue-header">
+        <h2>Latest Update</h2>
+        <a href="/latest-update">View all</a>
+    </div>
+    <div class="swiper">
+        <div class="movie-swape">
+            <% for(var i=0; i<latestUpdate.length; i++){%>
+        <div class="movies">
+          <a  href="/movie/<%= latestUpdate[i]._id %>">
+          <div class="movie-s">
+            <img src="/<%= latestUpdate[i].moviePoster %>" alt="">
+            <h2><%= latestUpdate[i].name %></h2>
+            <p><%= latestUpdate[i].category %></p>
+          </div>
+          </a>
+        </div>
+        <% } %>
+    </div>
+    </div>  
+</div>  
+
+<!-------------------------------NEXT RELEASE---------------------------->
+<div class="other-sec">
+    <div class="left-blue-header">
+        <h2>Next Release</h2>
+        <a href="/upcoming-releases">View all</a>
+    </div>
+    <div class="swiper">
+        <div class="movie-swape">
+            <% for(var i=0; i<nextRelease.length; i++){%>
+        <div class="movies">
+          <a  href="/movie/<%= nextRelease[i]._id %>">
+          <div class="movie-s">
+            <img src="/<%= nextRelease[i].moviePoster %>" alt="">
+            <h2><%= nextRelease[i].name %></h2>
+            <p><%= nextRelease[i].releasedate %></p>
+          </div>
+          </a>
+        </div>
+        <% } %>
+    </div>
+    </div>  
+</div> 
+
+<!-------------------------------Last RELEASEd MOVIES---------------------------->
+<div class="other-sec">
+    <div class="left-blue-header">
+        <h2>Last Released Movies</h2>
+        <a href="/last-released-movies">View all</a>
+    </div>
+    <div class="swiper">
+        <div class="movie-swape">
+            <% for(var i=0; i<lastReleasedMovies.length; i++){%>
+        <div class="movies">
+          <a  href="/movie/<%= lastReleasedMovies[i]._id %>">
+          <div class="movie-s">
+            <img src="/<%= lastReleasedMovies[i].moviePoster %>" alt="">
+            <h2><%= lastReleasedMovies[i].name %></h2>
+            <p><%= lastReleasedMovies[i].releasedate %></p>
+          </div>
+          </a>
+        </div>
+        <% } %>
+    </div>
+    </div>  
+</div> 
+
+<div class="other-sec">
+    <div class="left-blue-header">
+        <h2>Movies category</h2>
+    </div>
+
+    <div class="movies-list-section">
+        <div class="white-link"><a href="/malayalam-movies" class="dflexx"  title="Best Malayalam Movies Categorized List" > <i class="fas fa-chevron-circle-right"></i>Malayalam Movies</a></div>
+        <div class="white-link"><a href="/tamil-movies" class="dflexx" title="Best Tamil Movies Categorized List"> <i class="fas fa-chevron-circle-right"></i>Tamil Movies</a></div>
+        <div class="white-link"><a href="/hindi-movies" class="dflexx" title="Best Hindi Movies Categorized List"> <i class="fas fa-chevron-circle-right"></i>Hindi Movies</a></div>
+        <div class="white-link"><a href="/telugu-movies" class="dflexx" title="Best Telugu Movies Categorized List"> <i class="fas fa-chevron-circle-right"></i>Telugu Movies</a></div>
+        <div class="white-link"><a href="/english-movies" class="dflexx" title="Best Hollywood Movies Categorized List"> <i class="fas fa-chevron-circle-right"></i>Hollywood Movies</a></div>
+        <div class="white-link"><a href="kannada-movies" class="dflexx" title="Best Kannada  Movies Categorized List"> <i class="fas fa-chevron-circle-right"></i>Kannada Movies</a></div>
+
+      </div>
+</div>
+
+<%- include('../partials/footer'); -%>

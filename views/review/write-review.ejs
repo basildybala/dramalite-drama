@@ -1,0 +1,211 @@
+<%- include('../partials/header'); -%>
+
+<title><%= movie.name %> Movie Write Review and rating -Dramalite</title>
+<meta name="description" content="<%= movie.engname %> movie add review and sotry cast rewatch value rating">
+    <link rel="stylesheet" href="/css/movie.css">
+    <link rel="stylesheet" href="/css/auth.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://cdn.ckeditor.com/4.20.1/standard/ckeditor.js"></script>
+    <style>
+
+    </style>
+    <div class="err-msg">
+        <div class="msg "></div>
+    </div>
+    <div class="signup-form">
+        <div class="blue-header">
+            <h1>Write Review</h1>
+        </div>
+
+        <div class="r-movie-dettails">
+            <div class="r-movie-img">
+                <% if(movie.moviePoster ) { %>
+                    <img data-src="/<%= movie.moviePoster %>" alt=" <%= movie.name %> Poster" class="lazy-photo">
+                    <% }else { %>
+                        <img data- src="/images/movies/poster/mission.jpg" alt=" <%= movie.name %> Poster"
+                            class="lazy-photo">
+                <% } %>
+            </div>
+            <div class="r-movie-dettail">
+                <div class="dettail"> <i class="fa-solid fa-star" style="color: blue;"></i>
+                    <h2>
+                        <%= movie.name %>
+                    </h2>
+                </div>
+
+                <div class="dettail"><i class="fa-solid fa-circle"></i>
+                    <p>
+                        <%= movie.year %>
+                    </p>
+                </div>
+                <div class="dettail"> <i class="fa-sharp fa-solid fa-user"></i>
+                    <p>
+                        <%= movie.actorname1 %>
+                    </p>
+                </div>
+                <div class="dettail"><i class="fa-sharp fa-solid fa-user"></i>
+                    <p>
+                        <%= movie.actorname2 %>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="review-guid">
+            <h3> Read Guidelines</h3>
+            <ul>
+                <li>Write your own reviews.</li>
+                <li>Do not post major spoilers.</li>
+                <li>Do not add spoilers to the headline.</li>
+            </ul>
+        </div>
+
+        <style>
+            .range-input-group {
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                height: 15px;
+            }
+
+            .range-input-group input {
+                width: 80%;
+                padding: 0;
+            }
+
+            .value {
+                display: flex;
+                justify-content: flex-start;
+                color: black;
+                font-size: 17px;
+                font-weight: 500;
+            }
+            .input-group textarea{
+                width: 80%;
+                height: 250px;
+            }
+        </style>
+        <form id="review-form" action="" method="post">
+
+            <div class="form-group">
+                <label for="name">Story Rating:</label>
+                <div class="range-input-group">
+                    <input id="story-rating" type="range" min="5" max="10" step="0.5" class="form-control"
+                        name="storyRating" required="required">
+                    <div id="story-rating-value" class="value">
+                        100
+                    </div>
+                </div>
+
+            </div>
+            <div class="form-group">
+                <label for="name">Cast Rating:</label>
+                <div class="range-input-group">
+                    <input id="cast-rating" type="range" min="5" max="10" step="0.5" class="form-control"
+                        name="castRating" placeholder="Username" required="required">
+                    <div id="cast-rating-value" class="value">
+                        100
+                    </div>
+                </div>
+
+            </div>
+            <div class="form-group">
+                <label for="name">Re-watch Value:</label>
+                <div class="range-input-group">
+                    <input id="rewatch" type="range" min="5" max="10" step="0.5" class="form-control"
+                        name="rewatchValueRating" placeholder="Username" required="required">
+                    <div id="rewatch-value" class="value">
+                        100
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="form-group">
+                <label for="name" style="color: black;font-weight: 500;">Overall:</label>
+                <div class="range-input-group">
+                    <input id="overall-rating" type="range" min="5" max="10" step="0.5" class="form-control"
+                        name="overall" placeholder="Username" required="required">
+                    <div id="overall-rating-value" class="value">
+                        100
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="name">Review Headline:</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" name="head" placeholder="Review Headline" minlength="5"
+                        maxlength="90">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="name">Review :</label>
+                <div class="input-group">
+                    <textarea name="content" minlength="50" maxlength="2000"></textarea>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-lg blue-backgroud">Add Review</button>
+        </form>
+    </div>
+    <script>
+
+        CKEDITOR.replace('contents');
+        const stroyRating = document.getElementById('story-rating')
+        const stroyRatingValue = document.getElementById('story-rating-value')
+        stroyRatingValue.textContent = stroyRating.value
+        stroyRating.oninput = function () {
+            stroyRatingValue.textContent = this.value
+        }
+
+        const castRating = document.getElementById('cast-rating')
+        const castRatingValue = document.getElementById('cast-rating-value')
+        castRatingValue.textContent = castRating.value
+        castRating.oninput = function () {
+            castRatingValue.textContent = this.value
+        }
+
+        const overallRating = document.getElementById('overall-rating')
+        const overallRatingValue = document.getElementById('overall-rating-value')
+        overallRatingValue.textContent = overallRating.value
+        overallRating.oninput = function () {
+            overallRatingValue.textContent = this.value
+        }
+
+        const rewatch = document.getElementById('rewatch')
+        const rewatchValue = document.getElementById('rewatch-value')
+        rewatchValue.textContent = overallRating.value
+        rewatch.oninput = function () {
+            rewatchValue.textContent = this.value
+        }
+
+        $(document).ready(function () {
+            $('#review-form').submit(function (event) {
+                event.preventDefault()
+                var formData = $(this).serialize();
+                $.ajax({
+                    url: `/movie/write-review/<%= movie._id %>`,
+                    type: 'POST',
+                    data: formData,
+                    success: function (data) {
+                        console.log(data)
+                        if (data.complete) {
+                            $('.msg').addClass('success').text(data.msg);
+                            setTimeout(function () {
+                                window.location.replace(`/movie/<%= movie._id %>#review`)
+                            }, 1500)
+                        } else {
+                            $('.msg').addClass('error').text(data.msg);
+                            setTimeout(function () {
+                                window.location.replace(`/movie/write-review/<%= movie._id %>`)
+                            }, 3000)
+                        }
+
+                    }
+                })
+            })
+        })
+    </script>
+    <%- include('../partials/footer'); -%>

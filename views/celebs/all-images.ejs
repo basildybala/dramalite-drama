@@ -1,0 +1,28 @@
+<%- include('../partials/header'); -%>
+<title><%= celebrity.actorname %> Hd Photos Wallpaper download -Dramalite</title>
+<meta name="description" content="<%= celebrity.actorname %>  hd images and hot pics and hd wallpapers  download">
+
+    <link rel="stylesheet" href="/css/movie.css">
+
+    <div class="other-sec">
+        <div class="left-blue-header">
+            <h2><%= celebrity.actorname %> Photos</h2>
+        </div>
+        <div class="images">
+            <% if(celebrity.images.length >0) { %>
+            <% for(var i=0; i<celebrity.images.length; i++){%>
+            <div class="image">
+                <a href="/image/download?imgUrl=<%= celebrity.images[i] %>"><img data-src="/<%= celebrity.images[i] %>" alt="celebrity.actorname image" class="lazy-photo"></a>
+            </div>
+            <% } %>
+            <% }else{ %>
+                <p>Images not uploaded</p>
+            <% } %>
+        </div>
+    </div>
+
+
+
+
+
+<%- include('../partials/footer'); -%>

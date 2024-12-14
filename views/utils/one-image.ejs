@@ -1,0 +1,65 @@
+<%- include('../partials/header'); -%>
+<title>Download Image -Dramalite</title>
+<meta name="description" content="hd image download and view">
+    <link rel="stylesheet" href="/css/movie.css">
+
+    <style>
+        .img-download-section {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 360px;
+        }
+
+        .img-download-section img {
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .img-download-section a {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            appearance: none;
+            background-color: #1f86e6;
+            border: 1px solid rgba(27, 31, 35, .15);
+            border-radius: 6px;
+            box-shadow: rgba(27, 31, 35, .1) 0 1px 0;
+            box-sizing: border-box;
+            color: #fff;
+            cursor: pointer;
+            display: inline-block;
+            font-family: -apple-system, system-ui, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+            font-size: 14px;
+            font-weight: 600;
+            line-height: 20px;
+            padding: 6px 16px;
+            position: relative;
+            text-align: center;
+            text-decoration: none;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+            vertical-align: middle;
+            white-space: nowrap;
+            margin: 5px ;
+
+        }
+
+        .img-download-section a i {
+            margin-right: 5px;
+        }
+    </style>
+    <div class="other-sec">
+        <div class="blue-header">
+            <h1>Image Download</h1>
+        </div>
+        <div class="img-download-section">
+            <img data-src="/<%= imgUrl%>" alt=""
+                class="lazy-photo">
+            <a href="/<%= imgUrl%>" class="download-btn"><i class="fa-solid fa-download"></i> DOWNLOAD</a>
+        </div>
+    </div>
+
+    <%- include('../partials/footer'); -%>

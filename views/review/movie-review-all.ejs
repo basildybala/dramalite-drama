@@ -1,0 +1,113 @@
+ 
+ <%- include('../partials/header'); -%>
+ <title><%= movie.name %> Movie Reviews and rating -Dramalite</title>
+<meta name="description" content="<%= movie.engname %> movie reviews and sotry cast rewatch value rating">
+
+ <link rel="stylesheet" href="/css/movie.css">
+ <link rel="stylesheet" href="/css/auth.css">
+
+   <!--------------------REVIEW SECATION------------------------------>
+   <div class="other-sec">
+    <div class="left-blue-header">
+        <h2>Reviews</h2>
+    </div>
+    <div class="r-movie-dettails">
+        <div class="r-movie-img">
+            <% if(movie.moviePoster ) { %>
+                <img data-src="/<%= movie.moviePoster %>" alt=" <%= movie.name %> Poster" class="lazy-photo">
+                <% }else { %>
+                    <img data- src="/images/movies/poster/mission.jpg" alt=" <%= movie.name %> Poster"
+                        class="lazy-photo">
+            <% } %>
+        </div>
+        <div class="r-movie-dettail">
+            <div class="dettail"> <i class="fa-solid fa-star" style="color: blue;"></i>
+                <h2>
+                    <%= movie.name %>
+                </h2>
+            </div>
+
+            <div class="dettail"><i class="fa-solid fa-circle"></i>
+                <p>
+                    <%= movie.year %>
+                </p>
+            </div>
+            <div class="dettail"> <i class="fa-sharp fa-solid fa-user"></i>
+                <p>
+                    <%= movie.actorname1 %>
+                </p>
+            </div>
+            <div class="dettail"><i class="fa-sharp fa-solid fa-user"></i>
+                <p>
+                    <%= movie.actorname2 %>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="review-section">
+        <% for(var i=0; i<review.length; i++){%>
+        <div class="review">
+            <div class="user-dettails">
+                <a href="/user/profile/<%= review[i].userDettails[0]._id %>" class="user-pic">
+                    <img data-src="<%= review[i].userDettails[0].profilePic %>" class="lazy-photo" alt="User Profile pic">
+                </a>
+                <div class="user-name">
+                    <a href="/user/profile/<%= review[i].userDettails[0]._id %>"><%= review[i].userDettails[0].name %></a>
+                    <p><span><%= review[i].helpfulCount %></span> people liked this review</p>
+                    <div class="user-like">
+                        <div class="like">
+                            <form id="like-form" action="/movie/like-review" method="post">
+                                <input type="text" value="<%= movie._id%>" name="movieId" hidden>
+                                <input type="text" value="<%= review[i].userDettails[0]._id %>" name="reviewUserId" hidden>
+                                <button type="submit"><i class="fa-solid fa-thumbs-up"></i></button>
+                            </form>
+                           
+                            <span><%= review[i].helpfulCount %></span>
+                        </div>
+                        <div class="dislike">
+                            <form id="unlike-form" action="/movie/dislike-review" method="post">
+                                <input type="text" value="<%= movie._id%>" name="movieId" hidden>
+                                <input type="text" value="<%= review[i].userDettails[0]._id %>" name="reviewUserId" hidden>
+                                <button type="submit"><i class="fa-solid fa-thumbs-down"></i></button>
+                            </form>
+                            <span><%= review[i].notHelpfulCount %></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="review-rating">
+                    <div class="rating-box">
+                        <div class="rating-head">
+                            <h4>Overall</h4>
+                            <p><%= review[i].notHelpfulCount %></p>
+                        </div>
+                        <div class="rating-body">
+                            <div class="review-rating-body">
+                                <h4>Story</h4>
+                                <p><%= review[i].storyRating %></p>
+                            </div>
+                            <div class="review-rating-body">
+                                <h4>Cast</h4>
+                                <p><%= review[i].castRating %></p>
+                            </div>
+                            <div class="review-rating-body">
+                                <h4>Rewatch </h4>
+                                <p><%= review[i].rewatchValueRating %></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="review-dettails">
+                <div class="review-text">
+                    <h3><%= review[i].reviewHead %></h3>
+                    <p><% review[i].reviewContent %></p>
+                </div>
+
+            </div>
+        </div>
+        <% } %>
+    </div>
+</div>
+
+
+<%- include('../partials/footer'); -%>
