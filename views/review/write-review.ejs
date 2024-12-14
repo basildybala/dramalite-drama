@@ -186,7 +186,7 @@
                 event.preventDefault()
                 var formData = $(this).serialize();
                 $.ajax({
-                    url: `/movie/write-review/<%= movie._id %>`,
+                    url: `/drama/write-review/<%= movie._id %>`,
                     type: 'POST',
                     data: formData,
                     success: function (data) {
@@ -194,12 +194,12 @@
                         if (data.complete) {
                             $('.msg').addClass('success').text(data.msg);
                             setTimeout(function () {
-                                window.location.replace(`/movie/<%= movie._id %>#review`)
+                                window.location.replace(`/drama/<%= movie._id %>#review`)
                             }, 1500)
                         } else {
                             $('.msg').addClass('error').text(data.msg);
                             setTimeout(function () {
-                                window.location.replace(`/movie/write-review/<%= movie._id %>`)
+                                window.location.replace(`/drama/write-review/<%= movie._id %>`)
                             }, 3000)
                         }
 

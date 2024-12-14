@@ -50,7 +50,7 @@ app.use('/',homeRoutes)
 app.use('/auth',authRoutes)
 app.use('/user',userRoutes)
 app.use('/celebs',celebsRoutes)
-app.use('/movie',movieRoutes)
+app.use('/drama',movieRoutes)
 //app.use(session({secret:'Key',resave:true,saveUninitialized:true,cookie:{maxAge:60000000}},));
 app.use(flash())
 

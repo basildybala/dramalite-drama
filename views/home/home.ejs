@@ -12,7 +12,7 @@
         <div class="movie-swape">
             <% for(var i=0; i<latestUpdate.length; i++){%>
         <div class="movies">
-          <a  href="/movie/<%= latestUpdate[i]._id %>">
+          <a  href="/drama/<%= latestUpdate[i]._id %>">
           <div class="movie-s">
             <img src="/<%= latestUpdate[i].moviePoster %>" alt="">
             <h2><%= latestUpdate[i].name %></h2>
@@ -35,7 +35,7 @@
         <div class="movie-swape">
             <% for(var i=0; i<nextRelease.length; i++){%>
         <div class="movies">
-          <a  href="/movie/<%= nextRelease[i]._id %>">
+          <a  href="/drama/<%= nextRelease[i]._id %>">
           <div class="movie-s">
             <img src="/<%= nextRelease[i].moviePoster %>" alt="">
             <h2><%= nextRelease[i].name %></h2>
@@ -58,7 +58,7 @@
         <div class="movie-swape">
             <% for(var i=0; i<lastReleasedMovies.length; i++){%>
         <div class="movies">
-          <a  href="/movie/<%= lastReleasedMovies[i]._id %>">
+          <a  href="/drama/<%= lastReleasedMovies[i]._id %>">
           <div class="movie-s">
             <img src="/<%= lastReleasedMovies[i].moviePoster %>" alt="">
             <h2><%= lastReleasedMovies[i].name %></h2>

@@ -47,7 +47,7 @@ exports.addMovie = async (req, res) => {
                 actimg1, actimg2, actimg3, actimg4, actimg5, actimg6, actimg7, whereToWatch, moviePoster, images: movieImages
             })
             let saveMovie=await movie.save()
-            return res.redirect(`/movie/${saveMovie._id}`)
+            return res.redirect(`/drama/${saveMovie._id}`)
         } else {
             moviePoster = req.files.moviePoster[0]?.path
             let movie = await new Movie({
@@ -58,7 +58,7 @@ exports.addMovie = async (req, res) => {
                 actimg1, actimg2, actimg3, actimg4, actimg5, actimg6, actimg7, whereToWatch, moviePoster
             })
            let saveMovie=await movie.save()
-            return res.redirect(`/movie/${saveMovie._id}`)
+            return res.redirect(`/drama/${saveMovie._id}`)
         }
 
     } catch (error) {
@@ -120,7 +120,7 @@ exports.updateMovie = async (req, res) => {
                 }
             }
             )
-            return res.redirect(`/movie/${movie._id}`)
+            return res.redirect(`/drama/${movie._id}`)
         } else if (req.files.moviePoster?.length > 0) {
             moviePoster = req.files.moviePoster[0]?.path
             let movie = await Movie.findByIdAndUpdate(movieId, {
@@ -130,7 +130,7 @@ exports.updateMovie = async (req, res) => {
                 actorname7, mvactorname1, mvactorname2, mvactorname3, mvactorname4, mvactorname5, mvactorname6, mvactorname7,
                 actimg1, actimg2, actimg3, actimg4, actimg5, actimg6, actimg7, whereToWatch, moviePoster, images: actorImages
             })
-            return res.redirect(`/movie/${movie._id}`)
+            return res.redirect(`/drama/${movie._id}`)
         } else {
             let movie = await Movie.findByIdAndUpdate(movieId, {
                 name, engname, category, year, releasedate,releaseDate,ottreleasedate, genre, duration, director, directorlink,
@@ -139,7 +139,7 @@ exports.updateMovie = async (req, res) => {
                 actorname7, mvactorname1, mvactorname2, mvactorname3, mvactorname4, mvactorname5, mvactorname6, mvactorname7,
                 actimg1, actimg2, actimg3, actimg4, actimg5, actimg6, actimg7, whereToWatch, images: actorImages
             })
-            return res.redirect(`/movie/${movie._id}`)
+            return res.redirect(`/drama/${movie._id}`)
         }
 
     } catch (error) {
@@ -152,7 +152,7 @@ exports.deleteMovie = async (req, res) => {
     try {
         let movieId = req.params.movieId
         await Movie.findByIdAndDelete(movieId)
-        res.redirect('/movie/show-all-movies')
+        res.redirect('/drama/show-all-movies')
     } catch (error) {
         console.log("err in delete movie Page", error)
         return res.render('utils/err-handle-page', { error: { msg: "something wrong pls inform to admin", link: '/contact' } })
@@ -278,6 +278,7 @@ exports.writeReview = async (req, res) => {
 
 exports.addRating = async (req, res) => {
     try {
+        console.log("HAIIIIIIIIIIIIIIIIIIIIIII")
         console.log(req.user)
         let movieId = req.body.movieId
         let userId = req.user.id
@@ -333,7 +334,7 @@ exports.likeReview= async (req,res)=>{
                 (u) => u == currentUserId
             )
             if (liked) {
-                return res.redirect(`/movie/${movieId}#review`)
+                return res.redirect(`/drama/${movieId}#review`)
             } else {
                 Review.findOneAndUpdate(
                     {
@@ -352,11 +353,11 @@ exports.likeReview= async (req,res)=>{
                         new: true,
                     }
                 ).exec((err, res) => console.log(err))
-                return res.redirect(`/movie/${movieId}#review`)
+                return res.redirect(`/drama/${movieId}#review`)
             }
     
         } else {
-            return res.redirect(`/movie/${movieId}#review`)
+            return res.redirect(`/drama/${movieId}#review`)
         }
     } catch (error) {
         console.log("err in like review", error)
@@ -378,7 +379,7 @@ exports.dislikeReview= async (req,res)=>{
                 (u) => u == currentUserId
             )
             if (liked) {
-                return res.redirect(`/movie/${movieId}#review`)
+                return res.redirect(`/drama/${movieId}#review`)
             } else {
                 Review.findOneAndUpdate(
                     {
@@ -397,12 +398,12 @@ exports.dislikeReview= async (req,res)=>{
                         new: true,
                     }
                 ).exec((err, res) => console.log(err))
-                return res.redirect(`/movie/${movieId}#review`)
+                return res.redirect(`/drama/${movieId}#review`)
                 // }
             }
     
         } else {
-            return res.redirect(`/movie/${movieId}#review`)
+            return res.redirect(`/drama/${movieId}#review`)
         }
     } catch (error) {
         console.log("err in dislike review Page", error)

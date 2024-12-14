@@ -22,7 +22,7 @@
         <% movies.forEach (function (m){%>
           <tr>
             <td class="td-class">
-              <a href="/movie/<%= m._id  %>" title="<%= m.name %> Movie Details Page">
+              <a href="/drama/<%= m._id  %>" title="<%= m.name %> Movie Details Page">
                 <div>
                   <% if(m.moviePoster) {%> 
                      <img class="table-img lazy-photo" data-src="/<%= m.moviePoster %>" alt="<%= m.name %> Movie Poster">
@@ -35,7 +35,7 @@
             </td>
             <td class="td-class">
               <div class="movies-table">
-                <div class="t-col"><i class="fa fa-star" aria-hidden="true"></i> <a href="/movie/<%= m._id %>">
+                <div class="t-col"><i class="fa fa-star" aria-hidden="true"></i> <a href="/drama/<%= m._id %>">
                     <h2 title="<%= m.name %> Movie Page">
                       <%= m.name %>
                     </h2>

@@ -56,7 +56,7 @@
                     <p><span><%= review[i].helpfulCount %></span> people liked this review</p>
                     <div class="user-like">
                         <div class="like">
-                            <form id="like-form" action="/movie/like-review" method="post">
+                            <form id="like-form" action="/drama/like-review" method="post">
                                 <input type="text" value="<%= movie._id%>" name="movieId" hidden>
                                 <input type="text" value="<%= review[i].userDettails[0]._id %>" name="reviewUserId" hidden>
                                 <button type="submit"><i class="fa-solid fa-thumbs-up"></i></button>
@@ -65,7 +65,7 @@
                             <span><%= review[i].helpfulCount %></span>
                         </div>
                         <div class="dislike">
-                            <form id="unlike-form" action="/movie/dislike-review" method="post">
+                            <form id="unlike-form" action="/drama/dislike-review" method="post">
                                 <input type="text" value="<%= movie._id%>" name="movieId" hidden>
                                 <input type="text" value="<%= review[i].userDettails[0]._id %>" name="reviewUserId" hidden>
                                 <button type="submit"><i class="fa-solid fa-thumbs-down"></i></button>

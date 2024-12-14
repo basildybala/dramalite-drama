@@ -1,7 +1,7 @@
 <%- include('../partials/header'); -%>
-    <link rel="stylesheet" href="/css/movie.css">
+    <link rel="stylesheet" href="/css/drama.css">
 
-    <link rel="stylesheet" href="css/movies-list.css">
+    <link rel="stylesheet" href="css/dramas-list.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css">
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
   
@@ -21,12 +21,12 @@
           <% latestUpdate.forEach (function (m){%>
             <tr>
               <td class="td-class">
-                <a href="/movie/<%= m._id  %>" title="<%= m.name %> Movie Details Page">
+                <a href="/drama/<%= m._id  %>" title="<%= m.name %> Movie Details Page">
                   <div>
                     <% if(m.moviePoster) {%> 
                        <img class="table-img lazy-photo" data-src="/<%= m.moviePoster %>" alt="<%= m.name %> Movie Poster">
                        <%}else{%>
-                        <img class="table-img lazy-photo" data-src="/images/movies/id/<%= m._id  %>.jpg" alt="<%= m.name %>  Movie Poster">
+                        <img class="table-img lazy-photo" data-src="/images/dramas/id/<%= m._id  %>.jpg" alt="<%= m.name %>  Movie Poster">
                     <%}%>
   
                   </div>
@@ -34,7 +34,7 @@
               </td>
               <td class="td-class">
                 <div class="movies-table">
-                  <div class="t-col"><i class="fa fa-star" aria-hidden="true"></i> <a href="/movie/<%= m._id %>">
+                  <div class="t-col"><i class="fa fa-star" aria-hidden="true"></i> <a href="/drama/<%= m._id %>">
                       <h2 title="<%= m.name %> Movie Page">
                         <%= m.name %>
                       </h2>

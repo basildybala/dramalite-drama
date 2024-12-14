@@ -241,14 +241,14 @@
             <% for(var i=0; i<moviesList.length; i++){%>
                 
                 <div class="movie">
-                    <a href="/movie/<%= moviesList[i]._id %> " class="movie-body">
+                    <a href="/drama/<%= moviesList[i]._id %> " class="movie-body">
                         <div class="movie-img">
                             <% if(moviesList[i].moviePoster) { %>
                                 <img class="lazy-photo" data-src="/<%= moviesList[i].moviePoster %>"
                                     alt=" <%= moviesList[i].name %> Poster" srcset="">
                                 <% }else { %>
                                     <img class="lazy-photo"
-                                        data-src="/images/movies/id/<%= moviesList[i]._id  %>.jpg"
+                                        data-src="/images/dramas/id/<%= moviesList[i]._id  %>.jpg"
                                         alt=" <%= moviesList[i].name %> poster" srcset="">
                             <% } %>
                         </div>
