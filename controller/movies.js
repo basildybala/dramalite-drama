@@ -334,7 +334,7 @@ exports.likeReview= async (req,res)=>{
             if (liked) {
                 return res.redirect(`/drama/${movieId}#review`)
             } else {
-                Review.findOneAndUpdate(
+                await Review.findOneAndUpdate(
                     {
                         movieId: movieId,
                         'review.userId': reviewUserId,
@@ -350,7 +350,7 @@ exports.likeReview= async (req,res)=>{
                     {
                         new: true,
                     }
-                ).exec((err, res) => console.log(err))
+                )
                 return res.redirect(`/drama/${movieId}#review`)
             }
     
