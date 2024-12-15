@@ -278,8 +278,6 @@ exports.writeReview = async (req, res) => {
 
 exports.addRating = async (req, res) => {
     try {
-        console.log("HAIIIIIIIIIIIIIIIIIIIIIII")
-        console.log(req.user)
         let movieId = req.body.movieId
         let userId = req.user.id
         let rating = await Rating.findOne({ movieId: movieId })
