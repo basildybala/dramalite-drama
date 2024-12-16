@@ -30,7 +30,7 @@ exports.downloadImage=async(req,res)=>{
 exports.malayalamMoviesPage=async(req,res)=>{
     try {
         let user=req.user
-        let malayalamMovies=await Movie.find({category:'Malayalam'}).sort({name:'asc'})
+        let malayalamMovies=await Movie.find({category:'Malayalam'}).sort({releasedate:'desc'})
         
         res.render('home/malayalam-movies.ejs',{malayalamMovies,user})
     } catch (error) {
@@ -86,9 +86,65 @@ exports.hindiMoviesPage=async(req,res)=>{
 exports.tamilMoviesPage=async(req,res)=>{
     try {
         let user=req.user
-        let tamilMovies=await Movie.find({category:'Tamil'}).sort({name:'asc'})
+            // Get page and limit parameters from the query string
+            const page = parseInt(req.query.page) || 1;  // Default to page 1 if no page param
+            const limit = parseInt(req.query.limit) || 10;  // Default to 10 items per page
+            const aggregationPipeline = [
+                { $match: { category: 'Malayalam' } },  // Filter by category 'Malayalam'
+                {$project:
+                    {
+                        _id:1,
+                        name:1,
+                        category:1,
+                        releasedate:1,
+                        year:1,
+                        genre:1,
+                        moviePoster:1,
+                        episodes:1
+
+                    }
+                },
+                { $sort: { moviePoster: -1 } },  // Sort by name in ascending order
+                {
+                    $facet: {
+                        movies: [  // Paginate the movies
+                            { $skip: (page - 1) * limit },  // Skip based on the current page
+                            { $limit: limit },  // Limit the number of items per page
+                        ],
+                        total: [  // Count the total number of movies matching the filter (without pagination)
+                            { $count: 'totalCount' }
+                        ]
+                    }
+                }
+            ];
+            
+            // Perform the aggregation query
+            const result = await Movie.aggregate(aggregationPipeline);
+            
+            // Get the paginated movies and total count
+            const movies = result[0].movies;
+            const totalMovies = result[0].total.length ? result[0].total[0].totalCount : 0;
+            const totalPages = Math.ceil(totalMovies / limit);
+
+            // Render the movies in the EJS template
+            // res.json({
+            //     movies: movies,
+            //     currentPage: page,
+            //     totalPages: totalPages,
+            //     totalMovies: totalMovies,
+            //     limit: limit
+            // });
+            res.render('home/tamil-movies.ejs', {
+                movies: movies,
+                currentPage: page,
+                totalPages: totalPages,
+                totalMovies: totalMovies,
+                limit: limit
+            });
+            
+
         
-        res.render('home/tamil-movies.ejs',{tamilMovies,user})
+        //res.render('home/tamil-movies.ejs',{tamilMovies,user})
     } catch (error) {
         console.log("err in home page", error)
         return res.render('utils/err-handle-page', { error: { msg: "something wrong pls inform to admin", link: '/contact' } })

@@ -1,83 +1,149 @@
 <%- include('../partials/header'); -%>
 <title>New Full Tamil Movies 2021-2022 Where To Watch</title>
-<meta name="description" content="Upcoming Hit Tamil Movies Release  in Theater Hotstar Netflix Full Check Now. Films Cast & Crew Trailer Release date Story News Images">
-<meta name="keywords" content="Upcoming Tamil Movies, Tamil Latest Release Movies, Tamil New Movies, Tamil Movies, Tamil Movies Downlaod, Tamil movies free, Tamil Movies Hd"/>
+<meta
+  name="description"
+  content="Upcoming Hit Tamil Movies Release  in Theater Hotstar Netflix Full Check Now. Films Cast & Crew Trailer Release date Story News Images"
+/>
+<meta
+  name="keywords"
+  content="Upcoming Tamil Movies, Tamil Latest Release Movies, Tamil New Movies, Tamil Movies, Tamil Movies Downlaod, Tamil movies free, Tamil Movies Hd"
+/>
 
-<link rel="stylesheet" href="/css/movies-list.css">
-  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css">
-  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
+<link rel="stylesheet" href="/css/movies-list.css" />
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css"
+/>
+<script
+  type="text/javascript"
+  charset="utf8"
+  src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"
+></script>
+<style>
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    margin-top: 20px;
+    padding: 10px;
+    flex-wrap: nowrap; /* Keeps everything in a single line */
+    overflow-x: auto; /* Adds horizontal scrolling if necessary */
+}
+
+.pagination-link {
+    padding: 8px 12px;
+    text-decoration: none;
+    color: #007bff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    text-align: center;
+    min-width: 40px; /* Ensures consistent width for links */
+}
+
+.pagination-link:hover {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.pagination-link.active {
+    background-color: #007bff;
+    color: white;
+    font-weight: bold;
+    pointer-events: none;
+}
+
+.pagination-ellipsis {
+    padding: 8px 12px;
+    color: #666;
+    font-size: 14px;
+}
+
+@media (max-width: 768px) {
+    .pagination-link {
+        padding: 6px 10px;
+        font-size: 12px;
+    }
+
+    .pagination {
+        gap: 4px; /* Reduce spacing between elements */
+    }
+}
+
+@media (max-width: 480px) {
+    .pagination-link {
+        padding: 4px 8px;
+        font-size: 10px;
+        min-width:15px
+    }
+
+    .pagination {
+        gap: 3px;
+    }
+
+}
+
+</style>
+
+<!-- Display the list of movies -->
+<% if (movies.length > 0) { %>
+<ul>
+  <% movies.forEach(function(movie) { %>
+  <li>
+    <strong><%= movie.name %></strong><br />
+    Category: <%= movie.category %><br />
+    Release Date: <%= movie.releasedate %><br />
+    Movie Poster: <%= movie.moviePoster %><br />
+  </li>
+  <% }) %>
+</ul>
+
+<!-- Responsive Pagination -->
+<div class="pagination">
+  <% if (currentPage > 1) { %>
+      <a href="?page=<%= currentPage - 1 %>&limit=<%= limit %>" class="pagination-link"> ❮ </a>
+  <% } %>
+
+  <!-- Always show the first page -->
+  <a href="?page=1&limit=<%= limit %>" class="pagination-link <%= currentPage === 1 ? 'active' : '' %>">1</a>
+
+  <!-- Ellipsis before the current page if necessary -->
+  <% if (currentPage > 3) { %>
+      <span class="pagination-ellipsis">...</span>
+  <% } %>
+
+  <!-- Show only a few neighbors around the current page -->
+  <% for (let i = Math.max(2, currentPage - 1); i <= Math.min(currentPage + 1, totalPages - 1); i++) { %>
+      <a href="?page=<%= i %>&limit=<%= limit %>" class="pagination-link <%= currentPage === i ? 'active' : '' %>">
+          <%= i %>
+      </a>
+  <% } %>
+
+  <!-- Ellipsis after the current page if necessary -->
+  <% if (currentPage < totalPages - 2) { %>
+      <span class="pagination-ellipsis">...</span>
+  <% } %>
+
+  <!-- Always show the last page -->
+  <% if (totalPages > 1) { %>
+      <a href="?page=<%= totalPages %>&limit=<%= limit %>" class="pagination-link <%= currentPage === totalPages ? 'active' : '' %>">
+          <%= totalPages %>
+      </a>
+  <% } %>
+
+  <% if (currentPage < totalPages) { %>
+      <a href="?page=<%= currentPage + 1 %>&limit=<%= limit %>" class="pagination-link"> ❯</a>
+  <% } %>
+</div>
 
 
-  <div class="other-sec">
-    <table id="sample-table" style="width:100%;text-align:left">
-      <thead>
-        <tr>
-          <th class="fst-table-header" style="width: 103px;">
-            <h1>Tamil</h1< /th>
-          <th class="nd-table-header">
-            <h1>Movies List</h1>
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <% tamilMovies.forEach (function (m){%>
-          <tr>
-            <td class="td-class">
-              <a href="/movie/<%= m._id  %>" title="<%= m.name %> Movie Details Page">
-                <div>
-                  <% if(m.moviePoster) {%> 
-                     <img class="table-img lazy-photo" data-src="/<%= m.moviePoster %>" alt="<%= m.name %> Movie Poster">
-                     <%}else{%>
-                      <img class="table-img lazy-photo" data-src="/images/movies/id/<%= m._id  %>.jpg" alt="<%= m.name %>  Movie Poster">
-                  <%}%>
+<% } else { %>
+<p>No movies found.</p>
+<% } %>
 
-                </div>
-              </a>
-            </td>
-            <td class="td-class">
-              <div class="movies-table">
-                <div class="t-col"><i class="fa fa-star" aria-hidden="true"></i> <a href="/movie/<%= m._id %>">
-                    <h2 title="<%= m.name %> Movie Page">
-                      <%= m.name %>
-                    </h2>
-                  </a></div>
-                <div class="t-col">
-                  <h3>Cast :</h3>
-                  <h6> <a href="/celebs/<%= m.actid1 %>" title="<%= m.actorname1 %> Actor Details Page">
-                      <%= m.actorname1 %>,
-                    </a><a href="/celebs/<%= m.actid2 %>" title="<%= m.actorname2 %> Actor Details Page">
-                      <%= m.actorname2 %>
-                    </a> </h6>
-                </div>
-                <div class="t-col">
-                  <h3>Genre :</h3>
-                  <h6>
-                    <%= m.genre %>
-                  </h6>
-                </div>
-                <div class="t-col">
-                  <h5>Release Date :</h5>
-                  <% if(m.releasedate) {%>
-                    <p>
-                      <%= m.releasedate %>
-                    </p>
-                    <%}else{%>
-                      <p>Date Not Confirm</p>
-                      <%}%>
-                </div>
 
-              </div>
-            </td>
-          </tr>
-          <% });%>
-      </tbody>
-    </table>
-
-  </div>
-
-  <script>
-    $(function () {
-      $('#sample-table').DataTable();
-    });
-  </script>
-  <%- include('../partials/footer'); -%>
+<%- include('../partials/footer'); -%>
