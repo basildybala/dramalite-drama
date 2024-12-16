@@ -36,12 +36,18 @@
                 <div class="input-group">
                     <select class="form-control" name="category" required>
                         <option value="<%= movie.category %>"><%= movie.category %></option>
-                        <option value="Malayalam">Malayalam</option>
-                        <option value="Tamil">Tamil</option>
-                        <option value="Hindi">Hindi</option>
-                        <option value="Telugu">Telugu</option>
-                        <option value="Kannada">Kannada</option>
-                        <option value="English">English</option>
+                        <option value="Korean">Korean</option>
+                        <option value="Chinese">Chinese</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="name">Country</label>
+                <div class="input-group">
+                    <select class="form-control" name="category" required>
+                        <option value="<%= movie.country %>"><%= movie.country %></option>
+                        <option value="Korea">Korea</option>
+                        <option value="China">China</option>
                     </select>
                 </div>
             </div>
@@ -60,9 +66,9 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="name">OTT Release Date:</label>
+                <label for="name">Episode End Date:</label>
                 <div class="input-group">
-                    <input class="form-control" name="ottreleasedate" placeholder="Release Date" value="<%= movie.ottreleasedate %>">
+                    <input class="form-control" name="episodeEndDate" placeholder="episode End Date" value="<%= movie.episodeEndDate %>">
                 </div>
             </div>
             <div class="form-group">
