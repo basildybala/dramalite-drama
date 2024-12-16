@@ -58,7 +58,7 @@ const userSchema=mongoose.Schema({
     instaLink:{
         type:String,
         trim:true,
-        minlength: 5, maxlength: 900
+        maxlength: 100
     },
     role: {
         type: String,
