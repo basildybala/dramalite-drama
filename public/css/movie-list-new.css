@@ -1,0 +1,167 @@
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    padding: 10px;
+    flex-wrap: nowrap; /* Keeps everything in a single line */
+    overflow-x: auto; /* Adds horizontal scrolling if necessary */
+}
+
+.pagination-link {
+    padding: 8px 12px;
+    text-decoration: none;
+    color: #007bff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    text-align: center;
+    min-width: 40px; /* Ensures consistent width for links */
+}
+
+.pagination-link:hover {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.pagination-link.active {
+    background-color: #007bff;
+    color: white;
+    font-weight: bold;
+    pointer-events: none;
+}
+
+.pagination-ellipsis {
+    padding: 8px 12px;
+    color: #666;
+    font-size: 14px;
+}
+
+@media (max-width: 768px) {
+    .pagination-link {
+        padding: 6px 10px;
+        font-size: 12px;
+    }
+
+    .pagination {
+        gap: 4px; /* Reduce spacing between elements */
+    }
+}
+
+@media (max-width: 480px) {
+    .pagination-link {
+        padding: 4px 8px;
+        font-size: 10px;
+        min-width:15px
+    }
+
+    .pagination {
+        gap: 3px;
+    }
+
+}
+.flex{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+ /* Blue Header */
+ .blue-header {
+            width: 100%;
+            height: 35px; /* Fixed height */
+            background-color: #4fa0f7; /* Blue color */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 15px;
+            color: white;
+        }
+
+        /* Heading */
+        .blue-header-heading h1 {
+            font-size: 16px;
+            font-weight: bold;
+            font-family: 'Varela Round', sans-serif;
+        }
+
+        /* Sort Button */
+        .sort-container {
+            position: relative; /* For dropdown positioning */
+            margin-right: 12px;
+        }
+
+        .sort-button {
+            background-color: #ffffff;
+            color: #4fa0f7;
+            border: none;
+            border-radius: 5px;
+            padding: 4px 8px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .sort-button:hover {
+            background-color: #e3f2fd;
+        }
+
+        /* Dropdown Menu */
+        .dropdown-menu {
+            display: none; /* Initially hidden */
+            position: absolute;
+            right: 0;
+            top: 30px; /* Position below the button */
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            z-index: 10;
+        }
+
+        .dropdown-menu button {
+            background: none;
+            border: none;
+            color: #333;
+            padding: 8px 12px;
+            width: 100%;
+            text-align: left;
+            cursor: pointer;
+            font-size: 12px;
+        }
+
+        .dropdown-menu button:hover {
+            background-color: #e3f2fd;
+            color: #0073e6;
+        }
+
+        /* Responsive Design */
+        @media (min-width: 650px) {
+            .blue-header {                height: auto;
+                padding: 5px;
+            }
+
+            .blue-header-heading h1 {
+                margin: 0px;
+
+            }
+
+            .dropdown-menu {
+                top: 40px; /* Adjust for smaller screens */
+            }
+            .movies{
+                width: 180px;
+                 height: 300px;
+            }
+            .movie-s img{
+                height: 230px;
+            }
+            .movie-s h2{
+                font-size: 13px;
+            }
+            .movie-s p{
+                font-size: 10px;
+            }
+        }

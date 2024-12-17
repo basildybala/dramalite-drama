@@ -124,8 +124,8 @@ font-family: 'Varela Round', sans-serif;
 
  .error {
    color: #ba3939;
-   background: #ffe0e0;
-   border: 1px solid #a33a3a;
+   background: #429dff57;
+   border: 1px solid #1039f7;
    height: auto;
    font-size: 14px;
    display: flex;
@@ -317,8 +317,8 @@ hr{
 }
 .movies{
   width: 100px;
-  height: 175px;
-  margin: 0 5px;
+  height: 190px;
+  margin: 5px;
   border: 1px solid rgba(0,0,0,.14);
 }
 .movies a{
@@ -349,8 +349,8 @@ hr{
 }
 .movie-s p{
   font-family:'Poppins', sans-serif; 
-  margin: 0;
-  font-size: 9px;
+  margin: 2px;
+  font-size: 8px;
   color: black;
 }
 .other-sec {

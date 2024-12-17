@@ -13,17 +13,17 @@ router.get('/malayalam-movies',isUser,malayalamMoviesPage)
 //TAMIL MOVIES
 router.get('/tamil-movies',isUser,tamilMoviesPage)
 
-//HINDI MOVIES
-router.get('/hindi-movies',isUser,hindiMoviesPage)
+// //HINDI MOVIES
+// router.get('/hindi-movies',isUser,hindiMoviesPage)
 
-//TELUGU MOVIES
-router.get('/telugu-movies',isUser,teluguMoviesPage)
+// //TELUGU MOVIES
+// router.get('/telugu-movies',isUser,teluguMoviesPage)
 
-//ENGLISH MOVIES
-router.get('/english-movies',isUser,englishMoviesPage)
+// //ENGLISH MOVIES
+// router.get('/english-movies',isUser,englishMoviesPage)
 
-//KANNADA MOVIES
-router.get('/kannada-movies',isUser,kannadaMoviesPage)
+// //KANNADA MOVIES
+// router.get('/kannada-movies',isUser,kannadaMoviesPage)
 
 router.get('/image/download',isUser,downloadImage)
 
