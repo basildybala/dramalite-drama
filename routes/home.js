@@ -27,8 +27,9 @@ router.get('/tamil-movies',isUser,tamilMoviesPage)
 
 router.get('/image/download',isUser,downloadImage)
 
-//ADMIN PAGE
-router.get('/devadmin',isAuth,isAdmin,adminPage)
+// //ADMIN PAGE
+// // router.get('/devadmin',isAuth,isAdmin,adminPage)
+// router.get('/devadmin',adminPage)
 
 //SEARCH MOVIE
 router.get('/search-movie',isUser,searchMoviePage)
@@ -52,7 +53,9 @@ router.get('/terms-conditions',isUser,termsConditionsPage)
 router.get('/privacy-policy',isUser,privacyPolicyPage)
 
 //CONTACT
-router.get('/contact',isUser,contactPage)
+router.get('/contact',isUser,contactPage) 
+
+
 
 
 module.exports = router;

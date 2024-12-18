@@ -4,6 +4,7 @@ const actorSchema = mongoose.Schema(
   {
     actorname: {type: String,trim: true,},
     nickname: {type: String,trim: true,},
+    celeblink: {type: String,trim: true,unique:true},
     language: {type: String,trim: true,},
     age: {type: String,trim: true,},
     yearactive: {type: Number,trim: true,},

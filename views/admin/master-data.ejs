@@ -1,5 +1,5 @@
 <%- include('../partials/admin-header'); -%>
-<title>Show all movies-Dramalite</title>
+<title>List Master Data -Dramalite</title>
 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
 crossorigin="anonymous">
@@ -21,26 +21,24 @@ crossorigin="anonymous">
     }
 </style>
 
+<a href="/devadmin/add-master-data" class="btn btn-success">ADD MASTER DATA</a>
 
-<a href="/drama/add-movie" class="btn btn-success">ADD DRAMA</a>
 <table id="example" class="table table-striped table-bordered" style="width:100%">
     <thead>
     <tr>
       <th class="admin-header"> Name</th>
-      <th class="admin-headerL "> Lang</th>
-      <th class="admin-header"> OBID</th>
+      <th class="admin-headerL "> Type</th>
       <th class="admin-header"> Options</th>
     </tr>
     </thead>
     <tbody>
-        <% movie.forEach (function (m){%>
+        <% masterData.forEach (function (m){%>
     <tr>
       <td class="td-class" style="font-weight: 600;"><%= m.name %></td>
-      <td class="td-class"><%= m.category %></td>
-       <td class="td-class"><input style="width: 90%;" type="text" value="<%= m._id %>"> </td>
+      <td class="td-class"><%= m.type %></td>
       <td class="td-class">
-          <a style="color: green;margin-right: 5px;" href="/drama/edit-movie/<%= m._id %>"><i class="fas fa-user-edit"></i>Edit</a>
-          <a href="/drama/delete-movie/<%= m._id %>" onclick="return confirm('Are You Sure to Delete ')"><i class="fas fa-trash"></i></a>
+          <a style="color: green;margin-right: 5px;" href="/devadmin/edit-master-data/<%= m._id %>"><i class="fas fa-user-edit"></i>Edit</a>
+          <a href="/devadmin/delete-master-data/<%= m._id %>" onclick="return confirm('Are You Sure want to Delete ')"><i class="fas fa-trash"></i></a>
        </td>
     </tr>
     <% });%>
@@ -48,8 +46,7 @@ crossorigin="anonymous">
     <tfoot>
         <tr>
             <th>Name</th>
-            <th>lag</th>
-            <th>ID</th>
+            <th>Type</th>
             <th>Option</th>
         </tr>
     </tfoot>

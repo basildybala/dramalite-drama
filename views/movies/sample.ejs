@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actor Form</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>Actor Form</h2>
+        <form method="POST" action="/drama/submit">
+            <% for (let i = 1; i <= 7; i++) { %>
+            <div class="form-group">
+                <label for="name">Actor <%= i %>:</label>
+                <div class="input-group mb-2">
+                    <input type="text" class="form-control" name="actid<%= i %>" placeholder="ID" readonly>
+                    <input type="text" class="form-control actorname" name="actorname<%= i %>" data-index="<%= i %>" placeholder="Name">
+                </div>
+                <div class="input-group">
+                    <input type="text" class="form-control" name="actimg<%= i %>" placeholder="Img Url" readonly>
+                    <input type="text" class="form-control" name="mvactorname<%= i %>" placeholder="Movie Name">
+                </div>
+            </div>
+            <% } %>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+
+        <!-- Suggestions container -->
+        <div id="suggestionsActor" style="position: absolute; z-index: 1000; background: #fff; border: 1px solid #ccc; display: none;"></div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const suggestionContainer = document.getElementById('suggestionsActor');
+            let activeInput = null; // Track which input is currently being typed into
+
+            // Attach input event to all actor name fields
+            document.querySelectorAll('.actorname').forEach(input => {
+                input.addEventListener('input', async (event) => {
+                    activeInput = event.target;
+                    const query = activeInput.value.trim();
+                    const index = activeInput.dataset.index;
+
+                    if (!query) {
+                        suggestionContainer.style.display = 'none';
+                        return;
+                    }
+
+                    if (query.length < 3) {
+                      suggestionContainer.style.display = 'none';
+                      return;
+                    }
+
+
+                    // Fetch matching actors
+                    const response = await fetch(`/drama/search-actors?q=${query}`);
+                    const actors = await response.json();
+
+                    // Show suggestions under the input field
+                    suggestionContainer.innerHTML = '';
+                    if (actors.length > 0) {
+                        suggestionContainer.style.display = 'block';
+                        const rect = activeInput.getBoundingClientRect();
+                        suggestionContainer.style.left = `${rect.left}px`;
+                        suggestionContainer.style.top = `${rect.bottom + window.scrollY}px`;
+                        suggestionContainer.style.width = `${rect.width}px`;
+
+                        actors.forEach(actor => {
+                            const suggestion = document.createElement('div');
+                            suggestion.textContent = actor.name;
+                            suggestion.style.padding = '5px';
+                            suggestion.style.cursor = 'pointer';
+
+                            suggestion.addEventListener('click', () => {
+                                // Populate fields for the current actor
+                                document.querySelector(`[name="actid${index}"]`).value = actor.actid;
+                                document.querySelector(`[name="actimg${index}"]`).value = actor.profilePic;
+                                activeInput.value = actor.name;
+
+                                suggestionContainer.style.display = 'none';
+                            });
+
+                            suggestionContainer.appendChild(suggestion);
+                        });
+                    } else {
+                        suggestionContainer.style.display = 'none';
+                    }
+                });
+            });
+
+            // Hide suggestions when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!suggestionContainer.contains(e.target) && activeInput !== e.target) {
+                    suggestionContainer.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

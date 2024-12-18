@@ -15,6 +15,7 @@ const authRoutes=require('./routes/auth')
 const userRoutes=require('./routes/user')
 const celebsRoutes=require('./routes/celebs')
 const movieRoutes=require('./routes/movies')
+const adminRoutes=require('./routes/admin')
 
 app.use(express.json());
 app.use(express.urlencoded({extended:true}))
@@ -51,6 +52,7 @@ app.use('/auth',authRoutes)
 app.use('/user',userRoutes)
 app.use('/celebs',celebsRoutes)
 app.use('/drama',movieRoutes)
+app.use('/devadmin',adminRoutes)
 //app.use(session({secret:'Key',resave:true,saveUninitialized:true,cookie:{maxAge:60000000}},));
 app.use(flash())
 

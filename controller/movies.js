@@ -3,6 +3,8 @@ const Review = require("../models/Review")
 const Rating = require("../models/Rating")
 const mongoose = require('mongoose');
 const OTT = require("../utils/ott");
+const Master = require("../models/MasterData");
+
 exports.addMoviePage = async (req, res) => {
     try {
         let user = req.user
@@ -16,6 +18,7 @@ exports.addMoviePage = async (req, res) => {
 
 exports.addMovie = async (req, res) => {
     try {
+        
         let { name, engname, category, year, releasedate,ottreleasedate, genre, duration, director, directorlink,
             written, writtenlink, producedby, producedbylink, tags, ottName, ottImg, ottUrl, story,
             actid1, actid2, actid3, actid4, actid6, actid7, actorname1, actorname2, actorname3, actorname4, actorname5, actorname6,
@@ -23,11 +26,10 @@ exports.addMovie = async (req, res) => {
             actimg1, actimg2, actimg3, actimg4, actimg5, actimg6, actimg7 } = req.body
         var moviePoster;
         var releaseDate;
-        console.log(releasedate.length)
+
         if(releasedate.length>=9){
             releaseDate=new Date(releasedate).getTime()
         }
-        console.log(releaseDate)
         var whereToWatch = {
             ottName: ottName, ottImg: ottImg, ottUrl: ottUrl
         }
@@ -73,6 +75,7 @@ exports.editMoviePage = async (req, res) => {
         let movieId = req.params.movieId
         let ott=OTT
         let movie = await Movie.findById(movieId)
+        console.log(movie.tags)
         res.render('movies/edit-movie.ejs', { user, movie,ott })
     } catch (error) {
         console.log("err in edit movie page", error)
@@ -686,3 +689,17 @@ exports.contactPage= async (req,res)=>{
         return res.render('utils/err-handle-page', { error: { msg: "something wrong pls inform to admin", link: '/contact' } })
     }
 }
+
+exports.getTagsAndGenreData=async(req,res)=>{
+    try {
+        let value=req.query.filter
+        let masterData=await Master.find({type:value}).select('name type')
+        const query = req.query.q?.toLowerCase() || '';
+        const filteredTags = masterData.filter(tag => tag.name.toLowerCase().includes(query));
+        res.json(filteredTags);
+    } catch (error) {
+        console.log("err in show all celeb Page", error)
+        return res.render('utils/err-handle-page', { error: { msg: "something wrong pls inform to admin", link: '/contact' } })
+    }
+}
+

@@ -6,8 +6,65 @@
         integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="/css/auth.css">
     <script src="https://cdn.ckeditor.com/4.20.1/standard/ckeditor.js"></script>
+    <style>
+        #suggestions {
+      border: 1px solid #ccc;
+      max-width: 300px;
+      margin-top: 5px;
+      position: absolute;
+      background-color: #fff;
+      z-index: 1000;
+    }
+    .suggestion {
+      padding: 8px;
+      cursor: pointer;
+    }
+    .suggestion:hover {
+      background-color: #f0f0f0;
+    }
+    #selectedTags span {
+      margin-right: 10px;
+      padding: 5px;
+      background-color: #e0e0e0;
+      border-radius: 5px;
+      display: inline-block;
+    }
+    #selectedTags button {
+      margin-left: 5px;
+      border: none;
+      background: none;
+      cursor: pointer;
+      color: red;
+    }
+
+    #suggestionsGenre {
+      border: 1px solid #ccc;
+      max-width: 300px;
+      margin-top: 5px;
+      position: absolute;
+      background-color: #fff;
+      z-index: 1000;
+    }
+    .suggestion:hover {
+      background-color: #f0f0f0;
+    }
+    #selectedGenres span {
+      margin-right: 10px;
+      padding: 5px;
+      background-color: #e0e0e0;
+      border-radius: 5px;
+      display: inline-block;
+    }
+    #selectedGenres button {
+      margin-left: 5px;
+      border: none;
+      background: none;
+      cursor: pointer;
+      color: red;
+    }
+    </style>
     <div class="signup-form">
-        <form enctype="multipart/form-data" id="signup-form" action="/movie/edit-movie/<%= movie._id %>" method="post">
+        <form enctype="multipart/form-data" id="signup-form" action="/drama/edit-movie/<%= movie._id %>" method="post">
             <h2>Edit Movie</h2>
             <hr>
             <div class="form-group">
@@ -44,7 +101,7 @@
             <div class="form-group">
                 <label for="name">Country</label>
                 <div class="input-group">
-                    <select class="form-control" name="category" required>
+                    <select class="form-control" name="country" required>
                         <option value="<%= movie.country %>"><%= movie.country %></option>
                         <option value="Korea">Korea</option>
                         <option value="China">China</option>
@@ -74,7 +131,11 @@
             <div class="form-group">
                 <label for="name">Genre:</label>
                 <div class="input-group">
-                    <input type="text" class="form-control" name="genre" placeholder="genre" value="<%= movie.genre %>">
+                    <input type="text" id="genreInput" autocomplete="off" placeholder="Start typing genres..." />
+                    <div id="suggestionsGenre"></div>
+                    <div id="selectedGenres"></div>
+                    <div id="hiddenSelectedGenres"></div>
+                    <!-- <input type="text" class="form-control" name="genre" placeholder="genre" value="<%= movie.genre %>"> -->
                 </div>
             </div>
             <div class="form-group">
@@ -123,7 +184,13 @@
             </div>
             <div class="form-group">
                 <label for="name">Tags</label>
-                <div class="cate-array">
+                <div class="input-group">
+                    <input type="text" id="tagInput" autocomplete="off" placeholder="Start typing..." />
+                    <div id="suggestions"></div>
+                    <div id="selectedTags"></div>
+                    <div id="hiddenSelectedTags"></div>
+                </div>
+                <!-- <div class="cate-array">
                     <% for(var i=0; i<movie.tags.length; i++){%>
                         <div class="cate-div">
                             <input type="text" class="form-control" placeholder="Tag" name="tags"
@@ -131,9 +198,9 @@
                             <button class="btn btn-danger remove-btn m-2"><i class="fa-solid fa-trash"></i></button>
                         </div>
                         <%}%>
-                </div>
+                </div> -->
             </div>
-            <button id="add-label" class="btn btn-success mb-2">Add</button>
+            <!-- <button id="add-label" class="btn btn-success mb-2">Add</button> -->
             <% if(movie.moviePoster){%>
                 <div class="form-group">
                     <label for="name">Ott:</label>
@@ -174,7 +241,7 @@
                     <div class="form-group">
                         <label for="name">Story:</label>
                         <div class="input-group">
-                            <textarea name="story"><%= movie.story %></textarea>
+                            <textarea name="story" class="form-control" style="height: 180px;"><%= movie.story %></textarea>
                         </div>
                     </div>
 
@@ -319,44 +386,211 @@
                                 <% }%>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary btn-lg blue-backgroud">Add Movie</button>
+                    <button type="submit" class="btn btn-primary  blue-backgroud">Add Movie</button>
         </form>
     </div>
-    =
+    
     <script>
-        CKEDITOR.replace('story');
+    //============================GENREE=============================
+    const genreInput = document.getElementById('genreInput');
+    const suggestionsGenreDiv = document.getElementById('suggestionsGenre');
+    const selectedGenresDiv = document.getElementById('selectedGenres');
+    const hiddenSelectedGenres = document.getElementById('hiddenSelectedGenres');
 
-        let addBtn = document.getElementById('add-label');
-        let cateArray = document.querySelector('.cate-array');
-        let CateDiv = document.querySelectorAll('.cate-div')[0];
+    let selectedGenres = [];
+    let newGenre = ' <%- JSON.stringify(movie.genre) %>';
 
-        addBtn.addEventListener('click', function (e) {
-            e.preventDefault()
-            let value = CateDiv.cloneNode(true);
-            let input = value.getElementsByTagName('input')[0];
-            input.value = '';
-            cateArray.appendChild(value);
-        });
-        $(document).on('click', '.remove-btn', function (e) {
+    // newGenre = JSON.parse(newGenre);
+    newGenre = ['newGenre','Drama']
+    // Handle autocomplete
+    genreInput.addEventListener('input', async () => {
+      const query = genreInput.value.trim();
+      if (!query) {
+        suggestionsGenreDiv.innerHTML = '';
+        return;
+      }
+
+      // Fetch matching genres from the server
+      const response = await fetch(`/drama/genre-available?q=${query}`);
+      const genres = await response.json();
+
+      // Populate suggestions
+      suggestionsGenreDiv.innerHTML = '';
+      genres.forEach(genre => {
+        const suggestion = document.createElement('div');
+        suggestion.className = 'suggestion';
+        suggestion.textContent = genre.name;
+        suggestion.addEventListener('click', () => selectGenre(genre.name));
+        suggestionsGenreDiv.appendChild(suggestion);
+      });
+    });
+
+    // Add selected genre
+    function selectGenre(genreName) {
+      if (!selectedGenres.includes(genreName)) {
+        selectedGenres.push(genreName);
+        updateSelectedGenres();
+      }
+      genreInput.value = '';
+      suggestionsGenreDiv.innerHTML = '';
+    }
+
+    // Already added tag showing
+    newGenre.forEach(async (genre) => {
+        if (!selectedGenres.includes(genre)) {
+            selectedGenres.push(genre);
+            await updateSelectedGenres(); // Call the async function
+        }
+        tagInput.value = '';
+        suggestionsDiv.innerHTML = '';
+    });
+
+    // Update the selected genres UI and hidden inputs
+    function updateSelectedGenres() {
+      selectedGenresDiv.innerHTML = '';
+      hiddenSelectedGenres.innerHTML = '';
+
+      selectedGenres.forEach(genre => {
+        // Update UI
+        const genreElement = document.createElement('span');
+        genreElement.innerHTML = `${genre} <button type="button" onclick="removeGenre('${genre}')">x</button>`;
+        selectedGenresDiv.appendChild(genreElement);
+
+        // Add a hidden input for each selected genre
+        const input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = 'genre[]'; // Ensure the backend receives an array
+        input.value = genre;
+        hiddenSelectedGenres.appendChild(input);
+      });
+    }
+
+    // Remove a genre
+    function removeGenre(genreName) {
+      selectedGenres = selectedGenres.filter(genre => genre !== genreName);
+      updateSelectedGenres();
+    }
+   
+    //=======================================TAGS SETUP CODE==============================
+    const tagInput = document.getElementById('tagInput');
+    const suggestionsDiv = document.getElementById('suggestions');
+    const selectedTagsDiv = document.getElementById('selectedTags');
+    const hiddenSelectedTags = document.getElementById('hiddenSelectedTags');
+
+    let selectedTags =[];
+    let newTags = ' <%- JSON.stringify(movie.tags) %>';
+    newTags = JSON.parse(newTags);
+
+    // Handle autocomplete
+    tagInput.addEventListener('input', async () => {
+      const query = tagInput.value.trim();
+      if (!query) {
+        suggestionsDiv.innerHTML = '';
+        return;
+      }
+
+      // Fetch matching tags from the server
+      const response = await fetch(`/drama/tags-available?q=${query}`);
+      const tags = await response.json();
+
+      // Populate suggestions
+      suggestionsDiv.innerHTML = '';
+      tags.forEach(tag => {
+        const suggestion = document.createElement('div');
+        suggestion.className = 'suggestion';
+        suggestion.textContent = tag.name;
+        suggestion.addEventListener('click', () => selectTag(tag.name));
+        suggestionsDiv.appendChild(suggestion);
+      });
+    });
+
+    // Already added tag showing
+    newTags.forEach(async (tag) => {
+        if (!selectedTags.includes(tag)) {
+            selectedTags.push(tag);
+            await updateSelectedTags(); // Call the async function
+        }
+        tagInput.value = '';
+        suggestionsDiv.innerHTML = '';
+    });
+
+
+    // Add selected tag
+    function selectTag(tagName) {
+      if (!selectedTags.includes(tagName)) {
+        selectedTags.push(tagName);
+        updateSelectedTags();
+      }
+      tagInput.value = '';
+      suggestionsDiv.innerHTML = '';
+    }
+
+    // Update the selected tags UI and hidden inputs
+    function updateSelectedTags() {
+        console.log("first",selectedTags)
+      selectedTagsDiv.innerHTML = '';
+      hiddenSelectedTags.innerHTML = '';
+
+      selectedTags.forEach(tag => {
+        // Update UI
+        const tagElement = document.createElement('span');
+        tagElement.innerHTML = `${tag} <button type="button" onclick="removeTag('${tag}')">x</button>`;
+        selectedTagsDiv.appendChild(tagElement);
+
+        // Add a hidden input for each selected tag
+        const input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = 'tags[]'; // Ensure the backend receives an array
+        input.value = tag;
+        hiddenSelectedTags.appendChild(input);
+      });
+    }
+
+    // Remove a tag
+    function removeTag(tagName) {
+        console.log(tagName,selectedTags)
+      selectedTags = selectedTags.filter(tag => tag !== tagName);
+      updateSelectedTags();
+    }
+
+    $(document).on('click', '.remove-btn', function (e) {
             e.preventDefault();
             let rowItem = $(this).parent();
             $(rowItem).remove();
-        })
-        let addIngredientsBtn = document.getElementById('addIngredientsBtn');
-        let ingredientList = document.querySelector('.ingredientList');
-        let ingredeintDiv = document.querySelectorAll('.ingredeintDiv')[0];
-        addIngredientsBtn.addEventListener('click', function () {
-            let newIngredients = ingredeintDiv.cloneNode(true);
-            let input = newIngredients.getElementsByTagName('input')[0];
-            input.value = '';
-            ingredientList.appendChild(newIngredients);
-        });
+    })
+        // CKEDITOR.replace('story');
 
-        $(document).on('click', '.remove-btn', function (e) {
-            e.preventDefault();
-            let rowItem = $(this).parent();
-            $(rowItem).remove();
-        })
+        // let addBtn = document.getElementById('add-label');
+        // let cateArray = document.querySelector('.cate-array');
+        // let CateDiv = document.querySelectorAll('.cate-div')[0];
+
+        // addBtn.addEventListener('click', function (e) {
+        //     e.preventDefault()
+        //     let value = CateDiv.cloneNode(true);
+        //     let input = value.getElementsByTagName('input')[0];
+        //     input.value = '';
+        //     cateArray.appendChild(value);
+        // });
+        // $(document).on('click', '.remove-btn', function (e) {
+        //     e.preventDefault();
+        //     let rowItem = $(this).parent();
+        //     $(rowItem).remove();
+        // })
+        // let addIngredientsBtn = document.getElementById('addIngredientsBtn');
+        // let ingredientList = document.querySelector('.ingredientList');
+        // let ingredeintDiv = document.querySelectorAll('.ingredeintDiv')[0];
+        // addIngredientsBtn.addEventListener('click', function () {
+        //     let newIngredients = ingredeintDiv.cloneNode(true);
+        //     let input = newIngredients.getElementsByTagName('input')[0];
+        //     input.value = '';
+        //     ingredientList.appendChild(newIngredients);
+        // });
+
+        // $(document).on('click', '.remove-btn', function (e) {
+        //     e.preventDefault();
+        //     let rowItem = $(this).parent();
+        //     $(rowItem).remove();
+        // })
     </script>
 
     <%- include('../partials/footer'); -%>

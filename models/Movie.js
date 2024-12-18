@@ -18,7 +18,7 @@ const movieSchema = mongoose.Schema(
     producedbylink: {type: String,trim: true,},
     written: {type: String,trim: true,},
     writtenlink: {type: String,trim: true,},
-    genre: {type: String,trim: true,},
+    genre: { type: [String],trim: true,},
     duration: {type: String,trim: true,},
     story: {type: String,trim: true,},
     images: {type: [String]},

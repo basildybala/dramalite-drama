@@ -192,3 +192,15 @@ exports.allCelebrityImages=async(req,res)=>{
         return res.render('utils/err-handle-page', { error: { msg: "something wrong pls inform to admin", link: '/contact' } })
     }
 }
+
+exports.getCelebsDettailsForAddMovie=async(req,res)=>{
+    try {
+        let celebData=await Actor.find().select('actorname celeblink profilePic')
+        const query = req.query.q?.toLowerCase() || '';
+        const filteredTags = celebData.filter(celeb => celeb.actorname.toLowerCase().includes(query));
+        res.json(filteredTags);
+    } catch (error) {
+        console.log("err in show all celeb Page", error)
+        return res.render('utils/err-handle-page', { error: { msg: "something wrong pls inform to admin", link: '/contact' } })
+    }
+}

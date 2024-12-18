@@ -1,0 +1,36 @@
+<%- include('../partials/admin-header'); -%>
+<title>Add Master Data -Dramalite</title>
+
+
+<link rel="stylesheet" href="/css/auth.css">
+<title>Add Celebrity</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+crossorigin="anonymous">
+<link rel="stylesheet" href="css/auth.css">
+<script src="https://cdn.ckeditor.com/4.20.1/standard/ckeditor.js"></script>
+<div class="signup-form">
+    <form enctype="form-data" id="signup-form" action="/devadmin/add-master-data" method="post">
+		<h2>Add Master Data</h2>
+	<hr>
+        <div class="form-group">
+            <label for="name">Name:</label>
+			<div class="input-group">
+				<input type="text" class="form-control" name="name" placeholder="Name" >
+			</div>
+        </div>
+        <div class="form-group">
+            <label for="name">Type</label>
+            <div class="input-group">
+                <select class="form-control" name="type" required>
+                    <option value="">Default Name</option>
+                    <option value="Genre">Genre</option>
+                    <option value="Tags">Tags</option>
+                </select>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary btn-lg blue-backgroud">Add Celebrity</button>
+    </form>
+</div>
+
+
+<%- include('../partials/footer'); -%>
