@@ -1,6 +1,7 @@
 const express = require('express');
 const app=express()
 require('./db')
+require('./config/redis')
 require('dotenv').config()
 const morgan =require('morgan')
 var bodyParser = require('body-parser')

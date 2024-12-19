@@ -7,6 +7,8 @@ const Master = require("../models/MasterData");
 const { generateOTP } = require("../utils/mail");
 var slugify = require('slugify');
 const { fileUploadToDrive } = require("../config/googleDriveUpload")
+const Redis = require('ioredis');
+const redis =new Redis()
 exports.addMoviePage = async (req, res) => {
     try {
         let user = req.user
@@ -20,7 +22,10 @@ exports.addMoviePage = async (req, res) => {
 
 exports.addMovie = async (req, res) => {
     try {
-        
+        //Delete cache added movies
+        const cacheKey = `latestupdate`;
+        await redis.del(cacheKey);
+
         let { name, engname, category, year, releasedate,ottreleasedate, genre, duration, director, directorlink,
             written, writtenlink, producedby, producedbylink, tags, ottName, ottImg, ottUrl, story,
             actid1, actid2, actid3, actid4, actid6, actid7, actorname1, actorname2, actorname3, actorname4, actorname5, actorname6,
@@ -99,6 +104,8 @@ exports.editMoviePage = async (req, res) => {
 exports.updateMovie = async (req, res) => {
     try {
         let movieId = req.params.movieId
+        const cacheKey = `movie:${movieId}`;
+        await redis.del(cacheKey);
         let { name, engname, category, year, releasedate,ottreleasedate, genre, duration, director, directorlink,
             written, writtenlink, producedby, producedbylink, tags, ottName, ottImg, ottUrl, story,
             actid1, actid2, actid3, actid4, actid6, actid7, actorname1, actorname2, actorname3, actorname4, actorname5, actorname6,
@@ -192,15 +199,32 @@ exports.showAllMoviesPage = async (req, res) => {
 
 exports.showOneMovie = async (req, res) => {
     try {
+        let movie
         let user = req.user
         let movieId = req.params.movieId
-        let movie = await Movie.findById(movieId)
+        const cacheKey = `movie:${movieId}`;
+        const getMovie = await redis.get(cacheKey);
+        if (getMovie) {
+            // If found, return cached data
+            movie= JSON.parse(getMovie);
+        }else{
+            movie = await Movie.findById(movieId)
+            // Cache the movie data with a 1-hour expiration
+            await redis.set(cacheKey, JSON.stringify(movie), 'EX', 3600);
+        }
         let dateNow=Date.now()
+
         //GET MOVIE REVIEWS AGGREGaTION
-        let review = await this.getReviewsLimit(movieId)
+        
         let reviews = await this.getReviews(movieId)
+        
+        let review = reviews.slice(0, 6);
+        // await this.getReviewsLimit(movieId)
+
         let rating= await this.getRatings(movieId)
+
         let latestUpdate=await this.getLatestUpdate(6)
+
         let nextRelease= await this.getNextRelease(6)
         let lastReleasedMovies=await this.getLatestReleasedMovies(6)
         if (rating.length > 0) {
@@ -488,7 +512,7 @@ exports.getReviewsLimit = async (movieId) => {
             {
                 $sort: { helpfulCount: -1 }
             },
-            { $limit : 2 }
+            { $limit : 6 }
 
         ])
         return review
@@ -586,9 +610,21 @@ exports.getRatings = async (movieId) => {
 
 exports.getLatestUpdate=async(limit)=>{
     try {
+
+        const cacheKey = `latestupdate`;
+        const cachedLatestUpdates = await redis.get(cacheKey);
+
+        if (cachedLatestUpdates) {
+            // If found, return cached data
+            return JSON.parse(cachedLatestUpdates);
+        }
         const latestUpdate = await Movie.find()
+        .select('name category moviePoster releasedate episodes')
         .sort("-createdAt")
         .limit(limit);
+
+        // Cache the movie data with a 1-hour expiration
+        await redis.set(cacheKey, JSON.stringify(latestUpdate), 'EX', 28000);
         return latestUpdate
     } catch (error) {
         return
@@ -597,10 +633,20 @@ exports.getLatestUpdate=async(limit)=>{
 
 exports.getNextRelease=async(limit)=>{
     try {
+        const cacheKey = `nextrelease`;
+        const cachedNextRelease = await redis.get(cacheKey);
+
+        if (cachedNextRelease) {
+            // If found, return cached data
+            return JSON.parse(cachedNextRelease);
+        }
         let dateNow=Date.now()
         const latestUpdate = await Movie.find({releaseDate:{$gte:dateNow}})
+        .select('name category moviePoster releasedate episodes')
         .sort("releaseDate")
         .limit(limit);
+        // Cache the movie data with a 1-hour expiration
+        await redis.set(cacheKey, JSON.stringify(latestUpdate), 'EX', 7200);
         return latestUpdate
     } catch (error) {
         return
@@ -609,10 +655,22 @@ exports.getNextRelease=async(limit)=>{
 
 exports.getLatestReleasedMovies=async(limit)=>{
     try {
+        const cacheKey = `latestreleased`;
+        const latestReleased = await redis.get(cacheKey);
+
+        if (latestReleased) {
+            // If found, return cached data
+            return JSON.parse(latestReleased);
+        }
+
         let dateNow=Date.now()
         const latestUpdate = await Movie.find({releaseDate:{$lte:dateNow}})
+        .select('name category moviePoster releasedate episodes')
         .sort("-releaseDate")
         .limit(limit);
+
+        // Cache the movie data with a 1-hour expiration
+        await redis.set(cacheKey, JSON.stringify(latestUpdate), 'EX', 7200);
         return latestUpdate
     } catch (error) {
         return
