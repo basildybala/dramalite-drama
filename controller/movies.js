@@ -4,7 +4,9 @@ const Rating = require("../models/Rating")
 const mongoose = require('mongoose');
 const OTT = require("../utils/ott");
 const Master = require("../models/MasterData");
-
+const { generateOTP } = require("../utils/mail");
+var slugify = require('slugify');
+const { fileUploadToDrive } = require("../config/googleDriveUpload")
 exports.addMoviePage = async (req, res) => {
     try {
         let user = req.user
@@ -26,6 +28,10 @@ exports.addMovie = async (req, res) => {
             actimg1, actimg2, actimg3, actimg4, actimg5, actimg6, actimg7 } = req.body
         var moviePoster;
         var releaseDate;
+        let dramalink;
+        // generate 4 random number for link
+        let num = generateOTP(4);
+        dramalink = slugify(name)+'-'+num;
 
         if(releasedate.length>=9){
             releaseDate=new Date(releasedate).getTime()
@@ -37,17 +43,22 @@ exports.addMovie = async (req, res) => {
             let path = "";
             req.files.movieImages.forEach(function (files, index, arr) {
                 path = path + files.path + ",";
+                fileUploadToDrive(process.env.DRAMA_IMAGES_DRIVE,req.files.movieImages[index].filename,req.files.movieImages[index].mimetype,req.files.movieImages[index].path)
             });
             path = path.substring(0, path.lastIndexOf(","));
             var movieImages = path.split(",");
             moviePoster = req.files.moviePoster[0].path
+            if(req.files.moviePoster[0]){
+                fileUploadToDrive(process.env.DRAMA_POSTER_DRIVE,req.files.moviePoster[0].filename,req.files.moviePoster[0].mimetype,req.files.moviePoster[0].path)
+            }
             let movie = await new Movie({
                 name, engname, category, year, releasedate,releaseDate,ottreleasedate, genre, duration, director, directorlink,
                 written, writtenlink, producedby, producedbylink, tags, story,
                 actid1, actid2, actid3, actid4, actid6, actid7, actorname1, actorname2, actorname3, actorname4, actorname5, actorname6,
                 actorname7, mvactorname1, mvactorname2, mvactorname3, mvactorname4, mvactorname5, mvactorname6, mvactorname7,
-                actimg1, actimg2, actimg3, actimg4, actimg5, actimg6, actimg7, whereToWatch, moviePoster, images: movieImages
+                actimg1, actimg2, actimg3, actimg4, actimg5, actimg6, actimg7, whereToWatch, moviePoster, images: movieImages,dramalink
             })
+            
             let saveMovie=await movie.save()
             return res.redirect(`/drama/${saveMovie._id}`)
         } else {
@@ -57,9 +68,12 @@ exports.addMovie = async (req, res) => {
                 written, writtenlink, producedby, producedbylink, tags, story,
                 actid1, actid2, actid3, actid4, actid6, actid7, actorname1, actorname2, actorname3, actorname4, actorname5, actorname6,
                 actorname7, mvactorname1, mvactorname2, mvactorname3, mvactorname4, mvactorname5, mvactorname6, mvactorname7,
-                actimg1, actimg2, actimg3, actimg4, actimg5, actimg6, actimg7, whereToWatch, moviePoster
+                actimg1, actimg2, actimg3, actimg4, actimg5, actimg6, actimg7, whereToWatch, moviePoster,dramalink
             })
-           let saveMovie=await movie.save()
+            let saveMovie=await movie.save()
+            if(req.files.moviePoster[0]){
+                fileUploadToDrive(process.env.DRAMA_POSTER_DRIVE,req.files.moviePoster[0].filename,req.files.moviePoster[0].mimetype,req.files.moviePoster[0].path)
+            }
             return res.redirect(`/drama/${saveMovie._id}`)
         }
 
@@ -95,7 +109,6 @@ exports.updateMovie = async (req, res) => {
         if(req.body.actorImages===null || req.body.actorImages === undefined){
             actorImages=[]
         }
-            console.log(req.body.actorImages)
         if(releasedate.length>=9){
             releaseDate=new Date(releasedate).getTime()
         }
@@ -106,6 +119,7 @@ exports.updateMovie = async (req, res) => {
             let path = "";
             req.files.movieImages.forEach(function (files, index, arr) {
                 path = path + files.path + ",";
+                fileUploadToDrive(process.env.DRAMA_IMAGES_DRIVE,req.files.movieImages[index].filename,req.files.movieImages[index].mimetype,req.files.movieImages[index].path)
             });
             path = path.substring(0, path.lastIndexOf(","));
             var movieImages = path.split(",");
@@ -133,6 +147,9 @@ exports.updateMovie = async (req, res) => {
                 actorname7, mvactorname1, mvactorname2, mvactorname3, mvactorname4, mvactorname5, mvactorname6, mvactorname7,
                 actimg1, actimg2, actimg3, actimg4, actimg5, actimg6, actimg7, whereToWatch, moviePoster, images: actorImages
             })
+            if(req.files.moviePoster[0]){
+                fileUploadToDrive(process.env.DRAMA_POSTER_DRIVE,req.files.moviePoster[0].filename,req.files.moviePoster[0].mimetype,req.files.moviePoster[0].path)
+            }
             return res.redirect(`/drama/${movie._id}`)
         } else {
             let movie = await Movie.findByIdAndUpdate(movieId, {

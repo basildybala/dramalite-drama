@@ -5,6 +5,7 @@ const movieSchema = mongoose.Schema(
   {
     name: {type: String,},
     engname: {type: String,},
+    dramalink: {type: String,trim: true,unique:true},
     category: {type: String,},
     moviePoster: {type: String},
     releasedate: {type: String,trim: true,},

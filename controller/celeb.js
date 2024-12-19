@@ -1,6 +1,9 @@
 const { isValidObjectId } = require("mongoose")
 const Actor = require("../models/Actor")
 const Movie = require('../models/Movie')
+const { generateOTP } = require("../utils/mail")
+const slugify=require('slugify')
+const { fileUploadToDrive } = require("../config/googleDriveUpload")
 
 exports.addCelebPage = async (req, res) => {
     try {
@@ -16,25 +19,41 @@ exports.addCeleb = async (req, res) => {
     try {
         let { actorname, language, age, yearactive, occupation, instalink, twitlink, biography ,nationality,hometown,nickname} = req.body
         var profilePic;
+        let celeblink;
+        // generate 4 random number for link
+        let num = generateOTP(4);
+        celeblink = slugify(actorname)+'-'+num;
         if (req.files.actorImages?.length > 0) {
+
             let path = "";
             req.files.actorImages.forEach(function (files, index, arr) {
                 path = path + files.path + ",";
+                //Actor Images uploaded to Drive
+                fileUploadToDrive(process.env.ACTOR_IMAGES_DRIVE,req.files.actorImages[index].filename,req.files.actorImages[index].mimetype,req.files.actorImages[index].path)
             });
             path = path.substring(0, path.lastIndexOf(","));
             var actorImages = path.split(",");
             profilePic = req.files.actorProfilePic[0].path
+
+            //Profile Pic uploaded to Drive
+            if(profilePic) fileUploadToDrive(process.env.PROFILE_PIC_DRIVE,req.files.actorProfilePic[0].filename,req.files.actorProfilePic[0].mimetype,req.files.actorProfilePic[0].path)
             let actor = await new Actor({
                 actorname, language, age, yearactive, occupation, instalink, twitlink, biography,
-                images: actorImages, profilePic,nationality,hometown,nickname
+                images: actorImages, profilePic,nationality,hometown,nickname,celeblink
             })
             let saveActor= await actor.save()
             return res.redirect(`/celebs/${saveActor._id}`)
         } else {
             profilePic = req.files.actorProfilePic[0]?.path
             let actor = await new Actor({
-                actorname, language, age, yearactive, occupation, instalink, twitlink, biography, profilePic,nationality,hometown,nickname
+                actorname, language, age, yearactive, occupation, instalink, twitlink, biography, profilePic,nationality,hometown,nickname,celeblink
             })
+
+            //File uploaded to Drive also
+            if(req.files.actorProfilePic[0] && req.files.actorProfilePic[0].fieldname == 'actorProfilePic'){
+                fileUploadToDrive(process.env.PROFILE_PIC_DRIVE,req.files.actorProfilePic[0].filename,req.files.actorProfilePic[0].mimetype,req.files.actorProfilePic[0].path)
+            }    
+
             let saveActor= await actor.save()
             return res.redirect(`/celebs/${saveActor._id}`)
         }
@@ -50,11 +69,12 @@ exports.editCelebrity = async (req, res) => {
         let celebId = req.params.celebId
         let { actorname, language, age, yearactive, occupation, instalink, twitlink, biography,nationality,hometown,nickname } = req.body
         var profilePic;
-        console.log(req.body)
         if (req.files.actorImages?.length > 0) {
             let path = "";
             req.files.actorImages.forEach(function (files, index, arr) {
                 path = path + files.path + ",";
+                //Actor Images uploaded to Drive
+                fileUploadToDrive(process.env.ACTOR_IMAGES_DRIVE,req.files.actorImages[index].filename,req.files.actorImages[index].mimetype,req.files.actorImages[index].path)
             });
             path = path.substring(0, path.lastIndexOf(","));
             var actorImages = path.split(",");
@@ -73,10 +93,13 @@ exports.editCelebrity = async (req, res) => {
             let path = "";
             req.files.actorImages.forEach(function (files, index, arr) {
                 path = path + files.path + ",";
+                //Actor Images uploaded to Drive
+                fileUploadToDrive(process.env.ACTOR_IMAGES_DRIVE,req.files.actorImages[index].filename,req.files.actorImages[index].mimetype,req.files.actorImages[index].path)
             });
             path = path.substring(0, path.lastIndexOf(","));
             var actorImages = path.split(",");
             profilePic = req.files.actorProfilePic[0].path
+            if(profilePic)fileUploadToDrive(process.env.PROFILE_PIC_DRIVE,req.files.actorProfilePic[0].filename,req.files.actorProfilePic[0].mimetype,req.files.actorProfilePic[0].path)
             let actor = await Actor.findByIdAndUpdate(celebId, {
                 actorname, language, age, yearactive, occupation, instalink, twitlink, biography,profilePic,nationality,hometown,nickname
             })
@@ -93,6 +116,10 @@ exports.editCelebrity = async (req, res) => {
             let actor = await Actor.findByIdAndUpdate(celebId, {
                 actorname, language, age, yearactive, occupation, instalink, twitlink, biography, profilePic,nationality,hometown,nickname
             })
+             //File uploaded to Drive also
+            if(req.files.actorProfilePic[0] && req.files.actorProfilePic[0].fieldname == 'actorProfilePic'){
+                fileUploadToDrive(process.env.PROFILE_PIC_DRIVE,req.files.actorProfilePic[0].filename,req.files.actorProfilePic[0].mimetype,req.files.actorProfilePic[0].path)
+            }   
             return res.redirect(`/celebs/${actor._id}`)
         } else {
             let actor = await Actor.findByIdAndUpdate(celebId, {
