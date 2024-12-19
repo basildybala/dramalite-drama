@@ -311,43 +311,43 @@ hr{
 .swiper::-webkit-scrollbar{
   display: none;
 }
-.movie-swape{
+.drama-swape{
   display: flex;
   padding: 5px;
 }
-.movies{
+.dramas{
   width: 100px;
   height: 190px;
   margin: 5px;
   border: 1px solid rgba(0,0,0,.14);
 }
-.movies a{
+.dramas a{
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
-.movie-s{
+.drama-s{
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
-.movie-s img{
+.drama-s img{
   width: 100%;
   object-fit: cover;
   height: 130px;
 }
 
-.movie-s h2{
+.drama-s h2{
   font-family:'Poppins', sans-serif; 
   margin: 2px 0;
   font-size: 11px;
   text-align: center;
   color: black;
 }
-.movie-s p{
+.drama-s p{
   font-family:'Poppins', sans-serif; 
   margin: 2px;
   font-size: 8px;

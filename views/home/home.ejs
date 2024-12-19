@@ -9,11 +9,11 @@
         <a href="/latest-update">View all</a>
     </div>
     <div class="swiper">
-        <div class="movie-swape">
+        <div class="drama-swape">
             <% for(var i=0; i<latestUpdate.length; i++){%>
-        <div class="movies">
+        <div class="dramas">
           <a  href="/drama/<%= latestUpdate[i]._id %>">
-          <div class="movie-s">
+          <div class="drama-s">
             <img src="/<%= latestUpdate[i].moviePoster %>" alt="">
             <h2><%= latestUpdate[i].name %></h2>
             <p><%= latestUpdate[i].category %></p>
@@ -32,11 +32,11 @@
         <a href="/upcoming-releases">View all</a>
     </div>
     <div class="swiper">
-        <div class="movie-swape">
+        <div class="drama-swape">
             <% for(var i=0; i<nextRelease.length; i++){%>
-        <div class="movies">
+        <div class="dramas">
           <a  href="/drama/<%= nextRelease[i]._id %>">
-          <div class="movie-s">
+          <div class="drama-s">
             <img src="/<%= nextRelease[i].moviePoster %>" alt="">
             <h2><%= nextRelease[i].name %></h2>
             <p><%= nextRelease[i].releasedate %></p>
@@ -55,11 +55,11 @@
         <a href="/last-released-movies">View all</a>
     </div>
     <div class="swiper">
-        <div class="movie-swape">
+        <div class="drama-swape">
             <% for(var i=0; i<lastReleasedMovies.length; i++){%>
-        <div class="movies">
+        <div class="dramas">
           <a  href="/drama/<%= lastReleasedMovies[i]._id %>">
-          <div class="movie-s">
+          <div class="drama-s">
             <img src="/<%= lastReleasedMovies[i].moviePoster %>" alt="">
             <h2><%= lastReleasedMovies[i].name %></h2>
             <p><%= lastReleasedMovies[i].releasedate %></p>
@@ -77,13 +77,9 @@
     </div>
 
     <div class="movies-list-section">
-        <div class="white-link"><a href="/malayalam-movies" class="dflexx"  title="Best Malayalam Movies Categorized List" > <i class="fas fa-chevron-circle-right"></i>Malayalam Movies</a></div>
-        <div class="white-link"><a href="/tamil-movies" class="dflexx" title="Best Tamil Movies Categorized List"> <i class="fas fa-chevron-circle-right"></i>Tamil Movies</a></div>
-        <div class="white-link"><a href="/hindi-movies" class="dflexx" title="Best Hindi Movies Categorized List"> <i class="fas fa-chevron-circle-right"></i>Hindi Movies</a></div>
-        <div class="white-link"><a href="/telugu-movies" class="dflexx" title="Best Telugu Movies Categorized List"> <i class="fas fa-chevron-circle-right"></i>Telugu Movies</a></div>
-        <div class="white-link"><a href="/english-movies" class="dflexx" title="Best Hollywood Movies Categorized List"> <i class="fas fa-chevron-circle-right"></i>Hollywood Movies</a></div>
-        <div class="white-link"><a href="kannada-movies" class="dflexx" title="Best Kannada  Movies Categorized List"> <i class="fas fa-chevron-circle-right"></i>Kannada Movies</a></div>
-
+        <div class="white-link"><a href="/korean-drama" class="dflexx"  title="Best Korean Drama" > <i class="fas fa-chevron-circle-right"></i>Korean Drama</a></div>
+        <div class="white-link"><a href="/chinese-drama" class="dflexx" title="Best Cinese Drama List"> <i class="fas fa-chevron-circle-right"></i>Chinese Drama</a></div>
+        <div class="white-link"><a href="#" class="dflexx"  title="Best Korean Drama" > <i class="fas fa-chevron-circle-right"></i>Thai Drama</a></div>
       </div>
 </div>
 

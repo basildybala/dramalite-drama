@@ -63,14 +63,14 @@
     <div class="err-msg">
         <div class="msg "></div>
     </div>
-    <div class="movie-main">
+    <div class="drama-main">
         <div class="blue-header">
             <h1>
                 <%= movie.name %>
             </h1>
         </div>
         <div class="fst-sec">
-            <div class="movie-poster">
+            <div class="drama-poster">
                 <% if(movie.moviePoster ) { %>
                     <img data-src="/<%= movie.moviePoster %>" alt=" <%= movie.name %> Poster" class="lazy-photo">
                     <% }else { %>
@@ -96,10 +96,10 @@
                     </div>
                     <div class="rate-dettails">
                         <div class="rate-form">
-                            <form id="movie-rating-form" action="" method="post">
+                            <form id="drama-rating-form" action="" method="post">
                                 <input id="movie-rating" type="range" min="1" max="10" step="0.5" class="form-control-rate"
                                     name="ratingValue" required="required">
-                                <div id="movie-rating-value" class="value">
+                                <div id="drama-rating-value" class="value">
                                     100
                                 </div>
                                 <input type="text" name="movieId" value="<%= movie._id%>" hidden>
@@ -149,7 +149,7 @@
                     <hr>
 
                     <div class="dettails-section">
-                        <div class="movie-dettails">
+                        <div class="drama-dettails">
                             <div class="dettails-name">
                                 <h4>Movie Name</h4>
                             </div>
@@ -161,7 +161,7 @@
                         </div>
                         <hr>
 
-                        <div class="movie-dettails">
+                        <div class="drama-dettails">
                             <div class="dettails-name">
                                 <h4>Language</h4>
                             </div>
@@ -172,7 +172,7 @@
                             </div>
                         </div>
                         <hr>
-                        <div class="movie-dettails">
+                        <div class="drama-dettails">
                             <div class="dettails-name">
                                 <h4>Release Date</h4>
                             </div>
@@ -188,7 +188,7 @@
                         </div>
                         <hr>
                         <% if(movie.ottreleasedate ) { %>
-                        <div class="movie-dettails">
+                        <div class="drama-dettails">
                             <div class="dettails-name">
                                 <h4>OTT Date</h4>
                             </div>
@@ -201,7 +201,7 @@
                         </div>
                         <hr>
                         <% } %>
-                        <div class="movie-dettails">
+                        <div class="drama-dettails">
                             <div class="dettails-name">
                                 <h4>Genres</h4>
                             </div>
@@ -211,7 +211,7 @@
                         </div>
                         <hr>
                         <% if(movie.director) { %>
-                        <div class="movie-dettails">
+                        <div class="drama-dettails">
                             <div class="dettails-name">
                                 <h4>Director</h4>
                             </div>
@@ -228,7 +228,7 @@
                         <hr>
                         <% } %>
                         <% if(movie.written) { %>
-                        <div class="movie-dettails">
+                        <div class="drama-dettails">
                             <div class="dettails-name">
                                 <h4>Writer</h4>
                             </div>
@@ -245,7 +245,7 @@
                         <hr>
                         <% } %>
                         <% if(movie.producedby) { %>
-                        <div class="movie-dettails">
+                        <div class="drama-dettails">
                             <div class="dettails-name">
                                 <h4>Producer</h4>
                             </div>
@@ -262,7 +262,7 @@
                         <hr>
                         <% } %>
                         <% if(movie.duration) { %>
-                        <div class="movie-dettails">
+                        <div class="drama-dettails">
                             <div class="dettails-name">
                                 <h4>Duration</h4>
                             </div>
@@ -273,7 +273,7 @@
                         <hr>
                         <% } %>
                         <% if(movie.tags.length>1) { %>
-                        <div class="movie-dettails">
+                        <div class="drama-dettails">
                             <div class="dettails-name">
                                 <h4>Tags</h4>
                             </div>
@@ -472,7 +472,7 @@
         <div class="left-blue-header">
             <h2>Trailer</h2>
         </div>
-    <div class="movie-trailer">
+    <div class="drama-trailer">
         <iframe 
         data-src="<%= movie.ytlink%>" class="lazy-photo"> 
         </iframe>
@@ -562,11 +562,11 @@
         <a href="/latest-update">View all</a>
     </div>
     <div class="swiper">
-        <div class="movie-swape">
+        <div class="drama-swape">
             <% for(var i=0; i<latestUpdate.length; i++){%>
-        <div class="movies">
+        <div class="dramas">
           <a  href="/drama/<%= latestUpdate[i]._id %>">
-          <div class="movie-s">
+          <div class="drama-s">
             <img data-src="/<%= latestUpdate[i].moviePoster %>" class="lazy-photo" alt="<%= latestUpdate[i].name %>.jpg">
             <h2><%= latestUpdate[i].name %></h2>
             <p><%= latestUpdate[i].category %></p>
@@ -585,11 +585,11 @@
         <a href="/upcoming-releases">View all</a>
     </div>
     <div class="swiper">
-        <div class="movie-swape">
+        <div class="drama-swape">
             <% for(var i=0; i<nextRelease.length; i++){%>
-        <div class="movies">
+        <div class="dramas">
           <a  href="/drama/<%= nextRelease[i]._id %>">
-          <div class="movie-s">
+          <div class="drama-s">
             <img data-src="/<%= nextRelease[i].moviePoster %>" class="lazy-photo" alt="<%= nextRelease[i].name %>.jpg">
             <h2><%= nextRelease[i].name %></h2>
             <p><%= nextRelease[i].releasedate %></p>
@@ -607,11 +607,11 @@
         <a href="/last-released-movies">View all</a>
     </div>
     <div class="swiper">
-        <div class="movie-swape">
+        <div class="drama-swape">
             <% for(var i=0; i<lastReleasedMovies.length; i++){%>
-        <div class="movies">
+        <div class="dramas">
           <a  href="/drama/<%= lastReleasedMovies[i]._id %>">
-          <div class="movie-s">
+          <div class="drama-s">
             <img src="/<%= lastReleasedMovies[i].moviePoster %>" alt="">
             <h2><%= lastReleasedMovies[i].name %></h2>
             <p><%= lastReleasedMovies[i].releasedate %></p>
@@ -629,14 +629,14 @@
 
     <script>
         const movieRating = document.getElementById('movie-rating')
-        const movieRatingValue = document.getElementById('movie-rating-value')
+        const movieRatingValue = document.getElementById('drama-rating-value')
         movieRatingValue.textContent = movieRating.value
         movieRating.oninput = function () {
             movieRatingValue.textContent = this.value
         }
 
         $(document).ready(function () {
-            $('#movie-rating-form').submit(function (event) {
+            $('#drama-rating-form').submit(function (event) {
                 event.preventDefault()
                 var formData = $(this).serialize();
                 $.ajax({

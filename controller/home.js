@@ -166,6 +166,174 @@ exports.tamilMoviesPage=async(req,res)=>{
     }
 }
 
+exports.koreanDramaPage=async (req,res)=>{
+    try {
+
+        let user=req.user
+            // Get page and limit parameters from the query string
+            const page = parseInt(req.query.page) || 1;  // Default to page 1 if no page param
+            const limit = 15;  // Default to 10 items per page
+            const sort=req.query.sort
+            // Define dynamic sorting logic
+            let sortField = {};
+            if (sort === 'year') {
+                sortField = { year: 1 }; // Sort by year in ascending order
+            } else if (sort === 'releaseDate') {
+                sortField = { releasedate: 1 }; // Sort by release date in ascending order
+            } else if (sort === 'recentlyAdded') {
+                sortField = { _id: -1 }; // Sort by release date in ascending order
+            } else {
+                sortField = { moviePoster: 1 }; // Default sort by moviePoster in descending order
+            }
+            const aggregationPipeline = [
+                { $match: { category: 'Malayalam' } },  // Filter by category 'Malayalam'
+                {$project:
+                    {
+                        _id:1,
+                        name:1,
+                        category:1,
+                        releasedate:1,
+                        year:1,
+                        genre:1,
+                        moviePoster:1,
+                        episodes:1
+
+                    }
+                },
+                { $sort: sortField }, // Apply dynamic sort field
+                {
+                    $facet: {
+                        movies: [  // Paginate the movies
+                            { $skip: (page - 1) * limit },  // Skip based on the current page
+                            { $limit: limit },  // Limit the number of items per page
+                        ],
+                        total: [  // Count the total number of movies matching the filter (without pagination)
+                            { $count: 'totalCount' }
+                        ]
+                    }
+                }
+            ];
+            
+            // Perform the aggregation query
+            const result = await Movie.aggregate(aggregationPipeline);
+            
+            // Get the paginated movies and total count
+            const movies = result[0].movies;
+            const totalMovies = result[0].total.length ? result[0].total[0].totalCount : 0;
+            const totalPages = Math.ceil(totalMovies / limit);
+
+
+            if(sort){
+                res.json({
+                    drama: movies,
+                    currentPage: page,
+                    totalPages: totalPages,
+                    totalMovies: totalMovies,
+                    limit: limit
+                });
+            }else{
+                res.render('home/korean-drama.ejs', {
+                    drama: movies,
+                    currentPage: page,
+                    totalPages: totalPages,
+                    totalMovies: totalMovies,
+                    limit: limit
+                });
+            }
+            
+
+        
+        //res.render('home/tamil-movies.ejs',{tamilMovies,user})
+    } catch (error) {
+        console.log("err in home page", error)
+        return res.render('utils/err-handle-page', { error: { msg: "something wrong pls inform to admin", link: '/contact' } })
+    }
+}
+
+exports.chineseDramaPage=async (req,res)=>{
+    try {
+
+        let user=req.user
+            // Get page and limit parameters from the query string
+            const page = parseInt(req.query.page) || 1;  // Default to page 1 if no page param
+            const limit = 15;  // Default to 10 items per page
+            const sort=req.query.sort
+            // Define dynamic sorting logic
+            let sortField = {};
+            if (sort === 'year') {
+                sortField = { year: 1 }; // Sort by year in ascending order
+            } else if (sort === 'releaseDate') {
+                sortField = { releasedate: 1 }; // Sort by release date in ascending order
+            } else if (sort === 'recentlyAdded') {
+                sortField = { _id: -1 }; // Sort by release date in ascending order
+            } else {
+                sortField = { moviePoster: 1 }; // Default sort by moviePoster in descending order
+            }
+            const aggregationPipeline = [
+                { $match: { category: 'Malayalam' } },  // Filter by category 'Malayalam'
+                {$project:
+                    {
+                        _id:1,
+                        name:1,
+                        category:1,
+                        releasedate:1,
+                        year:1,
+                        genre:1,
+                        moviePoster:1,
+                        episodes:1
+
+                    }
+                },
+                { $sort: sortField }, // Apply dynamic sort field
+                {
+                    $facet: {
+                        movies: [  // Paginate the movies
+                            { $skip: (page - 1) * limit },  // Skip based on the current page
+                            { $limit: limit },  // Limit the number of items per page
+                        ],
+                        total: [  // Count the total number of movies matching the filter (without pagination)
+                            { $count: 'totalCount' }
+                        ]
+                    }
+                }
+            ];
+            
+            // Perform the aggregation query
+            const result = await Movie.aggregate(aggregationPipeline);
+            
+            // Get the paginated movies and total count
+            const movies = result[0].movies;
+            const totalMovies = result[0].total.length ? result[0].total[0].totalCount : 0;
+            const totalPages = Math.ceil(totalMovies / limit);
+
+
+            if(sort){
+                res.json({
+                    drama: movies,
+                    currentPage: page,
+                    totalPages: totalPages,
+                    totalMovies: totalMovies,
+                    limit: limit
+                });
+            }else{
+                res.render('home/chinese-drama.ejs', {
+                    drama: movies,
+                    currentPage: page,
+                    totalPages: totalPages,
+                    totalMovies: totalMovies,
+                    limit: limit
+                });
+            }
+            
+
+        
+        //res.render('home/tamil-movies.ejs',{tamilMovies,user})
+    } catch (error) {
+        console.log("err in home page", error)
+        return res.render('utils/err-handle-page', { error: { msg: "something wrong pls inform to admin", link: '/contact' } })
+    }
+}
+
 exports.adminPage=async(req,res)=>{
     try {
         let user=req.user

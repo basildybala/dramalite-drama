@@ -151,17 +151,17 @@
             .dropdown-menu {
                 top: 40px; /* Adjust for smaller screens */
             }
-            .movies{
+            .dramas{
                 width: 180px;
                  height: 300px;
             }
-            .movie-s img{
+            .drama-s img{
                 height: 230px;
             }
-            .movie-s h2{
+            .drama-s h2{
                 font-size: 13px;
             }
-            .movie-s p{
+            .drama-s p{
                 font-size: 10px;
             }
         }

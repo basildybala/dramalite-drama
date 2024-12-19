@@ -10,7 +10,7 @@
 />
 
 <link rel="stylesheet" href="/css/movie-list-new.css" />
-<link
+<!-- <link
   rel="stylesheet"
   type="text/css"
   href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css"
@@ -19,7 +19,7 @@
   type="text/javascript"
   charset="utf8"
   src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"
-></script>
+></script> -->
 
 
 <div class="blue-header">
@@ -41,21 +41,21 @@
 </div>
 
 <!-- Display the list of movies -->
-<% if (movies.length > 0) { %>
+<% if (drama.length > 0) { %>
     <div class="flex">
-        <% movies.forEach(function(movie) { %>
+        <% drama.forEach(function(drama) { %>
             <div class="dramas">
-                <a  href="/drama/<%= movie._id %>">
+                <a  href="/drama/<%= drama._id %>">
                     <div class="drama-s">
-                        <img data-src="/<%= movie.moviePoster %>" alt="" class="lazy-photo">
-                        <h2><%= movie.name %></h2>
-                        <p>Year: <%= movie.year %></p>
-                        <p>Episodes: <%= movie.year %></p>
+                        <img data-src="/<%= drama.moviePoster %>" alt="" class="lazy-photo">
+                        <h2><%= drama.name %></h2>
+                        <p>Year: <%= drama.year %></p>
+                        <p>Episodes: <%= drama.episodes %></p>
                     </div>
                 </a>
             </div>
         <% }) %>
-    </div>
+</div>
 
 <!-- Responsive Pagination -->
 <div class="pagination">
@@ -116,22 +116,22 @@
         function sortBy(type,event) {
             //event.preventDefault()
             $.ajax({
-                    url: `/tamil-movies?sort=${type}`,
+                    url: `/korean-drama?sort=${type}`,
                     type: 'GET',
                     success: function (data) {
                         
                          // Use data to update the movies section on the page
                         const moviesContainer = $(".flex"); // Target the container that holds the movie list
                         moviesContainer.empty(); // Clear current movie list
-                        data.movies.forEach(function(movie) {
+                        data.drama.forEach(function(drama) {
                         const movieHTML = `
                             <div class="dramas">
-                                <a href="/drama/${movie._id}">
+                                <a href="/drama/${drama._id}">
                                     <div class="drama-s">
-                                        <img data-src="/${movie.moviePoster}" alt="" class="lazy-photo">
-                                        <h2>${movie.name}</h2>
-                                        <p>Year: ${movie.year}</p>
-                                        <p>Episodes: ${movie.year}</p>
+                                        <img data-src="/${drama.moviePoster}" alt="" class="lazy-photo">
+                                        <h2>${drama.name}</h2>
+                                        <p>Year: ${drama.year}</p>
+                                        <p>Episodes: ${drama.episodes}</p>
                                     </div>
                                 </a>
                             </div>

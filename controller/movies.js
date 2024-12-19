@@ -30,7 +30,7 @@ exports.addMovie = async (req, res) => {
             written, writtenlink, producedby, producedbylink, tags, ottName, ottImg, ottUrl, story,
             actid1, actid2, actid3, actid4, actid6, actid7, actorname1, actorname2, actorname3, actorname4, actorname5, actorname6,
             actorname7, mvactorname1, mvactorname2, mvactorname3, mvactorname4, mvactorname5, mvactorname6, mvactorname7,
-            actimg1, actimg2, actimg3, actimg4, actimg5, actimg6, actimg7 } = req.body
+            actimg1, actimg2, actimg3, actimg4, actimg5, actimg6, actimg7,episodes,country } = req.body
         var moviePoster;
         var releaseDate;
         let dramalink;
@@ -61,7 +61,7 @@ exports.addMovie = async (req, res) => {
                 written, writtenlink, producedby, producedbylink, tags, story,
                 actid1, actid2, actid3, actid4, actid6, actid7, actorname1, actorname2, actorname3, actorname4, actorname5, actorname6,
                 actorname7, mvactorname1, mvactorname2, mvactorname3, mvactorname4, mvactorname5, mvactorname6, mvactorname7,
-                actimg1, actimg2, actimg3, actimg4, actimg5, actimg6, actimg7, whereToWatch, moviePoster, images: movieImages,dramalink
+                actimg1, actimg2, actimg3, actimg4, actimg5, actimg6, actimg7, whereToWatch, moviePoster, images: movieImages,dramalink,episodes,country
             })
             
             let saveMovie=await movie.save()
@@ -73,7 +73,7 @@ exports.addMovie = async (req, res) => {
                 written, writtenlink, producedby, producedbylink, tags, story,
                 actid1, actid2, actid3, actid4, actid6, actid7, actorname1, actorname2, actorname3, actorname4, actorname5, actorname6,
                 actorname7, mvactorname1, mvactorname2, mvactorname3, mvactorname4, mvactorname5, mvactorname6, mvactorname7,
-                actimg1, actimg2, actimg3, actimg4, actimg5, actimg6, actimg7, whereToWatch, moviePoster,dramalink
+                actimg1, actimg2, actimg3, actimg4, actimg5, actimg6, actimg7, whereToWatch, moviePoster,dramalink,episodes,country
             })
             let saveMovie=await movie.save()
             if(req.files.moviePoster[0]){
@@ -110,7 +110,7 @@ exports.updateMovie = async (req, res) => {
             written, writtenlink, producedby, producedbylink, tags, ottName, ottImg, ottUrl, story,
             actid1, actid2, actid3, actid4, actid6, actid7, actorname1, actorname2, actorname3, actorname4, actorname5, actorname6,
             actorname7, mvactorname1, mvactorname2, mvactorname3, mvactorname4, mvactorname5, mvactorname6, mvactorname7,
-            actimg1, actimg2, actimg3, actimg4, actimg5, actimg6, actimg7, actorImages } = req.body
+            actimg1, actimg2, actimg3, actimg4, actimg5, actimg6, actimg7, actorImages,episodes,country } = req.body
         var moviePoster;
         var releaseDate;
         if(req.body.actorImages===null || req.body.actorImages === undefined){
@@ -135,7 +135,7 @@ exports.updateMovie = async (req, res) => {
                 written, writtenlink, producedby, producedbylink, tags, story,
                 actid1, actid2, actid3, actid4, actid6, actid7, actorname1, actorname2, actorname3, actorname4, actorname5, actorname6,
                 actorname7, mvactorname1, mvactorname2, mvactorname3, mvactorname4, mvactorname5, mvactorname6, mvactorname7,
-                actimg1, actimg2, actimg3, actimg4, actimg5, actimg6, actimg7, whereToWatch, images: movieImages
+                actimg1, actimg2, actimg3, actimg4, actimg5, actimg6, actimg7, whereToWatch, images: movieImages,episodes,country
             })
             await Movie.findByIdAndUpdate(
                 movieId, {
@@ -152,7 +152,8 @@ exports.updateMovie = async (req, res) => {
                 written, writtenlink, producedby, producedbylink, tags, story,
                 actid1, actid2, actid3, actid4, actid6, actid7, actorname1, actorname2, actorname3, actorname4, actorname5, actorname6,
                 actorname7, mvactorname1, mvactorname2, mvactorname3, mvactorname4, mvactorname5, mvactorname6, mvactorname7,
-                actimg1, actimg2, actimg3, actimg4, actimg5, actimg6, actimg7, whereToWatch, moviePoster, images: actorImages
+                actimg1, actimg2, actimg3, actimg4, actimg5, actimg6, actimg7, whereToWatch, moviePoster, images: actorImages,
+                episodes,country
             })
             if(req.files.moviePoster[0]){
                 fileUploadToDrive(process.env.DRAMA_POSTER_DRIVE,req.files.moviePoster[0].filename,req.files.moviePoster[0].mimetype,req.files.moviePoster[0].path)
@@ -164,7 +165,8 @@ exports.updateMovie = async (req, res) => {
                 written, writtenlink, producedby, producedbylink, tags, story,
                 actid1, actid2, actid3, actid4, actid6, actid7, actorname1, actorname2, actorname3, actorname4, actorname5, actorname6,
                 actorname7, mvactorname1, mvactorname2, mvactorname3, mvactorname4, mvactorname5, mvactorname6, mvactorname7,
-                actimg1, actimg2, actimg3, actimg4, actimg5, actimg6, actimg7, whereToWatch, images: actorImages
+                actimg1, actimg2, actimg3, actimg4, actimg5, actimg6, actimg7, whereToWatch, images: actorImages,
+                episodes,country
             })
             return res.redirect(`/drama/${movie._id}`)
         }
@@ -681,10 +683,60 @@ exports.searchMovie= async (req,res)=>{
     try {
         let user=req.user
         let search=req.body.search
-        let movies = await Movie.find({
-            engname: { $regex: search, $options: "i" }
-          });
-        res.render('movies/search-movie',{movies,user})
+         // Get page and limit parameters from the query string
+             const page = parseInt(req.query.page) || 1;  // Default to page 1 if no page param
+             const limit = 15;  // Default to 10 items per page
+             const sort=req.query.sort
+
+             const aggregationPipeline = [
+                 {  $match: {
+                    engname: { $regex: search, $options: "i" }
+                } },  // Filter by category 'Malayalam'
+                 {$project:
+                     {
+                         _id:1,
+                         name:1,
+                         category:1,
+                         releasedate:1,
+                         year:1,
+                         genre:1,
+                         moviePoster:1,
+                        episodes:1
+
+                    }
+            },
+            {
+                $facet: {
+                    movies: [  // Paginate the movies
+                        { $skip: (page - 1) * limit },  // Skip based on the current page
+                        { $limit: limit },  // Limit the number of items per page
+                    ],
+                    total: [  // Count the total number of movies matching the filter (without pagination)
+                        { $count: 'totalCount' }
+                    ]
+                }
+            }
+        ];
+                    
+        // Perform the aggregation query
+        const result = await Movie.aggregate(aggregationPipeline);
+                    
+        // Get the paginated movies and total count
+        const movies = result[0].movies;
+        const totalMovies = result[0].total.length ? result[0].total[0].totalCount : 0;
+        const totalPages = Math.ceil(totalMovies / limit);
+        
+        
+
+        res.render('movies/search-movie', {
+            drama: movies,
+            currentPage: page,
+            totalPages: totalPages,
+            totalMovies: totalMovies,
+            limit: limit
+        });
+
+
     } catch (error) {
         console.log("err in show all celeb Page", error)
         return res.render('utils/err-handle-page', { error: { msg: "something wrong pls inform to admin", link: '/contact' } })
@@ -694,8 +746,14 @@ exports.searchMovie= async (req,res)=>{
 exports.searchMoviePage= async (req,res)=>{
     try {
         let user=req.user
-        let movies = await Movie.find();
-        res.render('movies/search-movie',{movies,user})
+        res.render('movies/search-movie', {
+            drama: [],
+            currentPage: 0,
+            totalPages: 0,
+            totalMovies: 0,
+            limit: 0
+        });
+
     } catch (error) {
         console.log("err in show all celeb Page", error)
         return res.render('utils/err-handle-page', { error: { msg: "something wrong pls inform to admin", link: '/contact' } })

@@ -1,5 +1,6 @@
 const { homePage ,downloadImage,malayalamMoviesPage, tamilMoviesPage, hindiMoviesPage, teluguMoviesPage, englishMoviesPage, kannadaMoviesPage
-,adminPage} = require('../controller/home');
+,adminPage,
+koreanDramaPage,chineseDramaPage} = require('../controller/home');
 const { searchMoviePage, searchMovie, termsConditionsPage, privacyPolicyPage, contactPage, latestUpdate, nextRelease, lastRelease } = require('../controller/movies');
 const { isUser, isAdmin, isAuth } = require('../middlewares/auth');
 
@@ -12,6 +13,13 @@ router.get('/malayalam-movies',isUser,malayalamMoviesPage)
 
 //TAMIL MOVIES
 router.get('/tamil-movies',isUser,tamilMoviesPage)
+
+//KOREAN DRAMA
+router.get('/korean-drama',isUser,koreanDramaPage)
+
+
+//KOREAN DRAMA
+router.get('/chinese-drama',isUser,chineseDramaPage)
 
 // //HINDI MOVIES
 // router.get('/hindi-movies',isUser,hindiMoviesPage)
