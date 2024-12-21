@@ -164,13 +164,13 @@
 }
 
 .rate-d p {
-    font-size: 15px;
+    font-size: 14px;
     margin: 0;
     font-family: 'Poppins', sans-serif;
 }
 
 .rate-d a {
-    font-size: 15px;
+    font-size: 14px;
     margin: 0;
     font-family: 'Poppins', sans-serif;
 }
@@ -207,13 +207,13 @@
 .dettails-name h4 {
     margin: 0;
     margin-left: 5px;
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 500;
     font-family: 'Poppins', sans-serif;
 }
 
 .dettails p {
-    font-size: 15px;
+    font-size: 14px;
     margin: 0;
     font-family: 'Poppins', sans-serif;
     --mdb-text-opacity: 1;

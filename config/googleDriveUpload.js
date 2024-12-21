@@ -8,7 +8,6 @@ let apikeys = require('../googledrivekey.json');
 
 // A Function to authenticate and get access to Google Drive API
 async function authorize() {
-    console.log(apikeys.private_key)
     const jwtClient = new google.auth.JWT(
         apikeys.client_email, // Service account email
         null,
@@ -55,7 +54,6 @@ async function uploadFile(authClient,folder,filename,filetype,filepath) {
 // Main Function to orchestrate authorization and file upload
 exports.fileUploadToDrive=async(folder,filename,filetype,filepath)=> {
     try {
-        console.log("hai")
         // Step 1: Authorize and get the auth client
         const authClient = await authorize();
         console.log('Authorization successful!');

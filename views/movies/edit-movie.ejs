@@ -125,7 +125,13 @@
             <div class="form-group">
                 <label for="name">Episode End Date:</label>
                 <div class="input-group">
-                    <input class="form-control" name="episodeEndDate" placeholder="episode End Date" value="<%= movie.episodeEndDate %>">
+                    <input class="form-control" name="episodeEndDate" placeholder="Episode End Date" value="<%= movie.episodeEndDate %>">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="name">Episodes:</label>
+                <div class="input-group">
+                    <input type="number" class="form-control" name="episodes" placeholder="Episodes" value="<%= movie.episodes %>">
                 </div>
             </div>
             <div class="form-group">
@@ -398,10 +404,11 @@
     const hiddenSelectedGenres = document.getElementById('hiddenSelectedGenres');
 
     let selectedGenres = [];
-    let newGenre = ' <%- JSON.stringify(movie.genre) %>';
+    let newGenre = []
+    newGenre = ' <%- JSON.stringify(movie.genre) %>';
 
     // newGenre = JSON.parse(newGenre);
-    newGenre = ['newGenre','Drama']
+    
     // Handle autocomplete
     genreInput.addEventListener('input', async () => {
       const query = genreInput.value.trim();

@@ -1,14 +1,29 @@
 const Movie = require("../models/Movie")
 const Actor = require("../models/Actor")
 const { generateMailTransporter } = require("../utils/mail")
-const { getLatestUpdate,getNextRelease, getLatestReleasedMovies } = require("./movies")
+const { getLatestUpdate,getNextRelease, getLatestReleasedMovies, getOngoingDrama, recentlyCompletedDramas, nextRelease } = require("./movies")
 exports.homePage=async(req,res)=>{
     try {
         let user=req.user
-        let latestUpdate=await getLatestUpdate(6)
-        let nextRelease=await getNextRelease(6)
-        let lastReleasedMovies=await getLatestReleasedMovies(6)
-        res.render('home/home.ejs',{lastReleasedMovies,nextRelease,latestUpdate,user})
+
+        //Latest Update
+        let latestUpdatedrama=await getLatestUpdate(1,6)
+        let latestUpdate=latestUpdatedrama.dramas
+        console.log("first",latestUpdate)
+        //Upcoming Drama
+        let upcoming=await getNextRelease(1,6)
+        let upcomingDramas=upcoming.dramas
+        //Recenlty completed dramas
+        let recentlyCompleted=await recentlyCompletedDramas(1,6)
+        let recentlyCompletedDrama=recentlyCompleted.dramas
+
+
+        //Ongoing Drama
+        let ongoingDramas=await getOngoingDrama(1,6)
+        let ongoingDrama=await ongoingDramas.dramas
+
+    
+        res.render('home/home.ejs',{ongoingDrama,recentlyCompletedDrama,latestUpdate,upcomingDramas,user})
     } catch (error) {
         console.log("err in home page", error)
         return res.render('utils/err-handle-page', { error: { msg: "something wrong pls inform to admin", link: '/contact' } })
@@ -186,7 +201,7 @@ exports.koreanDramaPage=async (req,res)=>{
                 sortField = { moviePoster: 1 }; // Default sort by moviePoster in descending order
             }
             const aggregationPipeline = [
-                { $match: { category: 'Malayalam' } },  // Filter by category 'Malayalam'
+                { $match: { category: 'Korean' } },  // Filter by category 'Malayalam'
                 {$project:
                     {
                         _id:1,
@@ -328,6 +343,27 @@ exports.chineseDramaPage=async (req,res)=>{
 
         
         //res.render('home/tamil-movies.ejs',{tamilMovies,user})
+    } catch (error) {
+        console.log("err in home page", error)
+        return res.render('utils/err-handle-page', { error: { msg: "something wrong pls inform to admin", link: '/contact' } })
+    }
+}
+
+exports.viewAllDrama=async(req,res)=>{
+    try {
+        let dramas=[]
+        let dramalist= req.query.dramaList
+        if(dramalist==='recentlyCompleted'){
+            dramas=await recentlyCompletedDramas()
+            console.log(dramas)
+            res.render('view-all/view-all-dramas.ejs', {
+                drama: dramas.dramas,
+                currentPage: dramas.page,
+                totalPages: dramas.totalPages,
+                totalMovies: dramas.totalMovies,
+                limit: dramas.limit
+            });
+        }
     } catch (error) {
         console.log("err in home page", error)
         return res.render('utils/err-handle-page', { error: { msg: "something wrong pls inform to admin", link: '/contact' } })

@@ -135,13 +135,6 @@
                     <div class="story-sec">
                         <p>
                             <%- movie.story %>
-                                <% if(movie.readmorestory ) { %>
-                                    <%= movie.readmorestory %>
-                                        <% } %>
-
-                                            <% if(movie.storyenglish ) { %>
-                                                <%= movie.storyenglish %>
-                                                    <% } %>
                         </p>
 
                     </div>
@@ -160,7 +153,15 @@
                             </div>
                         </div>
                         <hr>
-
+                        <div class="drama-dettails">
+                            <div class="dettails-name">
+                                <h4>Genres</h4>
+                            </div>
+                            <div class="dettails">
+                                <p><%= movie.genre && String(movie.genre).trim() ? movie.genre : '-' %></p>
+                            </div>
+                        </div>
+                        <hr>
                         <div class="drama-dettails">
                             <div class="dettails-name">
                                 <h4>Language</h4>
@@ -187,29 +188,43 @@
                             </div>
                         </div>
                         <hr>
-                        <% if(movie.ottreleasedate ) { %>
                         <div class="drama-dettails">
                             <div class="dettails-name">
-                                <h4>OTT Date</h4>
+                                <h4>Episodes End</h4>
                             </div>
                             <div class="dettails">
-                                    <p>
-                                        <%= movie.ottreleasedate %>
-                                    </p> 
+                                    <% if(movie.episodeEndDate ) { %>
+                                        <p>
+                                            <%= movie.episodeEndDate %>
+                                        </p>
+                                    <% }else{ %>
+                                        <p>Date not Confirmed</p>      
+                                    <% } %>                                     
                           
                             </div>
                         </div>
                         <hr>
-                        <% } %>
+                            <div class="drama-dettails">
+                                <div class="dettails-name">
+                                    <h4>Episodes</h4>
+                                </div>
+                                <div class="dettails">
+                                    <p><%= movie.episodes && String(movie.episodes).trim() ? movie.episodes : '-' %></p>
+                                </div>
+                            </div>
+                            <hr>
+                        <% if(movie.duration) { %>
                         <div class="drama-dettails">
                             <div class="dettails-name">
-                                <h4>Genres</h4>
+                                <h4>Duration</h4>
                             </div>
                             <div class="dettails">
-                                <p><%= movie.genre %></p>
+                                <p><%= movie.duration %></p>
                             </div>
                         </div>
                         <hr>
+                        <% } %>
+                        
                         <% if(movie.director) { %>
                         <div class="drama-dettails">
                             <div class="dettails-name">
@@ -261,18 +276,7 @@
                         </div>
                         <hr>
                         <% } %>
-                        <% if(movie.duration) { %>
-                        <div class="drama-dettails">
-                            <div class="dettails-name">
-                                <h4>Duration</h4>
-                            </div>
-                            <div class="dettails">
-                                <p><%= movie.duration %></p>
-                            </div>
-                        </div>
-                        <hr>
-                        <% } %>
-                        <% if(movie.tags.length>1) { %>
+                        <!-- <% if(movie.tags.length>1) { %>
                         <div class="drama-dettails">
                             <div class="dettails-name">
                                 <h4>Tags</h4>
@@ -283,7 +287,7 @@
                                 <% } %>
                             </div>
                         </div>
-                        <% } %>
+                        <% } %> -->
                     </div>
         </div>
     </div>
@@ -411,7 +415,7 @@
                             <% if(movie.actimg7) { %>
                             <img class="lazy-photo" data-src="/<%= movie.actimg7 %>" alt=" {{movie.actorname7}}.jpg" />
                             <% }else{ %>
-                                <img class="lazy-photo" data-src="/images/actor/id/<%= movie.actid7 %>.jpg" alt=" {{movie.actorname47}.jpg" />
+                                <img class="lazy-photo" data-src="/images/actor/id/<%= movie.actid7 %>.jpg" alt=" {{movie.actorname47}}.jpg" />
                             <% } %>   
                             <h6><%= movie.actorname7 %></h6>
                             <p><%= movie.mvactorname7 %></p>
@@ -424,11 +428,11 @@
 
     </div>
 
-    <!--------------------------IMAGE SECTION-->
+    <!--------------------------IMAGE SECTION------------->
     <div class="other-sec">
         <div class="left-blue-header">
             <h2>Images</h2>
-            <a href="/movie/all-images/<%= movie._id%>">View all</a>
+            <a href="/drama/<%= movie.dramalink%>/drama-images">View all</a>
         </div>
         <div class="images">
             <% if(movie.images.length >0) { %>
@@ -555,82 +559,106 @@
 
 
     </style>
-<!-------------------------------LATEST UPDATE---------------------------->
-<div class="other-sec">
-    <div class="left-blue-header">
-        <h2>Latest Update</h2>
-        <a href="/latest-update">View all</a>
-    </div>
-    <div class="swiper">
-        <div class="drama-swape">
-            <% for(var i=0; i<latestUpdate.length; i++){%>
-        <div class="dramas">
-          <a  href="/drama/<%= latestUpdate[i]._id %>">
-          <div class="drama-s">
-            <img data-src="/<%= latestUpdate[i].moviePoster %>" class="lazy-photo" alt="<%= latestUpdate[i].name %>.jpg">
-            <h2><%= latestUpdate[i].name %></h2>
-            <p><%= latestUpdate[i].category %></p>
-          </div>
-          </a>
-        </div>
-        <% } %>
-    </div>
-    </div>  
-</div>  
 
-<!-------------------------------NEXT RELEASE---------------------------->
+    <!-------------------------------Ongoing Drama---------------------------->
 <div class="other-sec">
     <div class="left-blue-header">
-        <h2>Next Release</h2>
-        <a href="/upcoming-releases">View all</a>
+        <h2>Ongoing Dramas</h2>
+        <a href="/ongoing-dramas">View all</a>
     </div>
     <div class="swiper">
         <div class="drama-swape">
-            <% for(var i=0; i<nextRelease.length; i++){%>
-        <div class="dramas">
-          <a  href="/drama/<%= nextRelease[i]._id %>">
-          <div class="drama-s">
-            <img data-src="/<%= nextRelease[i].moviePoster %>" class="lazy-photo" alt="<%= nextRelease[i].name %>.jpg">
-            <h2><%= nextRelease[i].name %></h2>
-            <p><%= nextRelease[i].releasedate %></p>
-          </div>
-          </a>
+            <% for(var i = 0; i < ongoingDrama.length; i++) { 
+                // Define the maximum length for the title
+                let maxLength = 30; 
+                // Truncate the movie title if it exceeds maxLength
+                let truncatedName = ongoingDrama[i]?.name.length > maxLength ? ongoingDrama[i].name.substring(0, maxLength) + "..." : ongoingDrama[i].name;
+            %>
+            <div class="dramas">
+                <a href="/drama/<%= ongoingDrama[i].dramalink %>">
+                    <div class="drama-s">
+                        <img data-src="/<%= ongoingDrama[i].moviePoster %>" alt="" class="lazy-photo">
+                        <h2 id="drama-title"><%= truncatedName %></h2>
+                        <p><%= ongoingDrama[i].category %></p>
+                        <p>Episodes :<%= ongoingDrama[i].episodes ? ongoingDrama[i].episodes : 0%></p>
+                    </div>
+                </a>
+            </div>
+            <% } %>
         </div>
-        <% } %>
     </div>
-    </div>  
-</div>  
-<!-------------------------------Last RELEASEd MOVIES---------------------------->
-<div class="other-sec">
-    <div class="left-blue-header">
-        <h2>Last Released Movies</h2>
-        <a href="/last-released-movies">View all</a>
-    </div>
-    <div class="swiper">
-        <div class="drama-swape">
-            <% for(var i=0; i<lastReleasedMovies.length; i++){%>
-        <div class="dramas">
-          <a  href="/drama/<%= lastReleasedMovies[i]._id %>">
-          <div class="drama-s">
-            <img src="/<%= lastReleasedMovies[i].moviePoster %>" alt="">
-            <h2><%= lastReleasedMovies[i].name %></h2>
-            <p><%= lastReleasedMovies[i].releasedate %></p>
-          </div>
-          </a>
-        </div>
-        <% } %>
-    </div>
-    </div>  
+    
 </div> 
 
+<!-------------------------------Upcoming Drama---------------------------->
+<div class="other-sec">
+    <div class="left-blue-header">
+        <h2>Upcoming Drama</h2>
+        <a href="/upcoming-dramas">View all</a>
+    </div>
+    <div class="swiper">
+        <div class="drama-swape">
+            <% for(var i = 0; i < upcomingDramas.length; i++) { 
+                // Define the maximum length for the title
+                let maxLength = 30; 
+                // Truncate the movie title if it exceeds maxLength
+                let truncatedName = upcomingDramas[i]?.name.length > maxLength ? upcomingDramas[i].name.substring(0, maxLength) + "..." : upcomingDramas[i].name;
+            %>
+            <div class="dramas">
+                <a href="/drama/<%= upcomingDramas[i].dramalink %>">
+                    <div class="drama-s">
+                        <img data-src="/<%= upcomingDramas[i].moviePoster %>" alt="" class="lazy-photo">
+                        <h2 id="drama-title"><%= truncatedName %></h2>
+                        <p><%= upcomingDramas[i].category %></p>
+                        <p>Episodes :<%= upcomingDramas[i].episodes ? upcomingDramas[i].episodes : 0%></p>
+                    </div>
+                </a>
+            </div>
+            <% } %>
+        </div>
+    </div>
+    
+</div> 
+
+<!-------------------------------Recently Completed Dramas---------------------------->
+<div class="other-sec">
+    <div class="left-blue-header">
+        <h2>Recently Completed</h2>
+        <a href="/recently-completed">View all</a>
+    </div>
+    <div class="swiper">
+        <div class="drama-swape">
+            <% for(var i = 0; i < recentlyCompletedDrama.length; i++) { 
+                // Define the maximum length for the title
+                let maxLength = 30; 
+                // Truncate the movie title if it exceeds maxLength
+                let truncatedName = recentlyCompletedDrama[i]?.name.length > maxLength ? recentlyCompletedDrama[i].name.substring(0, maxLength) + "..." : recentlyCompletedDrama[i].name; %>
+            <div class="dramas">
+                <a href="/drama/<%= recentlyCompletedDrama[i].dramalink %>">
+                    <div class="drama-s">
+                        <img data-src="/<%= recentlyCompletedDrama[i].moviePoster %>" alt="" class="lazy-photo">
+                        <h2 id="drama-title"><%= truncatedName %></h2>
+                        <p><%= recentlyCompletedDrama[i].category %></p>
+                        <p>Episodes :<%= recentlyCompletedDrama[i].episodes ? recentlyCompletedDrama[i].episodes : 0%></p>
+                    </div>
+                </a>
+            </div>
+            <% } %>
+        </div>
+    </div>
+    
+</div> 
 
 
 
 
     <script>
         const movieRating = document.getElementById('movie-rating')
+
         const movieRatingValue = document.getElementById('drama-rating-value')
-        movieRatingValue.textContent = movieRating.value
+
+        movieRatingValue.textContent = 0
+  
         movieRating.oninput = function () {
             movieRatingValue.textContent = this.value
         }
@@ -645,7 +673,7 @@
                     headers:"Authorization",
                     data: formData,
                     success: function (data) {
-                        console.log(data)
+
                         
                         if (data.complete) {
                             $('.msg').addClass('success').text(data.msg);

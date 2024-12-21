@@ -1,7 +1,8 @@
 const { homePage ,downloadImage,malayalamMoviesPage, tamilMoviesPage, hindiMoviesPage, teluguMoviesPage, englishMoviesPage, kannadaMoviesPage
 ,adminPage,
-koreanDramaPage,chineseDramaPage} = require('../controller/home');
-const { searchMoviePage, searchMovie, termsConditionsPage, privacyPolicyPage, contactPage, latestUpdate, nextRelease, lastRelease } = require('../controller/movies');
+koreanDramaPage,chineseDramaPage,
+viewAllDrama} = require('../controller/home');
+const { searchMoviePage, searchMovie, termsConditionsPage, privacyPolicyPage, contactPage, latestUpdate, nextRelease, lastRelease, ongoingDramas, recentlyCompletedDramaPage, getNextRelease, upcomingDramas } = require('../controller/movies');
 const { isUser, isAdmin, isAuth } = require('../middlewares/auth');
 
 const router = require('express').Router()
@@ -19,7 +20,10 @@ router.get('/korean-drama',isUser,koreanDramaPage)
 
 
 //KOREAN DRAMA
-router.get('/chinese-drama',isUser,chineseDramaPage)
+router.get('/chinese-drama',isUser,chineseDramaPage) 
+
+//View ALL Drama
+router.get('/view-all-drama',viewAllDrama)
 
 // //HINDI MOVIES
 // router.get('/hindi-movies',isUser,hindiMoviesPage)
@@ -46,10 +50,15 @@ router.get('/search-movie',isUser,searchMoviePage)
 router.get('/latest-update',isUser,latestUpdate)
 
 //Upcoming Release movies List
-router.get('/upcoming-releases',isUser,nextRelease)
+// router.get('/upcoming-releases',isUser,nextRelease)
 
 //Upcoming Release movies List
-router.get('/last-released-movies',isUser,lastRelease)
+router.get('/recently-completed',isUser,recentlyCompletedDramaPage)
+
+router.get('/ongoing-dramas',isUser,ongoingDramas)
+
+//UPCOMING Drama
+router.get('/upcoming-dramas',isUser,upcomingDramas)
 
 //SEARCH MOVIE
 router.post('/search-movie',searchMovie)

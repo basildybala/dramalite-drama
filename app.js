@@ -10,6 +10,7 @@ var session=require('express-session');
 var cookieParser = require('cookie-parser')
 const cors =require('cors');
 const path =require('path')
+
 //ROUTES SETUP
 const homeRoutes=require('./routes/home')
 const authRoutes=require('./routes/auth')

@@ -28,7 +28,7 @@ router.get('/delete-celebrity/:celebId',deleteCelebrity)
 router.get('/:celebId',isUser,showOneCelebrity)
 
 //ALL IMAGES
-router.get('/all-images/:celebId',isUser,allCelebrityImages) 
+router.get('/drama-images/:celebId',isUser,allCelebrityImages) 
 
 
 

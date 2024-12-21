@@ -25,7 +25,7 @@
 <div class="blue-header">
     <!-- Header Title -->
     <div class="blue-header-heading">
-        <h1>Recently Added Dramas</h1>
+        <h1>Korean Drama</h1>
     </div>
 
 </div>
@@ -35,7 +35,7 @@
     <div class="flex">
         <% drama.forEach(function(drama) { %>
             <div class="dramas">
-                <a  href="/drama/<%= drama.dramalink %>">
+                <a  href="/drama/<%= drama._id %>">
                     <div class="drama-s">
                         <img data-src="/<%= drama.moviePoster %>" alt="" class="lazy-photo">
                         <h2><%= drama.name %></h2>
@@ -87,7 +87,7 @@
 
 
 <% } else { %>
-<p>No dramas found.</p>
+<p>No movies found.</p>
 <% } %>
 
 

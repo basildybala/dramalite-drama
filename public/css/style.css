@@ -317,9 +317,10 @@ hr{
 }
 .dramas{
   width: 100px;
-  height: 190px;
+  height: 185px;
   margin: 5px;
   border: 1px solid rgba(0,0,0,.14);
+  overflow: hidden;
 }
 .dramas a{
   display: flex;

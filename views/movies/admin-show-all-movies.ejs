@@ -28,7 +28,7 @@ crossorigin="anonymous">
     <tr>
       <th class="admin-header"> Name</th>
       <th class="admin-headerL "> Lang</th>
-      <th class="admin-header"> OBID</th>
+      <!-- <th class="admin-header"> OBID</th> -->
       <th class="admin-header"> Options</th>
     </tr>
     </thead>
@@ -37,7 +37,8 @@ crossorigin="anonymous">
     <tr>
       <td class="td-class" style="font-weight: 600;"><%= m.name %></td>
       <td class="td-class"><%= m.category %></td>
-       <td class="td-class"><input style="width: 90%;" type="text" value="<%= m._id %>"> </td>
+      <!-- <td class="td-class" style="max-width:40%;"><%= m._id %></td> -->
+       <!-- <td class="td-class"><input style="width: 90%;" type="text" value="<%= m._id %>"> </td> -->
       <td class="td-class">
           <a style="color: green;margin-right: 5px;" href="/drama/edit-movie/<%= m._id %>"><i class="fas fa-user-edit"></i>Edit</a>
           <a href="/drama/delete-movie/<%= m._id %>" onclick="return confirm('Are You Sure to Delete ')"><i class="fas fa-trash"></i></a>
@@ -49,7 +50,7 @@ crossorigin="anonymous">
         <tr>
             <th>Name</th>
             <th>lag</th>
-            <th>ID</th>
+            <!-- <th>ID</th> -->
             <th>Option</th>
         </tr>
     </tfoot>
