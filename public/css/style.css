@@ -399,6 +399,7 @@ hr{
    font-size: 13px;
    font-weight: 500;
    border-radius: 5px;
+   white-space: nowrap;
   }
   
   
@@ -498,8 +499,9 @@ hr{
    }
    .connect-icons i{
     font-size: 19px;
-    color: rgb(252, 54, 19);
+    color: #4fa0f7;
     margin-right: 8px;
+    font-weight: 500;
    }
    .connect-text p{
     margin: 0;

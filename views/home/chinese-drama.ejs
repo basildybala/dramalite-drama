@@ -47,9 +47,13 @@
             <div class="dramas">
                 <a  href="/drama/<%= drama.dramalink %>">
                     <div class="drama-s">
-                        <img data-src="/<%= drama.moviePoster %>" alt="" class="lazy-photo">
+                        <% if( drama.moviePoster && String(drama.moviePoster).trim()) { %>
+                            <img data-src="/<%= drama.moviePoster %>" alt="" class="lazy-photo">
+                        <% }else { %>
+                            <img data-src="/images/other/poster-not-available.jpg" alt=" <%= drama.name %> Poster" class="lazy-photo">
+                        <% } %>
                         <h2><%= drama.name %></h2>
-                        <p>Year: <%= drama.year %></p>
+                        <p><%= drama.releasedate %></p>
                         <p>Episodes: <%= drama.episodes %></p>
                     </div>
                 </a>
@@ -119,18 +123,25 @@
                     url: `/chinese-drama?sort=${type}`,
                     type: 'GET',
                     success: function (data) {
-                        
+                        console.log(data)
                          // Use data to update the movies section on the page
                         const moviesContainer = $(".flex"); // Target the container that holds the movie list
                         moviesContainer.empty(); // Clear current movie list
                         data.drama.forEach(function(drama) {
+                        let moviePoster
+                        if(drama.moviePoster && String(drama.moviePoster).trim()){
+                            moviePoster=drama.moviePoster
+                        }else{
+                            moviePoster='images/other/poster-not-available.jpg'
+                        }
+
                         const movieHTML = `
                             <div class="dramas">
-                                <a href="/drama/${drama._id}">
+                                <a href="/drama/${drama.dramalink}">
                                     <div class="drama-s">
-                                        <img data-src="/${drama.moviePoster}" alt="" class="lazy-photo">
+                                        <img src="${moviePoster}" alt="" class="lazy-photo">
                                         <h2>${drama.name}</h2>
-                                        <p>Year: ${drama.year}</p>
+                                        <p>${drama.releasedate}</p>
                                         <p>Episodes: ${drama.episodes}</p>
                                     </div>
                                 </a>

@@ -211,7 +211,8 @@ exports.koreanDramaPage=async (req,res)=>{
                         year:1,
                         genre:1,
                         moviePoster:1,
-                        episodes:1
+                        episodes:1,
+                        dramalink:1
 
                     }
                 },
@@ -244,7 +245,8 @@ exports.koreanDramaPage=async (req,res)=>{
                     currentPage: page,
                     totalPages: totalPages,
                     totalMovies: totalMovies,
-                    limit: limit
+                    limit: limit,
+                    user
                 });
             }else{
                 res.render('home/korean-drama.ejs', {
@@ -252,7 +254,8 @@ exports.koreanDramaPage=async (req,res)=>{
                     currentPage: page,
                     totalPages: totalPages,
                     totalMovies: totalMovies,
-                    limit: limit
+                    limit: limit,
+                    user
                 });
             }
             
@@ -285,7 +288,7 @@ exports.chineseDramaPage=async (req,res)=>{
                 sortField = { moviePoster: 1 }; // Default sort by moviePoster in descending order
             }
             const aggregationPipeline = [
-                { $match: { category: 'Malayalam' } },  // Filter by category 'Malayalam'
+                { $match: { category: 'Chinese' } },  // Filter by category 'Malayalam'
                 {$project:
                     {
                         _id:1,
@@ -295,7 +298,8 @@ exports.chineseDramaPage=async (req,res)=>{
                         year:1,
                         genre:1,
                         moviePoster:1,
-                        episodes:1
+                        episodes:1,
+                        dramalink:1
 
                     }
                 },
@@ -328,7 +332,8 @@ exports.chineseDramaPage=async (req,res)=>{
                     currentPage: page,
                     totalPages: totalPages,
                     totalMovies: totalMovies,
-                    limit: limit
+                    limit: limit,
+                    user
                 });
             }else{
                 res.render('home/chinese-drama.ejs', {
@@ -336,7 +341,8 @@ exports.chineseDramaPage=async (req,res)=>{
                     currentPage: page,
                     totalPages: totalPages,
                     totalMovies: totalMovies,
-                    limit: limit
+                    limit: limit,
+                    user
                 });
             }
             

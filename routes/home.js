@@ -19,7 +19,7 @@ router.get('/tamil-movies',isUser,tamilMoviesPage)
 router.get('/korean-drama',isUser,koreanDramaPage)
 
 
-//KOREAN DRAMA
+//Chinese DRAMA
 router.get('/chinese-drama',isUser,chineseDramaPage) 
 
 //View ALL Drama
