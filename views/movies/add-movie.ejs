@@ -221,8 +221,9 @@
                 <div class="form-group">
                     <label for="name">Actor <%= i %>:</label>
                     <div class="input-group mb-2">
-                        <input type="text" class="form-control" name="actid<%= i %>" placeholder="ID" readonly>
+                        <input type="text" class="form-control" name="actid<%= i %>" placeholder="ID" readonly hidden>
                         <input type="text" class="form-control actorname" name="actorname<%= i %>" data-index="<%= i %>" placeholder="Name">
+                        <input type="text" class="form-control" name="celeblink<%= i %>" data-index="<%= i %>" placeholder="Actor Link">
                     </div>
                     <div class="input-group">
                         <input type="text" class="form-control" name="actimg<%= i %>" placeholder="Img Url" readonly>
@@ -327,7 +328,7 @@
                     <input type="file" class="form-control" name="movieImages" placeholder="Images" multiple>
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary btn-lg blue-backgroud">Add Movie</button>
+            <button type="submit" class="btn btn-primary blue-backgroud">Add Drama</button>
         </form>
     </div>
     <!-- Suggestions container -->
@@ -376,6 +377,7 @@
                             suggestion.addEventListener('click', () => {
                                 // Populate fields for the current actor
                                 document.querySelector(`[name="actid${index}"]`).value = actor._id;
+                                document.querySelector(`[name="celeblink${index}"]`).value = actor.celeblink;
                                 document.querySelector(`[name="actimg${index}"]`).value = actor.profilePic?actor.profilePic:'';
                                 activeInput.value = actor.actorname;
 

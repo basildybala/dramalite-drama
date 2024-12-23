@@ -24,6 +24,17 @@
                         value="<%= celebrity.nickname %>">
                 </div>
             </div>
+            <div class="form-group">
+                <label for="name">Gender</label>
+                <div class="input-group">
+                    <select class="form-control" name="gender" required>
+                        <option value="<%= celebrity.gender %>"><%= celebrity.gender %></option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+            </div>
 
             <div class="form-group">
                 <label for="name">Nationality:</label>
@@ -43,6 +54,13 @@
                 <label for="name">Born:</label>
                 <div class="input-group">
                     <input type="text" class="form-control" name="age" placeholder="Born" value="<%= celebrity.age %>">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="name">Lover:</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" name="lover" placeholder="Lover"
+                        value="<%= celebrity.lover %>">
                 </div>
             </div>
             <div class="form-group">
@@ -116,7 +134,7 @@
                         <% }%>
                     </div>
                 </div>
-            <button type="submit" class="btn btn-primary btn-lg blue-backgroud" style="margin-top: 10px;">Edit Celebrity</button>
+            <button type="submit" class="btn btn-primary blue-backgroud" style="margin-top: 10px;">Edit Celebrity</button>
         </form>
     </div>
 

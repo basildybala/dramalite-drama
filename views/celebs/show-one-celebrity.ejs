@@ -49,44 +49,10 @@
                     </h1>
                 </div>
                 <div class="celeb-img">
-                    <% if(celebrity.profilePic ) { %>
-                        <img class="lazy-photo" data-src="/<%= celebrity.profilePic %>" alt=" <%= celebrity.actorname %> Profile"
-                        srcset="">
-                    <% }else { %>
-                        <img class="lazy-photo" data-src="/images/actor/id/<%= celebrity._id %>.jpg" alt=" <%= celebrity.actorname %> Profile"
-                        srcset="">
-                    <% } %>
+                    <img class="lazy-photo" data-src="/<%= celebrity.profilePic %>" alt=" <%= celebrity.actorname %> Profile" srcset="">
                 </div>
             </div>
-            <!-- <div class="actor-card">
-                <div class="part-one">
-                    <% if(celebrity.profilePic ) { %>
-                        <img class="lazy-photo" data-src="/<%= celebrity.profilePic %>" alt=" <%= celebrity.actorname %> Profile"
-                        srcset="">
-                    <% }else { %>
-                        <img class="lazy-photo" data-src="/images/actor/id/<%= celebrity._id %>.jpg" alt=" <%= celebrity.actorname %> Profile"
-                        srcset="">
-                    <% } %>
-                   
-                </div>
-                <div class="part-two">
-                    <div class="name-part">
-                        <h1>
-                            <%= celebrity.actorname %>
-                        </h1>
-                        <p>
-                            <%= celebrity.occupation %>
-                        </p>
-                    </div>
-                    <div class="center-part">
-                        <p>Age:</p><span id="age"></span>
-                    </div>
-                    <div class="button-part">
-                        <a  href="#images-sec" class="btn btn-outline-primary me-1 flex-grow-1">Images</a>
-                        <a href="#movies-sec" class="btn btn-primary flex-grow-1">Movies</a>
-                    </div>
-                </div>
-            </div> -->
+   
         </div>
         <div class="scd-sec">
 
@@ -107,18 +73,39 @@
                         <h2>Nick Name</h2>
                     </div>
                     <div class="dettails">
-                        <h3> <%- celebrity.nickname%></h3>
+                        <h3>
+                            <%= celebrity.nickname && String(celebrity.nickname).trim() ? celebrity.nickname : '-' %>
+                        </h3>
                     </div>
                 </div>
                 <hr>
-                <% } %>
+            <% } %>
+            <div class="actor-dettails">
+                <div class="dettails-name">
+                    <% if (String(celebrity.gender).trim() === 'Male') { %>
+                        <h2>Girlfriend</h2>
+                    <% } else if (String(celebrity.gender).trim() === 'Female') { %>
+                        <h2>Boyfriend</h2>
+                    <% } else { %>
+                        <h2>Partner</h2>
+                    <% } %>
+                </div>
+                <div class="dettails">
+                    <h3>
+                        <%= celebrity.lover && String(celebrity.lover).trim() ? celebrity.lover : '-' %>
+                    </h3>
+                </div>
+            </div>
+            <hr>
                 <% if( celebrity.nationality) { %>
                     <div class="actor-dettails">
                         <div class="dettails-name">
                             <h2>Nationality</h2>
                         </div>
                         <div class="dettails">
-                            <h3> <%- celebrity.nationality%></h3>
+                            <h3> 
+                                <%= celebrity.nationality && String(celebrity.nationality).trim() ? celebrity.nationality : '-' %>
+                            </h3>
                         </div>
                     </div>
                     <hr>
@@ -150,7 +137,7 @@
                 </div>
                 <div class="dettails">
                     <h3>
-                        <%= celebrity.occupation %>
+                        <%= celebrity.occupation && String(celebrity.occupation).trim() ? celebrity.occupation : '-' %>
                     </h3>
                 </div>
             </div>
@@ -161,7 +148,7 @@
                 </div>
                 <div class="dettails">
                     <h3>
-                        <%= celebrity.language %>
+                        <%= celebrity.language && String(celebrity.language).trim() ? celebrity.language : '-' %>
                     </h3>
                 </div>
             </div>
@@ -183,9 +170,8 @@
                 </div>
                 <div class="dettails">
                     <p class="cutoff-text">
-                        <%- celebrity.biography %>
+                        <%= celebrity.biography && String(celebrity.biography).trim() ? celebrity.biography : '-' %>
                     </p>
-                    <!-- <input class="expand-btn" type="checkbox"> -->
                 </div>
             </div>
             <% if( celebrity.instalink) { %>
@@ -234,30 +220,27 @@
 
     <div class="img-sec" id="movies-sec">
         <div class="left-blue-header">
-            <h2>Movies List</h2>
-            <a href="">View all</a>
+            <h2>Drama List</h2>
+            <a href="#">View all</a>
         </div>
         <div class="movies-list">
-            <% for(var i=0; i<moviesList.length; i++){%>
+            <% for(var i=0; i<dramaList.length; i++){%>
                 
                 <div class="movie">
-                    <a href="/drama/<%= moviesList[i]._id %> " class="movie-body">
+                    <a href="/drama/<%= dramaList[i].dramalink %> " class="movie-body">
                         <div class="movie-img">
-                            <% if(moviesList[i].moviePoster) { %>
-                                <img class="lazy-photo" data-src="/<%= moviesList[i].moviePoster %>"
-                                    alt=" <%= moviesList[i].name %> Poster" srcset="">
-                                <% }else { %>
-                                    <img class="lazy-photo"
-                                        data-src="/images/dramas/id/<%= moviesList[i]._id  %>.jpg"
-                                        alt=" <%= moviesList[i].name %> poster" srcset="">
+                            <% if( dramaList[i].moviePoster && String(dramaList[i].dramaList).trim()) { %>
+                                <img data-src="/<%= dramaList[i].moviePoster %>" alt="" class="lazy-photo">
+                            <% }else { %>
+                                <img data-src="/images/other/poster-not-available.jpg" alt=" <%= dramaList[i].name %> Poster" class="lazy-photo">
                             <% } %>
                         </div>
                         <div class="movie-text">
                             <h3>
-                                <%= moviesList[i].name %>
+                                <%= dramaList[i].name %>
                             </h3>
                             <p>
-                                <%= moviesList[i].year %>
+                                <%= dramaList[i].year %>
                             </p>
                         </div>
                     </a>

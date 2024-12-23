@@ -22,15 +22,23 @@ exports.addMoviePage = async (req, res) => {
 
 exports.addMovie = async (req, res) => {
     try {
+        // res.send(req.body)
         //Delete cache added movies
-        const cacheKey = `latestupdate`;
+        const cacheKey = 'latestupdate_page_1_limit_6';
+        const cacheKeyOfNexRelease = `nextrelease_page_1_limit_6`; 
+        const cacheKeyOfCompletedDrama = `completedDramas_page_1_limit_6`; 
+        const cacheKeyOfOngoingDrama = `ongoingdrama_1_6`;
         await redis.del(cacheKey);
+        await redis.del(cacheKeyOfNexRelease);
+        await redis.del(cacheKeyOfCompletedDrama);
+        await redis.del(cacheKeyOfOngoingDrama);
 
         let { name, engname, category, year, releasedate,ottreleasedate, genre, duration, director, directorlink,
             written, writtenlink, producedby, producedbylink, tags, ottName, ottImg, ottUrl, story,
             actid1, actid2, actid3, actid4, actid6, actid7, actorname1, actorname2, actorname3, actorname4, actorname5, actorname6,
             actorname7, mvactorname1, mvactorname2, mvactorname3, mvactorname4, mvactorname5, mvactorname6, mvactorname7,
-            actimg1, actimg2, actimg3, actimg4, actimg5, actimg6, actimg7,episodes,country,episodeEndDate } = req.body
+            actimg1, actimg2, actimg3, actimg4, actimg5, actimg6, actimg7,episodes,country,episodeEndDate,celeblink1,
+            celeblink2,celeblink3,celeblink4,celeblink5,celeblink6,celeblink7 } = req.body
         var moviePoster;
         var releaseDate;
         let dramalink;
@@ -70,26 +78,43 @@ exports.addMovie = async (req, res) => {
                 actid1, actid2, actid3, actid4, actid6, actid7, actorname1, actorname2, actorname3, actorname4, actorname5, actorname6,
                 actorname7, mvactorname1, mvactorname2, mvactorname3, mvactorname4, mvactorname5, mvactorname6, mvactorname7,
                 actimg1, actimg2, actimg3, actimg4, actimg5, actimg6, actimg7, whereToWatch, moviePoster, images: movieImages,dramalink,episodes,country,
-                episodeEndDate,episodeEndDateStamp
+                episodeEndDate,episodeEndDateStamp,celeblink1,
+                celeblink2,celeblink3,celeblink4,celeblink5,celeblink6,celeblink7
             })
             
             let saveMovie=await movie.save()
             return res.redirect(`/drama/${saveMovie.dramalink}`)
         } else {
-            moviePoster = req.files.moviePoster[0]?.path
-            let movie = await new Movie({
+            if(req.files.moviePoster){
+
+                moviePoster = req.files.moviePoster[0]?.path
+                let movie = await new Movie({
                 name, engname, category, year, releasedate,releaseDate,ottreleasedate, genre, duration, director, directorlink,
                 written, writtenlink, producedby, producedbylink, tags, story,
                 actid1, actid2, actid3, actid4, actid6, actid7, actorname1, actorname2, actorname3, actorname4, actorname5, actorname6,
                 actorname7, mvactorname1, mvactorname2, mvactorname3, mvactorname4, mvactorname5, mvactorname6, mvactorname7,
                 actimg1, actimg2, actimg3, actimg4, actimg5, actimg6, actimg7, whereToWatch, moviePoster,dramalink,episodes,country,episodeEndDate,
-                episodeEndDateStamp
-            })
-            let saveMovie=await movie.save()
-            if(req.files.moviePoster[0]){
-                fileUploadToDrive(process.env.DRAMA_POSTER_DRIVE,req.files.moviePoster[0].filename,req.files.moviePoster[0].mimetype,req.files.moviePoster[0].path)
+                episodeEndDateStamp,celeblink1,
+                celeblink2,celeblink3,celeblink4,celeblink5,celeblink6,celeblink7
+                })
+                let saveMovie=await movie.save()
+                if(req.files.moviePoster[0]){
+                    fileUploadToDrive(process.env.DRAMA_POSTER_DRIVE,req.files.moviePoster[0].filename,req.files.moviePoster[0].mimetype,req.files.moviePoster[0].path)
+                }
+                return res.redirect(`/drama/${saveMovie.dramalink}`)
+            }else{
+                let movie = await new Movie({
+                name, engname, category, year, releasedate,releaseDate,ottreleasedate, genre, duration, director, directorlink,
+                written, writtenlink, producedby, producedbylink, tags, story,
+                actid1, actid2, actid3, actid4, actid6, actid7, actorname1, actorname2, actorname3, actorname4, actorname5, actorname6,
+                actorname7, mvactorname1, mvactorname2, mvactorname3, mvactorname4, mvactorname5, mvactorname6, mvactorname7,
+                actimg1, actimg2, actimg3, actimg4, actimg5, actimg6, actimg7, whereToWatch,dramalink,episodes,country,episodeEndDate,
+                episodeEndDateStamp,celeblink1,
+                celeblink2,celeblink3,celeblink4,celeblink5,celeblink6,celeblink7
+                })
+                let saveMovie=await movie.save()
+                return res.redirect(`/drama/${saveMovie.dramalink}`)
             }
-            return res.redirect(`/drama/${saveMovie.dramalink}`)
         }
 
     } catch (error) {
@@ -114,8 +139,18 @@ exports.editMoviePage = async (req, res) => {
 exports.updateMovie = async (req, res) => {
     try {
         let movieId = req.params.movieId
-        const cacheKey = `movie:${movieId}`;
+        let findMovie=await Movie.findById(movieId)
+
+        //Deleting redis cache
+        const cacheKey = `drama:${findMovie.dramalink}`;
+        const cacheKeyOfNexRelease = `nextrelease_page_1_limit_6`; 
+        const cacheKeyOfCompletedDrama = `completedDramas_page_1_limit_6`; 
+        const cacheKeyOfOngoingDrama = `ongoingdrama_1_6`;
         await redis.del(cacheKey);
+        await redis.del(cacheKeyOfNexRelease);
+        await redis.del(cacheKeyOfCompletedDrama);
+        await redis.del(cacheKeyOfOngoingDrama);
+
         let { name, engname, category, year, releasedate,ottreleasedate, genre, duration, director, directorlink,
             written, writtenlink, producedby, producedbylink, tags, ottName, ottImg, ottUrl, story,
             actid1, actid2, actid3, actid4, actid6, actid7, actorname1, actorname2, actorname3, actorname4, actorname5, actorname6,
@@ -225,7 +260,7 @@ exports.showOneMovie = async (req, res) => {
         let movie;
         let user = req.user
         let dramalink = req.params.dramalink
-        const cacheKey = `movie:${dramalink}`;
+        const cacheKey = `drama:${dramalink}`;
         const getMovie = await redis.get(cacheKey);
         if (getMovie) {
             // If found, return cached data

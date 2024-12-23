@@ -14,8 +14,10 @@ const actorSchema = mongoose.Schema(
     nationality: {type: String,trim: true,},
     hometown: {type: String,trim: true,},
     biography: {type: String,},
+    lover: {type: String,},
     profilePic: {type: String,},
     images: {type: [String]},
+    gender: {type: String,enum: ["Male", "Female","Other"],},
   },
   { timestamps: true }
 );

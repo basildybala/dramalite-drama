@@ -8,8 +8,7 @@ const { uploadImage } = require('../middlewares/multer');
 const router = require('express').Router()
 
 
-//GET ONE Movie
-router.get('/:dramalink',isUser,showOneMovie)
+
 
 //SAMPLE 
 router.get('/sample',(req,res)=>{
@@ -73,7 +72,10 @@ router.post('/like-review',isAuth,likeReview)
 router.post('/dislike-review',isAuth,dislikeReview)
 
 //ALL IMAGES
-router.get('/:dramalink/drama-images/',isUser,movieAllImages) 
+router.get('/:dramalink/drama-images/',isUser,movieAllImages)
+
+//GET ONE Movie
+router.get('/:dramalink',isUser,showOneMovie) 
 
 
 

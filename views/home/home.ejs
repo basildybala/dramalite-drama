@@ -20,7 +20,12 @@
             <div class="dramas">
                 <a href="/drama/<%= ongoingDrama[i].dramalink %>">
                     <div class="drama-s">
-                        <img data-src="/<%= ongoingDrama[i].moviePoster %>" alt="" class="lazy-photo">
+                        <% if( ongoingDrama[i].moviePoster && String(ongoingDrama[i].moviePoster).trim()) { %>
+                            <img data-src="/<%= ongoingDrama[i].moviePoster %>" alt="" class="lazy-photo">
+                        <% }else { %>
+                            <img data-src="/images/other/poster-not-available.jpg" alt=" <%= ongoingDrama[i].name %> Poster" class="lazy-photo">
+                        <% } %>
+                        
                         <h2 id="drama-title"><%= truncatedName %></h2>
                         <p><%= ongoingDrama[i].category %></p>
                         <p>Episodes :<%= ongoingDrama[i].episodes ? ongoingDrama[i].episodes : 0%></p>
@@ -50,7 +55,11 @@
             <div class="dramas">
                 <a href="/drama/<%= ongoingDrama[i].dramalink %>">
                     <div class="drama-s">
-                        <img data-src="/<%= upcomingDramas[i].moviePoster %>" alt="" class="lazy-photo">
+                        <% if( upcomingDramas[i].moviePoster && String(upcomingDramas[i].moviePoster).trim()) { %>
+                            <img data-src="/<%= upcomingDramas[i].moviePoster %>" alt="" class="lazy-photo">
+                        <% }else { %>
+                            <img data-src="/images/other/poster-not-available.jpg" alt=" <%= upcomingDramas[i].name %> Poster" class="lazy-photo">
+                        <% } %>
                         <h2 id="drama-title"><%= truncatedName %></h2>
                         <p><%= upcomingDramas[i].category %></p>
                         <p>Episodes :<%= upcomingDramas[i].episodes ? upcomingDramas[i].episodes : 0%></p>
@@ -79,7 +88,11 @@
             <div class="dramas">
                 <a href="/drama/<%= recentlyCompletedDrama[i].dramalink %>">
                     <div class="drama-s">
-                        <img data-src="/<%= recentlyCompletedDrama[i].moviePoster %>" alt="" class="lazy-photo">
+                        <% if( recentlyCompletedDrama[i].moviePoster && String(recentlyCompletedDrama[i].moviePoster).trim()) { %>
+                            <img data-src="/<%= recentlyCompletedDrama[i].moviePoster %>" alt="" class="lazy-photo">
+                        <% }else { %>
+                            <img data-src="/images/other/poster-not-available.jpg" alt=" <%= recentlyCompletedDrama[i].name %> Poster" class="lazy-photo">
+                        <% } %>
                         <h2 id="drama-title"><%= truncatedName %></h2>
                         <p><%= recentlyCompletedDrama[i].category %></p>
                         <p>Episodes :<%= recentlyCompletedDrama[i].episodes ? recentlyCompletedDrama[i].episodes : 0%></p>
@@ -107,7 +120,11 @@
            <div class="dramas">
              <a href="/drama/<%= latestUpdate[i].dramalink %>">
                <div class="drama-s">
-                 <img data-src="/<%= latestUpdate[i].moviePoster %>" alt="" class="lazy-photo">
+                <% if( latestUpdate[i].moviePoster && String(latestUpdate[i].moviePoster).trim()) { %>
+                    <img data-src="/<%= latestUpdate[i].moviePoster %>" alt="" class="lazy-photo">
+                <% }else { %>
+                    <img data-src="/images/other/poster-not-available.jpg" alt=" <%= latestUpdate[i].name %> Poster" class="lazy-photo">
+                <% } %>
                  <h2 id="drama-title">
                    <%= latestUpdate[i].name.length > maxLength 
                        ? latestUpdate[i].name.substring(0, maxLength) + "..." 

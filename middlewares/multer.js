@@ -3,6 +3,7 @@ let shortid = require('shortid');
 const path = require('path');
 var slugify = require('slugify');
 var fs = require('fs');
+const { generateOTP } = require("../utils/mail");
 
 // const Actorstorage = multer.diskStorage({
 //   destination: function (req, file, cb) {
@@ -32,7 +33,17 @@ const storage = multer.diskStorage({
       return cb(null, shortid.generate() + '-' + Date.now())
     } 
     let ext = path.extname(file.originalname)
-    cb(null, shortid.generate() + '-' + file.originalname )
+    //cb(null, shortid.generate() + '-' + file.originalname )
+    let num = generateOTP(4);
+    // Use name from req.body and append the file extension
+    if (req.body.name) {
+      cb(null, `${req.body.name}-${num}${ext}`);
+    } else if(req.body.actorname){
+      cb(null, `${req.body.actorname}-${num}${ext}`);
+    }else{
+      // Fallback if 'name' is not provided in body
+      cb(null, `${shortid.generate()}-${Date.now()}${ext}`);
+    }
   }
 });
 

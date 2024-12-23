@@ -26,7 +26,7 @@ crossorigin="anonymous">
     <tr>
       <th class="admin-header"> Name</th>
       <th class="admin-headerL "> Nation</th>
-      <!-- <th class="admin-header"> OBID</th> -->
+      <th class="admin-header"> OBID</th>
       <th class="admin-header"> Options</th>
     </tr>
     </thead>
@@ -35,10 +35,10 @@ crossorigin="anonymous">
     <tr>
       <td class="td-class" style="font-weight: 600;"><%= c.actorname %></td>
       <td class="td-class"><%= c.nationality %></td>
-       <!-- <td class="td-class">
-        <input style="width: 90%;" type="text" value="<%= c._id %>"> 
+       <td class="td-class">
+        <input style="width: 90%;" type="text" value="<%= c.celeblink %>"> 
         <input style="width: 90%;" type="text" value="<%= c.profilePic %>"> 
-      </td> -->
+      </td>
       <td class="td-class">
           <a style="color: green;margin-right: 5px;" href="/celebs/edit-celebrity/<%= c._id %>"><i class="fas fa-user-edit"></i>Edit</a>
           <a href="/celebs/delete-celebrity/<%= c._id %>" onclick="return confirm('Are You SHure to Delete ')"><i class="fas fa-trash"></i></a>
@@ -50,7 +50,7 @@ crossorigin="anonymous">
         <tr>
             <th>Name</th>
             <th>Nation</th>
-            <!-- <th>ID</th> -->
+            <th>ID</th>
             <th>Option</th>
         </tr>
     </tfoot>

@@ -9,7 +9,7 @@ exports.homePage=async(req,res)=>{
         //Latest Update
         let latestUpdatedrama=await getLatestUpdate(1,6)
         let latestUpdate=latestUpdatedrama.dramas
-        console.log("first",latestUpdate)
+
         //Upcoming Drama
         let upcoming=await getNextRelease(1,6)
         let upcomingDramas=upcoming.dramas
