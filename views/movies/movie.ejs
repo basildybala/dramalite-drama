@@ -2,32 +2,46 @@
     <link rel="stylesheet" href="/css/movie.css">
 
 
-    <title><%= movie.engname %> Movie Cast, Story, Review, Photos, Videos,OTT Watch</title>
-<meta name="title" content="<%= movie.engname %> Movie Cast, Story, Review, Photos, Videos,OTT Watch"/>
-<meta name="description" content="<%= movie.story %> <%= movie.engname %> Ott Release Date Movie ">
-<meta name="keywords" content="<%= movie.engname %>, <%= movie.engname %> <%= movie.category %>Movie, <%= movie.engname %> <%= movie.year %>, <%= movie.engname %> movie, <%= movie.actorname1 %> <%= movie.engname %>, <%= movie.actorname1 %> <%= movie.engname %> Movie, <%= movie.engname %> Download"/>
-<meta name="news_keywords" content="<%= movie.engname %>, <%= movie.engname %> <%= movie.category %> Movie, <%= movie.engname %> <%= movie.year %>, <%= movie.engname %> movie, <%= movie.actorname1 %> <%= movie.engname %>, <%= movie.actorname1 %> <%= movie.engname %> Movie, <%= movie.engname %> Download"/>
-<meta property="og:title" content="<%= movie.engname %> Movie Cast, Story, Review, Photos, Videos, Watch">
+    <title><%= movie.engname %> 
+        <% if( movie.category == 'Korean' ) { %>
+            Kdrama
+        <% }else if(movie.category == 'Chinese') { %>
+               Cdrama
+        <% }else{ %>
+        <% }%>
+        Release Date, Episodes, Cast & Reviews</title>
+<meta name="title" content="<%= movie.engname %> 
+<% if( movie.category == 'Korean' ) { %>
+    Kdrama
+<% }else if(movie.category == 'Chinese') { %>
+       Cdrama
+<% }else{ %>
+<% }%>
+Release Date, Episodes, Cast & Reviews"/>
+<meta name="description" content="<%= movie.story %> <%= movie.engname %> Dramacool ">
+<meta name="keywords" content="<%= movie.engname %>, <%= movie.engname %> <%= movie.category %>, <%= movie.engname %> <%= movie.year %>, <%= movie.engname %> drama, <%= movie.actorname1 %> <%= movie.engname %>, <%= movie.actorname1 %> <%= movie.engname %> Drama, <%= movie.engname %> Dramacool"/>
+<meta name="news_keywords" content="<%= movie.engname %>, <%= movie.engname %> <%= movie.category %> Drama, <%= movie.engname %> <%= movie.year %>, <%= movie.engname %> drama, <%= movie.actorname1 %> <%= movie.engname %>, <%= movie.actorname1 %> <%= movie.engname %> Drama, <%= movie.engname %> Dramacool"/>
+<meta property="og:title" content="<%= movie.engname %> Drama Release Date, Episodes, Cast & Reviews">
 <meta property="og:site_name" content="DramaLite.Com ">
 <meta property="og:url" content="https://dramalite.com/drama/<%= movie._id %>">
-<meta property="og:description" content="<%= movie.name %> <%= movie.actorname1 %> <%= movie.engname %> Movie Story: <%= movie.story %> <%= movie.engname %> Movie">
+<meta property="og:description" content="<%= movie.name %> <%= movie.actorname1 %> <%= movie.engname %> Drama Story: <%= movie.story %> <%= movie.engname %> Drama">
 <meta property="og:type" content="video.movie">
 <meta property="og:image" itemid="image" content="https://dramalite.com/public/images/dramas/poster/<%= movie.moviePoster %>">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:site" content="Dramalite.com">
-<meta name="twitter:title" content="<%= movie.engname %> Movie Cast, Story, Review, Photos, Videos, Watch">
-<meta name="twitter:description" content="<%= movie.name %> <%= movie.actorname1 %> <%= movie.engname %> Movie Story: <%= movie.story %> <%= movie.engname %> Movie">
+<meta name="twitter:title" content="<%= movie.engname %> Drama Release Date, Episodes, Cast & Reviews">
+<meta name="twitter:description" content="<%= movie.name %> <%= movie.actorname1 %> <%= movie.engname %> Movie Story: <%= movie.story %> <%= movie.engname %> Drama">
 <meta name="twitter:image" content="<%= movie.name %>">
-<meta name="twitter:url" content="https://dramalite.com/drama/<%= movie._id %>">
-<link rel="canonical" href="https://dramalite.com/drama/<%= movie._id %>"/>
+<meta name="twitter:url" content="https://dramalite.com/drama/<%= movie.dramalink %>">
+<link rel="canonical" href="https://dramalite.com/drama/<%= movie.dramalink %>"/>
 
 
 <script type="application/ld+json">
     {"@context":"http://schema.org",
     "@type":"Movie",
-    "url":"https://dramalite.com/drama/<%= movie._id %>",
+    "url":"https://dramalite.com/drama/<%= movie.dramalink %>",
     "name":"<%= movie.name %>",
-    "image":" <% if(movie.moviePoster ) { %>/<%= movie.moviePoster %><% }else { %>/images/movies/id/<%= movie._id  %>.jpg<% } %>",
+    "image":" <%= movie.moviePoster %> %>",
     "description":"<%= movie.story %>",
      "countryOfOrigin":{"@type":"Country","name":"India"},
      "contentLocation":{"@type":"Place","name":"India"},
@@ -46,16 +60,16 @@
      "ratingValue":<% if(rating.rating){ %><%= rating.rating %>
         <% }else{ %>0.0<% } %>},<% } %> 
      "actor":[
-     {"@type":"Person","name":"<%= movie.actorname1 %>","url":"/celebs/<%= movie.actid1 %>"}<% if(movie.actorname2){ %>,
-     {"@type":"Person","name":"<%= movie.actorname2 %>","url":"/celebs/<%= movie.actid2 %>"}
+     {"@type":"Person","name":"<%= movie.actorname1 %>","url":"/celebs/<%= movie.celeblink1 %>"}<% if(movie.actorname2){ %>,
+     {"@type":"Person","name":"<%= movie.actorname2 %>","url":"/celebs/<%= movie.celeblink2 %>"}
      <% } %><% if(movie.actorname3){ %> ,
-     {"@type":"Person","name":"<%= movie.actorname3 %>","url":"/celebs/<%= movie.actid3 %>"}
+     {"@type":"Person","name":"<%= movie.actorname3 %>","url":"/celebs/<%= movie.celeblink3 %>"}
      <% } %><% if(movie.actorname4) { %> ,
-     {"@type":"Person","name":"<%= movie.actorname4 %>","url":"/celebs/<%= movie.actid4 %>"}
+     {"@type":"Person","name":"<%= movie.actorname4 %>","url":"/celebs/<%= movie.celeblink4 %>"}
      <% } %><% if(movie.actorname5) { %> ,
-     {"@type":"Person","name":"<%= movie.actorname5 %>","url":"/celebs/<%= movie.actid5 %>"}
+     {"@type":"Person","name":"<%= movie.actorname5 %>","url":"/celebs/<%= movie.celeblink5 %>"}
      <% } %><% if(movie.actorname6) { %> ,
-     {"@type":"Person","name":"<%= movie.actorname6 %>","url":"/celebs/<%= movie.actid6 %>""}
+     {"@type":"Person","name":"<%= movie.actorname6 %>","url":"/celebs/<%= movie.celeblink6 %>""}
      <% } %>  
      ]}
     </script>
