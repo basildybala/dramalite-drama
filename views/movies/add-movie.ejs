@@ -226,7 +226,13 @@
                         <input type="text" class="form-control" name="celeblink<%= i %>" data-index="<%= i %>" placeholder="Actor Link">
                     </div>
                     <div class="input-group">
-                        <input type="text" class="form-control" name="actimg<%= i %>" placeholder="Img Url" readonly>
+                        <select class="form-control" name="celebrole<%= i %>">
+                            <option value="">Role</option>
+                            <option value="Main Role">Main Role</option>
+                            <option value="Support Role">Support Role</option>
+                            <option value="Guest Role">Guest Role</option>
+                        </select>
+                        <input type="text" class="form-control" name="actimg<%= i %>" placeholder="Img Url" readonly hidden>
                         <input type="text" class="form-control" name="mvactorname<%= i %>" placeholder="Movie Name">
                     </div>
                 </div>

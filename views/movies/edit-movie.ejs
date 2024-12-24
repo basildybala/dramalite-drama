@@ -256,6 +256,9 @@
                         <div class="input-group">
                             <input type="text" class="form-control" name="actid1" placeholder="ID"
                                 value="<%= movie.actid1 %>">
+
+                            <input type="text" class="form-control" name="celeblink1" placeholder="Celeb Link"value="<%= movie.celeblink1 %>">    
+
                             <input type="text" class="form-control" name="actorname1" placeholder="Name"
                                 value="<%= movie.actorname1 %>">
 
@@ -263,6 +266,12 @@
                         <div class="input-group" style="margin: 5px 0px;">
                             <input type="text" class="form-control" name="actimg1" placeholder="Img Url"
                                 value="<%= movie.actimg1 %>">
+                            <select class="form-control" name="celebrole1">
+                                <option value="<%= movie.celebrole1 %>"><%= movie.celebrole1 && String(movie.celebrole1).trim()?movie.celebrole1: 'Role' %></option>
+                                <option value="Main Role">Main Role</option>
+                                <option value="Support Role">Support Role</option>
+                                <option value="Guest Role">Guest Role</option> 
+                            </select>
                             <input type="text" class="form-control" name="mvactorname1" placeholder="Mv Name"
                                 value="<%= movie.mvactorname1 %>">
                         </div>
@@ -272,12 +281,19 @@
                         <div class="input-group">
                             <input type="text" class="form-control" name="actid2" placeholder="ID"
                                 value="<%= movie.actid2 %>">
+                            <input type="text" class="form-control" name="celeblink2" placeholder="Celeb Link"value="<%= movie.celeblink2 %>">  
                             <input type="text" class="form-control" name="actorname2" placeholder="Name"
                                 value="<%= movie.actorname2 %>">
                         </div>
                         <div class="input-group" style="margin: 5px 0px;">
                             <input type="text" class="form-control" name="actimg2" placeholder="Img Url"
                                 value="<%= movie.actimg2 %>">
+                                <select class="form-control" name="celebrole2">
+                                    <option value="<%= movie.celebrole2 %>"><%= movie.celebrole2 && String(movie.celebrole2).trim()?movie.celebrole2: 'Role' %></option>
+                                    <option value="Main Role">Main Role</option>
+                                    <option value="Support Role">Support Role</option>
+                                    <option value="Guest Role">Guest Role</option> 
+                                </select>    
                             <input type="text" class="form-control" name="mvactorname2" placeholder="Mv Name"
                                 value="<%= movie.mvactorname2 %>">
                         </div>
@@ -287,12 +303,19 @@
                         <div class="input-group">
                             <input type="text" class="form-control" name="actid3" placeholder="ID"
                                 value="<%= movie.actid3 %>">
+                            <input type="text" class="form-control" name="celeblink3" placeholder="Celeb Link"value="<%= movie.celeblink3 %>">  
                             <input type="text" class="form-control" name="actorname3" placeholder="Name"
                                 value="<%= movie.actorname3 %>">
                         </div>
                         <div class="input-group" style="margin: 5px 0px;">
                             <input type="text" class="form-control" name="actimg3" placeholder="Img Url"
                                 value="<%= movie.actimg3 %>">
+                                <select class="form-control" name="celebrole3">
+                                    <option value="<%= movie.celebrole3 %>"><%= movie.celebrole3 && String(movie.celebrole3).trim()?movie.celebrole3: 'Role' %></option>
+                                    <option value="Main Role">Main Role</option>
+                                    <option value="Support Role">Support Role</option>
+                                    <option value="Guest Role">Guest Role</option> 
+                                </select>
                             <input type="text" class="form-control" name="mvactorname3" placeholder="Mv Name"
                                 value="<%= movie.mvactorname3 %>">
                         </div>
@@ -302,6 +325,7 @@
                         <div class="input-group">
                             <input type="text" class="form-control" name="actid4" placeholder="ID"
                                 value="<%= movie.actid4 %>">
+                            <input type="text" class="form-control" name="celeblink4" placeholder="Celeb Link"value="<%= movie.celeblink4 %>">  
                             <input type="text" class="form-control" name="actorname4" placeholder="Name"
                                 value="<%= movie.actorname4 %>">
 
@@ -309,6 +333,12 @@
                         <div class="input-group" style="margin: 5px 0px;">
                             <input type="text" class="form-control" name="actimg4" placeholder="Img Url"
                                 value="<%= movie.actimg4 %>">
+                                <select class="form-control" name="celebrole4">
+                                    <option value="<%= movie.celebrole4 %>"><%= movie.celebrole4 && String(movie.celebrole4).trim()?movie.celebrole4: 'Role' %></option>
+                                    <option value="Main Role">Main Role</option>
+                                    <option value="Support Role">Support Role</option>
+                                    <option value="Guest Role">Guest Role</option> 
+                                </select>
                             <input type="text" class="form-control" name="mvactorname4" placeholder="Mv Name"
                                 value="<%= movie.mvactorname4 %>">
                         </div>
@@ -318,6 +348,7 @@
                         <div class="input-group">
                             <input type="text" class="form-control" name="actid5" placeholder="ID"
                                 value="<%= movie.actid5 %>">
+                            <input type="text" class="form-control" name="celeblink5" placeholder="Celeb Link"value="<%= movie.celeblink5 %>">  
                             <input type="text" class="form-control" name="actorname5" placeholder="Name"
                                 value="<%= movie.actorname5 %>">
 
@@ -325,6 +356,12 @@
                         <div class="input-group" style="margin: 5px 0px;">
                             <input type="text" class="form-control" name="actimg5" placeholder="Img Url"
                                 value="<%= movie.actimg5 %>">
+                                <select class="form-control" name="celebrole5">
+                                    <option value="<%= movie.celebrole5 %>"><%= movie.celebrole5 && String(movie.celebrole5).trim()?movie.celebrole5: 'Role' %></option>
+                                    <option value="Main Role">Main Role</option>
+                                    <option value="Support Role">Support Role</option>
+                                    <option value="Guest Role">Guest Role</option> 
+                                </select>
                             <input type="text" class="form-control" name="mvactorname5" placeholder="Mv Name"
                                 value="<%= movie.mvactorname5 %>">
                         </div>
@@ -334,6 +371,7 @@
                         <div class="input-group">
                             <input type="text" class="form-control" name="actid6" placeholder="ID"
                                 value="<%= movie.actid6 %>">
+                            <input type="text" class="form-control" name="celeblink6" placeholder="Celeb Link"value="<%= movie.celeblink6 %>">  
                             <input type="text" class="form-control" name="actorname6" placeholder="Name"
                                 value="<%= movie.actorname6 %>">
 
@@ -341,6 +379,12 @@
                         <div class="input-group" style="margin: 5px 0px;">
                             <input type="text" class="form-control" name="actimg6" placeholder="Img Url"
                                 value="<%= movie.actimg6 %>">
+                                <select class="form-control" name="celebrole6">
+                                    <option value="<%= movie.celebrole6 %>"><%= movie.celebrole6 && String(movie.celebrole6).trim()?movie.celebrole6: 'Role' %></option>
+                                    <option value="Main Role">Main Role</option>
+                                    <option value="Support Role">Support Role</option>
+                                    <option value="Guest Role">Guest Role</option> 
+                                </select>
                             <input type="text" class="form-control" name="mvactorname6" placeholder="Mv Name"
                                 value="<%= movie.mvactorname6 %>">
                         </div>
@@ -351,6 +395,7 @@
                         <div class="input-group">
                             <input type="text" class="form-control" name="actid7" placeholder="ID"
                                 value="<%= movie.actid7 %>">
+                            <input type="text" class="form-control" name="celeblink7" placeholder="Celeb Link"value="<%= movie.celeblink7 %>">  
                             <input type="text" class="form-control" name="actorname7" placeholder="Name"
                                 value="<%= movie.actorname7 %>">
 
@@ -358,6 +403,12 @@
                         <div class="input-group" style="margin: 5px 0px;">
                             <input type="text" class="form-control" name="actimg7" placeholder="Img Url"
                                 value="<%= movie.actimg7 %>">
+                                <select class="form-control" name="celebrole7">
+                                    <option value="<%= movie.celebrole7 %>"><%= movie.celebrole7 && String(movie.celebrole7).trim()?movie.celebrole7: 'Role' %></option>
+                                    <option value="Main Role">Main Role</option>
+                                    <option value="Support Role">Support Role</option>
+                                    <option value="Guest Role">Guest Role</option> 
+                                </select>
                             <input type="text" class="form-control" name="mvactorname7" placeholder="Mv Name"
                                 value="<%= movie.mvactorname7 %>">
                         </div>
@@ -407,7 +458,7 @@
     let newGenre = []
     newGenre = ' <%- JSON.stringify(movie.genre) %>';
 
-    // newGenre = JSON.parse(newGenre);
+    newGenre = JSON.parse(newGenre);
     
     // Handle autocomplete
     genreInput.addEventListener('input', async () => {
@@ -441,16 +492,17 @@
       genreInput.value = '';
       suggestionsGenreDiv.innerHTML = '';
     }
-
-    // Already added tag showing
-    newGenre.forEach(async (genre) => {
-        if (!selectedGenres.includes(genre)) {
+    if(newGenre.length > 0){
+        // Already added tag showing
+        newGenre.forEach(async (genre) => {
+            if (!selectedGenres.includes(genre)) {
             selectedGenres.push(genre);
             await updateSelectedGenres(); // Call the async function
         }
         tagInput.value = '';
         suggestionsDiv.innerHTML = '';
-    });
+        });
+    }
 
     // Update the selected genres UI and hidden inputs
     function updateSelectedGenres() {
@@ -510,16 +562,18 @@
         suggestionsDiv.appendChild(suggestion);
       });
     });
+    if(newTags.length > 0){
 
-    // Already added tag showing
-    newTags.forEach(async (tag) => {
-        if (!selectedTags.includes(tag)) {
-            selectedTags.push(tag);
-            await updateSelectedTags(); // Call the async function
-        }
-        tagInput.value = '';
-        suggestionsDiv.innerHTML = '';
-    });
+        // Already added tag showing
+        newTags.forEach(async (tag) => {
+            if (!selectedTags.includes(tag)) {
+                selectedTags.push(tag);
+                await updateSelectedTags(); // Call the async function
+            }
+            tagInput.value = '';
+            suggestionsDiv.innerHTML = '';
+        });
+    }
 
 
     // Add selected tag
@@ -534,7 +588,6 @@
 
     // Update the selected tags UI and hidden inputs
     function updateSelectedTags() {
-        console.log("first",selectedTags)
       selectedTagsDiv.innerHTML = '';
       hiddenSelectedTags.innerHTML = '';
 

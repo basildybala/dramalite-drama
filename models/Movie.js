@@ -70,6 +70,13 @@ const movieSchema = mongoose.Schema(
     celeblink5:{type: String,trim: true,},
     celeblink6:{type: String,trim: true,},
     celeblink7:{type: String,trim: true,},
+    celebrole1:{type: String,trim: true,},
+    celebrole2:{type: String,trim: true,},
+    celebrole3:{type: String,trim: true,},
+    celebrole4:{type: String,trim: true,},
+    celebrole5:{type: String,trim: true,},
+    celebrole6:{type: String,trim: true,},
+    celebrole7:{type: String,trim: true,},
 
   },
   { timestamps: true }

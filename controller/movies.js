@@ -38,7 +38,8 @@ exports.addMovie = async (req, res) => {
             actid1, actid2, actid3, actid4, actid6, actid7, actorname1, actorname2, actorname3, actorname4, actorname5, actorname6,
             actorname7, mvactorname1, mvactorname2, mvactorname3, mvactorname4, mvactorname5, mvactorname6, mvactorname7,
             actimg1, actimg2, actimg3, actimg4, actimg5, actimg6, actimg7,episodes,country,episodeEndDate,celeblink1,
-            celeblink2,celeblink3,celeblink4,celeblink5,celeblink6,celeblink7 } = req.body
+            celeblink2,celeblink3,celeblink4,celeblink5,celeblink6,celeblink7,celebrole1,celebrole2,celebrole3,celebrole4,celebrole5,
+            celebrole6,celebrole7 } = req.body
         var moviePoster;
         var releaseDate;
         let dramalink;
@@ -79,7 +80,8 @@ exports.addMovie = async (req, res) => {
                 actorname7, mvactorname1, mvactorname2, mvactorname3, mvactorname4, mvactorname5, mvactorname6, mvactorname7,
                 actimg1, actimg2, actimg3, actimg4, actimg5, actimg6, actimg7, whereToWatch, moviePoster, images: movieImages,dramalink,episodes,country,
                 episodeEndDate,episodeEndDateStamp,celeblink1,
-                celeblink2,celeblink3,celeblink4,celeblink5,celeblink6,celeblink7
+                celeblink2,celeblink3,celeblink4,celeblink5,celeblink6,celeblink7,celebrole1,celebrole2,celebrole3,celebrole4,celebrole5,
+                celebrole6,celebrole7
             })
             
             let saveMovie=await movie.save()
@@ -95,7 +97,8 @@ exports.addMovie = async (req, res) => {
                 actorname7, mvactorname1, mvactorname2, mvactorname3, mvactorname4, mvactorname5, mvactorname6, mvactorname7,
                 actimg1, actimg2, actimg3, actimg4, actimg5, actimg6, actimg7, whereToWatch, moviePoster,dramalink,episodes,country,episodeEndDate,
                 episodeEndDateStamp,celeblink1,
-                celeblink2,celeblink3,celeblink4,celeblink5,celeblink6,celeblink7
+                celeblink2,celeblink3,celeblink4,celeblink5,celeblink6,celeblink7,celebrole1,celebrole2,celebrole3,celebrole4,celebrole5,
+                celebrole6,celebrole7
                 })
                 let saveMovie=await movie.save()
                 if(req.files.moviePoster[0]){
@@ -109,8 +112,9 @@ exports.addMovie = async (req, res) => {
                 actid1, actid2, actid3, actid4, actid6, actid7, actorname1, actorname2, actorname3, actorname4, actorname5, actorname6,
                 actorname7, mvactorname1, mvactorname2, mvactorname3, mvactorname4, mvactorname5, mvactorname6, mvactorname7,
                 actimg1, actimg2, actimg3, actimg4, actimg5, actimg6, actimg7, whereToWatch,dramalink,episodes,country,episodeEndDate,
-                episodeEndDateStamp,celeblink1,
-                celeblink2,celeblink3,celeblink4,celeblink5,celeblink6,celeblink7
+                episodeEndDateStamp,celeblink1,celeblink2,celeblink3,celeblink4,celeblink5,celeblink6,celeblink7,celebrole1,celebrole2,
+                celebrole3,celebrole4,celebrole5,
+                celebrole6,celebrole7
                 })
                 let saveMovie=await movie.save()
                 return res.redirect(`/drama/${saveMovie.dramalink}`)
@@ -155,7 +159,8 @@ exports.updateMovie = async (req, res) => {
             written, writtenlink, producedby, producedbylink, tags, ottName, ottImg, ottUrl, story,
             actid1, actid2, actid3, actid4, actid6, actid7, actorname1, actorname2, actorname3, actorname4, actorname5, actorname6,
             actorname7, mvactorname1, mvactorname2, mvactorname3, mvactorname4, mvactorname5, mvactorname6, mvactorname7,
-            actimg1, actimg2, actimg3, actimg4, actimg5, actimg6, actimg7, actorImages,episodes,country,episodeEndDate } = req.body
+            actimg1, actimg2, actimg3, actimg4, actimg5, actimg6, actimg7, actorImages,episodes,country,episodeEndDate,celebrole1,celebrole2,celebrole3,
+            celebrole4,celebrole5,celebrole6,celebrole7,celeblink1,celeblink2,celeblink3,celeblink4,celeblink5,celeblink6,celeblink7 } = req.body
         var moviePoster;
         var releaseDate;
         let episodeEndDateStamp;
@@ -190,7 +195,8 @@ exports.updateMovie = async (req, res) => {
                 actid1, actid2, actid3, actid4, actid6, actid7, actorname1, actorname2, actorname3, actorname4, actorname5, actorname6,
                 actorname7, mvactorname1, mvactorname2, mvactorname3, mvactorname4, mvactorname5, mvactorname6, mvactorname7,
                 actimg1, actimg2, actimg3, actimg4, actimg5, actimg6, actimg7, whereToWatch, images: movieImages,episodes,country,episodeEndDate,
-                episodeEndDateStamp
+                episodeEndDateStamp,celebrole1,celebrole2,celebrole3,celebrole4,celebrole5,
+                celebrole6,celebrole7,celeblink1,celeblink2,celeblink3,celeblink4,celeblink5,celeblink6,celeblink7
             })
             await Movie.findByIdAndUpdate(
                 movieId, {
@@ -208,7 +214,8 @@ exports.updateMovie = async (req, res) => {
                 actid1, actid2, actid3, actid4, actid6, actid7, actorname1, actorname2, actorname3, actorname4, actorname5, actorname6,
                 actorname7, mvactorname1, mvactorname2, mvactorname3, mvactorname4, mvactorname5, mvactorname6, mvactorname7,
                 actimg1, actimg2, actimg3, actimg4, actimg5, actimg6, actimg7, whereToWatch, moviePoster, images: actorImages,
-                episodes,country,episodeEndDate,episodeEndDateStamp
+                episodes,country,episodeEndDate,episodeEndDateStamp,celebrole1,celebrole2,celebrole3,celebrole4,celebrole5,
+                celebrole6,celebrole7,celeblink1,celeblink2,celeblink3,celeblink4,celeblink5,celeblink6,celeblink7
             })
             if(req.files.moviePoster[0]){
                 fileUploadToDrive(process.env.DRAMA_POSTER_DRIVE,req.files.moviePoster[0].filename,req.files.moviePoster[0].mimetype,req.files.moviePoster[0].path)
@@ -221,9 +228,9 @@ exports.updateMovie = async (req, res) => {
                 actid1, actid2, actid3, actid4, actid6, actid7, actorname1, actorname2, actorname3, actorname4, actorname5, actorname6,
                 actorname7, mvactorname1, mvactorname2, mvactorname3, mvactorname4, mvactorname5, mvactorname6, mvactorname7,
                 actimg1, actimg2, actimg3, actimg4, actimg5, actimg6, actimg7, whereToWatch, images: actorImages,
-                episodes,country,episodeEndDate,episodeEndDateStamp
+                episodes,country,episodeEndDate,episodeEndDateStamp,celebrole1,celebrole2,celebrole3,celebrole4,celebrole5,
+                celebrole6,celebrole7,celeblink1,celeblink2,celeblink3,celeblink4,celeblink5,celeblink6,celeblink7
             })
-            console.log(movie)
             return res.redirect(`/drama/${movie.dramalink}`)
         }
 
@@ -947,7 +954,7 @@ exports.getOngoingDrama = async (page = 1, limit = 15) => {
                     }
                 ]
             })
-            .select('name category moviePoster releasedate episodes dramalink') // Select specific fields
+            .select('name category moviePoster releasedate episodes dramalink genre') // Select specific fields
             .sort('-releasedate')
             .skip(skip)
             .limit(limit),
@@ -1076,7 +1083,7 @@ exports.recentlyCompletedDramas = async (page = 1, limit = 10) => {
                     }
                 ]
             })
-            .select('name category moviePoster releasedate episodes dramalink') // Select specific fields
+            .select('name category moviePoster releasedate episodes dramalink genre') // Select specific fields
             .sort('-releasedate')
             .skip(skip)
             .limit(limit),
@@ -1170,7 +1177,7 @@ exports.recentlyCompletedDramaPage= async (req,res)=>{
     try {
         let user=req.user
         let dramas=await this.recentlyCompletedDramas()
-        console.log(dramas)
+
         res.render('view-all/last-released.ejs', {
             drama: dramas.dramas,
             currentPage: dramas.page,

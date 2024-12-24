@@ -301,101 +301,97 @@
             <div class="actor-swp">
                 <% if(movie.actorname1) { %>
                 <div class="actorswp">
-                    <% if(movie.actid1) { %>
+                    <!-- <% if(movie.actid1) { %> -->
                     <a href="/celebs/<%= movie.celeblink1%>" title="{{movie.actorname1}} Page">
                         <img class="lazy-photo" data-src="/<%= movie.actimg1 %>" alt=" {{movie.actorname1}}.jpg" />
                         <h6><%= movie.actorname1 %></h6>
+                        <p><%= movie.celebrole1 %></p>
                         <p><%= movie.mvactorname1 %></p>
                     </a>
-                    <% } else{%>
+                    <!-- <% } else{%>
                         <a href="#" title="{{movie.actorname1}} Page">
                             <img class="lazy-photo" data-src="<%= movie.actimg1 %>" alt=" {{movie.actorname1}}.jpg" />
                             <h6><%= movie.actorname1 %></h6>
                             <p><%= movie.mvactorname1 %></p>
+                            <p><%= movie.celebrole1 %></p>
                         </a>
-                    <% } %>   
+                    <% } %>    -->
                 </div>
                 <% } %>
                 <% if(movie.actorname2) { %>
                     <div class="actorswp">
-                        <% if(movie.actid2) { %>
+                        <!-- <% if(movie.actid2) { %> -->
                         <a href="/celebs/<%= movie.celeblink2 %>" title="{{movie.actorname2}} Page">
                             <img class="lazy-photo" data-src="/<%= movie.actimg2 %>" alt=" {{movie.actorname2}}.jpg" />
                             <h6><%= movie.actorname2 %></h6>
+                            <p><%= movie.celebrole2 %></p>
                             <p><%= movie.mvactorname2 %></p>
                         </a>
-                        <% } else{%>
+                        <!-- <% } else{%>
                             <a href="#" title="{{movie.actorname2}} Page">
                                 <img class="lazy-photo" data-src="<%= movie.actimg2 %>" alt=" {{movie.actorname2}}.jpg" />
                                 <h6><%= movie.actorname2 %></h6>
                                 <p><%= movie.mvactorname2 %></p>
                             </a>
-                        <% } %>   
+                        <% } %>    -->
                     </div>
                 <% } %>
                 <% if(movie.actorname3) { %>
                     <div class="actorswp">
-                        <% if(movie.actid3) { %>
+                        <!-- <% if(movie.actid3) { %> -->
                         <a href="/celebs/<%= movie.celeblink3 %>" title="{{movie.actorname3}} Page">
                             <img class="lazy-photo" data-src="/<%= movie.actimg3 %>" alt=" {{movie.actorname3}}.jpg" /> 
                             <h6><%= movie.actorname3 %></h6>
+                            <p><%= movie.celebrole3 %></p>
                             <p><%= movie.mvactorname3 %></p>
                         </a>
-                        <% } else{%>
+                        <!-- <% } else{%>
                             <a href="#" title="{{movie.actorname3}} Page">
                                 <img class="lazy-photo" data-src="<%= movie.actimg3 %>" alt=" {{movie.actorname3}}.jpg" />
                                 <h6><%= movie.actorname3 %></h6>
                                 <p><%= movie.mvactorname3 %></p>
                             </a>
-                        <% } %>   
+                        <% } %>    -->
                     </div>
                     <% } %>
                 <% if(movie.actorname4) { %>
                     <div class="actorswp">
-                        <% if(movie.actid4) { %>
                         <a href="/celebs/<%= movie.celeblink4 %>" title="{{movie.actorname4}} Page">
-                            <% if(movie.actimg4) { %>
-                            <img class="lazy-photo" data-src="/<%= movie.actimg4 %>" alt=" {{movie.actorname4}}.jpg" />
-                            <% }else{ %>
-                                <img class="lazy-photo" data-src="/images/actor/id/<%= movie.actid4 %>.jpg" alt=" {{movie.actorname4}}.jpg" />
-                            <% } %>   
+                            <img class="lazy-photo" data-src="/<%= movie.actimg4 %>" alt=" {{movie.actorname4}}.jpg" /> 
                             <h6><%= movie.actorname4 %></h6>
+                            <p><%= movie.celebrole4 %></p>
                             <p><%= movie.mvactorname4 %></p>
                         </a>
-                        <% } %>
                     </div>
                 <% } %>
                 <% if(movie.actorname5) { %>
                     <div class="actorswp">
-                        <% if(movie.actid5) { %>
                         <a href="/celebs/<%= movie.celeblink5 %>" title="{{movie.actorname5}} Page">
                             <img class="lazy-photo" data-src="/<%= movie.actimg5 %>" alt=" {{movie.actorname5}}.jpg" />
                             <h6><%= movie.actorname5 %></h6>
+                            <p><%= movie.celebrole5 %></p>
                             <p><%= movie.mvactorname5 %></p>
                         </a>
-                        <% } %>
                     </div>
                 <% } %>
                 <% if(movie.actorname6) { %>
                     <div class="actorswp">
-                        <% if(movie.actid6) { %>
                         <a href="/celebs/<%= movie.celeblink6 %>" title="{{movie.actorname6}} Page">
                             <img class="lazy-photo" data-src="/<%= movie.actimg6 %>" alt=" {{movie.actorname6}}.jpg" />
                             <h6><%= movie.actorname6 %></h6>
+                            <p><%= movie.celebrole6 %></p>
                             <p><%= movie.mvactorname6 %></p>
                         </a>
-                        <% } %>
                     </div>
                 <% } %>
                 <% if(movie.actorname7) { %>
                     <div class="actorswp">
-                        <% if(movie.actid7) { %>
                         <a href="/celebs/<%= movie.celeblink7 %>" title="{{movie.actorname7}} Page">
                             <img class="lazy-photo" data-src="/<%= movie.actimg7 %>" alt=" {{movie.actorname7}}.jpg" />  
                             <h6><%= movie.actorname7 %></h6>
+                            <p><%= movie.celebrole7 %></p>
                             <p><%= movie.mvactorname7 %></p>
                         </a>
-                        <% } %>
                     </div>
                 <% } %>
             </div>
@@ -559,6 +555,7 @@
                         <% } %>
                         
                         <h2 id="drama-title"><%= truncatedName %></h2>
+                        <p><%= ongoingDrama[i].genre ? ongoingDrama[i].genre : n/a %></p>
                         <p><%= ongoingDrama[i].category %></p>
                         <p>Episodes :<%= ongoingDrama[i].episodes ? ongoingDrama[i].episodes : 0%></p>
                     </div>
@@ -628,8 +625,9 @@
                         <% } %>
                         
                         <h2 id="drama-title"><%= truncatedName %></h2>
+                        <p><%= recentlyCompletedDrama[i].genre ? recentlyCompletedDrama[i].genre : n/a %></p>
                         <p><%= recentlyCompletedDrama[i].category %></p>
-                        <p>Episodes :<%= recentlyCompletedDrama[i].episodes ? recentlyCompletedDrama[i].episodes : 0%></p>
+                        
                     </div>
                 </a>
             </div>
