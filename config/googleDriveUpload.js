@@ -28,7 +28,6 @@ async function uploadFile(authClient,folder,filename,filetype,filepath) {
             name: filename, // Name of the file in Drive
             parents: [folder], // Folder ID in Drive
         };
-        console.log('filepath',filepath)
         const media = {
             mimeType: filetype,
             body: fs.createReadStream(filepath), // Path to the local file

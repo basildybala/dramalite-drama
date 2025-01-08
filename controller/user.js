@@ -1,3 +1,4 @@
+const { fileUploadToDrive } = require("../config/googleDriveUpload")
 const User = require("../models/User")
 
 exports.myProfilePage=async (req,res)=>{
@@ -27,6 +28,7 @@ exports.editProfile=async (req,res)=>{
         var {name,instaLink,gender} =req.body
         var  userId=req.params.userId
         if(req.file){
+            fileUploadToDrive(process.env.USER_PROFILE_DRIVE,req.file.filename,req.file.mimetype,req.file.path)
             let user=await User.findByIdAndUpdate(userId,{
                 name,instaLink,gender,profilePic:'/'+req.file.path
             })

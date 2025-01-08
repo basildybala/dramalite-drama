@@ -2,5 +2,6 @@ node_modules
 package-lock.json
 public/images/movies
 public/images/actor
+public/images/user/profilePic
 .env
 googledrivekey.json

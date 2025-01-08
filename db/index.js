@@ -7,3 +7,10 @@ mongoose.connect(process.env.MONGODB)
 }).catch((err)=>{
     console.log("MongoDb Err",err)
 })
+
+// mongoose.connect(process.env.MONGODB, {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true,
+//     serverSelectionTimeoutMS: 15000, // 5 seconds
+//   });
+  
