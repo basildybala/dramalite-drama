@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const actorSchema = mongoose.Schema(
   {
-    actorname: {type: String,trim: true,},
+    actorname: {type: String,trim: true,unique:true},
     nickname: {type: String,trim: true,},
     celeblink: {type: String,trim: true,unique:true},
     language: {type: String,trim: true,},

@@ -9,10 +9,11 @@ var slugify = require('slugify');
 const { fileUploadToDrive } = require("../config/googleDriveUpload")
 const Redis = require('ioredis');
 const redis =new Redis()
+let Platform=require('../models/WhereToWatch')
 exports.addMoviePage = async (req, res) => {
     try {
         let user = req.user
-        let ott=OTT
+        let ott=await Platform.find()
         res.render('movies/add-movie.ejs', { ott,user })
     } catch (error) {
         console.log("err in add celeb page", error)
@@ -55,9 +56,15 @@ exports.addMovie = async (req, res) => {
         if(episodeEndDate.length>=9){
             episodeEndDateStamp=new Date(episodeEndDate).getTime()
         }
-        var whereToWatch = {
-            ottName: ottName, ottImg: ottImg, ottUrl: ottUrl
+
+        //Checking If Where to watch option is passing or not
+        if(ottName){
+            let platform=await Platform.findOne({name:ottName})
+            var whereToWatch = {
+                ottName: ottName, ottImg: platform.image, ottUrl: ottUrl
+            }
         }
+
         if (req.files.movieImages?.length > 0) {
             let path = "";
             req.files.movieImages.forEach(function (files, index, arr) {
@@ -131,9 +138,9 @@ exports.editMoviePage = async (req, res) => {
     try {
         let user = req.user
         let movieId = req.params.movieId
-        let ott=OTT
+        let ott=await Platform.find()
         let movie = await Movie.findById(movieId)
-        console.log(movie.tags)
+
         res.render('movies/edit-movie.ejs', { user, movie,ott })
     } catch (error) {
         console.log("err in edit movie page", error)
@@ -176,9 +183,17 @@ exports.updateMovie = async (req, res) => {
         if(episodeEndDate.length<=6){
             episodeEndDateStamp=null
         }
-        var whereToWatch = {
-            ottName: ottName, ottImg: ottImg, ottUrl: ottUrl
+
+        //Checking If Where to watch option is passing or not
+        if(ottName){
+            let platform=await Platform.findOne({name:ottName})
+            var whereToWatch = {
+                ottName: ottName, ottImg: platform.image, ottUrl: ottUrl
+            }
         }
+        // var whereToWatch = {
+        //     ottName: ottName, ottImg: ottImg, ottUrl: ottUrl
+        // }
         if (req.files.movieImages?.length > 0) {
             let path = "";
             req.files.movieImages.forEach(function (files, index, arr) {

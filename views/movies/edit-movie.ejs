@@ -224,7 +224,7 @@
                                         </option>
                                         <% } %>
                     </select>
-                    <select class="form-control" name="ottImg" style="margin: 7px 0px;">
+                    <!-- <select class="form-control" name="ottImg" style="margin: 7px 0px;">
                         <% if(movie.whereToWatch.ottImg){%>
                             <option value="<%= movie.whereToWatch.ottImg%>">
                                 <%= movie.whereToWatch.ottName%>
@@ -237,7 +237,7 @@
                                             <%= ott[i].name %>
                                         </option>
                                         <% } %>
-                    </select>
+                    </select> -->
                     <div class="input-group">
                         <input type="text" class="form-control" name="ottUrl" placeholder="OTT url"
                             value="<%= movie.whereToWatch.ottUrl %>">

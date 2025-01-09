@@ -89,7 +89,9 @@ exports.showAllPlatform = async (req, res) => {
 exports.addPlatForm=async(req,res)=>{
     try {
         let {name} = req.body
-
+        //FILE UPLOAD TO GOOGLE DRIVE
+        fileUploadToDrive(process.env.OTT_PLATFORM_DRIVE,req.file.filename,req.file.mimetype,req.file.path)
+        
         let platform=await new Platform({name,image:'/'+req.file.path})
         await platform.save()
         res.redirect('/devadmin/show-all-platform')
