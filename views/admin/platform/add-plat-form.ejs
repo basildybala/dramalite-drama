@@ -1,0 +1,33 @@
+<%- include('../../partials/admin-header'); -%>
+<title>Add Platform Data -Dramalite</title>
+
+
+<link rel="stylesheet" href="/css/auth.css">
+<title>Add PlatForm</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+crossorigin="anonymous">
+<link rel="stylesheet" href="css/auth.css">
+<script src="https://cdn.ckeditor.com/4.20.1/standard/ckeditor.js"></script>
+<div class="signup-form">
+    <form enctype="multipart/form-data" id="signup-form" action="/devadmin/add-platform" method="post">
+		<h2>Add Platform</h2>
+	<hr>
+        <div class="form-group">
+            <label for="name">Name:</label>
+			<div class="input-group">
+				<input type="text" class="form-control" name="name" placeholder="Name" >
+			</div>
+        </div>
+		<div class="form-group">
+            <label for="name">Add Picture:</label>
+			<div class="input-group">
+
+				<input type="file" class="form-control" name="platformPic" placeholder="PlatForm Pic" required>
+			</div>
+        </div>
+        <button type="submit" class="btn btn-primary blue-backgroud">Add Platform</button>
+    </form>
+</div>
+
+
+<%- include('../../partials/footer'); -%>

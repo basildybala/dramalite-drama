@@ -1,8 +1,9 @@
-const { masterPage, addMasterDataPage, addMasterData, editMasterDataPage, editMasterData, deleteMasterData } = require('../controller/admin');
+const { masterPage, addMasterDataPage, addMasterData, editMasterDataPage, editMasterData, deleteMasterData, showAllPlatform, addPlatformPage, addPlatForm, editPlatFormPage, editPlatForm, deletePlatForm } = require('../controller/admin');
 const { showAllCelebrityPage } = require('../controller/celeb');
 const { adminPage } = require('../controller/home');
 const { showAllMoviesPage } = require('../controller/movies');
 const { isUser, isAdmin, isAuth } = require('../middlewares/auth');
+const { uploadImage } = require('../middlewares/multer');
 
 const router = require('express').Router()
 
@@ -30,7 +31,17 @@ router.get('/show-all-dramas',showAllMoviesPage)
 // router.get('/show-all-celebrity',isAuth,isAdmin,showAllCelebrityPage)
 router.get('/show-all-celebrity',showAllCelebrityPage)
 
+//SHOW ALL PLATFORM  
+router.get('/show-all-platform',showAllPlatform)
 
+//ADD PLATFORM DATA
+router.get('/add-platform',addPlatformPage)
+router.post('/add-platform',uploadImage.single('platformPic'),addPlatForm)
+
+//EDIT AND DELETE PLATFORm DATA
+router.get('/edit-platform/:id',editPlatFormPage)
+router.post('/edit-platform/:id',uploadImage.single('platformPic'),editPlatForm)
+router.get('/delete-platform/:id',deletePlatForm)  
 
 
 

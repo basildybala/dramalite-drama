@@ -3,5 +3,6 @@ package-lock.json
 public/images/movies
 public/images/actor
 public/images/user/profilePic
+public/images/ott
 .env
 googledrivekey.json

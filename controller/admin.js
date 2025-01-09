@@ -1,4 +1,5 @@
 let Master=require('../models/MasterData')
+let Platform=require('../models/WhereToWatch')
 
 
 
@@ -67,6 +68,85 @@ exports.deleteMasterData=async(req,res)=>{
         let masterId=req.params.id
         await Master.findByIdAndDelete(masterId)
         res.redirect('/devadmin/show-all-master-data')
+    } catch (error) {
+        console.log("err in add celeb page", error)
+        return res.render('utils/err-handle-page', { error: { msg: "something wrong pls inform to admin", link: '/contact' } })
+    }
+}
+
+
+exports.showAllPlatform = async (req, res) => {
+    try {
+        let platform=await Platform.find()
+
+        res.render('admin/platform/show-all-platform.ejs',{platform})
+    } catch (error) {
+        console.log("err in add celeb page", error)
+        return res.render('utils/err-handle-page', { error: { msg: "something wrong pls inform to admin", link: '/contact' } })
+    }
+}
+
+exports.addPlatForm=async(req,res)=>{
+    try {
+        let {name} = req.body
+
+        let platform=await new Platform({name,image:'/'+req.file.path})
+        await platform.save()
+        res.redirect('/devadmin/show-all-platform')
+    } catch (error) {
+        console.log("err in add platform page", error)
+        return res.render('utils/err-handle-page', { error: { msg: "something wrong pls inform to admin", link: '/contact' } })
+    }
+}
+exports.addPlatformPage=(req,res)=>{
+    try {
+        
+        res.render('admin/platform/add-plat-form.ejs')
+    } catch (error) {
+        console.log("err in add celeb page", error)
+        return res.render('utils/err-handle-page', { error: { msg: "something wrong pls inform to admin", link: '/contact' } })
+    }
+}
+
+exports.editPlatFormPage=async(req,res)=>{
+    try {
+        let platformId=req.params.id
+        let platform=await Platform.findById(platformId)
+        res.render('admin/platform/edit-platform.ejs',{platform})
+    } catch (error) {
+        console.log("err in add celeb page", error)
+        return res.render('utils/err-handle-page', { error: { msg: "something wrong pls inform to admin", link: '/contact' } })
+    }
+}
+
+exports.editPlatForm=async(req,res)=>{
+    try {
+
+        let platformId=req.params.id
+        console.log(platformId)
+        let {name} = req.body
+        if(req.file){
+            console.log(req.file)
+            await Platform.findByIdAndUpdate(platformId,{
+                name,image:'/'+req.file.path
+            })
+        }else{
+            await Platform.findByIdAndUpdate(platformId,{
+                name
+            })
+        }
+        res.redirect('/devadmin/show-all-platform')
+    } catch (error) {
+        console.log("err in add celeb page", error)
+        return res.render('utils/err-handle-page', { error: { msg: "something wrong pls inform to admin", link: '/contact' } })
+    }
+}
+
+exports.deletePlatForm=async(req,res)=>{
+    try {
+        let platformId=req.params.id
+        await Platform.findByIdAndDelete(platformId)
+        res.redirect('/devadmin/show-all-platform')
     } catch (error) {
         console.log("err in add celeb page", error)
         return res.render('utils/err-handle-page', { error: { msg: "something wrong pls inform to admin", link: '/contact' } })

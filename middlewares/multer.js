@@ -25,6 +25,7 @@ const storage = multer.diskStorage({
     if(file.fieldname==='userProfilePic') return cb(null, `public/images/user/profilePic/`)
     if(file.fieldname==='actorProfilePic') return cb(null, `public/images/actor/profilePic/`)
     if(file.fieldname==='actorImages') return cb(null, `public/images/actor/images/`)
+    if(file.fieldname==='platformPic') return cb(null, `public/images/ott/`)
     return cb(null, `public/images/`)
   },
   filename: function (req, file, cb) {
