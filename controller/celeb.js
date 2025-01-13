@@ -193,7 +193,7 @@ exports.showOneCelebrity=async(req,res)=>{
             celebrity= JSON.parse(getCeleb);
         }else{
             celebrity = await Actor.findOne({ celeblink: { $regex: `^${celeblink}$`, $options: 'i' } });
-        
+            console.log(celebrity)
             // Cache the movie data with a 1-hour expiration
             await redis.set(cacheKey, JSON.stringify(celebrity), 'EX', 7200);
         }
