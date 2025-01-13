@@ -153,7 +153,7 @@
             font-size: .9rem; }
 
 
-    .profile-container .data-box {
+    /* .profile-container .data-box {
       padding: 20px;
       background-color: #FFF;
       box-shadow: 0 2px 6px 0 rgba(218, 218, 253, 0.65), 0 2px 6px 0 rgba(206, 206, 238, 0.54);
@@ -208,7 +208,7 @@
       font-size: 22px; }
     .profile-container .education-detail .resume-dat {
       text-align: center;
-      margin: auto; }
+      margin: auto; } */
     .menu{
         width: 370px;
     margin: auto;
