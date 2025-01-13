@@ -30,24 +30,24 @@ router.get('/genre-available',getTagsAndGenreData);
 
 //RENDER ADD MOVIE PAGE
 //router.get('/add-movie',isAuth,isAdmin,addMoviePage)
-router.get('/add-movie',addMoviePage)
+router.get('/add-movie',isAuth,isAdmin,addMoviePage)
 
 
 //ADD MOVIE
 // router.post('/add-movie',isAuth,isAdmin,uploadImage.fields([{ name: "moviePoster", maxCount: 1 }, { name: "movieImages", maxCount: 20 }]),addMovie)
-router.post('/add-movie',uploadImage.fields([{ name: "moviePoster", maxCount: 1 }, { name: "movieImages", maxCount: 20 }]),addMovie)
+router.post('/add-movie',isAuth,isAdmin,uploadImage.fields([{ name: "moviePoster", maxCount: 1 }, { name: "movieImages", maxCount: 20 }]),addMovie)
 
 //RENDER EDIT MOVIE PAGE
 // router.get('/edit-movie/:movieId',isAuth,isAdmin,editMoviePage)
-router.get('/edit-movie/:movieId',editMoviePage)
+router.get('/edit-movie/:movieId',isAuth,isAdmin,editMoviePage)
 
 
 //EDIT MOVIE
 // router.post('/edit-movie/:movieId',isAuth,isAdmin,uploadImage.fields([{ name: "moviePoster", maxCount: 1 }, { name: "movieImages", maxCount: 20 }]),updateMovie)
-router.post('/edit-movie/:movieId',uploadImage.fields([{ name: "moviePoster", maxCount: 1 }, { name: "movieImages", maxCount: 20 }]),updateMovie)
+router.post('/edit-movie/:movieId',isAuth,isAdmin,uploadImage.fields([{ name: "moviePoster", maxCount: 1 }, { name: "movieImages", maxCount: 20 }]),updateMovie)
 
 //DELETE Movie
-router.get('/delete-movie/:movieId',isAuth,isAdmin,deleteMovie)
+router.get('/delete-movie/:movieId',isAuth,isAdmin,isAuth,isAdmin,deleteMovie)
 
 
 

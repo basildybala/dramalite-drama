@@ -1,3 +1,4 @@
+const { fileUploadToDrive } = require('../config/googleDriveUpload')
 let Master=require('../models/MasterData')
 let Platform=require('../models/WhereToWatch')
 
@@ -7,7 +8,7 @@ let Platform=require('../models/WhereToWatch')
 exports.masterPage = async (req, res) => {
     try {
         let masterData=await Master.find()
-        console.log(masterData)
+
         res.render('admin/master-data.ejs',{masterData})
     } catch (error) {
         console.log("err in add celeb page", error)
@@ -20,15 +21,15 @@ exports.addMasterData=async(req,res)=>{
         let {name,type} = req.body
         let masterData=await new Master({name,type})
         await masterData.save()
-        res.redirect('/devadmin/show-all-master-data')
+        res.redirect('/devadmin/add-master-data')
     } catch (error) {
         console.log("err in add celeb page", error)
         return res.render('utils/err-handle-page', { error: { msg: "something wrong pls inform to admin", link: '/contact' } })
     }
 }
-exports.addMasterDataPage=(req,res)=>{
+exports.addMasterDataPage=async (req,res)=>{
     try {
-        
+
         res.render('admin/add-master-data.ejs')
     } catch (error) {
         console.log("err in add celeb page", error)
