@@ -44,7 +44,7 @@ exports.addCeleb = async (req, res) => {
                 images: actorImages, profilePic,nationality,hometown,nickname,celeblink,lover,gender
             })
             let saveActor= await actor.save()
-            return res.redirect(`/celebs/${saveActor._id}`)
+            return res.redirect(`/celebs/${saveActor.celeblink}`)
         } else {
             profilePic = req.files.actorProfilePic[0]?.path
             let actor = await new Actor({
@@ -185,9 +185,10 @@ exports.showOneCelebrity=async(req,res)=>{
         let celeblink=req.params.celeblink
         let celebrity
         // if (!isValidObjectId(celebId)) return res.render('utils/err-handle-page', { error: { msg: "something wrong pls inform to admin", link: '/contact' } })
-
+        console.log("------------------------",celeblink)
         const cacheKey = `celeb:${celeblink}`;
         const getCeleb = await redis.get(cacheKey);
+        console.log("------------------------",getCeleb)
         if (getCeleb) {
             // If found, return cached data
             celebrity= JSON.parse(getCeleb);
