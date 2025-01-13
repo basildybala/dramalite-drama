@@ -221,38 +221,44 @@ exports.forgetPasswordPage = async (req, res) => {
 
 //LINK GENERATE AND SEND TO EMAIL FOR RESET PASSWORD
 exports.forgetPassword = async (req, res) => {
-    const { email } = req.body;
+    try {
+        const { email } = req.body;
 
-    if (!email) return res.send({ complete: false, msg: "email is missing!" })
+        if (!email) return res.send({ complete: false, msg: "email is missing!" })
+    
+        const user = await User.findOne({ email });
+        if (!user) return res.send({ complete: false, msg: "user not exist!" })
+    
+        const alreadyHasToken = await PasswordResetToken.findOne({ owner: user._id });
+        if (alreadyHasToken) return res.send({ complete: false, msg: "Link already Sent Only after one hour you can request for another Link!" })
+    
+        const token = await generateRandomByte();
+        const newPasswordResetToken = await PasswordResetToken({
+            owner: user._id,
+            token,
+        });
+        await newPasswordResetToken.save();
+    
+        const resetPasswordUrl = `${process.env.WEBSITE_URL}/auth/reset-password?token=${token}&id=${user._id}`;
+    
+        const transport = generateMailTransporter();
+    
+        transport.sendMail({
+          from: "dramalitebot@gmail.com",
+          to: user.email,
+          subject: "Reset Password Link",
+          html: `
+            <p>Click here to reset password</p>
+            <a href='${resetPasswordUrl}'>Change Password</a>
+          `,
+        });
+        console.log("restet Password URL", resetPasswordUrl)
+        res.json({ complete: true, msg: "A verification link has been sent to your email." });
+    } catch (error) {
+        console.log(error)
+        return res.render('utils/err-handle-page', { error: { msg: "something wrong pls inform to admin", link: '/contact' } })
+    }
 
-    const user = await User.findOne({ email });
-    if (!user) return res.send({ complete: false, msg: "user not exist!" })
-
-    const alreadyHasToken = await PasswordResetToken.findOne({ owner: user._id });
-    if (alreadyHasToken) return res.send({ complete: false, msg: "Link already Sented Only after one hour you can request for another Link!" })
-
-    const token = await generateRandomByte();
-    const newPasswordResetToken = await PasswordResetToken({
-        owner: user._id,
-        token,
-    });
-    await newPasswordResetToken.save();
-
-    const resetPasswordUrl = `${process.env.WEBSITE_URL}/auth/reset-password?token=${token}&id=${user._id}`;
-
-    const transport = generateMailTransporter();
-
-    transport.sendMail({
-      from: "dramalitebot@gmail.com",
-      to: user.email,
-      subject: "Reset Password Link",
-      html: `
-        <p>Click here to reset password</p>
-        <a href='${resetPasswordUrl}'>Change Password</a>
-      `,
-    });
-    console.log("restet Password URL", resetPasswordUrl)
-    res.json({ complete: true, msg: "A verification link has been sent to your email." });
 };
 
 //RENDER RESET PASSWORD PAGE 
@@ -261,9 +267,9 @@ exports.renderResetPasswordPage = async (req, res) => {
         let userId = req.query.id
         let token = req.query.token
         let tokenExist = await PasswordResetToken.findOne({ owner: userId })
-        if (!tokenExist) return res.render('err-find', { error: { msg: "Link is expired pleas Reset new link", link: '/forget-password' } })
+        if (!tokenExist) return res.render('utils/err-handle-page', { error: { msg: "Link has expired pleas Reset new link", link: '/forget-password' } })
         let compaireToken = await tokenExist.compaireToken(token)
-        if (!compaireToken) return res.render('err-find', { error: { msg: "Unauthorized access, invalid request!", link: '/forget-password' } })
+        if (!compaireToken) return res.render('utils/err-handle-page', { error: { msg: "Unauthorized access, invalid request!", link: '/forget-password' } })
         res.render('auth/reset-password.ejs', { token: { userId: userId, tokenId: tokenExist._id } })
     } catch (error) {
         console.log("err in reset password page", error)
