@@ -36,7 +36,7 @@ Release Date, Episodes, Cast & Reviews"/>
 <link rel="canonical" href="https://dramalite.com/drama/<%= movie.dramalink %>"/>
 
 
-<script type="application/ld+json">
+<script type="application/ld+json" async>
     {"@context":"http://schema.org",
     "@type":"Movie",
     "url":"https://dramalite.com/drama/<%= movie.dramalink %>",
@@ -654,7 +654,7 @@ Release Date, Episodes, Cast & Reviews"/>
 
 
 
-    <script>
+    <script async>
         const movieRating = document.getElementById('movie-rating')
 
         const movieRatingValue = document.getElementById('drama-rating-value')
