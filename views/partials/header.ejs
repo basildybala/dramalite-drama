@@ -39,11 +39,19 @@
 
 
   <div class="web-nav-bar">
-    <a href="/" class="logo">
+    <% if(user){%>
+    <a href="/" class="logo" style="margin-left: -160px;">
       <img data-src="/images/logo/dramalitelogo.png" alt="Dramalite" class="lazy-photo" srcset="">
       <h2>Dramalite</h2>
       <span>.com</span>
     </a>
+    <%}else{%>
+      <a href="/" class="logo">
+        <img data-src="/images/logo/dramalitelogo.png" alt="Dramalite" class="lazy-photo" srcset="">
+        <h2>Dramalite</h2>
+        <span>.com</span>
+      </a>
+    <% }%>
     <% if(user){%>
       <div class="action">
         <div class="profile" onclick="menuToggle();">

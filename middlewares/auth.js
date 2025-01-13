@@ -49,9 +49,14 @@ exports.isUser = async (req, res, next) => {
     }
     const { userId } = decode;
     const user = await User.findById(userId);
-    if (!user) return res.render('err-find',{error:{msg:"unauthorized access!!",link:'/auth/login'}}) 
-    req.user = user;
-    next();
+    if(user){
+      req.user = user;
+      next();
+    }else{
+      req.user = null;
+      next()
+    }
+
   }else{
     req.user = null;
     next();

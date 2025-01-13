@@ -334,7 +334,6 @@ exports.getAllMovieReview = async (req, res) => {
         let movieId = req.params.movieId
         let movie=await Movie.findById(movieId)
         let review =await this.getReviews(movieId)
-        console.log(review)
         res.render('review/movie-review-all', { movie,review,user })
     } catch (error) {
         console.log("err in show all celeb Page", error)

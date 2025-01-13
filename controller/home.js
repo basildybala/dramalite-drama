@@ -34,7 +34,7 @@ exports.downloadImage=async(req,res)=>{
     try {
         let user=req.user
         let imgUrl=req.query.imgUrl
-        console.log(imgUrl)
+
         res.render('utils/one-image.ejs',{imgUrl,user})
     } catch (error) {
         console.log("err in home page", error)
@@ -361,7 +361,6 @@ exports.viewAllDrama=async(req,res)=>{
         let dramalist= req.query.dramaList
         if(dramalist==='recentlyCompleted'){
             dramas=await recentlyCompletedDramas()
-            console.log(dramas)
             res.render('view-all/view-all-dramas.ejs', {
                 drama: dramas.dramas,
                 currentPage: dramas.page,
