@@ -185,16 +185,14 @@ exports.showOneCelebrity=async(req,res)=>{
         let celeblink=req.params.celeblink
         let celebrity
         // if (!isValidObjectId(celebId)) return res.render('utils/err-handle-page', { error: { msg: "something wrong pls inform to admin", link: '/contact' } })
-        console.log("------------------------",celeblink)
         const cacheKey = `celeb:${celeblink}`;
         const getCeleb = await redis.get(cacheKey);
-        console.log("------------------------",getCeleb)
         if (getCeleb) {
             // If found, return cached data
             celebrity= JSON.parse(getCeleb);
         }else{
             celebrity = await Actor.findOne({ celeblink: { $regex: `^${celeblink}$`, $options: 'i' } });
-            console.log(celebrity)
+
             // Cache the movie data with a 1-hour expiration
             await redis.set(cacheKey, JSON.stringify(celebrity), 'EX', 7200);
         }

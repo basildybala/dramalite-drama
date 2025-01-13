@@ -50,9 +50,7 @@ exports.editMasterDataPage=async(req,res)=>{
 
 exports.editMasterData=async(req,res)=>{
     try {
-        console.log("EDIT MASTER DATA",req.body)
         let masterId=req.params.id
-        console.log(masterId)
         let {name,type} = req.body
         await Master.findByIdAndUpdate(masterId,{
             name,type
@@ -126,10 +124,9 @@ exports.editPlatForm=async(req,res)=>{
     try {
 
         let platformId=req.params.id
-        console.log(platformId)
+
         let {name} = req.body
         if(req.file){
-            console.log(req.file)
             await Platform.findByIdAndUpdate(platformId,{
                 name,image:'/'+req.file.path
             })

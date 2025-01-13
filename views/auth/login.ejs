@@ -100,7 +100,6 @@ crossorigin="anonymous">
                         window.location.replace(data.url)
 					},1500)
                  }else{
-                    console.log(data)
                     if(data.msg==="Email verification failed. Please try again."){
                         $('.msg').addClass('error').text(data.msg);
                         setTimeout(function(){

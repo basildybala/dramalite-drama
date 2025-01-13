@@ -11,16 +11,16 @@ const router = require('express').Router()
 
 
 //SAMPLE 
-router.get('/sample',(req,res)=>{
-    console.log("HAIIII")
-    res.render('movies/sample.ejs')
-})
-router.post('/submit', (req, res) => {
-    console.log(req.body)
-    const selectedTags = req.body
-    console.log(selectedTags)
-    res.json({ selectedTags }); // Send response with selected tags
-});
+// router.get('/sample',(req,res)=>{
+//     console.log("HAIIII")
+//     res.render('movies/sample.ejs')
+// })
+// router.post('/submit', (req, res) => {
+//     console.log(req.body)
+//     const selectedTags = req.body
+//     console.log(selectedTags)
+//     res.json({ selectedTags }); // Send response with selected tags
+// });
 
 //List of tags
 router.get('/tags-available',getTagsAndGenreData);

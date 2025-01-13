@@ -30,7 +30,6 @@ exports.isAuth = async (req, res, next) => {
 
 exports.isAdmin = async (req, res, next) => {
   const { user } = req;
-  console.log(user)
   if (user.role !== "admin")  return res.redirect('/auth/login')
   next();
 };
