@@ -55,7 +55,7 @@
                 let truncatedName = upcomingDramas[i]?.name.length > maxLength ? upcomingDramas[i].name.substring(0, maxLength) + "..." : upcomingDramas[i].name;
             %>
             <div class="dramas">
-                <a href="/drama/<%= ongoingDrama[i].dramalink %>">
+                <a href="/drama/<%= upcomingDramas[i].dramalink %>">
                     <div class="drama-s">
                         <% if( upcomingDramas[i].moviePoster && String(upcomingDramas[i].moviePoster).trim()) { %>
                             <img data-src="/<%= upcomingDramas[i].moviePoster %>" alt="" class="lazy-photo">
