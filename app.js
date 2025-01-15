@@ -24,7 +24,7 @@ app.use(express.urlencoded({extended:true}))
 app.use(cookieParser())
 //app.use(bodyParser)
 app.use(cors())
-app.use(morgan("dev"))
+//app.use(morgan("dev"))
 require("express-async-errors");
 app.locals.user=null
 
