@@ -10,11 +10,7 @@ const router = require('express').Router()
 
 
 
-//SAMPLE 
-router.get('/sample',(req,res)=>{
-    console.log("HAIIII")
-    res.render('movies/sample.ejs')
-})
+
 // router.post('/submit', (req, res) => {
 //     console.log(req.body)
 //     const selectedTags = req.body

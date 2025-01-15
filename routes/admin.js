@@ -7,7 +7,11 @@ const { uploadImage } = require('../middlewares/multer');
 
 const router = require('express').Router()
 
-
+//SAMPLE 
+router.get('/sample',(req,res)=>{
+    console.log("HAIIII")
+    res.render('movies/sample.ejs')
+})
 //ADMIN PAGE
 // router.get('/devadmin',isAuth,isAdmin,adminPage)
 router.get('/',isAuth,isAdmin,adminPage)
