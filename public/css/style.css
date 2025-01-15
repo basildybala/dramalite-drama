@@ -75,14 +75,16 @@ font-family: 'Varela Round', sans-serif;
  .blue-header{
     width: 100%;
     height: 35px;
-    background-color: #4fa0f7;
+    /* background-color: #4fa0f7; */
+    background-color: rgb(79, 160, 247);
     display: flex;
     justify-content: center;
     align-items: center;
  }
  .blue-header h1{
     font-size: 18px;
-    color: #fff;
+    /* color: #fff; */
+    color: rgb(255, 255, 255);
     margin: 0;
     font-family: 'Varela Round', sans-serif;
     font-weight: bold;
@@ -251,7 +253,8 @@ font-family: 'Varela Round', sans-serif;
  }
  
 .left-blue-header{
-  background-color: #4fa0f7;
+  /* background-color: #4fa0f7; */
+  background-color: rgb(79, 160, 247);
   height: 30px;
   width: 100%;
 display: flex;
@@ -261,7 +264,8 @@ display: flex;
 
 .left-blue-header h2{
   font-size: 16px;
-  color: #fff;
+  /* color: #fff; */
+  color: rgb(255, 255, 255);
   margin: 0;
   font-family: 'Varela Round', sans-serif;
   font-weight: bold;
@@ -270,7 +274,8 @@ display: flex;
 .left-blue-header a{
   margin-right: 5px;
   text-decoration: none;
-  color: #0050a7;
+  /* color: #0050a7; */
+  color: rgb(255, 255, 255);
   font-family: 'Varela Round', sans-serif;
   font-size: 14px;
 }
