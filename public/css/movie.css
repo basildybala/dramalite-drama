@@ -1,1 +1,763 @@
-.list-link a,.number h4{color:#fff;font-family:Poppins,sans-serif}.dettails-name h4,.list-link a,.number h4,.rate-d a,.rate-d p,.story-sec p{font-family:Poppins,sans-serif}.list-link,.swiper{overflow-y:hidden;display:flex}.actorswp h6,.actorswp p{text-align:center;padding:0}.drama-main{width:360px;margin:auto;border:1px solid rgba(0,0,0,.125)}.drama-poster,.list-link,.where-img{width:100%}.fst-sec{padding:10px}.drama-poster img{width:100%;object-fit:cover}.list-link::-webkit-scrollbar{display:none}.list-link{overflow:hidden;overflow-x:scroll;height:30px;align-items:center;justify-content:space-around}.list-link a{font-size:15px}.list-a{margin:5px;width:27%;height:7px;border:1px solid #007bff;background-color:#4fa0f7;display:flex;justify-content:center;align-items:center;padding:5px}.rate-section{display:flex;align-items:center;width:100%;margin:10px 0}.rate-number{width:26%}.rate-dettails{width:73%;display:flex;flex-direction:column;justify-content:center}.number{display:flex;justify-content:center;align-items:center;background-color:#007bffd9;width:80px;height:80px;box-shadow:0 1px 1px 0 rgb(0 0 0 / 25%);border-radius:7px}.number h4{font-size:28px;line-height:28px}.dislike,.new-review-user-dettails,.rate-d,.user-like{display:flex;align-items:center}.rate-d a,.rate-d p{font-size:14px;margin:0}.rate-d span{font-weight:700;font-size:16px}.story-sec p{font-size:16px;line-height:1.5;font-weight:400}.drama-dettails{display:flex;width:100%;height:35px;overflow:hidden;justify-content:center;align-items:center}.dettails-name{width:30%}.dettails{width:70%}.dettails-name h4{margin:0 0 0 5px;font-size:14px;font-weight:500}.dettails a,.dettails p{margin:0;--mdb-text-opacity:1}.dettails p{font-size:14px;font-family:Poppins,sans-serif;color:#757575!important;font-weight:400}.dettails a,.dettails-tag a{font-size:15px;font-weight:400;font-family:Poppins,sans-serif}.dettails a{color:#4e99df!important}.dettails-tag{width:70%;display:flex}.dettails-tag a{margin-right:4px;color:#0050a78a}.swiper{overflow-x:scroll}.swiper::-webkit-scrollbar{display:none}.actorswp{border:1px solid rgba(0,0,0,.14);width:95px;height:150px;overflow:hidden;margin-right:5px}.actorswp img{width:100%;height:100px;object-fit:cover}.actorswp a{text-decoration:none}.actorswp h6{margin:0;font-size:11px;font-family:Poppins,sans-serif;color:#211818;font-weight:600px}.actorswp p{margin:2px;font-size:10px;color:rgb(0 0 0 / 73%);font-family:sans-serif}.user-name a,.user-name p span{margin:0;font-weight:900}.actor-swp{display:flex;padding:6px}.review-dettails,.user-dettails,.user-name{padding:10px;display:flex}.review,.review-section{display:flex;flex-direction:column}.user-dettails{align-items:center;height:70px;border:1px solid hsla(210,8%,51%,.13);background-color:#f8f8f8;overflow:hidden}.user-pic{flex:1;height:70px;width:70px}.user-pic img{width:100%;height:70px;object-fit:cover;border-radius:500px}.user-name{flex:2;flex-direction:column;justify-content:center}.user-name a{padding:0;font-size:14px;font-family:Poppins,sans-serif;color:#00f}.user-name p,.user-name p span{font-size:10px;padding:0;font-family:Poppins,sans-serif;color:#211818}.user-name p{margin:5px 0;font-weight:400}.dislike span,.like span{font-size:14px;padding:0;font-weight:500;font-family:Poppins,sans-serif;color:#211818}.like{margin-right:7px;display:flex;align-items:center}.like span{margin:0 4px}.dislike span{margin:0}.review-dettails{height:auto}.review-text h3{margin:10px 0;font-size:16px;font-weight:700;font-family:Poppins,sans-serif;color:#211818}.new-review-text p,.review-text p{margin:0;font-size:14px;font-weight:400;font-family:lato,Helvetica,Arial,sans-serif;color:#211818;line-height:1.3rem;letter-spacing:.3px}.rating-head h4,.rating-head p,.review-rating-body h4,.review-rating-body p{font-size:12px;color:#211818;letter-spacing:.3px;font-family:lato,Helvetica,Arial,sans-serif}.review-rating{width:65px;height:75px;flex:1.5;border:1px solid rgba(0,0,0,.125)}.rating-head{border-bottom:1px solid rgba(0,0,0,.125);height:16px;display:flex;justify-content:space-evenly;align-items:center;background-color:#e9f4fb;padding:4px}.rating-head h4,.rating-head p{font-weight:600;line-height:1.3rem}.rating-body{padding:5px 10px}.drama-trailer,.whereToWatch{padding:10px;width:100%}.review-rating-body{display:flex;justify-content:space-between}.review-rating-body h4,.review-rating-body p{font-weight:500}.reivew-all{display:flex;justify-content:center;align-items:center;height:40px;border-top:1px solid hsla(210,8%,51%,.13)}.reivew-all a{font-size:15px;font-family:lato,Helvetica,Arial,sans-serif;color:#00f}.new-review-text h3,.other-sec h7,.whereToWatch a{font-family:Poppins,sans-serif}.err-msg{position:fixed;top:55px;width:100%}.other-sec{border:1px solid rgba(0,0,0,.125);width:360px;margin:10px auto}.rate-form{margin-bottom:5px;width:100%}.rate-form form{display:flex;justify-content:space-between;align-items:center}.rate-form form button{cursor:pointer;border:1px solid #007bffd9;color:#007bffd9;background-color:#fff;border-radius:8px;padding:4px 7px;-webkit-box-pack:center;justify-content:center;-webkit-box-align:center;align-items:center;display:flex;margin-left:4px;font-family:sans-serif;font-size:13px}.review-rating-section div h4,.review-rating-section div p{font-family:lato,Helvetica,Arial,sans-serif;color:#211818;line-height:1.3rem;letter-spacing:.3px}.range-input-group{display:flex;justify-content:space-around;align-items:center}#drama-rating-value{margin:0 9px}.other-sec h7{font-size:16px;margin:10px}.drama-trailer{display:flex;justify-content:center;align-items:center}.whereToWatch a{display:flex;align-items:end;font-size:16px;font-weight:500}.whereToWatch a img{width:75px;height:auto}.form-control-rate{display:block;width:49%;height:20px;font-size:1rem;line-height:1.5;color:#495057;background-color:#fff;background-clip:padding-box;border:1px solid #ced4da;border-radius:.25rem;transition:border-color .15s ease-in-out,box-shadow .15s ease-in-out}.review-swiper{padding:10px;width:100%}.review-new-section{display:flex;height:300px;border:1px solid hsla(210,8%,51%,.13);background-color:#f8f8f8;overflow:hidden;width:260px;padding:10px 15px;flex-direction:column}.new-review-user-dettails a{color:#211818}.new-review-user-pic{width:40px;height:40px}.new-review-user-pic img{object-fit:cover;width:100%;height:100%;border-radius:500px}.new-review-user-name{font-family:PingFangSC-Regular,Tahoma,Microsoft Yahei,sans-serif;margin-left:10px}.new-review-user-name a{color:#211818;text-decoration:none;font-size:14px;font-weight:600}.new-review-user-name p{margin-top:2px;color:#211818;text-decoration:none;font-size:10px}.new-review-user-name p span{font-weight:700}.new-review-dettails{display:flex;height:auto}.new-review-text h3{margin:12px 0 6px;font-size:14px;font-weight:700;color:#211818}.review-rating-section{display:flex;justify-content:space-around}.review-rating-section div h4{margin:0 3px 0 0;font-size:11px;font-weight:500}.review-rating-section div p{margin:0;font-size:10px;font-weight:700}.review-rating-section div{display:flex;margin-right:4px;flex-direction:column;justify-content:center;align-items:end}.review-rating-section div i{font-size:10px;margin-right:2px}.dislike form button,.like form button{margin-right:4px;background-color:#f8f8f8;border:#f8f8f8}.dislike form button i,.like form button i{color:#000;line-height:10px;cursor:pointer}.new-review-bottom,.new-review-header{flex:1}.new-review-middle{flex:5;overflow:hidden}@media(min-width:767px){.drama-main,.other-sec{width:650px}.user-dettails{height:135px}.user-pic img{height:100px;width:100px}.rate-form form button{width:75px;height:40px;font-size:17px}#drama-rating-value{font-size:18px}.rate-number{display:flex;justify-content:center}.actorswp{width:115px;height:210px}.actorswp img{height:150px}.image,.image a img{max-height:none}}
+.drama-main {
+    width: 360px;
+    margin: auto;
+    border: 1px solid rgba(0, 0, 0, .125);
+
+}
+
+.fst-sec {
+    padding: 10px;
+}
+
+.drama-poster {
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.drama-poster img {
+     width: 330px;
+    height: 420px;
+    max-height: 520px;
+    object-fit: cover;
+}
+
+/* .button-section {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.button-section a {
+    text-decoration: none;
+}
+
+.blue-out-line-button {
+    width: 30%;
+    color: #007bff;
+    background-color: transparent;
+    background-image: none;
+    border-color: #007bff;
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border: 1px solid #007bff;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: 0.25rem;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Varela Round', sans-serif;
+}
+
+.blue-out-line-button:hover {
+    background-color: 007bff;
+}
+
+.blue-button {
+    width: 30%;
+    color: #fff;
+    background-color: #007bff;
+    background-image: none;
+    border-color: #007bff;
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border: 1px solid #007bff;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: 0.25rem;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Varela Round', sans-serif;
+} */
+.list-link::-webkit-scrollbar {
+    display: none;
+}
+
+.list-link {
+    display: flex;
+    overflow: hidden;
+    overflow-y: hidden;
+    overflow-x: scroll;
+    /* background-color: #efefef; */
+    height: 30px;
+    /* border-color: #007bff; */
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.list-link a {
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+    color: #fff;
+}
+
+.list-a {
+    margin: 5px;
+    width: 27%;
+    height: 7px;
+    border: 1px solid #007bff;
+    background-color: #4fa0f7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+}
+
+.rate-section {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin: 10px 0px;
+}
+
+.rate-number {
+    width: 26%;
+}
+
+.rate-dettails {
+    width: 73%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.number {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #007bffd9;
+    width: 80px;
+    height: 80px;
+    box-shadow: 0 1px 1px 0 rgb(0 0 0 / 25%);
+    border-radius: 7px;
+}
+
+.number h4 {
+    color: #fff;
+    font-size: 28px;
+    line-height: 28px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.rate-d {
+    display: flex;
+    align-items: center;
+
+}
+
+.rate-d p {
+    font-size: 14px;
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+.rate-d a {
+    font-size: 14px;
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+.rate-d span {
+    font-weight: 700;
+    font-size: 16px;
+}
+
+.story-sec p {
+    font-size: 16px;
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.5;
+    font-weight: 400;
+}
+
+.drama-dettails {
+    display: flex;
+    width: 100%;
+    height: 35px;
+    overflow: hidden;
+    justify-content: center;
+    align-items: center;
+}
+
+.dettails-name {
+    width: 30%;
+}
+
+.dettails {
+    width: 70%;
+}
+
+.dettails-name h4 {
+    margin: 0;
+    margin-left: 5px;
+    font-size: 14px;
+    font-weight: 500;
+    font-family: 'Poppins', sans-serif;
+}
+
+.dettails p {
+    font-size: 14px;
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    --mdb-text-opacity: 1;
+    color: #757575 !important;
+    font-weight: 400;
+}
+.dettails a{
+    font-size: 15px;
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    --mdb-text-opacity: 1;
+    color: #4e99df !important;
+    font-weight: 400;
+}
+.dettails-tag {
+    width: 70%;
+    display: flex;
+}
+.dettails-tag a{
+    margin-right: 4px;
+    font-size: 15px;
+    font-weight: 400;
+    color: #0050a78a;
+    font-family: 'Poppins', sans-serif;
+}
+
+.swiper{
+    display: flex;
+    overflow-x: scroll;
+    overflow-y: hidden;
+}
+.swiper::-webkit-scrollbar{
+    display: none;
+}
+.actorswp{
+    border: 1px solid rgba(0,0,0,.14);
+    width: 95px;
+    height: 150px;
+    overflow: hidden;
+    margin-right: 5px;
+    
+}
+.actorswp img{
+    width: 100%;
+    height: 100px;
+    object-fit: cover;
+}
+.actorswp a{
+    text-decoration: none;
+}
+.actorswp h6{
+    margin: 0;
+    padding: 0;
+    font-size: 11px;
+    font-family: 'Poppins', sans-serif;
+    color: #211818;
+    font-weight: 600px;
+    text-align: center;
+    
+}
+.actorswp p{
+    margin: 2px;
+    padding: 0;
+    text-align: center;
+    font-size: 10px;
+    color: rgb(0 0 0 / 73%);
+    font-family: sans-serif;
+}
+.actor-swp{
+    display: flex;
+    padding: 6px;
+}
+
+/*REVIEW SECTION*/
+.review-section {
+    display: flex;
+    flex-direction: column;
+}
+
+.review {
+    display: flex;
+    flex-direction: column;
+}
+
+.user-dettails {
+    display: flex;
+    align-items: center;
+    height: 70px;
+    border: 1px solid hsla(210, 8%, 51%, .13);
+    padding: 10px;
+    background-color: #f8f8f8;
+    overflow: hidden;
+}
+
+.user-pic {
+    flex: 1;
+    height: 70px;
+    width: 70px;
+}
+
+.user-pic img {
+    width: 100%;
+    height: 70px;
+    object-fit: cover;
+    border-radius: 500px;
+}
+
+.user-name {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10px;
+}
+
+.user-name a {
+
+    margin: 0;
+    padding: 0;
+    font-size: 14px;
+    font-family: 'Poppins', sans-serif;
+    color: blue;
+    font-weight: 900;
+}
+.user-name p span{
+    font-size: 10px;
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    color: #211818;
+    font-weight: 900;
+}
+.user-name p {
+    font-size: 10px;
+    margin: 5px 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    color: #211818;
+    font-weight: 400;
+}
+.user-like {
+    display: flex;
+    align-items: center;
+}
+
+.like {
+    margin-right: 7px;
+    display: flex;
+    align-items: center;
+}
+.dislike{
+    display: flex;
+    align-items: center;
+    
+}
+.like span{
+    font-size: 14px;
+    margin: 0 4px;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    color: #211818;
+    font-weight: 500;
+}
+.dislike span{
+    margin-left: 4px;
+    font-size: 14px;
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    color: #211818;
+    font-weight: 500;
+}
+.dislike form button {
+    margin-right: 4px;
+}
+.review-dettails{
+    display: flex;
+    height: auto;
+    padding: 10px;
+}
+.review-text h3{
+    margin: 10px 0;
+    font-size: 16px;
+    font-weight: 700;
+    font-family: 'Poppins', sans-serif;
+    color: #211818;
+}
+.review-text p{
+    margin: 0;
+    font-size: 14px;
+    font-weight: 400;
+    font-family: lato,Helvetica,Arial,sans-serif;
+    color: #211818;
+    line-height: 1.3rem;
+    letter-spacing: 0.3px;
+}
+.review-rating{
+    width: 65px;
+    height: 75px;
+    flex: 1.5;
+    border: 1px solid rgba(0, 0, 0, .125);
+}
+.rating-head{
+    border-bottom: 1px solid rgba(0, 0, 0, .125);
+    height: 16px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: #e9f4fb;
+    padding: 4px;
+   
+}
+.rating-head h4{
+    font-size: 12px;
+    font-weight: 600;
+    font-family: lato,Helvetica,Arial,sans-serif;
+    color: #211818;
+    line-height: 1.3rem;
+    letter-spacing: 0.3px;
+}
+
+.rating-head p{
+    font-size: 12px;
+    font-weight: 600;
+    font-family: lato,Helvetica,Arial,sans-serif;
+    color: #211818;
+    line-height: 1.3rem;
+    letter-spacing: 0.3px;
+}
+.rating-body{
+    padding: 5px 10px;
+}
+.review-rating-body{
+    display: flex;
+    justify-content: space-between;
+}
+.review-rating-body h4{
+    font-size: 12px;
+    font-weight: 500;
+    font-family: lato,Helvetica,Arial,sans-serif;
+    color: #211818;
+    letter-spacing: 0.3px;
+}
+.review-rating-body p{
+    font-size: 12px;
+    font-weight: 500;
+    font-family: lato,Helvetica,Arial,sans-serif;
+    color: #211818;
+    letter-spacing: 0.3px;
+}
+.reivew-all{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    border-top: 1px solid hsla(210, 8%, 51%, .13);
+}
+.reivew-all a{
+    font-size: 15px;
+    font-family: lato,Helvetica,Arial,sans-serif;
+    color: blue;
+}
+.other-sec {
+    border: 1px solid rgba(0, 0, 0, .125);
+    width: 360px;
+    margin: 10px auto;
+}
+.err-msg {
+	position: fixed;
+	top: 55px;
+	width: 100%;
+}
+.other-sec {
+    border: 1px solid rgba(0, 0, 0, .125);
+    width: 360px;
+    margin: 10px auto;
+}
+/*MOVIE RATING FORM*/
+.rate-form {
+
+    margin-bottom: 5px;
+    width: 100%;
+}
+
+.rate-form form {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.rate-form form button {
+    cursor: pointer;
+    border: 1px solid #007bffd9;
+    color: #007bffd9;
+    background-color: rgb(255, 255, 255);
+    border-radius: 8px;
+    padding: 4px 7px;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+    display: flex;
+    margin-left: 4px;
+    font-family: sans-serif;
+    font-size: 13px;
+}
+
+
+.range-input-group {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#drama-rating-value {
+    margin: 0px 9px;
+}
+.other-sec h7{
+    font-size: 16px;
+    margin: 10px;
+    font-family: 'Poppins', sans-serif;
+}
+.drama-trailer{
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.whereToWatch{
+    width: 100%;
+    padding: 10px;
+}
+.where-img{
+    width: 100%;
+}
+.whereToWatch a{
+    display: flex;
+align-items: end;
+font-size: 16px;
+font-weight: 500;
+font-family:'Poppins', sans-serif; 
+}
+.whereToWatch a img{
+    width: 75px;
+    height: auto;
+}
+.form-control-rate{
+    display: block;
+    width: 49%;
+    height: 20px;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  }
+
+  .review-swiper{
+    padding: 10px;
+    width: 100%;
+}
+.review-new-section{
+    display: flex;
+    height: 300px;
+    border: 1px solid hsla(210, 8%, 51%, .13);
+    background-color: #f8f8f8;
+    overflow: hidden;
+    width: 260px;
+    padding: 10px 15px;
+    flex-direction: column;
+}
+.new-review-user-dettails{
+    display: flex;
+    align-items: center;
+}
+.new-review-user-dettails a{
+    color: #211818;
+}
+
+.new-review-user-pic{
+    width: 40px;
+    height: 40px;
+}
+.new-review-user-pic img{
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    border-radius: 500px;
+}
+.new-review-user-name{
+    font-family:PingFangSC-Regular, Tahoma, Microsoft Yahei, sans-serif;
+    margin-left: 10px;
+
+    
+}
+.new-review-user-name a{
+    color:#211818 ;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+}
+.new-review-user-name p{
+    margin-top: 2px;
+    color:#211818 ;
+    text-decoration: none;
+    font-size: 10px;
+}
+.new-review-user-name p span{
+font-weight: bold;
+}
+.new-review-dettails{
+    display: flex;
+    height: auto;
+}
+.new-review-text h3{
+    margin: 12px 0px 6px 0px;
+    font-size: 14px;
+    font-weight: 700;
+    font-family: 'Poppins', sans-serif;
+    color: #211818;
+}
+.new-review-text p{
+    margin: 0;
+    font-size: 14px;
+    font-weight: 400;
+    font-family: lato,Helvetica,Arial,sans-serif;
+    color: #211818;
+    line-height: 1.3rem;
+    letter-spacing: 0.3px;
+}
+.review-rating-section{
+    display: flex;
+    justify-content: space-around;
+}
+.review-rating-section div h4{
+    margin: 0;
+    font-size: 11px;
+    font-weight: 500;
+    font-family: lato,Helvetica,Arial,sans-serif;
+    color: #211818;
+    line-height: 1.3rem;
+    letter-spacing: 0.3px;
+    margin-right: 3px;
+}
+.review-rating-section div p{
+    margin: 0;
+    font-size: 10px;
+    font-weight: 700;
+    font-family: lato,Helvetica,Arial,sans-serif;
+    color: #211818;
+    line-height: 1.3rem;
+    letter-spacing: 0.3px;
+}
+.review-rating-section div{
+    display: flex;
+    margin-right: 4px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: end;
+}
+.review-rating-section div i{
+    font-size: 10px;
+    margin-right: 2px;
+    
+}
+.dislike form button {
+    margin-right: 4px;
+    background-color: #f8f8f8;
+    border: #f8f8f8;
+}
+.like form button {
+    margin-right: 4px;
+    background-color: #f8f8f8;
+    border: #f8f8f8;
+}
+.dislike form button i{
+    color: black;
+    line-height: 10px;
+    cursor: pointer;
+}
+.like form button i{
+    color: black;
+    line-height: 10px;
+    cursor: pointer;
+}
+.new-review-header{
+    flex: 1;
+}
+.new-review-middle{
+    flex:5;
+    overflow: hidden;
+}
+.new-review-bottom{
+    flex: 1;
+}
+
+@media(min-width: 767px) {
+    .other-sec{
+      width: 650px;
+    }
+
+    .drama-main {
+        width: 650px;
+    }
+    .user-dettails{
+        height: 135px;
+
+    }
+    .user-pic img{
+        height: 100px;
+        width: 100px;
+    }
+    .rate-form form button{
+        width: 75px;
+        height: 40px;
+        font-size: 17px;
+    }
+    #drama-rating-value{
+        font-size: 18px;
+
+    }
+    .rate-number{
+        display: flex;
+        justify-content: center;
+    }
+    .actorswp {
+        width: 115px;
+        height: 210px;
+    }
+    .actorswp img{
+        height: 150px;
+    }
+    .image{
+       max-height: none;
+    }
+    .image a img{
+        max-height: none;
+    }
+  }
