@@ -72,7 +72,8 @@
  .blue-header {
             width: 100%;
             height: 35px; /* Fixed height */
-            background-color: #4fa0f7; /* Blue color */
+            /* background-color: #4fa0f7; */
+            background-color: #0050C2; /* Blue color */
             display: flex;
             justify-content: space-between;
             align-items: center;

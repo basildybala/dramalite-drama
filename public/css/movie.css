@@ -119,7 +119,8 @@
     width: 27%;
     height: 7px;
     border: 1px solid #007bff;
-    background-color: #4fa0f7;
+    /* background-color: #4fa0f7; */
+    background-color: #0050C2;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -148,7 +149,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #007bffd9;
+    /* background-color: #007bffd9; */
+    background-color: #0050C2;
     width: 80px;
     height: 80px;
     box-shadow: 0 1px 1px 0 rgb(0 0 0 / 25%);
@@ -510,8 +512,8 @@
 }
 .rate-form form button {
     cursor: pointer;
-    border: 1px solid #007bffd9;
-    color: #007bffd9;
+    border: 1px solid #0050C2;
+    color: #0050C2;
     background-color: rgb(255, 255, 255);
     border-radius: 8px;
     padding: 4px 7px;
