@@ -1,5 +1,5 @@
 <%- include('../partials/header'); -%>
-<title>Download Image -Dramalite</title>
+<title>Download <%= name%> Image -Dramalite</title>
 <meta name="description" content="hd image download and view">
     <link rel="stylesheet" href="/css/movie.css">
 
@@ -53,7 +53,7 @@
     </style>
     <div class="other-sec">
         <div class="blue-header">
-            <h1>Image Download</h1>
+            <h1><%= name%> Image Download</h1>
         </div>
         <div class="img-download-section">
             <img data-src="/<%= imgUrl%>" alt=""

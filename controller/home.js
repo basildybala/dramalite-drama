@@ -34,8 +34,8 @@ exports.downloadImage=async(req,res)=>{
     try {
         let user=req.user
         let imgUrl=req.query.imgUrl
-
-        res.render('utils/one-image.ejs',{imgUrl,user})
+        let name=req.query.name
+        res.render('utils/one-image.ejs',{imgUrl,name,user})
     } catch (error) {
         console.log("err in home page", error)
         return res.render('utils/err-handle-page', { error: { msg: "something wrong pls inform to admin", link: '/contact' } })

@@ -232,7 +232,7 @@
                 <% var length= celebrity.images.length >6?6:celebrity.images.length %>
                 <% for(var i=0; i<length; i++){%>
             <div class="image">
-                <a href="/image/download?imgUrl=<%= celebrity.images[i] %>"><img data-src="/<%= celebrity.images[i] %>" alt="<%= celebrity.actorname %> <%= celebrity.images[i] %>" class="lazy-photo"></a>
+                <a href="/image/download?imgUrl=<%= celebrity.images[i] %>&name=<%= celebrity.actorname %>"><img data-src="/<%= celebrity.images[i] %>" alt="<%= celebrity.actorname %> <%= celebrity.images[i] %>" class="lazy-photo"></a>
             </div>
             <% } %>
             <% }else{ %>

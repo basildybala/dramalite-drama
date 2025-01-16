@@ -424,7 +424,7 @@ Release Date, Episodes, Cast & Reviews"/>
                 <% var length= movie.images.length >6?6:movie.images.length %>
             <% for(var i=0; i<length; i++){%>
             <div class="image">
-                <a href="/image/download?imgUrl=<%= movie.images[i] %>"><img data-src="/<%= movie.images[i] %>" alt="" class="lazy-photo"></a>
+                <a href="/image/download?imgUrl=<%= movie.images[i] %>&name=<%= movie.name %>"><img data-src="/<%= movie.images[i] %>" alt="" class="lazy-photo"></a>
             </div>
             <% } %>
             <% }else{ %>

@@ -1064,7 +1064,7 @@ exports.getOngoingDrama = async (page = 1, limit = 15) => {
 exports.recentlyCompletedDramas = async (page = 1, limit = 10) => {
     const dateNow = Date.now();
     const oneDayAgo = dateNow - (1 * 24 * 60 * 60 * 1000);
-    const thirtyDaysAgo = dateNow - (30 * 24 * 60 * 60 * 1000);
+    const thirtyDaysAfter = dateNow + (30 * 24 * 60 * 60 * 1000);
 
     try {
         // Construct cache key including page and limit for proper caching
@@ -1093,7 +1093,7 @@ exports.recentlyCompletedDramas = async (page = 1, limit = 10) => {
                             { episodeEndDateStamp: { $exists: false } },
                             { episodeEndDateStamp: null }
                         ],
-                        releaseDate: { $gte: thirtyDaysAgo }
+                        releaseDate: { $gte: thirtyDaysAfter }
                     }
                 ]
             })
@@ -1111,7 +1111,7 @@ exports.recentlyCompletedDramas = async (page = 1, limit = 10) => {
                             { episodeEndDateStamp: { $exists: false } },
                             { episodeEndDateStamp: null }
                         ],
-                        releaseDate: { $gte: thirtyDaysAgo }
+                        releaseDate: { $gte: thirtyDaysAfter }
                     }
                 ]
             })
