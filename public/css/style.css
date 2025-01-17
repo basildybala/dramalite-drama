@@ -327,7 +327,7 @@ hr{
 }
 .dramas{
   width: 100px;
-  height: 185px;
+  height: 174px;
   margin: 5px;
   border: 1px solid rgba(0,0,0,.14);
   overflow: hidden;
@@ -438,7 +438,7 @@ hr{
     margin-left: 4px; 
 }
 .dflexx i{
-    color: #3797ff;
+    color: #0050C2;
     font-size: larger;
     margin-right: 4px;
 }

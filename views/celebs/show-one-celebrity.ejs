@@ -84,14 +84,26 @@
                 </div>
                 <hr>
             <% } %>
-            <% if( celebrity.gender) { %>
+            
+            <div class="actor-dettails">
+                <div class="dettails-name">
+                    <h2>Occupation</h2>
+                </div>
+                <div class="dettails">
+                    <h3>
+                        <%= celebrity.occupation && String(celebrity.occupation).trim() ? celebrity.occupation : '-' %>
+                    </h3>
+                </div>
+            </div>
+            <hr>
+            <% if( celebrity.yearactive) { %>
                 <div class="actor-dettails">
                     <div class="dettails-name">
-                        <h2>Gender</h2>
+                        <h2>Year Of Active</h2>
                     </div>
                     <div class="dettails">
                         <h3>
-                            <%= celebrity.gender && String(celebrity.gender).trim() ? celebrity.gender : '-' %>
+                            <%= celebrity.yearactive && String(celebrity.yearactive).trim() ? celebrity.yearactive : '-' %>
                         </h3>
                     </div>
                 </div>
@@ -117,7 +129,21 @@
                 </div>
     
                 <hr>
-                <% } %>
+            <% } %>
+            <% if( celebrity.gender) { %>
+                <div class="actor-dettails">
+                    <div class="dettails-name">
+                        <h2>Gender</h2>
+                    </div>
+                    <div class="dettails">
+                        <h3>
+                            <%= celebrity.gender && String(celebrity.gender).trim() ? celebrity.gender : '-' %>
+                        </h3>
+                    </div>
+                </div>
+                <hr>
+            <% } %>
+
                 <% if( celebrity.nationality) { %>
                     <div class="actor-dettails">
                         <div class="dettails-name">
@@ -132,7 +158,7 @@
                     <hr>
                 <% } %>   
 
-            <div class="actor-dettails">
+            <!-- <div class="actor-dettails">
                 <div class="dettails-name">
                     <% if (String(celebrity.gender).trim() === 'Male') { %>
                         <h2>Girlfriend</h2>
@@ -147,21 +173,8 @@
                         <%= celebrity.lover && String(celebrity.lover).trim() ? celebrity.lover : '-' %>
                     </h3>
                 </div>
-            </div>
-            <hr>
+            </div> -->
 
-
-            <div class="actor-dettails">
-                <div class="dettails-name">
-                    <h2>Occupation</h2>
-                </div>
-                <div class="dettails">
-                    <h3>
-                        <%= celebrity.occupation && String(celebrity.occupation).trim() ? celebrity.occupation : '-' %>
-                    </h3>
-                </div>
-            </div>
-            <hr>
             <div class="actor-dettails">
                 <div class="dettails-name">
                     <h2>Language</h2>
@@ -173,17 +186,6 @@
                 </div>
             </div>
             <hr>
-            <% if( celebrity.hometown) { %>
-                <div class="actor-dettails">
-                    <div class="dettails-name">
-                        <h2>Home Town</h2>
-                    </div>
-                    <div class="dettails">
-                        <h3> <%- celebrity.hometown%></h3>
-                    </div>
-                </div>
-                <hr>
-            <% } %>
             <div class="about-dettails" style="flex-direction: column;">
                 <div class="dettails-name" style="margin-bottom: 2px;">
                     <h2>About</h2>
