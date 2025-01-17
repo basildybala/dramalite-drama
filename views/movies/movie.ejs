@@ -428,7 +428,7 @@ Release Date, Episodes, Cast & Reviews"/>
             </div>
             <% } %>
             <% }else{ %>
-                <p>Images not uploaded</p>
+                <h7>Images currently unavailable</h7>
             <% } %>
         </div>
     </div>
@@ -441,15 +441,16 @@ Release Date, Episodes, Cast & Reviews"/>
         <div class="whereToWatch">
             <% if(movie.whereToWatch) { %>
             <% if(movie.whereToWatch.ottName) { %>
-            <div class="where-img">
-                <a href="<%= movie.whereToWatch.ottUrl %>" >
-                    <img class="lazy-photo" data-src="<%= movie.whereToWatch.ottImg%>" alt="">
-                    <%= movie.whereToWatch.ottName%>
-                </a>
-            </div>
-            <% }else { %>
-                <h7>Not available </h7>
-            <% } %>  
+                <div class="where-img">
+                    <a href="<%= movie.whereToWatch.ottUrl %>" >
+                        <img class="lazy-photo" data-src="<%= movie.whereToWatch.ottImg%>" alt="">
+                        <%= movie.whereToWatch.ottName%>
+                    </a>
+                </div>
+            <% }%>
+                
+            <% }else {  %>  
+                <h7>Not yet scheduled </h7>
             <% } %>  
 
         </div>
