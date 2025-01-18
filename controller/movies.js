@@ -1279,7 +1279,7 @@ exports.getTagsAndGenreData=async(req,res)=>{
         let value=req.query.filter
         let masterData=await Master.find({type:value}).select('name type')
         const query = req.query.q?.toLowerCase() || '';
-        const filteredTags = masterData.filter(tag => tag.name.toLowerCase().includes(query));
+        const filteredTags = masterData.filter(tag => tag.name.toLowerCase().startsWith(query));
         res.json(filteredTags);
     } catch (error) {
         console.log("err in show all celeb Page", error)

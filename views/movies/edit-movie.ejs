@@ -111,7 +111,7 @@
             <div class="form-group">
                 <label for="name">Year:</label>
                 <div class="input-group">
-                    <input type="number" class="form-control" name="year" placeholder="Year">
+                    <input type="number" class="form-control" name="year" placeholder="Year"  value="<%= movie.year %>">
                 </div>
             </div>
 
@@ -469,7 +469,7 @@
       }
 
       // Fetch matching genres from the server
-      const response = await fetch(`/drama/genre-available?q=${query}`);
+      const response = await fetch(`/drama/genre-available?q=${query}&filter=Genre`);
       const genres = await response.json();
 
       // Populate suggestions
@@ -549,7 +549,7 @@
       }
 
       // Fetch matching tags from the server
-      const response = await fetch(`/drama/tags-available?q=${query}`);
+      const response = await fetch(`/drama/tags-available?q=${query}&filter=Tags`);
       const tags = await response.json();
 
       // Populate suggestions
