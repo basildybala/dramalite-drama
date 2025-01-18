@@ -257,8 +257,8 @@ exports.getCelebrityMoviesList = async (celeblink) => {
 exports.allCelebrityImages=async(req,res)=>{
     try {
         let user=req.user
-        let celebId=req.params.celebId
-        let celebrity=await Actor.findById(celebId)
+        let celeblink=req.params.celeblink
+        let celebrity=await Actor.findOne({celeblink:celeblink})
         res.render('celebs/all-images',{user,celebrity})
     } catch (error) {
         console.log("err in show all celeb Page", error)

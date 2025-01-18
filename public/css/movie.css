@@ -6,7 +6,7 @@
 }
 
 .fst-sec {
-    padding: 10px;
+    padding: 7px;
 }
 
 .drama-poster {
@@ -17,7 +17,7 @@
 }
 
 .drama-poster img {
-     width: 330px;
+     width: 338px;
     height: 420px;
     max-height: 520px;
     object-fit: cover;
@@ -186,6 +186,9 @@
     font-weight: 700;
     font-size: 16px;
 }
+.story-sec{
+    margin-left: 3px;
+}
 
 .story-sec p {
     font-size: 16px;
@@ -232,7 +235,7 @@
     margin: 0;
     font-family: 'Poppins', sans-serif;
     --mdb-text-opacity: 1;
-    color: #4e99df !important;
+    color: #0050C2 !important;
     font-weight: 400;
 }
 .dettails-tag {

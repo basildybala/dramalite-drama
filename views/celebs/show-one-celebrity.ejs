@@ -204,7 +204,7 @@
                 </div>
                 <div class="dettails">
                 <% if( celebrity.instalink) { %>
-                    <a href="<%= celebrity.instalink %>"><%= celebrity.instalink %></a>
+                    <a href="<%= celebrity.instalink %>"><i class="fa-brands fa-instagram"></i> <%= celebrity.instalink.substring(26) %></a>
                 <% }else { %>
                     <h3>-</h3>
                 <% }%>    
@@ -227,7 +227,7 @@
     <div class="img-sec" id="images-sec">
         <div class="left-blue-header">
             <h2>Images</h2>
-            <% if(celebrity.images.length >6) { %> <a href="/celebs/all-images/<%= celebrity._id%>">View all</a> <% } %>
+            <% if(celebrity.images.length >6) { %> <a href="/celebs/celeb-images/<%= celebrity.celeblink %>">View all</a> <% } %>
         </div>
         <div class="images">
             <% if(celebrity.images.length >0) { %>

@@ -110,8 +110,8 @@ hr {
 
 .dettails-name h2 {
     margin: 0;
-    margin-left: 5px;
-    font-size: 16px;
+    margin-left: 3px;
+    font-size: 15px;
     font-weight: 500;
     font-family: 'Poppins', sans-serif;
 }
@@ -121,7 +121,7 @@ hr {
 }
 
 .dettails h3 {
-    font-size: 16px;
+    font-size: 15px;
     margin: 0;
     font-family: 'Poppins', sans-serif;
     --mdb-text-opacity: 1;
