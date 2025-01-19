@@ -92,12 +92,28 @@ hr {
 }
 
 .about-dettails {
-    display: flex;
     width: 100%;
     height: auto;
     overflow: hidden;
-    justify-content: center;
+    /* justify-content: center; */
 
+}
+.about-dettails span{
+    font-size: 15px;
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    --mdb-text-opacity: 1;
+    color: #757575 !important;
+    font-weight: 400;
+}
+.about-dettails h2{
+    margin: 0;
+    margin-left: 3px;
+    font-size: 15px;
+    font-weight: 500;
+    font-family: 'Poppins', sans-serif;
+    display: inline-block;
+    margin-right: 54px;
 }
 
 .about-dettails .dettails {
@@ -252,5 +268,9 @@ justify-content: center;
     .movie{
         width: 100px;
     }
+    .about-dettails h2{
+        margin-right: 141px;
+    }
 
   }
+

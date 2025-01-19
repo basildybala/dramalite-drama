@@ -766,3 +766,29 @@ font-weight: bold;
         max-height: none;
     }
   }
+
+ .tags-section{
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+ } 
+ .tags-header{
+    margin-left: 5px;
+ }
+ .tags-header span{
+    font-size: 15px;
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    color: #757575  !important;
+    font-weight: 400;
+ }
+ .tags-header h4{
+    margin: 0;
+    font-size: 14px;
+    font-weight: 500;
+    font-family: 'Poppins', sans-serif;
+    margin-right: 36px;
+    display: inline-block;
+    margin-bottom: 6px;
+ }
+

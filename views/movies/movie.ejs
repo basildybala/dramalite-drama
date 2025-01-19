@@ -277,18 +277,19 @@
                         </div>
                         <hr>
                         <% } %>
-                        <!-- <% if(movie.tags.length>1) { %>
-                        <div class="drama-dettails">
-                            <div class="dettails-name">
-                                <h4>Tags</h4>
+                        <% if(movie.tags.length>1) { %>
+                            <div class="tags-section">
+                                <div class="tags-header">
+                                    <h4>Themes</h4>
+                                    <span style="margin-left: 5px;">
+                                        <% for (var i = 0; i < movie.tags.length; i++) { %>
+                                            <%= movie.tags[i] %><%= (i < movie.tags.length - 1 ? ', ' : '') %>
+                                        <% } %>
+                                    </span>
+                                </div>
                             </div>
-                            <div class="dettails-tag">
-                                <% for(var i=0; i<movie.tags.length; i++){ %>
-                                    <a href="/tags/tag= <%= movie.tags[i]%>"><%= movie.tags[i] %> </a>,
-                                <% } %>
-                            </div>
-                        </div>
-                        <% } %> -->
+                               
+                        <% } %>
                     </div>
         </div>
     </div>
