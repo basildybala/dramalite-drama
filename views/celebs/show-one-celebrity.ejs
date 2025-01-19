@@ -1,22 +1,35 @@
 <%- include('../partials/header'); -%>
 
 
-<title><%= celebrity.actorname %> - Relationship, Age, and Top TV Shows</title>
+<title><%= celebrity.actorname %>: Age,Top TV Shows and More</title>
 
-<meta name="title" content="<%= celebrity.actorname %> - Relationship, Age, and Top TV Shows"/>
-
-<meta name="description" content="<%= celebrity.biography %>">
-
-<meta property="og:site_name" content="DramaLite.Com Actor Section ">
+<meta name="title" content="<%= celebrity.actorname %>: Age, Biography, Top TV Shows and More"/>
+<meta name="description" content="Dive deep into the career of <%= celebrity.actorname %>.<%= celebrity.biography %>">
 <meta property="og:url" content="https://dramalite.com/celebs/<%= celebrity.celeblink %>">
-<meta property="og:description" content="<%= celebrity.biography %>">
-<meta property="og:type" content="video.movie">
-<meta property="og:image" content="https://dramalite.com/public/images/actor/profilePic/<%= celebrity.profilePic %>.jpg">
-
-<meta property="og:image:width" content="1920" />
-<meta property="og:image:height" content="1080" />
+<meta property="og:description" content="Dive deep into the career of <%= celebrity.actorname %>.<%= celebrity.biography %>">
+<meta property="og:image" content="/<%= celebrity.profilePic %>">
 <meta property="og:image:alt" content="<%= celebrity.actorname %>" />
-<meta property="og:image:type" content="image/jpeg" />
+<meta property="og:image:type" content="image/jpeg" /> 
+
+<script type="application/ld+json" async>
+    {
+        "@context": "https://schema.org/",
+        "@type": "Person",
+        "name": "<%= celebrity.actorname %>",
+        "image": "/<%= celebrity.profilePic %>", 
+        "birthDate": "<%- celebrity.age %>", 
+        "occupation": "<%- celebrity.occupation %>",
+        "knownFor": [
+                <% dramaList.forEach(function(drama, index) { %>
+                {
+                    "@type": "TVSeries", 
+                    "name": "<%= drama.name %>"
+                }<% if (index < dramaList.length - 1) { %>,<% } %>
+                <% }); %>
+            ],
+        "description": "<%= celebrity.biography %>" 
+    }
+</script>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
         integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">

@@ -1,37 +1,25 @@
 <%- include('../partials/header'); -%>
     <link rel="stylesheet" href="/css/movie.css">
+    
 
 
-    <title><%= movie.engname %> 
-        <% if( movie.category == 'Korean' ) { %>
-            Kdrama
-        <% }else if(movie.category == 'Chinese') { %>
-               Cdrama
-        <% }else{ %>
-        <% }%>
-        Release Date, Episodes, Cast & Reviews</title>
-<meta name="title" content="<%= movie.engname %> 
-<% if( movie.category == 'Korean' ) { %>
-    Kdrama
-<% }else if(movie.category == 'Chinese') { %>
-       Cdrama
-<% }else{ %>
-<% }%>
-Release Date, Episodes, Cast & Reviews"/>
-<meta name="description" content="<%= movie.story %> <%= movie.engname %> Dramacool ">
-<meta name="keywords" content="<%= movie.engname %>, <%= movie.engname %> <%= movie.category %>, <%= movie.engname %> <%= movie.year %>, <%= movie.engname %> drama, <%= movie.actorname1 %> <%= movie.engname %>, <%= movie.actorname1 %> <%= movie.engname %> Drama, <%= movie.engname %> Dramacool"/>
-<meta name="news_keywords" content="<%= movie.engname %>, <%= movie.engname %> <%= movie.category %> Drama, <%= movie.engname %> <%= movie.year %>, <%= movie.engname %> drama, <%= movie.actorname1 %> <%= movie.engname %>, <%= movie.actorname1 %> <%= movie.engname %> Drama, <%= movie.engname %> Dramacool"/>
-<meta property="og:title" content="<%= movie.engname %> Drama Release Date, Episodes, Cast & Reviews">
+<title><%= movie.engname %> <%= dramaTitle %>: Release Date, Episodes, Cast & Reviews</title>
+<meta name="title" content="<%= movie.engname %> <%= dramaTitle %>: Release Date, Episodes, Cast, Reviews & More  "/>
+<meta name="description" content="<%= movie.genre %> <%= movie.engname %> <%= dramaTitle %>. <%= movie.story %>">
+<meta name="keywords" content="<%= movie.engname %> Kdrama, <%= movie.engname %> <%= movie.category %>, <%= movie.engname %> Release Date, <%= movie.engname %> Episodes, <%= movie.engname %> Cast, <%= movie.engname %> Reviews, <%= movie.category %> Drama, <%= movie.dramaTitle%>, <%= movie.engname %> <%= movie.genre %>">
+
+<meta name="news_keywords" content="<%= movie.engname %> Kdrama, <%= movie.engname %> <%= movie.category %>, <%= movie.engname %> Release Date, <%= movie.engname %> Episodes, <%= movie.engname %> Cast, <%= movie.engname %> Reviews, <%= movie.category %> Drama, <%= movie.dramaTitle%>, <%= movie.engname %> <%= movie.genre %>"/>
+<meta property="og:title" content="<%= movie.engname %> <%= dramaTitle %>: Release Date, Episodes, Cast, Reviews & More ">
 <meta property="og:site_name" content="DramaLite.Com ">
-<meta property="og:url" content="https://dramalite.com/drama/<%= movie._id %>">
-<meta property="og:description" content="<%= movie.name %> <%= movie.actorname1 %> <%= movie.engname %> Drama Story: <%= movie.story %> <%= movie.engname %> Drama">
+<meta property="og:url" content="https://dramalite.com/drama/<%= movie.dramalink %>">
+<meta property="og:description" content="<%= movie.genre %> <%= movie.engname %> <%= dramaTitle %>. <%= movie.story %>">
 <meta property="og:type" content="video.movie">
-<meta property="og:image" itemid="image" content="https://dramalite.com/public/images/dramas/poster/<%= movie.moviePoster %>">
+<meta property="og:image" itemid="image" content="/<%= movie.moviePoster %>">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:site" content="Dramalite.com">
-<meta name="twitter:title" content="<%= movie.engname %> Drama Release Date, Episodes, Cast & Reviews">
-<meta name="twitter:description" content="<%= movie.name %> <%= movie.actorname1 %> <%= movie.engname %> Movie Story: <%= movie.story %> <%= movie.engname %> Drama">
-<meta name="twitter:image" content="<%= movie.name %>">
+<meta name="twitter:title" content="<%= movie.engname %> <%= dramaTitle %>: Release Date, Episodes, Cast, Reviews & More ">
+<meta name="twitter:description" content="<%= movie.genre %> <%= movie.engname %> <%= dramaTitle %>. <%= movie.story %>">
+<meta name="twitter:image" content="/<%= movie.moviePoster %>">
 <meta name="twitter:url" content="https://dramalite.com/drama/<%= movie.dramalink %>">
 <link rel="canonical" href="https://dramalite.com/drama/<%= movie.dramalink %>"/>
 
@@ -41,10 +29,10 @@ Release Date, Episodes, Cast & Reviews"/>
     "@type":"Movie",
     "url":"https://dramalite.com/drama/<%= movie.dramalink %>",
     "name":"<%= movie.name %>",
-    "image":" <%= movie.moviePoster %> %>",
+    "image":"/<%= movie.moviePoster %> %>",
     "description":"<%= movie.story %>",
-     "countryOfOrigin":{"@type":"Country","name":"India"},
-     "contentLocation":{"@type":"Place","name":"India"},
+     "countryOfOrigin":{"@type":"Country","name":"<%= movie.country %>"},
+     "contentLocation":{"@type":"Place","name":"<%= movie.country %>"},
      "alternateName":"<%= movie.engname %>",
      "genre":"<%= movie.genre %>",
      "datePublished":"<% if(movie.releasedate ){ %><%= movie.releasedate %>

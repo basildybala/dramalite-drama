@@ -9,11 +9,11 @@ const router = require('express').Router()
 
 router.get('/',isUser,homePage)
 
-//MALAYALAM MOVIES
-router.get('/malayalam-movies',isUser,malayalamMoviesPage)
+// //MALAYALAM MOVIES
+// router.get('/malayalam-movies',isUser,malayalamMoviesPage)
 
-//TAMIL MOVIES
-router.get('/tamil-movies',isUser,tamilMoviesPage)
+// //TAMIL MOVIES
+// router.get('/tamil-movies',isUser,tamilMoviesPage)
 
 //KOREAN DRAMA
 router.get('/korean-drama',isUser,koreanDramaPage)

@@ -321,7 +321,17 @@ exports.showOneMovie = async (req, res) => {
             rating = rating[0]
             rating.rating = rating.rating.toPrecision(2)
         }
-        res.render('movies/movie', { movie, rating, review, user,dateNow ,reviews,ongoingDrama,recentlyCompletedDrama,upcomingDramas})
+
+        //Handle Seo Title
+        let dramaTitle;
+        if(movie.category == 'Korean'){
+            dramaTitle='Kdrama'
+        }else if(movie.category =='Chinese'){
+            dramaTitle='Cdrama'
+        }else{
+            dramaTitle='Drama'
+        }
+        res.render('movies/movie', { movie, rating, review, user,dateNow ,reviews,ongoingDrama,recentlyCompletedDrama,upcomingDramas,dramaTitle})
     } catch (error) {
         console.log("err in MOVIE Page", error)
         return res.render('utils/err-handle-page', { error: { msg: "something wrong pls inform to admin", link: '/contact' } })
