@@ -3,8 +3,8 @@
     
 
 
-<title><%= movie.engname %> <%= dramaTitle %>: Release Date, Episodes, Cast & Reviews</title>
-<meta name="title" content="<%= movie.engname %> <%= dramaTitle %>: Release Date, Episodes, Cast, Reviews & More  "/>
+<title><%= movie.engname %> <%= dramaTitle %>: Release Date, Episodes, Cast, Reviews and More</title>
+<meta name="title" content="<%= movie.engname %> <%= dramaTitle %>: Release Date, Episodes, Cast, Reviews and More"/>
 <meta name="description" content="<%= movie.genre %> <%= movie.engname %> <%= dramaTitle %>. <%= movie.story %>">
 <meta name="keywords" content="<%= movie.engname %> Kdrama, <%= movie.engname %> <%= movie.category %>, <%= movie.engname %> Release Date, <%= movie.engname %> Episodes, <%= movie.engname %> Cast, <%= movie.engname %> Reviews, <%= movie.category %> Drama, <%= movie.dramaTitle%>, <%= movie.engname %> <%= movie.genre %>">
 
@@ -14,12 +14,12 @@
 <meta property="og:url" content="https://dramalite.com/drama/<%= movie.dramalink %>">
 <meta property="og:description" content="<%= movie.genre %> <%= movie.engname %> <%= dramaTitle %>. <%= movie.story %>">
 <meta property="og:type" content="video.movie">
-<meta property="og:image" itemid="image" content="/<%= movie.moviePoster %>">
+<meta property="og:image" itemid="image" content="https://dramalite.com/<%= movie.moviePoster %>">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:site" content="Dramalite.com">
 <meta name="twitter:title" content="<%= movie.engname %> <%= dramaTitle %>: Release Date, Episodes, Cast, Reviews & More ">
 <meta name="twitter:description" content="<%= movie.genre %> <%= movie.engname %> <%= dramaTitle %>. <%= movie.story %>">
-<meta name="twitter:image" content="/<%= movie.moviePoster %>">
+<meta name="twitter:image" content="https://dramalite.com/<%= movie.moviePoster %>">
 <meta name="twitter:url" content="https://dramalite.com/drama/<%= movie.dramalink %>">
 <link rel="canonical" href="https://dramalite.com/drama/<%= movie.dramalink %>"/>
 
@@ -29,7 +29,7 @@
     "@type":"Movie",
     "url":"https://dramalite.com/drama/<%= movie.dramalink %>",
     "name":"<%= movie.name %>",
-    "image":"/<%= movie.moviePoster %> %>",
+    "image":"https://dramalite.com//<%= movie.moviePoster %> %>",
     "description":"<%= movie.story %>",
      "countryOfOrigin":{"@type":"Country","name":"<%= movie.country %>"},
      "contentLocation":{"@type":"Place","name":"<%= movie.country %>"},

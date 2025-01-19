@@ -7,7 +7,7 @@
 <meta name="description" content="Dive deep into the career of <%= celebrity.actorname %>.<%= celebrity.biography %>">
 <meta property="og:url" content="https://dramalite.com/celebs/<%= celebrity.celeblink %>">
 <meta property="og:description" content="Dive deep into the career of <%= celebrity.actorname %>.<%= celebrity.biography %>">
-<meta property="og:image" content="/<%= celebrity.profilePic %>">
+<meta property="og:image" content="https://dramalite.com/<%= celebrity.profilePic %>">
 <meta property="og:image:alt" content="<%= celebrity.actorname %>" />
 <meta property="og:image:type" content="image/jpeg" /> 
 
@@ -16,7 +16,7 @@
         "@context": "https://schema.org/",
         "@type": "Person",
         "name": "<%= celebrity.actorname %>",
-        "image": "/<%= celebrity.profilePic %>", 
+        "image": "https://dramalite.com/<%= celebrity.profilePic %>", 
         "birthDate": "<%- celebrity.age %>", 
         "occupation": "<%- celebrity.occupation %>",
         "knownFor": [
