@@ -38,9 +38,11 @@ const storage = multer.diskStorage({
     let num = generateOTP(4);
     // Use name from req.body and append the file extension
     if (req.body.name) {
-      cb(null, `${req.body.name}-${num}${ext}`);
+      let name=slugify(req.body.name)
+      cb(null, `${name}-${num}${ext}`);
     } else if(req.body.actorname){
-      cb(null, `${req.body.actorname}-${num}${ext}`);
+      let name=slugify(req.body.actorname)
+      cb(null, `${name}-${num}${ext}`);
     }else{
       // Fallback if 'name' is not provided in body
       cb(null, `${shortid.generate()}-${Date.now()}${ext}`);

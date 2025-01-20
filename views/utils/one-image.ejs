@@ -1,6 +1,15 @@
 <%- include('../partials/header'); -%>
 <title>Download <%= name%> Image -Dramalite</title>
-<meta name="description" content="hd image download and view">
+    <!-- Primary Meta Tags -->
+    <meta name="title" content="Download <%= name%> Image -Dramalite">
+    <meta name="description" content="Download high-quality images of <%= name%>. Find the best photos of the famous actress for your projects or personal use.">
+
+    <!-- Open Graph / Facebook Meta Tags -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Download <%= name%> Image -Dramalite">
+    <meta property="og:description" content="Download high-quality images of <%= name%>. Find the best photos of the famous actress for your projects or personal use.">
+    <meta property="og:image" content="https://dramalite.com/<%= imgUrl%>">
+    <meta name="keywords" content="<%= name%>, Download Images, <%= name%> Photos, <%= name%> Pictures, Celebrity Images">
     <link rel="stylesheet" href="/css/movie.css">
 
     <style>
@@ -53,7 +62,7 @@
     </style>
     <div class="other-sec">
         <div class="blue-header">
-            <h1><%= name%> Image Download</h1>
+            <h1 style="font-size: 14px;"><%= name%> Download Image</h1>
         </div>
         <div class="img-download-section">
             <img data-src="/<%= imgUrl%>" alt=""
