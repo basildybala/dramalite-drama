@@ -569,6 +569,7 @@ font-family:'Poppins', sans-serif;
 .whereToWatch a img{
     width: 75px;
     height: auto;
+    border-radius: 25px;
 }
 .form-control-rate{
     display: block;
