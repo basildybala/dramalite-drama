@@ -56,7 +56,15 @@ exports.addMovie = async (req, res) => {
         if(episodeEndDate.length>=9){
             episodeEndDateStamp=new Date(episodeEndDate).getTime()
         }
-
+        // Process YouTube link: Convert to embed format
+        if (ytlink) {
+            const ytMatch = ytlink.match(/^https:\/\/youtu\.be\/([\w-]+)(\?.*)?$/);
+            if (ytMatch) {
+                const videoId = ytMatch[1]; // Extract video ID
+                const queryParams = ytMatch[2] || ''; // Extract query parameters if present
+                ytlink = `https://youtube.com/embed/${videoId}${queryParams}`;
+            }
+        }
         //Checking If Where to watch option is passing or not
         if(ottName){
             let platform=await Platform.findOne({name:ottName})
@@ -183,7 +191,15 @@ exports.updateMovie = async (req, res) => {
         if(episodeEndDate.length<=6){
             episodeEndDateStamp=null
         }
-
+        // Process YouTube link: Convert to embed format
+        if (ytlink) {
+            const ytMatch = ytlink.match(/^https:\/\/youtu\.be\/([\w-]+)(\?.*)?$/);
+            if (ytMatch) {
+                const videoId = ytMatch[1]; // Extract video ID
+                const queryParams = ytMatch[2] || ''; // Extract query parameters if present
+                ytlink = `https://youtube.com/embed/${videoId}${queryParams}`;
+            }
+        }
         //Checking If Where to watch option is passing or not
         if(ottName){
             let platform=await Platform.findOne({name:ottName})

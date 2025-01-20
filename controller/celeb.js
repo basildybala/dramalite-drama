@@ -25,6 +25,11 @@ exports.addCeleb = async (req, res) => {
         // generate 4 random number for link
         let num = generateOTP(4);
         celeblink = slugify(actorname)+'-'+num;
+
+        //Insta link 
+        if(instalink){
+            instalink = instalink.split('?')[0];
+        }
         if (req.files.actorImages?.length > 0) {
 
             let path = "";
@@ -77,6 +82,10 @@ exports.editCelebrity = async (req, res) => {
 
         let { actorname, language, age, yearactive, occupation, instalink, twitlink, biography,nationality,hometown,nickname,lover,gender } = req.body
         var profilePic;
+        //Insta link 
+        if(instalink){
+            instalink = instalink.split('?')[0];
+        }
         if (req.files.actorImages?.length > 0) {
             let path = "";
             req.files.actorImages.forEach(function (files, index, arr) {
