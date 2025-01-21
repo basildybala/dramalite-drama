@@ -782,6 +782,7 @@ font-weight: bold;
     font-family: 'Poppins', sans-serif;
     color: #757575  !important;
     font-weight: 400;
+    line-height: 21px;
  }
  .tags-header h4{
     margin: 0;
@@ -790,6 +791,5 @@ font-weight: bold;
     font-family: 'Poppins', sans-serif;
     margin-right: 36px;
     display: inline-block;
-    margin-bottom: 6px;
  }
 
