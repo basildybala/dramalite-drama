@@ -1,7 +1,7 @@
 <%- include('../partials/header'); -%>
 
 
-<title><%= celebrity.actorname %>: Age,Top TV Shows and More</title>
+<title><%= celebrity.actorname %>: Age, Biography,Top TV Shows and More</title>
 
 <meta name="title" content="<%= celebrity.actorname %>: Age, Biography, Top TV Shows and More"/>
 <meta name="description" content="Dive deep into the career of <%= celebrity.actorname %>.<%= celebrity.biography %>">
@@ -199,14 +199,6 @@
                 </div>
             </div>
             <hr>
-            <div class="about-dettails">
-                    <h2>About</h2>
-                    <span>
-                        <%= celebrity.biography && String(celebrity.biography).trim() ? celebrity.biography : '-' %>
-                    </span>
-            </div>
-            
-            <hr>
             <div class="actor-dettails">
                 <div class="dettails-name">
                     <h2>Instagram </h2>
@@ -219,6 +211,15 @@
                 <% }%>    
                 </div>
             </div>
+            <hr>
+            <div class="about-dettails">
+                    <h2>Biography</h2>
+                    <span>
+                        <%= celebrity.biography && String(celebrity.biography).trim() ? celebrity.biography : '-' %>
+                    </span>
+            </div>
+            
+
             
             <% if( celebrity.twitlink) { %>
             <hr>

@@ -48,16 +48,16 @@
      "ratingValue":<% if(rating.rating){ %><%= rating.rating %>
         <% }else{ %>0.0<% } %>},<% } %> 
      "actor":[
-     {"@type":"Person","name":"<%= movie.actorname1 %>","url":"/celebs/<%= movie.celeblink1 %>"}<% if(movie.actorname2){ %>,
-     {"@type":"Person","name":"<%= movie.actorname2 %>","url":"/celebs/<%= movie.celeblink2 %>"}
+     {"@type":"Person","name":"<%= movie.actorname1 %>","url":"https://dramalite.com/celebs/<%= movie.celeblink1 %>"}<% if(movie.actorname2){ %>,
+     {"@type":"Person","name":"<%= movie.actorname2 %>","url":"https://dramalite.com/celebs/<%= movie.celeblink2 %>"}
      <% } %><% if(movie.actorname3){ %> ,
-     {"@type":"Person","name":"<%= movie.actorname3 %>","url":"/celebs/<%= movie.celeblink3 %>"}
+     {"@type":"Person","name":"<%= movie.actorname3 %>","url":"https://dramalite.com/celebs/<%= movie.celeblink3 %>"}
      <% } %><% if(movie.actorname4) { %> ,
-     {"@type":"Person","name":"<%= movie.actorname4 %>","url":"/celebs/<%= movie.celeblink4 %>"}
+     {"@type":"Person","name":"<%= movie.actorname4 %>","url":"https://dramalite.com/celebs/<%= movie.celeblink4 %>"}
      <% } %><% if(movie.actorname5) { %> ,
-     {"@type":"Person","name":"<%= movie.actorname5 %>","url":"/celebs/<%= movie.celeblink5 %>"}
+     {"@type":"Person","name":"<%= movie.actorname5 %>","url":"https://dramalite.com/celebs/<%= movie.celeblink5 %>"}
      <% } %><% if(movie.actorname6) { %> ,
-     {"@type":"Person","name":"<%= movie.actorname6 %>","url":"/celebs/<%= movie.celeblink6 %>""}
+     {"@type":"Person","name":"<%= movie.actorname6 %>","url":"https://dramalite.com/celebs/<%= movie.celeblink6 %>""}
      <% } %>  
      ]}
     </script>

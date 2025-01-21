@@ -113,7 +113,7 @@ hr {
     font-weight: 500;
     font-family: 'Poppins', sans-serif;
     display: inline-block;
-    margin-right: 54px;
+    margin-right: 27px;
 }
 
 .about-dettails .dettails {
@@ -247,7 +247,6 @@ justify-content: center;
 }
 .actor-dettails a{
     text-decoration: none;
-    margin-left: -21px;
     color: #0050C2; 
     font-family: 'Poppins', sans-serif;
 }
