@@ -1,36 +1,38 @@
 <%- include('../partials/header'); -%>
     <link rel="stylesheet" href="/css/movie.css">
+    
 
 
-    <title><%= movie.engname %> Movie Cast, Story, Review, Photos, Videos,OTT Watch</title>
-<meta name="title" content="<%= movie.engname %> Movie Cast, Story, Review, Photos, Videos,OTT Watch"/>
-<meta name="description" content="<%= movie.story %> <%= movie.engname %> Ott Release Date Movie ">
-<meta name="keywords" content="<%= movie.engname %>, <%= movie.engname %> <%= movie.category %>Movie, <%= movie.engname %> <%= movie.year %>, <%= movie.engname %> movie, <%= movie.actorname1 %> <%= movie.engname %>, <%= movie.actorname1 %> <%= movie.engname %> Movie, <%= movie.engname %> Download"/>
-<meta name="news_keywords" content="<%= movie.engname %>, <%= movie.engname %> <%= movie.category %> Movie, <%= movie.engname %> <%= movie.year %>, <%= movie.engname %> movie, <%= movie.actorname1 %> <%= movie.engname %>, <%= movie.actorname1 %> <%= movie.engname %> Movie, <%= movie.engname %> Download"/>
-<meta property="og:title" content="<%= movie.engname %> Movie Cast, Story, Review, Photos, Videos, Watch">
+<title><%= movie.engname %> <%= dramaTitle %>: Release Date, Episodes, Cast, Reviews and More</title>
+<meta name="title" content="<%= movie.engname %> <%= dramaTitle %>: Release Date, Episodes, Cast, Reviews and More"/>
+<meta name="description" content="<%= movie.genre %> <%= movie.engname %> <%= dramaTitle %>. <%= movie.story %>">
+<meta name="keywords" content="<%= movie.engname %> Kdrama, <%= movie.engname %> <%= movie.category %>, <%= movie.engname %> Release Date, <%= movie.engname %> Episodes, <%= movie.engname %> Cast, <%= movie.engname %> Reviews, <%= movie.category %> Drama, <%= movie.dramaTitle%>, <%= movie.engname %> <%= movie.genre %>">
+
+<meta name="news_keywords" content="<%= movie.engname %> Kdrama, <%= movie.engname %> <%= movie.category %>, <%= movie.engname %> Release Date, <%= movie.engname %> Episodes, <%= movie.engname %> Cast, <%= movie.engname %> Reviews, <%= movie.category %> Drama, <%= movie.dramaTitle%>, <%= movie.engname %> <%= movie.genre %>"/>
+<meta property="og:title" content="<%= movie.engname %> <%= dramaTitle %>: Release Date, Episodes, Cast, Reviews & More ">
 <meta property="og:site_name" content="DramaLite.Com ">
-<meta property="og:url" content="https://dramalite.com/drama/<%= movie._id %>">
-<meta property="og:description" content="<%= movie.name %> <%= movie.actorname1 %> <%= movie.engname %> Movie Story: <%= movie.story %> <%= movie.engname %> Movie">
+<meta property="og:url" content="https://dramalite.com/drama/<%= movie.dramalink %>">
+<meta property="og:description" content="<%= movie.genre %> <%= movie.engname %> <%= dramaTitle %>. <%= movie.story %>">
 <meta property="og:type" content="video.movie">
-<meta property="og:image" itemid="image" content="https://dramalite.com/public/images/dramas/poster/<%= movie.moviePoster %>">
+<meta property="og:image" itemid="image" content="https://dramalite.com/<%= movie.moviePoster %>">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:site" content="Dramalite.com">
-<meta name="twitter:title" content="<%= movie.engname %> Movie Cast, Story, Review, Photos, Videos, Watch">
-<meta name="twitter:description" content="<%= movie.name %> <%= movie.actorname1 %> <%= movie.engname %> Movie Story: <%= movie.story %> <%= movie.engname %> Movie">
-<meta name="twitter:image" content="<%= movie.name %>">
-<meta name="twitter:url" content="https://dramalite.com/drama/<%= movie._id %>">
-<link rel="canonical" href="https://dramalite.com/drama/<%= movie._id %>"/>
+<meta name="twitter:title" content="<%= movie.engname %> <%= dramaTitle %>: Release Date, Episodes, Cast, Reviews & More ">
+<meta name="twitter:description" content="<%= movie.genre %> <%= movie.engname %> <%= dramaTitle %>. <%= movie.story %>">
+<meta name="twitter:image" content="https://dramalite.com/<%= movie.moviePoster %>">
+<meta name="twitter:url" content="https://dramalite.com/drama/<%= movie.dramalink %>">
+<link rel="canonical" href="https://dramalite.com/drama/<%= movie.dramalink %>"/>
 
 
-<script type="application/ld+json">
+<script type="application/ld+json" async>
     {"@context":"http://schema.org",
     "@type":"Movie",
-    "url":"https://dramalite.com/drama/<%= movie._id %>",
+    "url":"https://dramalite.com/drama/<%= movie.dramalink %>",
     "name":"<%= movie.name %>",
-    "image":" <% if(movie.moviePoster ) { %>/<%= movie.moviePoster %><% }else { %>/images/movies/id/<%= movie._id  %>.jpg<% } %>",
+    "image":"https://dramalite.com//<%= movie.moviePoster %> %>",
     "description":"<%= movie.story %>",
-     "countryOfOrigin":{"@type":"Country","name":"India"},
-     "contentLocation":{"@type":"Place","name":"India"},
+     "countryOfOrigin":{"@type":"Country","name":"<%= movie.country %>"},
+     "contentLocation":{"@type":"Place","name":"<%= movie.country %>"},
      "alternateName":"<%= movie.engname %>",
      "genre":"<%= movie.genre %>",
      "datePublished":"<% if(movie.releasedate ){ %><%= movie.releasedate %>
@@ -46,16 +48,16 @@
      "ratingValue":<% if(rating.rating){ %><%= rating.rating %>
         <% }else{ %>0.0<% } %>},<% } %> 
      "actor":[
-     {"@type":"Person","name":"<%= movie.actorname1 %>","url":"/celebs/<%= movie.actid1 %>"}<% if(movie.actorname2){ %>,
-     {"@type":"Person","name":"<%= movie.actorname2 %>","url":"/celebs/<%= movie.actid2 %>"}
+     {"@type":"Person","name":"<%= movie.actorname1 %>","url":"https://dramalite.com/celebs/<%= movie.celeblink1 %>"}<% if(movie.actorname2){ %>,
+     {"@type":"Person","name":"<%= movie.actorname2 %>","url":"https://dramalite.com/celebs/<%= movie.celeblink2 %>"}
      <% } %><% if(movie.actorname3){ %> ,
-     {"@type":"Person","name":"<%= movie.actorname3 %>","url":"/celebs/<%= movie.actid3 %>"}
+     {"@type":"Person","name":"<%= movie.actorname3 %>","url":"https://dramalite.com/celebs/<%= movie.celeblink3 %>"}
      <% } %><% if(movie.actorname4) { %> ,
-     {"@type":"Person","name":"<%= movie.actorname4 %>","url":"/celebs/<%= movie.actid4 %>"}
+     {"@type":"Person","name":"<%= movie.actorname4 %>","url":"https://dramalite.com/celebs/<%= movie.celeblink4 %>"}
      <% } %><% if(movie.actorname5) { %> ,
-     {"@type":"Person","name":"<%= movie.actorname5 %>","url":"/celebs/<%= movie.actid5 %>"}
+     {"@type":"Person","name":"<%= movie.actorname5 %>","url":"https://dramalite.com/celebs/<%= movie.celeblink5 %>"}
      <% } %><% if(movie.actorname6) { %> ,
-     {"@type":"Person","name":"<%= movie.actorname6 %>","url":"/celebs/<%= movie.actid6 %>""}
+     {"@type":"Person","name":"<%= movie.actorname6 %>","url":"https://dramalite.com/celebs/<%= movie.celeblink6 %>""}
      <% } %>  
      ]}
     </script>
@@ -63,19 +65,18 @@
     <div class="err-msg">
         <div class="msg "></div>
     </div>
-    <div class="movie-main">
+    <div class="drama-main">
         <div class="blue-header">
             <h1>
                 <%= movie.name %>
             </h1>
         </div>
         <div class="fst-sec">
-            <div class="movie-poster">
-                <% if(movie.moviePoster ) { %>
+            <div class="drama-poster">
+                <% if( movie.moviePoster && String(movie.moviePoster).trim()) { %>
                     <img data-src="/<%= movie.moviePoster %>" alt=" <%= movie.name %> Poster" class="lazy-photo">
-                    <% }else { %>
-                        <img data-src="/images/movies/id/<%= movie._id  %>.jpg" alt=" <%= movie.name %> Poster"
-                            class="lazy-photo">
+                <% }else { %>
+                        <img data-src="/images/other/poster-not-available.jpg" alt=" <%= movie.name %> Poster" class="lazy-photo">
                 <% } %>
             </div>
             <% if(movie.releaseDate < dateNow){%>
@@ -96,10 +97,10 @@
                     </div>
                     <div class="rate-dettails">
                         <div class="rate-form">
-                            <form id="movie-rating-form" action="" method="post">
-                                <input id="movie-rating" type="range" min="5" max="10" step="0.5" class="form-control-rate"
+                            <form id="drama-rating-form" action="" method="post">
+                                <input id="movie-rating" type="range" min="1" max="10" step="0.5" class="form-control-rate"
                                     name="ratingValue" required="required">
-                                <div id="movie-rating-value" class="value">
+                                <div id="drama-rating-value" class="value">
                                     100
                                 </div>
                                 <input type="text" name="movieId" value="<%= movie._id%>" hidden>
@@ -135,13 +136,6 @@
                     <div class="story-sec">
                         <p>
                             <%- movie.story %>
-                                <% if(movie.readmorestory ) { %>
-                                    <%= movie.readmorestory %>
-                                        <% } %>
-
-                                            <% if(movie.storyenglish ) { %>
-                                                <%= movie.storyenglish %>
-                                                    <% } %>
                         </p>
 
                     </div>
@@ -149,9 +143,9 @@
                     <hr>
 
                     <div class="dettails-section">
-                        <div class="movie-dettails">
+                        <div class="drama-dettails">
                             <div class="dettails-name">
-                                <h4>Movie Name</h4>
+                                <h4>Drama Name</h4>
                             </div>
                             <div class="dettails">
                                 <p>
@@ -160,8 +154,16 @@
                             </div>
                         </div>
                         <hr>
-
-                        <div class="movie-dettails">
+                        <div class="drama-dettails">
+                            <div class="dettails-name">
+                                <h4>Genres</h4>
+                            </div>
+                            <div class="dettails">
+                                <p><%= movie.genre && String(movie.genre).trim() ? movie.genre : '-' %></p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="drama-dettails">
                             <div class="dettails-name">
                                 <h4>Language</h4>
                             </div>
@@ -172,7 +174,7 @@
                             </div>
                         </div>
                         <hr>
-                        <div class="movie-dettails">
+                        <div class="drama-dettails">
                             <div class="dettails-name">
                                 <h4>Release Date</h4>
                             </div>
@@ -187,31 +189,45 @@
                             </div>
                         </div>
                         <hr>
-                        <% if(movie.ottreleasedate ) { %>
-                        <div class="movie-dettails">
+                        <div class="drama-dettails">
                             <div class="dettails-name">
-                                <h4>OTT Date</h4>
+                                <h4>Episodes End</h4>
                             </div>
                             <div class="dettails">
-                                    <p>
-                                        <%= movie.ottreleasedate %>
-                                    </p> 
+                                    <% if(movie.episodeEndDate ) { %>
+                                        <p>
+                                            <%= movie.episodeEndDate %>
+                                        </p>
+                                    <% }else{ %>
+                                        <p>Date not Confirmed</p>      
+                                    <% } %>                                     
                           
                             </div>
                         </div>
                         <hr>
-                        <% } %>
-                        <div class="movie-dettails">
+                        <div class="drama-dettails">
                             <div class="dettails-name">
-                                <h4>Genres</h4>
+                                <h4>Episodes</h4>
                             </div>
                             <div class="dettails">
-                                <p><%= movie.genre %></p>
+                                <p><%= movie.episodes && String(movie.episodes).trim() ? movie.episodes : '-' %></p>
                             </div>
                         </div>
                         <hr>
+                        <% if(movie.duration) { %>
+                        <div class="drama-dettails">
+                            <div class="dettails-name">
+                                <h4>Duration</h4>
+                            </div>
+                            <div class="dettails">
+                                <p><%= movie.duration %></p>
+                            </div>
+                        </div>
+                        <hr>
+                        <% } %>
+                        
                         <% if(movie.director) { %>
-                        <div class="movie-dettails">
+                        <div class="drama-dettails">
                             <div class="dettails-name">
                                 <h4>Director</h4>
                             </div>
@@ -228,7 +244,7 @@
                         <hr>
                         <% } %>
                         <% if(movie.written) { %>
-                        <div class="movie-dettails">
+                        <div class="drama-dettails">
                             <div class="dettails-name">
                                 <h4>Writer</h4>
                             </div>
@@ -245,7 +261,7 @@
                         <hr>
                         <% } %>
                         <% if(movie.producedby) { %>
-                        <div class="movie-dettails">
+                        <div class="drama-dettails">
                             <div class="dettails-name">
                                 <h4>Producer</h4>
                             </div>
@@ -261,28 +277,18 @@
                         </div>
                         <hr>
                         <% } %>
-                        <% if(movie.duration) { %>
-                        <div class="movie-dettails">
-                            <div class="dettails-name">
-                                <h4>Duration</h4>
-                            </div>
-                            <div class="dettails">
-                                <p><%= movie.duration %></p>
-                            </div>
-                        </div>
-                        <hr>
-                        <% } %>
                         <% if(movie.tags.length>1) { %>
-                        <div class="movie-dettails">
-                            <div class="dettails-name">
-                                <h4>Tags</h4>
+                            <div class="tags-section">
+                                <div class="tags-header">
+                                    <h4>Themes</h4>
+                                    <span style="margin-left: 5px;">
+                                        <% for (var i = 0; i < movie.tags.length; i++) { %>
+                                            <%= movie.tags[i] %><%= (i < movie.tags.length - 1 ? ', ' : '') %>
+                                        <% } %>
+                                    </span>
+                                </div>
                             </div>
-                            <div class="dettails-tag">
-                                <% for(var i=0; i<movie.tags.length; i++){ %>
-                                    <a href="/tags/tag= <%= movie.tags[i]%>"><%= movie.tags[i] %> </a>,
-                                <% } %>
-                            </div>
-                        </div>
+                               
                         <% } %>
                     </div>
         </div>
@@ -298,125 +304,97 @@
             <div class="actor-swp">
                 <% if(movie.actorname1) { %>
                 <div class="actorswp">
-                    <% if(movie.actid1) { %>
-                    <a href="/celebs/<%= movie.actid1 %>" title="{{movie.actorname1}} Page">
-                        <% if(movie.actimg1) { %>
+                    <!-- <% if(movie.actid1) { %> -->
+                    <a href="/celebs/<%= movie.celeblink1%>" title="{{movie.actorname1}} Page">
                         <img class="lazy-photo" data-src="/<%= movie.actimg1 %>" alt=" {{movie.actorname1}}.jpg" />
-                        <% }else{ %>
-                            <img class="lazy-photo" data-src="/images/actor/id/<%= movie.actid1 %>.jpg" alt=" {{movie.actorname1}}.jpg" />
-                        <% } %>   
                         <h6><%= movie.actorname1 %></h6>
+                        <p><%= movie.celebrole1 %></p>
                         <p><%= movie.mvactorname1 %></p>
                     </a>
-                    <% } else{%>
+                    <!-- <% } else{%>
                         <a href="#" title="{{movie.actorname1}} Page">
                             <img class="lazy-photo" data-src="<%= movie.actimg1 %>" alt=" {{movie.actorname1}}.jpg" />
                             <h6><%= movie.actorname1 %></h6>
                             <p><%= movie.mvactorname1 %></p>
+                            <p><%= movie.celebrole1 %></p>
                         </a>
-                    <% } %>   
+                    <% } %>    -->
                 </div>
                 <% } %>
                 <% if(movie.actorname2) { %>
                     <div class="actorswp">
-                        <% if(movie.actid2) { %>
-                        <a href="/celebs/<%= movie.actid2 %>" title="{{movie.actorname2}} Page">
-                            <% if(movie.actimg2) { %>
+                        <!-- <% if(movie.actid2) { %> -->
+                        <a href="/celebs/<%= movie.celeblink2 %>" title="{{movie.actorname2}} Page">
                             <img class="lazy-photo" data-src="/<%= movie.actimg2 %>" alt=" {{movie.actorname2}}.jpg" />
-                            <% }else{ %>
-                                <img class="lazy-photo" data-src="/images/actor/id/<%= movie.actid2 %>.jpg" alt=" {{movie.actorname2}}.jpg" />
-                            <% } %>   
                             <h6><%= movie.actorname2 %></h6>
+                            <p><%= movie.celebrole2 %></p>
                             <p><%= movie.mvactorname2 %></p>
                         </a>
-                        <% } else{%>
+                        <!-- <% } else{%>
                             <a href="#" title="{{movie.actorname2}} Page">
                                 <img class="lazy-photo" data-src="<%= movie.actimg2 %>" alt=" {{movie.actorname2}}.jpg" />
                                 <h6><%= movie.actorname2 %></h6>
                                 <p><%= movie.mvactorname2 %></p>
                             </a>
-                        <% } %>   
+                        <% } %>    -->
                     </div>
                 <% } %>
                 <% if(movie.actorname3) { %>
                     <div class="actorswp">
-                        <% if(movie.actid3) { %>
-                        <a href="/celebs/<%= movie.actid3 %>" title="{{movie.actorname3}} Page">
-                            <% if(movie.actimg3) { %>
-                            <img class="lazy-photo" data-src="/<%= movie.actimg3 %>" alt=" {{movie.actorname3}}.jpg" />
-                            <% }else{ %>
-                                <img class="lazy-photo" data-src="/images/actor/id/<%= movie.actid3 %>.jpg" alt=" {{movie.actorname3}}.jpg" />
-                            <% } %>   
+                        <!-- <% if(movie.actid3) { %> -->
+                        <a href="/celebs/<%= movie.celeblink3 %>" title="{{movie.actorname3}} Page">
+                            <img class="lazy-photo" data-src="/<%= movie.actimg3 %>" alt=" {{movie.actorname3}}.jpg" /> 
                             <h6><%= movie.actorname3 %></h6>
+                            <p><%= movie.celebrole3 %></p>
                             <p><%= movie.mvactorname3 %></p>
                         </a>
-                        <% } else{%>
+                        <!-- <% } else{%>
                             <a href="#" title="{{movie.actorname3}} Page">
                                 <img class="lazy-photo" data-src="<%= movie.actimg3 %>" alt=" {{movie.actorname3}}.jpg" />
                                 <h6><%= movie.actorname3 %></h6>
                                 <p><%= movie.mvactorname3 %></p>
                             </a>
-                        <% } %>   
+                        <% } %>    -->
                     </div>
                     <% } %>
                 <% if(movie.actorname4) { %>
                     <div class="actorswp">
-                        <% if(movie.actid4) { %>
-                        <a href="/celebs/<%= movie.actid4 %>" title="{{movie.actorname4}} Page">
-                            <% if(movie.actimg4) { %>
-                            <img class="lazy-photo" data-src="/<%= movie.actimg4 %>" alt=" {{movie.actorname4}}.jpg" />
-                            <% }else{ %>
-                                <img class="lazy-photo" data-src="/images/actor/id/<%= movie.actid4 %>.jpg" alt=" {{movie.actorname4}}.jpg" />
-                            <% } %>   
+                        <a href="/celebs/<%= movie.celeblink4 %>" title="{{movie.actorname4}} Page">
+                            <img class="lazy-photo" data-src="/<%= movie.actimg4 %>" alt=" {{movie.actorname4}}.jpg" /> 
                             <h6><%= movie.actorname4 %></h6>
+                            <p><%= movie.celebrole4 %></p>
                             <p><%= movie.mvactorname4 %></p>
                         </a>
-                        <% } %>
                     </div>
                 <% } %>
                 <% if(movie.actorname5) { %>
                     <div class="actorswp">
-                        <% if(movie.actid5) { %>
-                        <a href="/celebs/<%= movie.actid5 %>" title="{{movie.actorname5}} Page">
-                            <% if(movie.actimg5) { %>
+                        <a href="/celebs/<%= movie.celeblink5 %>" title="{{movie.actorname5}} Page">
                             <img class="lazy-photo" data-src="/<%= movie.actimg5 %>" alt=" {{movie.actorname5}}.jpg" />
-                            <% }else{ %>
-                                <img class="lazy-photo" data-src="/images/actor/id/<%= movie.actid5 %>.jpg" alt=" {{movie.actorname5}}.jpg" />
-                            <% } %>   
                             <h6><%= movie.actorname5 %></h6>
+                            <p><%= movie.celebrole5 %></p>
                             <p><%= movie.mvactorname5 %></p>
                         </a>
-                        <% } %>
                     </div>
                 <% } %>
                 <% if(movie.actorname6) { %>
                     <div class="actorswp">
-                        <% if(movie.actid6) { %>
-                        <a href="/celebs/<%= movie.actid6 %>" title="{{movie.actorname6}} Page">
-                            <% if(movie.actimg6) { %>
+                        <a href="/celebs/<%= movie.celeblink6 %>" title="{{movie.actorname6}} Page">
                             <img class="lazy-photo" data-src="/<%= movie.actimg6 %>" alt=" {{movie.actorname6}}.jpg" />
-                            <% }else{ %>
-                                <img class="lazy-photo" data-src="/images/actor/id/<%= movie.actid6 %>.jpg" alt=" {{movie.actorname6}}.jpg" />
-                            <% } %>   
                             <h6><%= movie.actorname6 %></h6>
+                            <p><%= movie.celebrole6 %></p>
                             <p><%= movie.mvactorname6 %></p>
                         </a>
-                        <% } %>
                     </div>
                 <% } %>
                 <% if(movie.actorname7) { %>
                     <div class="actorswp">
-                        <% if(movie.actid7) { %>
-                        <a href="/celebs/<%= movie.actid7 %>" title="{{movie.actorname7}} Page">
-                            <% if(movie.actimg7) { %>
-                            <img class="lazy-photo" data-src="/<%= movie.actimg7 %>" alt=" {{movie.actorname7}}.jpg" />
-                            <% }else{ %>
-                                <img class="lazy-photo" data-src="/images/actor/id/<%= movie.actid7 %>.jpg" alt=" {{movie.actorname47}.jpg" />
-                            <% } %>   
+                        <a href="/celebs/<%= movie.celeblink7 %>" title="{{movie.actorname7}} Page">
+                            <img class="lazy-photo" data-src="/<%= movie.actimg7 %>" alt=" {{movie.actorname7}}.jpg" />  
                             <h6><%= movie.actorname7 %></h6>
+                            <p><%= movie.celebrole7 %></p>
                             <p><%= movie.mvactorname7 %></p>
                         </a>
-                        <% } %>
                     </div>
                 <% } %>
             </div>
@@ -424,22 +402,22 @@
 
     </div>
 
-    <!--------------------------IMAGE SECTION-->
+    <!--------------------------IMAGE SECTION------------->
     <div class="other-sec">
         <div class="left-blue-header">
             <h2>Images</h2>
-            <a href="/movie/all-images/<%= movie._id%>">View all</a>
+            <a href="/drama/<%= movie.dramalink%>/drama-images">View all</a>
         </div>
         <div class="images">
             <% if(movie.images.length >0) { %>
                 <% var length= movie.images.length >6?6:movie.images.length %>
             <% for(var i=0; i<length; i++){%>
             <div class="image">
-                <a href="/image/download?imgUrl=<%= movie.images[i] %>"><img data-src="/<%= movie.images[i] %>" alt="" class="lazy-photo"></a>
+                <a href="/image/download?imgUrl=<%= movie.images[i] %>&name=<%= movie.name %>"><img data-src="/<%= movie.images[i] %>" alt="" class="lazy-photo"></a>
             </div>
             <% } %>
             <% }else{ %>
-                <p>Images not uploaded</p>
+                <h7>Images currently unavailable</h7>
             <% } %>
         </div>
     </div>
@@ -450,17 +428,18 @@
             <h2>Where to watch</h2>
         </div>
         <div class="whereToWatch">
-            <% if(movie.moviePoster) { %>
+            <% if(movie.whereToWatch) { %>
             <% if(movie.whereToWatch.ottName) { %>
-            <div class="where-img">
-                <a href="<%= movie.whereToWatch.ottUrl %>" >
-                    <img class="lazy-photo" data-src="<%= movie.whereToWatch.ottImg%>" alt="">
-                    <%= movie.whereToWatch.ottName%>
-                </a>
-            </div>
-            <% }else { %>
-                <h7>Not available </h7>
-            <% } %>  
+                <div class="where-img">
+                    <a href="<%= movie.whereToWatch.ottUrl %>" >
+                        <img class="lazy-photo" data-src="<%= movie.whereToWatch.ottImg%>" alt="">
+                        <%= movie.whereToWatch.ottName%>
+                    </a>
+                </div>
+            <% }%>
+                
+            <% }else {  %>  
+                <h7>Not yet scheduled </h7>
             <% } %>  
 
         </div>
@@ -472,7 +451,7 @@
         <div class="left-blue-header">
             <h2>Trailer</h2>
         </div>
-    <div class="movie-trailer">
+    <div class="drama-trailer">
         <iframe 
         data-src="<%= movie.ytlink%>" class="lazy-photo"> 
         </iframe>
@@ -480,32 +459,52 @@
     </div>
     <% } %>
     <% if(movie.releaseDate < dateNow){%>
-    <!--------------------REVIEW SECATION------------------------------>
+    <!----------------------NEW REVIEW SECTION----------------->
     <div class="other-sec" id="review">
         <div class="left-blue-header">
             <h2>Reviews</h2>
             <a href="/drama/write-review/<%= movie._id%>">Write Review</a>
         </div>
         <% if(review.length>0) { %>
-            <div class="review-section">
-                <% for(var i=0; i<review.length; i++){%>
-                <div class="review">
-                    <div class="user-dettails">
-                        <a href="/user/profile/<%= review[i].userDettails[0]._id %>" class="user-pic">
-                            <img data-src="<%= review[i].userDettails[0].profilePic %>" class="lazy-photo" alt="User Profile pic">
-                        </a>
-                        <div class="user-name">
-                            <a href="/user/profile/<%= review[i].userDettails[0]._id %>"><%= review[i].userDettails[0].name %></a>
-                            <p><span><%= review[i].helpfulCount %></span> people liked this review</p>
-                            <div class="user-like">
+        
+        <div class="swiper">
+            <% for(var i=0; i<review.length; i++){%>
+            <did class="review-swiper">
+                <div class="review-new-section">
+                    <div class="new-review-header">
+                        <div class="new-review-user-dettails">
+                            <a href="/user/profile/<%= review[i].userDettails[0]._id %>" class="new-review-user-pic">
+                                <img data-src="<%= review[i].userDettails[0].profilePic %>" class="lazy-photo" alt="User Profile pic">
+                            </a>
+                            <div class="new-review-user-name">
+                                <a href="/user/profile/<%= review[i].userDettails[0]._id %>"><%= review[i].userDettails[0].name %></a>
+                                <p><span><%= review[i].helpfulCount %></span> people liked this review</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="new-review-middle">
+                        <div class="new-review-dettails">
+                            <div class="new-review-text">
+                                <h3><%= review[i].reviewHead %></h3>
+                                <p style="font-family: PingFangSC-Regular, Tahoma, Microsoft Yahei, sans-serif;"><%- review[i].reviewContent %></p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="new-review-bottom">
+                        <hr>
+                        <div class="review-rating-section">
+                            <div><h4>Story</h4><p><i class="fa-solid fa-star"></i><%= review[i].storyRating %>/10</p></div>
+                            <div><h4>Cast</h4><p><i class="fa-solid fa-star"></i><%= review[i].castRating %>/10</p></div>
+                            <div><h4>Overall</h4><p> <i class="fa-solid fa-star"></i><%= review[i].overall %>/10</p></div>
+                            <div style="flex-direction: row;align-items: center;">
+
                                 <div class="like">
                                     <form id="like-form" action="/drama/like-review" method="post">
-                                        <input type="text" value="<%= movie._id%>" name="movieId" hidden>
-                                        <input type="text" value="<%= review[i].userDettails[0]._id %>" name="reviewUserId" hidden>
-                                        <button type="submit"><i class="fa-solid fa-thumbs-up"></i></button>
-                                    </form>
-                                   
-                                    <span><%= review[i].helpfulCount %></span>
+                                    <input type="text" value="<%= movie._id%>" name="movieId" hidden>
+                                    <input type="text" value="<%= review[i].userDettails[0]._id %>" name="reviewUserId" hidden>
+                                    <button type="submit"><i class="fa-solid fa-thumbs-up"></i></button>
+                                </form>
                                 </div>
                                 <div class="dislike">
                                     <form id="unlike-form" action="/drama/dislike-review" method="post">
@@ -513,46 +512,16 @@
                                         <input type="text" value="<%= review[i].userDettails[0]._id %>" name="reviewUserId" hidden>
                                         <button type="submit"><i class="fa-solid fa-thumbs-down"></i></button>
                                     </form>
-                                    <span><%= review[i].notHelpfulCount %></span>
+                
                                 </div>
                             </div>
-                        </div>
-                        <div class="review-rating">
-                            <div class="rating-box">
-                                <div class="rating-head">
-                                    <h4>Overall</h4>
-                                    <p><%= review[i].notHelpfulCount %></p>
-                                </div>
-                                <div class="rating-body">
-                                    <div class="review-rating-body">
-                                        <h4>Story</h4>
-                                        <p><%= review[i].storyRating %></p>
-                                    </div>
-                                    <div class="review-rating-body">
-                                        <h4>Cast</h4>
-                                        <p><%= review[i].castRating %></p>
-                                    </div>
-                                    <div class="review-rating-body">
-                                        <h4>Rewatch </h4>
-                                        <p><%= review[i].rewatchValueRating %></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="review-dettails">
-                        <div class="review-text">
-                            <h3><%= review[i].reviewHead %></h3>
-                            <p><%- review[i].reviewContent %></p>
-                        </div>
-    
+                        </div>   
                     </div>
                 </div>
-                <% } %>
-                <div class="reivew-all">
-                    <a href="/drama/all-review/<%= movie._id%>">View All</a>
-                </div>
-            </div>
+                
+            </did>
+            <% } %>
+        </div>
         <% }else{ %>
             <h7>Reviews not added</h7>
         <%}%>
@@ -565,88 +534,130 @@
 
 
     </style>
-<!-------------------------------LATEST UPDATE---------------------------->
-<div class="other-sec">
-    <div class="left-blue-header">
-        <h2>Latest Update</h2>
-        <a href="/latest-update">View all</a>
-    </div>
-    <div class="swiper">
-        <div class="movie-swape">
-            <% for(var i=0; i<latestUpdate.length; i++){%>
-        <div class="movies">
-          <a  href="/drama/<%= latestUpdate[i]._id %>">
-          <div class="movie-s">
-            <img data-src="/<%= latestUpdate[i].moviePoster %>" class="lazy-photo" alt="<%= latestUpdate[i].name %>.jpg">
-            <h2><%= latestUpdate[i].name %></h2>
-            <p><%= latestUpdate[i].category %></p>
-          </div>
-          </a>
-        </div>
-        <% } %>
-    </div>
-    </div>  
-</div>  
 
-<!-------------------------------NEXT RELEASE---------------------------->
+    <!-------------------------------Ongoing Drama---------------------------->
 <div class="other-sec">
     <div class="left-blue-header">
-        <h2>Next Release</h2>
-        <a href="/upcoming-releases">View all</a>
+        <h2>Ongoing Dramas</h2>
+        <a href="/ongoing-dramas">View all</a>
     </div>
     <div class="swiper">
-        <div class="movie-swape">
-            <% for(var i=0; i<nextRelease.length; i++){%>
-        <div class="movies">
-          <a  href="/drama/<%= nextRelease[i]._id %>">
-          <div class="movie-s">
-            <img data-src="/<%= nextRelease[i].moviePoster %>" class="lazy-photo" alt="<%= nextRelease[i].name %>.jpg">
-            <h2><%= nextRelease[i].name %></h2>
-            <p><%= nextRelease[i].releasedate %></p>
-          </div>
-          </a>
+        <div class="drama-swape">
+            <% for(var i = 0; i < ongoingDrama.length; i++) { 
+                // Define the maximum length for the title
+                let maxLength = 30; 
+                // Truncate the movie title if it exceeds maxLength
+                let truncatedName = ongoingDrama[i]?.name.length > maxLength ? ongoingDrama[i].name.substring(0, maxLength) + "..." : ongoingDrama[i].name;
+            %>
+            <div class="dramas">
+                <a href="/drama/<%= ongoingDrama[i].dramalink %>">
+                    <div class="drama-s">
+                        <% if( ongoingDrama[i].moviePoster && String(ongoingDrama[i].moviePoster).trim()) { %>
+                            <img data-src="/<%= ongoingDrama[i].moviePoster %>" alt="" class="lazy-photo">
+                        <% }else { %>
+                            <img data-src="/images/other/poster-not-available.jpg" alt=" <%= ongoingDrama[i].name %> Poster" class="lazy-photo">
+                        <% } %>
+                        
+                        <h2 id="drama-title"><%= truncatedName %></h2>
+                        <!-- <p><%= ongoingDrama[i].genre ? ongoingDrama[i].genre : n/a %></p> -->
+                        <p><%= ongoingDrama[i].category %></p>
+                        <!-- <p>Episodes :<%= ongoingDrama[i].episodes ? ongoingDrama[i].episodes : 0%></p> -->
+                    </div>
+                </a>
+            </div>
+            <% } %>
         </div>
-        <% } %>
     </div>
-    </div>  
-</div>  
-<!-------------------------------Last RELEASEd MOVIES---------------------------->
+    
+</div> 
+
+<!-------------------------------Upcoming Drama---------------------------->
 <div class="other-sec">
     <div class="left-blue-header">
-        <h2>Last Released Movies</h2>
-        <a href="/last-released-movies">View all</a>
+        <h2>Upcoming Drama</h2>
+        <a href="/upcoming-dramas">View all</a>
     </div>
     <div class="swiper">
-        <div class="movie-swape">
-            <% for(var i=0; i<lastReleasedMovies.length; i++){%>
-        <div class="movies">
-          <a  href="/drama/<%= lastReleasedMovies[i]._id %>">
-          <div class="movie-s">
-            <img src="/<%= lastReleasedMovies[i].moviePoster %>" alt="">
-            <h2><%= lastReleasedMovies[i].name %></h2>
-            <p><%= lastReleasedMovies[i].releasedate %></p>
-          </div>
-          </a>
+        <div class="drama-swape">
+            <% for(var i = 0; i < upcomingDramas.length; i++) { 
+                // Define the maximum length for the title
+                let maxLength = 30; 
+                // Truncate the movie title if it exceeds maxLength
+                let truncatedName = upcomingDramas[i]?.name.length > maxLength ? upcomingDramas[i].name.substring(0, maxLength) + "..." : upcomingDramas[i].name;
+            %>
+            <div class="dramas">
+                <a href="/drama/<%= upcomingDramas[i].dramalink %>">
+                    <div class="drama-s">
+                        <% if( upcomingDramas[i].moviePoster && String(upcomingDramas[i].moviePoster).trim()) { %>
+                            <img data-src="/<%= upcomingDramas[i].moviePoster %>" alt="" class="lazy-photo">
+                        <% }else { %>
+                            <img data-src="/images/other/poster-not-available.jpg" alt=" <%= upcomingDramas[i].name %> Poster" class="lazy-photo">
+                        <% } %>
+                        
+                        <h2 id="drama-title"><%= truncatedName %></h2>
+                        <p><%= upcomingDramas[i].releasedate %></p>
+                        <!-- <p><%= upcomingDramas[i].category %></p> -->
+                        
+                    </div>
+                </a>
+            </div>
+            <% } %>
         </div>
-        <% } %>
     </div>
-    </div>  
+    
+</div> 
+
+<!-------------------------------Recently Completed Dramas---------------------------->
+<div class="other-sec">
+    <div class="left-blue-header">
+        <h2>Recently Completed</h2>
+        <a href="/recently-completed">View all</a>
+    </div>
+    <div class="swiper">
+        <div class="drama-swape">
+            <% for(var i = 0; i < recentlyCompletedDrama.length; i++) { 
+                // Define the maximum length for the title
+                let maxLength = 30; 
+                // Truncate the movie title if it exceeds maxLength
+                let truncatedName = recentlyCompletedDrama[i]?.name.length > maxLength ? recentlyCompletedDrama[i].name.substring(0, maxLength) + "..." : recentlyCompletedDrama[i].name; %>
+            <div class="dramas">
+                <a href="/drama/<%= recentlyCompletedDrama[i].dramalink %>">
+                    <div class="drama-s">
+                        <% if( recentlyCompletedDrama[i].moviePoster && String(recentlyCompletedDrama[i].moviePoster).trim()) { %>
+                            <img data-src="/<%= recentlyCompletedDrama[i].moviePoster %>" alt="" class="lazy-photo">
+                        <% }else { %>
+                            <img data-src="/images/other/poster-not-available.jpg" alt=" <%= recentlyCompletedDrama[i].name %> Poster" class="lazy-photo">
+                        <% } %>
+                        
+                        <h2 id="drama-title"><%= truncatedName %></h2>
+                        <p><%= recentlyCompletedDrama[i].genre ? recentlyCompletedDrama[i].genre : n/a %></p>
+                        <p><%= recentlyCompletedDrama[i].category %></p>
+                        
+                    </div>
+                </a>
+            </div>
+            <% } %>
+        </div>
+    </div>
+    
 </div> 
 
 
 
 
-
-    <script>
+    <script async>
         const movieRating = document.getElementById('movie-rating')
-        const movieRatingValue = document.getElementById('movie-rating-value')
-        movieRatingValue.textContent = movieRating.value
+
+        const movieRatingValue = document.getElementById('drama-rating-value')
+
+        movieRatingValue.textContent = 0
+  
         movieRating.oninput = function () {
             movieRatingValue.textContent = this.value
         }
 
         $(document).ready(function () {
-            $('#movie-rating-form').submit(function (event) {
+            $('#drama-rating-form').submit(function (event) {
                 event.preventDefault()
                 var formData = $(this).serialize();
                 $.ajax({
@@ -655,7 +666,7 @@
                     headers:"Authorization",
                     data: formData,
                     success: function (data) {
-                        console.log(data)
+
                         
                         if (data.complete) {
                             $('.msg').addClass('success').text(data.msg);

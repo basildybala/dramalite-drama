@@ -1,12 +1,12 @@
 <%- include('../partials/header'); -%>
 <!-- Meta Title -->
-<title>Recently Completed Kdramas & Cdramas - Full Series to Binge-Watch</title>
+<title>View All Kdramas & Cdramas - Complete Drama Collection</title>
 
 <!-- Meta Description -->
-<meta name="description" content="Explore recently completed Korean and Chinese dramas. Find full episodes, binge-worthy series, and reviews of your favorite Kdramas and Cdramas.">
+<meta name="description" content="Browse a complete collection of Korean and Chinese dramas. Explore all Kdramas and Cdramas, including trending series, completed shows, and upcoming releases.">
 
 <!-- Meta Keywords -->
-<meta name="keywords" content="recently completed Kdramas, completed Cdramas, full Korean dramas, full Chinese dramas, binge-worthy Kdramas, binge-worthy Cdramas, Kdrama reviews, Cdrama updates, latest finished dramas">
+<meta name="keywords" content="view all Kdramas, view all Cdramas, Korean drama collection, Chinese drama collection, complete Kdrama list, complete Cdrama list, all Korean dramas, all Chinese dramas, drama database">
 
 
 <link rel="stylesheet" href="/css/movie-list-new.css" />
@@ -25,7 +25,7 @@
 <div class="blue-header">
     <!-- Header Title -->
     <div class="blue-header-heading">
-        <h1>Recently Completed Dramas</h1>
+        <h1>Korean Drama</h1>
     </div>
 
 </div>
@@ -35,7 +35,7 @@
     <div class="flex">
         <% drama.forEach(function(drama) { %>
             <div class="dramas">
-                <a  href="/drama/<%= drama.dramalink %>">
+                <a  href="/drama/<%= drama._id %>">
                     <div class="drama-s">
                         <img data-src="/<%= drama.moviePoster %>" alt="" class="lazy-photo">
                         <h2><%= drama.name %></h2>
@@ -87,7 +87,7 @@
 
 
 <% } else { %>
-<p>No dramas found.</p>
+<p>No movies found.</p>
 <% } %>
 
 

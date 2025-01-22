@@ -5,8 +5,22 @@
 <meta name="description" content="<%= user.name%> Profile">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
 crossorigin="anonymous">
-<link rel="stylesheet" href="/css/user.css">
-
+<!-- <link rel="stylesheet" href="/public/css/user.css"> -->
+<style>
+          .profile-container .pro-s-cover img {
+        max-width: 75%;
+        border-radius: 50px; }
+      .profile-container .pro-s-cover h6 {
+        font-family: "mouse-300", Arial, Helvetica, sans-serif;
+        font-size: 1.3rem;
+        margin-top: 10px;
+        margin-bottom: 0px; }
+        .profile-container .pro-s-cover {
+      background-color: #FFF;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 2px 6px 0 rgba(218, 218, 253, 0.65), 0 2px 6px 0 rgba(206, 206, 238, 0.54); }
+</style>
 <div class="container-fluid">
     <div class="container profile-container">
         <div class="row">
@@ -14,11 +28,11 @@ crossorigin="anonymous">
                 <div class="pro-s-cover">
                     <img src="<%= user.profilePic%>" alt="">
                     <h6><%= user.name%></h6>
-                    <hp><%= user.email%></p>
+                    <!-- <hp><%= user.email%></p> -->
                     <% if(user.instaLink){%>
                     <div class="connect-with">
                         <span>Connect </span> 
-                        <a href="<h6><%= user.instaLink%></h6>"><i class="fab fa-instagram"></i></a>
+                        <a href="https://instagram.com/<%= user.instaLink%>"><i class="fab fa-instagram"></i></a>
                     </div>
                     <% } %>
                     <!-- <p>Web Designer</p>  border-bottom: 1px solid #CCC;-->

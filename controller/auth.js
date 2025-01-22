@@ -21,18 +21,22 @@ exports.signUpPage = async (req, res) => {
 //CREATE NEW USER TO DB
 exports.createUser = async (req, res) => {
     try {
-        const { name, email, password, confirmPassword } = req.body
+        const { name, email, password, confirmPassword,instaLink } = req.body
+        if(instaLink){
+            const isInvalid = /http|instagram\.com|\/+/i.test(instaLink);
+            if (isInvalid) return res.send({ complete: false, msg: "Please add Instagram username only" })
+        }
         if (confirmPassword != password) return res.send({ complete: false, msg: "Password miss match" })
         const oldUser = await User.findOne({ email })
         if (oldUser) return res.send({ complete: false, msg: "Email already registerd" })
 
-        const newUser = new User({ name, email, password })
+        const newUser = new User({ name, email, password,instaLink })
         await newUser.save()
 
         // generate 6 digit otp
         let OTP = generateOTP();
-        // let OTP = '123456';
-        // store otp inside our db
+         //let OTP = '123456';
+        // save otp inside our db
         const newEmailVerificationToken = new EmailVerificationToken({
             owner: newUser._id,
             token: OTP,
@@ -53,7 +57,7 @@ exports.createUser = async (req, res) => {
         res.status(201).json({
             complete: true,
             id: newUser._id,
-            msg: "OTP SENTED TO YOUR SUBMITTED EMAIL"
+            msg: "OTP has been sent to your registered email address."
         });
     } catch (error) {
         console.log("err in signup page", error)
@@ -88,13 +92,13 @@ exports.verifyEmail = async (req, res) => {
     const user = await User.findById(userId);
     if (!user) res.send({ complete: false, msg: "Invalid User" })
 
-    if (user.isVerified) return res.send({ complete: false, msg: "user is already verified!" })
+    if (user.isVerified) return res.send({ complete: false, msg: "User already verified!" })
 
     const token = await EmailVerificationToken.findOne({ owner: userId });
-    if (!token) return res.send({ complete: false, msg: "otp expired please resend otp" })
+    if (!token) return res.send({ complete: false, msg: "OTP has expired. Please request a new one." })
 
     const isMatched = await token.compaireToken(OTP);
-    if (!isMatched) return res.send({ complete: false, msg: "Please submit a valid OTP!" })
+    if (!isMatched) return res.send({ complete: false, msg: "Please enter a valid OTP!" })
 
     user.isVerified = true;
     await user.save();
@@ -112,7 +116,7 @@ exports.verifyEmail = async (req, res) => {
     //const jwtToken = jwt.sign({ userId: user._id }, process.env.JWT_SECRET);
     res.send({
         complete: true,
-        msg: "email is verified successfully",
+        msg: "Your email has been successfully verified!",
     });
 };
 
@@ -185,7 +189,7 @@ exports.login = async (req, res, next) => {
 
     const { _id, name, role, isVerified } = user;
    // if (!isVerified) return res.redirect(`/auth/verify-otp/${_id}`)
-    if (!isVerified) return res.send({complete:false,msg:"email not verified",id:_id})
+    if (!isVerified) return res.send({complete:false,msg:"Email verification failed. Please try again.",id:_id})
 
     //JWT ACCESS TOKEN
     const token = jwt.sign(
@@ -217,38 +221,44 @@ exports.forgetPasswordPage = async (req, res) => {
 
 //LINK GENERATE AND SEND TO EMAIL FOR RESET PASSWORD
 exports.forgetPassword = async (req, res) => {
-    const { email } = req.body;
+    try {
+        const { email } = req.body;
 
-    if (!email) return res.send({ complete: false, msg: "email is missing!" })
+        if (!email) return res.send({ complete: false, msg: "email is missing!" })
+    
+        const user = await User.findOne({ email });
+        if (!user) return res.send({ complete: false, msg: "user not exist!" })
+    
+        const alreadyHasToken = await PasswordResetToken.findOne({ owner: user._id });
+        if (alreadyHasToken) return res.send({ complete: false, msg: "Link already Sent Only after one hour you can request for another Link!" })
+    
+        const token = await generateRandomByte();
+        const newPasswordResetToken = await PasswordResetToken({
+            owner: user._id,
+            token,
+        });
+        await newPasswordResetToken.save();
+    
+        const resetPasswordUrl = `${process.env.WEBSITE_URL}/auth/reset-password?token=${token}&id=${user._id}`;
+    
+        const transport = generateMailTransporter();
+    
+        transport.sendMail({
+          from: "dramalitebot@gmail.com",
+          to: user.email,
+          subject: "Reset Password Link",
+          html: `
+            <p>Click here to reset password</p>
+            <a href='${resetPasswordUrl}'>Change Password</a>
+          `,
+        });
+        console.log("restet Password URL", resetPasswordUrl)
+        res.json({ complete: true, msg: "A verification link has been sent to your email." });
+    } catch (error) {
+        console.log(error)
+        return res.render('utils/err-handle-page', { error: { msg: "something wrong pls inform to admin", link: '/contact' } })
+    }
 
-    const user = await User.findOne({ email });
-    if (!user) return res.send({ complete: false, msg: "user not exist!" })
-
-    const alreadyHasToken = await PasswordResetToken.findOne({ owner: user._id });
-    if (alreadyHasToken) return res.send({ complete: false, msg: "Link already Sented Only after one hour you can request for another Link!" })
-
-    const token = await generateRandomByte();
-    const newPasswordResetToken = await PasswordResetToken({
-        owner: user._id,
-        token,
-    });
-    await newPasswordResetToken.save();
-
-    const resetPasswordUrl = `http://localhost:8000/auth/reset-password?token=${token}&id=${user._id}`;
-
-    const transport = generateMailTransporter();
-
-    transport.sendMail({
-      from: "dramalitebot@gmail.com",
-      to: user.email,
-      subject: "Reset Password Link",
-      html: `
-        <p>Click here to reset password</p>
-        <a href='${resetPasswordUrl}'>Change Password</a>
-      `,
-    });
-    console.log("restet Password URL", resetPasswordUrl)
-    res.json({ complete: true, msg: "Link sented to your email!" });
 };
 
 //RENDER RESET PASSWORD PAGE 
@@ -257,9 +267,9 @@ exports.renderResetPasswordPage = async (req, res) => {
         let userId = req.query.id
         let token = req.query.token
         let tokenExist = await PasswordResetToken.findOne({ owner: userId })
-        if (!tokenExist) return res.render('err-find', { error: { msg: "Link is expired pleas Reset new link", link: '/forget-password' } })
+        if (!tokenExist) return res.render('utils/err-handle-page', { error: { msg: "Link has expired pleas Reset new link", link: '/forget-password' } })
         let compaireToken = await tokenExist.compaireToken(token)
-        if (!compaireToken) return res.render('err-find', { error: { msg: "Unauthorized access, invalid request!", link: '/forget-password' } })
+        if (!compaireToken) return res.render('utils/err-handle-page', { error: { msg: "Unauthorized access, invalid request!", link: '/forget-password' } })
         res.render('auth/reset-password.ejs', { token: { userId: userId, tokenId: tokenExist._id } })
     } catch (error) {
         console.log("err in reset password page", error)
@@ -270,10 +280,8 @@ exports.renderResetPasswordPage = async (req, res) => {
 //RESET PASSWORD
 exports.resetPassword = async (req, res) => {
     const { newPassword, confirmPassword, userId, tokenId } = req.body;
-    console.log(req.body)
     if (newPassword != confirmPassword) return res.send({ complete: false, msg: "Password miss match" })
     const user = await User.findById(userId);
-    console.log(user)
     if (!user) return res.send({ complete: false, msg: "Something  wrong pleas generate new link!" })
     // const matched = await user.compairePassword(newPassword);
     // if (matched)return res.send({complete:false,msg:"The new password must be different from the old one!"})  

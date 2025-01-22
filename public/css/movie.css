@@ -1,4 +1,4 @@
-.movie-main {
+.drama-main {
     width: 360px;
     margin: auto;
     border: 1px solid rgba(0, 0, 0, .125);
@@ -6,15 +6,20 @@
 }
 
 .fst-sec {
-    padding: 10px;
+    padding: 7px;
 }
 
-.movie-poster {
+.drama-poster {
     width: 100%;
+    justify-content: center;
+    align-items: center;
+    display: flex;
 }
 
-.movie-poster img {
-    width: 100%;
+.drama-poster img {
+     width: 338px;
+    height: 420px;
+    max-height: 520px;
     object-fit: cover;
 }
 
@@ -114,7 +119,8 @@
     width: 27%;
     height: 7px;
     border: 1px solid #007bff;
-    background-color: #4fa0f7;
+    /* background-color: #4fa0f7; */
+    background-color: #0050C2;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -143,7 +149,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #007bffd9;
+    /* background-color: #007bffd9; */
+    background-color: #0050C2;
     width: 80px;
     height: 80px;
     box-shadow: 0 1px 1px 0 rgb(0 0 0 / 25%);
@@ -164,13 +171,13 @@
 }
 
 .rate-d p {
-    font-size: 15px;
+    font-size: 14px;
     margin: 0;
     font-family: 'Poppins', sans-serif;
 }
 
 .rate-d a {
-    font-size: 15px;
+    font-size: 14px;
     margin: 0;
     font-family: 'Poppins', sans-serif;
 }
@@ -178,6 +185,9 @@
 .rate-d span {
     font-weight: 700;
     font-size: 16px;
+}
+.story-sec{
+    margin-left: 3px;
 }
 
 .story-sec p {
@@ -187,7 +197,7 @@
     font-weight: 400;
 }
 
-.movie-dettails {
+.drama-dettails {
     display: flex;
     width: 100%;
     height: 35px;
@@ -207,13 +217,13 @@
 .dettails-name h4 {
     margin: 0;
     margin-left: 5px;
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 500;
     font-family: 'Poppins', sans-serif;
 }
 
 .dettails p {
-    font-size: 15px;
+    font-size: 14px;
     margin: 0;
     font-family: 'Poppins', sans-serif;
     --mdb-text-opacity: 1;
@@ -225,7 +235,7 @@
     margin: 0;
     font-family: 'Poppins', sans-serif;
     --mdb-text-opacity: 1;
-    color: #4e99df !important;
+    color: #0050C2 !important;
     font-weight: 400;
 }
 .dettails-tag {
@@ -267,24 +277,24 @@
 .actorswp h6{
     margin: 0;
     padding: 0;
-    font-size: 13px;
+    font-size: 11px;
     font-family: 'Poppins', sans-serif;
     color: #211818;
-    font-weight: 900;
+    font-weight: 600px;
     text-align: center;
     
 }
 .actorswp p{
-    margin: 0;
+    margin: 2px;
     padding: 0;
     text-align: center;
-    font-size: 12px;
+    font-size: 10px;
     color: rgb(0 0 0 / 73%);
     font-family: sans-serif;
 }
 .actor-swp{
     display: flex;
-    padding: 5px;
+    padding: 6px;
 }
 
 /*REVIEW SECTION*/
@@ -504,18 +514,20 @@
     align-items: center;
 }
 .rate-form form button {
-    margin: 5px;
-    width: 50px;
-    height: 21px;
-    border: 1px solid #007bff;
-    background-color: #4fa0f7;
-    display: flex;
+    cursor: pointer;
+    border: 1px solid #0050C2;
+    color: #0050C2;
+    background-color: rgb(255, 255, 255);
+    border-radius: 8px;
+    padding: 4px 7px;
+    -webkit-box-pack: center;
     justify-content: center;
+    -webkit-box-align: center;
     align-items: center;
-    padding: 5px;
-    font-family: 'Poppins', sans-serif;
-    font-size: 15px;
-    color: #fff;
+    display: flex;
+    margin-left: 4px;
+    font-family: sans-serif;
+    font-size: 13px;
 }
 
 
@@ -525,15 +537,15 @@
     align-items: center;
 }
 
-#movie-rating-value {
+#drama-rating-value {
     margin: 0px 9px;
 }
 .other-sec h7{
-    font-size: 16px;
+    font-size: 14px;
     margin: 10px;
     font-family: 'Poppins', sans-serif;
 }
-.movie-trailer{
+.drama-trailer{
     width: 100%;
     padding: 10px;
     display: flex;
@@ -557,10 +569,11 @@ font-family:'Poppins', sans-serif;
 .whereToWatch a img{
     width: 75px;
     height: auto;
+    border-radius: 25px;
 }
 .form-control-rate{
     display: block;
-    width: 55%;
+    width: 49%;
     height: 20px;
     font-size: 1rem;
     line-height: 1.5;
@@ -572,12 +585,151 @@ font-family:'Poppins', sans-serif;
     transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
   }
 
+  .review-swiper{
+    padding: 10px;
+    width: 100%;
+}
+.review-new-section{
+    display: flex;
+    height: 300px;
+    border: 1px solid hsla(210, 8%, 51%, .13);
+    background-color: #f8f8f8;
+    overflow: hidden;
+    width: 260px;
+    padding: 10px 15px;
+    flex-direction: column;
+}
+.new-review-user-dettails{
+    display: flex;
+    align-items: center;
+}
+.new-review-user-dettails a{
+    color: #211818;
+}
+
+.new-review-user-pic{
+    width: 40px;
+    height: 40px;
+}
+.new-review-user-pic img{
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    border-radius: 500px;
+}
+.new-review-user-name{
+    font-family:PingFangSC-Regular, Tahoma, Microsoft Yahei, sans-serif;
+    margin-left: 10px;
+
+    
+}
+.new-review-user-name a{
+    color:#211818 ;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+}
+.new-review-user-name p{
+    margin-top: 2px;
+    color:#211818 ;
+    text-decoration: none;
+    font-size: 10px;
+}
+.new-review-user-name p span{
+font-weight: bold;
+}
+.new-review-dettails{
+    display: flex;
+    height: auto;
+}
+.new-review-text h3{
+    margin: 12px 0px 6px 0px;
+    font-size: 14px;
+    font-weight: 700;
+    font-family: 'Poppins', sans-serif;
+    color: #211818;
+}
+.new-review-text p{
+    margin: 0;
+    font-size: 14px;
+    font-weight: 400;
+    font-family: lato,Helvetica,Arial,sans-serif;
+    color: #211818;
+    line-height: 1.3rem;
+    letter-spacing: 0.3px;
+}
+.review-rating-section{
+    display: flex;
+    justify-content: space-around;
+}
+.review-rating-section div h4{
+    margin: 0;
+    font-size: 11px;
+    font-weight: 500;
+    font-family: lato,Helvetica,Arial,sans-serif;
+    color: #211818;
+    line-height: 1.3rem;
+    letter-spacing: 0.3px;
+    margin-right: 3px;
+}
+.review-rating-section div p{
+    margin: 0;
+    font-size: 10px;
+    font-weight: 700;
+    font-family: lato,Helvetica,Arial,sans-serif;
+    color: #211818;
+    line-height: 1.3rem;
+    letter-spacing: 0.3px;
+}
+.review-rating-section div{
+    display: flex;
+    margin-right: 4px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: end;
+}
+.review-rating-section div i{
+    font-size: 10px;
+    margin-right: 2px;
+    
+}
+.dislike form button {
+    margin-right: 4px;
+    background-color: #f8f8f8;
+    border: #f8f8f8;
+}
+.like form button {
+    margin-right: 4px;
+    background-color: #f8f8f8;
+    border: #f8f8f8;
+}
+.dislike form button i{
+    color: black;
+    line-height: 10px;
+    cursor: pointer;
+}
+.like form button i{
+    color: black;
+    line-height: 10px;
+    cursor: pointer;
+}
+.new-review-header{
+    flex: 1;
+}
+.new-review-middle{
+    flex:5;
+    overflow: hidden;
+}
+.new-review-bottom{
+    flex: 1;
+}
+
 @media(min-width: 767px) {
     .other-sec{
       width: 650px;
     }
 
-    .movie-main {
+    .drama-main {
         width: 650px;
     }
     .user-dettails{
@@ -593,7 +745,7 @@ font-family:'Poppins', sans-serif;
         height: 40px;
         font-size: 17px;
     }
-    #movie-rating-value{
+    #drama-rating-value{
         font-size: 18px;
 
     }
@@ -615,3 +767,29 @@ font-family:'Poppins', sans-serif;
         max-height: none;
     }
   }
+
+ .tags-section{
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+ } 
+ .tags-header{
+    margin-left: 5px;
+ }
+ .tags-header span{
+    font-size: 15px;
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    color: #757575  !important;
+    font-weight: 400;
+    line-height: 21px;
+ }
+ .tags-header h4{
+    margin: 0;
+    font-size: 14px;
+    font-weight: 500;
+    font-family: 'Poppins', sans-serif;
+    margin-right: 36px;
+    display: inline-block;
+ }
+

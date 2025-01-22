@@ -3,6 +3,7 @@ let shortid = require('shortid');
 const path = require('path');
 var slugify = require('slugify');
 var fs = require('fs');
+const { generateOTP } = require("../utils/mail");
 
 // const Actorstorage = multer.diskStorage({
 //   destination: function (req, file, cb) {
@@ -24,6 +25,7 @@ const storage = multer.diskStorage({
     if(file.fieldname==='userProfilePic') return cb(null, `public/images/user/profilePic/`)
     if(file.fieldname==='actorProfilePic') return cb(null, `public/images/actor/profilePic/`)
     if(file.fieldname==='actorImages') return cb(null, `public/images/actor/images/`)
+    if(file.fieldname==='platformPic') return cb(null, `public/images/ott/`)
     return cb(null, `public/images/`)
   },
   filename: function (req, file, cb) {
@@ -32,7 +34,19 @@ const storage = multer.diskStorage({
       return cb(null, shortid.generate() + '-' + Date.now())
     } 
     let ext = path.extname(file.originalname)
-    cb(null, shortid.generate() + '-' + file.originalname )
+    //cb(null, shortid.generate() + '-' + file.originalname )
+    let num = generateOTP(4);
+    // Use name from req.body and append the file extension
+    if (req.body.name) {
+      let name=slugify(req.body.name)
+      cb(null, `${name}-${num}${ext}`);
+    } else if(req.body.actorname){
+      let name=slugify(req.body.actorname)
+      cb(null, `${name}-${num}${ext}`);
+    }else{
+      // Fallback if 'name' is not provided in body
+      cb(null, `${shortid.generate()}-${Date.now()}${ext}`);
+    }
   }
 });
 

@@ -58,7 +58,7 @@ const userSchema=mongoose.Schema({
     instaLink:{
         type:String,
         trim:true,
-        minlength: 5, maxlength: 900
+        maxlength: 100
     },
     role: {
         type: String,
@@ -84,7 +84,6 @@ userSchema.pre('save',async function(next){
     }
 })
 userSchema.methods.compairePassword = async function (password) {
-    console.log(password)
     const result = await bcrypt.compare(password, this.password);
     return result;
 };

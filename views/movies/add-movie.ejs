@@ -6,12 +6,69 @@
         integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="css/auth.css">
     <script src="https://cdn.ckeditor.com/4.20.1/standard/ckeditor.js"></script>
+    <style>
+    #suggestions {
+      border: 1px solid #ccc;
+      max-width: 300px;
+      margin-top: 5px;
+      position: absolute;
+      background-color: #fff;
+      z-index: 1000;
+    }
+    .suggestion {
+      padding: 8px;
+      cursor: pointer;
+    }
+    .suggestion:hover {
+      background-color: #f0f0f0;
+    }
+    #selectedTags span {
+      margin-right: 10px;
+      padding: 5px;
+      background-color: #e0e0e0;
+      border-radius: 5px;
+      display: inline-block;
+    }
+    #selectedTags button {
+      margin-left: 5px;
+      border: none;
+      background: none;
+      cursor: pointer;
+      color: red;
+    }
+
+    #suggestionsGenre {
+      border: 1px solid #ccc;
+      max-width: 300px;
+      margin-top: 5px;
+      position: absolute;
+      background-color: #fff;
+      z-index: 1000;
+    }
+    .suggestion:hover {
+      background-color: #f0f0f0;
+    }
+    #selectedGenres span {
+      margin-right: 10px;
+      padding: 5px;
+      background-color: #e0e0e0;
+      border-radius: 5px;
+      display: inline-block;
+    }
+    #selectedGenres button {
+      margin-left: 5px;
+      border: none;
+      background: none;
+      cursor: pointer;
+      color: red;
+    }
+    </style>
     <div class="signup-form">
-        <form enctype="multipart/form-data" id="signup-form" action="/movie/add-movie" method="post">
-            <h2>Add Movie</h2>
+        <form enctype="multipart/form-data" id="signup-form" action="/drama/add-movie" method="post">
+            <h2>Add Drama</h2>
             <hr>
             <div class="form-group">
-                <label for="name">Movie Name:</label>
+                <label for="name">Drama Name:</label>
                 <div class="input-group">
                     <input type="text" class="form-control" name="name" placeholder="Movie Name" required="required">
                 </div>
@@ -27,12 +84,19 @@
                 <div class="input-group">
                     <select class="form-control" name="category" required>
                         <option value="">Default Name</option>
-                        <option value="Malayalam">Malayalam</option>
-                        <option value="Tamil">Tamil</option>
-                        <option value="Hindi">Hindi</option>
-                        <option value="Telugu">Telugu</option>
-                        <option value="Kannada">Kannada</option>
-                        <option value="English">English</option>
+                        <option value="Korean">Korean</option>
+                        <option value="Chinese">Chinese</option>
+                        
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="name">Country</label>
+                <div class="input-group">
+                    <select class="form-control" name="country" required>
+                        <option value="">Default Name</option>
+                        <option value="Korea">Korea</option>
+                        <option value="China">China</option>
                     </select>
                 </div>
             </div>
@@ -49,15 +113,27 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="name">OTT Release Date:</label>
+                <label for="name">Episode End Date:</label>
                 <div class="input-group">
-                    <input type="text" class="form-control" name="ottreleasedate" placeholder="Release Date">
+                    <input type="text" class="form-control" name="episodeEndDate" placeholder="Episode End Date">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="name">Episodes:</label>
+                <div class="input-group">
+                    <input type="number" class="form-control" name="episodes" placeholder="Episodes">
                 </div>
             </div>
             <div class="form-group">
                 <label for="name">Genre:</label>
                 <div class="input-group">
-                    <input type="text" class="form-control" name="genre" placeholder="genre">
+                    <div class="input-field">
+                        <input type="text" id="genreInput" autocomplete="off" placeholder="Start typing genres..." />
+                        <div id="suggestionsGenre"></div>
+                        <div id="selectedGenres"></div>
+                        <div id="hiddenSelectedGenres"></div>
+                    </div>
+                    <!-- <input type="text" class="form-control" name="genre" placeholder="genre"> -->
                 </div>
             </div>
             <div class="form-group">
@@ -83,29 +159,35 @@
                 </div>
             </div>
 
-            <div class="form-group">
+            <!-- <div class="form-group">
                 <label for="name">Producer:</label>
                 <div class="input-group">
                     <input type="text" class="form-control" name="producedby" placeholder="Producer Name">
                     <input type="text" class="form-control" name="producedbylink" placeholder="Producer Link">
                 </div>
-            </div>
+            </div> -->
             <div class="form-group">
                 <label for="name">Youtube Trailer:</label>
                 <div class="input-group">
-                    <input type="text" class="form-control" name="ytlink" placeholder="Producer Name">
+                    <input type="text" class="form-control" name="ytlink" placeholder="Youtube link">
                 </div>
             </div>
             <div class="form-group">
                 <label for="name">Tags</label>
-                <div class="cate-array">
+                <div class="input-group">
+                    <input type="text" id="tagInput" autocomplete="off" placeholder="Start typing..." />
+                    <div id="suggestions"></div>
+                    <div id="selectedTags"></div>
+                    <div id="hiddenSelectedTags"></div>
+                </div>
+                <!-- <div class="cate-array">
                     <div class="cate-div">
                         <input type="text" class="form-control" placeholder="Tag" name="tags" />
                         <button class="btn btn-danger remove-btn m-2"><i class="fa-solid fa-trash"></i></button>
                     </div>
-                </div>
+                </div> -->
             </div>
-            <button id="add-label" class="btn btn-success mb-2">Add</button>
+            <!-- <button id="add-label" class="btn btn-success mb-2">Add</button> -->
             <div class="form-group">
                 <label for="name">Ott:</label>
                 <select class="form-control" name="ottName">
@@ -116,14 +198,14 @@
                         </option>
                         <% } %>
                 </select>
-                <select class="form-control" name="ottImg" style="margin: 7px 0px;">
+                <!-- <select class="form-control" name="ottImg" style="margin: 7px 0px;">
                     <option value="">Ott Image </option>
                     <% for(var i=0; i<ott.length; i++){%>
                         <option value="<%= ott[i].img %> ">
                             <%= ott[i].name %>
                         </option>
                         <% } %>
-                </select>
+                </select> -->
                 <div class="input-group">
                     <input type="text" class="form-control" name="ottUrl" placeholder="OTT url">
                 </div>
@@ -132,11 +214,30 @@
             <div class="form-group">
                 <label for="name">Story:</label>
                 <div class="input-group">
-                    <textarea name="story"></textarea>
+                    <textarea class="form-control" style="height: 190px;" name="story" ></textarea>
                 </div>
             </div>
-
-            <div class="form-group">
+            <% for (let i = 1; i <= 7; i++) { %>
+                <div class="form-group">
+                    <label for="name">Actor <%= i %>:</label>
+                    <div class="input-group mb-2">
+                        <input type="text" class="form-control" name="actid<%= i %>" placeholder="ID" readonly hidden>
+                        <input type="text" class="form-control actorname" name="actorname<%= i %>" data-index="<%= i %>" placeholder="Name">
+                        <input type="text" class="form-control" name="celeblink<%= i %>" data-index="<%= i %>" placeholder="Actor Link">
+                    </div>
+                    <div class="input-group">
+                        <select class="form-control" name="celebrole<%= i %>">
+                            <option value="">Role</option>
+                            <option value="Main Role">Main Role</option>
+                            <option value="Support Role">Support Role</option>
+                            <option value="Guest Role">Guest Role</option>
+                        </select>
+                        <input type="text" class="form-control" name="actimg<%= i %>" placeholder="Img Url" readonly hidden>
+                        <input type="text" class="form-control" name="mvactorname<%= i %>" placeholder="Movie Name">
+                    </div>
+                </div>
+            <% } %>
+            <!-- <div class="form-group">
                 <label for="name">Actor 1:</label>
                 <div class="input-group">
                     <input type="text" class="form-control" name="actid1" placeholder="ID">
@@ -218,7 +319,7 @@
                     <input type="text" class="form-control" name="actimg7" placeholder="Img Url">
                     <input type="text" class="form-control" name="mvactorname7" placeholder="Mv Name">
                 </div>
-            </div>
+            </div> -->
 
             <div class="form-group">
                 <label for="name">Movie Poster:</label>
@@ -233,38 +334,220 @@
                     <input type="file" class="form-control" name="movieImages" placeholder="Images" multiple>
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary btn-lg blue-backgroud">Add Movie</button>
+            <button type="submit" class="btn btn-primary blue-backgroud">Add Drama</button>
         </form>
     </div>
-    =
+    <!-- Suggestions container -->
+    <div id="suggestionsActor" style="position: absolute; z-index: 1000; background: #fff; border: 1px solid #ccc; display: none;"></div>
     <script>
-        CKEDITOR.replace('story');
+     //===========================ACTOR AUTO SELECT=================================
+     document.addEventListener('DOMContentLoaded', () => {
+            const suggestionContainer = document.getElementById('suggestionsActor');
+            let activeInput = null; // Track which input is currently being typed into
 
-        let addBtn = document.getElementById('add-label');
-        let cateArray = document.querySelector('.cate-array');
-        let CateDiv = document.querySelectorAll('.cate-div')[0];
+            // Attach input event to all actor name fields
+            document.querySelectorAll('.actorname').forEach(input => {
+                input.addEventListener('input', async (event) => {
+                    activeInput = event.target;
+                    const query = activeInput.value.trim();
+                    const index = activeInput.dataset.index;
 
-        addBtn.addEventListener('click', function (e) {
-            e.preventDefault()
-            let value = CateDiv.cloneNode(true);
-            let input = value.getElementsByTagName('input')[0];
-            input.value = '';
-            cateArray.appendChild(value);
+                    if (!query) {
+                        suggestionContainer.style.display = 'none';
+                        return;
+                    }
+                    if (query.length < 3) {
+                      suggestionContainer.style.display = 'none';
+                      return;
+                    }
+
+                    // Fetch matching actors
+                    const response = await fetch(`/celebs/search-actors?q=${query}`);
+                    const actors = await response.json();
+
+                    // Show suggestions under the input field
+                    suggestionContainer.innerHTML = '';
+                    if (actors.length > 0) {
+                        suggestionContainer.style.display = 'block';
+                        const rect = activeInput.getBoundingClientRect();
+                        suggestionContainer.style.left = `${rect.left}px`;
+                        suggestionContainer.style.top = `${rect.bottom + window.scrollY}px`;
+                        suggestionContainer.style.width = `${rect.width}px`;
+
+                        actors.forEach(actor => {
+                            const suggestion = document.createElement('div');
+                            suggestion.textContent = actor.actorname;
+                            suggestion.style.padding = '5px';
+                            suggestion.style.cursor = 'pointer';
+
+                            suggestion.addEventListener('click', () => {
+                                // Populate fields for the current actor
+                                document.querySelector(`[name="actid${index}"]`).value = actor._id;
+                                document.querySelector(`[name="celeblink${index}"]`).value = actor.celeblink;
+                                document.querySelector(`[name="actimg${index}"]`).value = actor.profilePic?actor.profilePic:'';
+                                activeInput.value = actor.actorname;
+
+                                suggestionContainer.style.display = 'none';
+                            });
+
+                            suggestionContainer.appendChild(suggestion);
+                        });
+                    } else {
+                        suggestionContainer.style.display = 'none';
+                    }
+                });
+            });
+
+            // Hide suggestions when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!suggestionContainer.contains(e.target) && activeInput !== e.target) {
+                    suggestionContainer.style.display = 'none';
+                }
+            });
         });
-        $(document).on('click', '.remove-btn', function (e) {
-            e.preventDefault();
-            let rowItem = $(this).parent();
-            $(rowItem).remove();
-        })
-        let addIngredientsBtn = document.getElementById('addIngredientsBtn');
-        let ingredientList = document.querySelector('.ingredientList');
-        let ingredeintDiv = document.querySelectorAll('.ingredeintDiv')[0];
-        addIngredientsBtn.addEventListener('click', function () {
-            let newIngredients = ingredeintDiv.cloneNode(true);
-            let input = newIngredients.getElementsByTagName('input')[0];
-            input.value = '';
-            ingredientList.appendChild(newIngredients);
-        });
+    //============================GENREE=============================
+    const genreInput = document.getElementById('genreInput');
+    const suggestionsGenreDiv = document.getElementById('suggestionsGenre');
+    const selectedGenresDiv = document.getElementById('selectedGenres');
+    const hiddenSelectedGenres = document.getElementById('hiddenSelectedGenres');
+
+    let selectedGenres = [];
+
+    // Handle autocomplete
+    genreInput.addEventListener('input', async () => {
+      const query = genreInput.value.trim();
+      if (!query) {
+        suggestionsGenreDiv.innerHTML = '';
+        return;
+      }
+      if (query.length < 3) {
+        suggestionsGenreDiv.innerHTML = '';
+        return;
+      }
+
+      // Fetch matching genres from the server
+      const response = await fetch(`/drama/genre-available?q=${query}&filter=Genre`);
+      const genres = await response.json();
+
+      // Populate suggestions
+      suggestionsGenreDiv.innerHTML = '';
+      genres.forEach(genre => {
+        const suggestion = document.createElement('div');
+        suggestion.className = 'suggestion';
+        suggestion.textContent = genre.name;
+        suggestion.addEventListener('click', () => selectGenre(genre.name));
+        suggestionsGenreDiv.appendChild(suggestion);
+      });
+    });
+
+    // Add selected genre
+    function selectGenre(genreName) {
+      if (!selectedGenres.includes(genreName)) {
+        selectedGenres.push(genreName);
+        updateSelectedGenres();
+      }
+      genreInput.value = '';
+      suggestionsGenreDiv.innerHTML = '';
+    }
+
+    // Update the selected genres UI and hidden inputs
+    function updateSelectedGenres() {
+      selectedGenresDiv.innerHTML = '';
+      hiddenSelectedGenres.innerHTML = '';
+
+      selectedGenres.forEach(genre => {
+        // Update UI
+        const genreElement = document.createElement('span');
+        genreElement.innerHTML = `${genre} <button type="button" onclick="removeGenre('${genre}')">x</button>`;
+        selectedGenresDiv.appendChild(genreElement);
+
+        // Add a hidden input for each selected genre
+        const input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = 'genre[]'; // Ensure the backend receives an array
+        input.value = genre;
+        hiddenSelectedGenres.appendChild(input);
+      });
+    }
+
+    // Remove a genre
+    function removeGenre(genreName) {
+      selectedGenres = selectedGenres.filter(genre => genre !== genreName);
+      updateSelectedGenres();
+    }
+
+
+    //===================================TAGS SETUP CODE=====================================
+    const tagInput = document.getElementById('tagInput');
+
+    const suggestionsDiv = document.getElementById('suggestions');
+    const selectedTagsDiv = document.getElementById('selectedTags');
+    const hiddenSelectedTags = document.getElementById('hiddenSelectedTags');
+
+    let selectedTags = [];
+
+    // Handle autocomplete
+    tagInput.addEventListener('input', async () => {
+      const query = tagInput.value.trim();
+      if (!query) {
+        suggestionsDiv.innerHTML = '';
+        return;
+      }
+      if (query.length < 3) {
+        suggestionsDiv.innerHTML = '';
+        return;
+      }
+      // Fetch matching tags from the server
+      const response = await fetch(`/drama/tags-available?q=${query}&filter=Tags`);
+      const tags = await response.json();
+
+      // Populate suggestions
+      suggestionsDiv.innerHTML = '';
+      tags.forEach(tag => {
+        const suggestion = document.createElement('div');
+        suggestion.className = 'suggestion';
+        suggestion.textContent = tag.name;
+        suggestion.addEventListener('click', () => selectTag(tag.name));
+        suggestionsDiv.appendChild(suggestion);
+      });
+    });
+
+    // Add selected tag
+    function selectTag(tagName) {
+      if (!selectedTags.includes(tagName)) {
+        selectedTags.push(tagName);
+        updateSelectedTags();
+      }
+      tagInput.value = '';
+      suggestionsDiv.innerHTML = '';
+    }
+
+    // Update the selected tags UI and hidden inputs
+    function updateSelectedTags() {
+      selectedTagsDiv.innerHTML = '';
+      hiddenSelectedTags.innerHTML = '';
+
+      selectedTags.forEach(tag => {
+        // Update UI
+        const tagElement = document.createElement('span');
+        tagElement.innerHTML = `${tag} <button type="button" onclick="removeTag('${tag}')">x</button>`;
+        selectedTagsDiv.appendChild(tagElement);
+
+        // Add a hidden input for each selected tag
+        const input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = 'tags[]'; // Ensure the backend receives an array
+        input.value = tag;
+        hiddenSelectedTags.appendChild(input);
+      });
+    }
+
+    // Remove a tag
+    function removeTag(tagName) {
+      selectedTags = selectedTags.filter(tag => tag !== tagName);
+      updateSelectedTags();
+    }
+
     </script>
 
     <%- include('../partials/footer'); -%>

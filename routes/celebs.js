@@ -1,9 +1,11 @@
-const { addCelebPage, addCeleb, editCelebrityPage, editCelebrity, showAllCelebrityPage, deleteCelebrity,showOneCelebrity, allCelebrityImages } = require('../controller/celeb');
+const { addCelebPage, addCeleb, editCelebrityPage, editCelebrity, showAllCelebrityPage, deleteCelebrity,showOneCelebrity, allCelebrityImages, getCelebsDettailsForAddMovie } = require('../controller/celeb');
 const { isUser, isAdmin ,isAuth} = require('../middlewares/auth');
 const { uploadImage } = require('../middlewares/multer');
 
 const router = require('express').Router()
 
+// Endpoint for autocomplete
+router.get('/search-actors',getCelebsDettailsForAddMovie);
 //RENDER CELEB PAGE
 router.get('/add-celebrity',isAuth,isAdmin,addCelebPage)
 
@@ -21,14 +23,14 @@ router.post('/edit-celebrity/:celebId',isAuth,isAdmin,uploadImage.fields([{ name
 //DELETE CELEBRITY
 router.get('/delete-celebrity/:celebId',isAuth,isAdmin,deleteCelebrity)
 
-//SHOW ALL CELEBRITY
-router.get('/show-all-celebrity',isAuth,isAdmin,showAllCelebrityPage)
 
 //GET ONE CELEBS
-router.get('/:celebId',isUser,showOneCelebrity)
+router.get('/:celeblink',isUser,showOneCelebrity)
 
 //ALL IMAGES
-router.get('/all-images/:celebId',isUser,allCelebrityImages)
+router.get('/celeb-images/:celeblink',isUser,allCelebrityImages) 
+
+
 
 
 

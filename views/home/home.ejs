@@ -1,7 +1,112 @@
 <%- include('../partials/header'); -%>
-<title>Malayalam Tamil Hindi Hollywood Movies New Download Cast Story Free -Dramalite</title>
-<meta name="description" content="Malayalam Movies and Tamil Telugu Hindi Webseries  Release Date Reviews Videos  Cast & Crew  Film Poster">
+<title>Dramalite: The Best Place for Kdrama and Cdrama Lovers</title>
+<meta name="description" content="Discover Dramalite, the ultimate destination for Kdrama and Cdrama lovers. Explore the best Korean and Chinese dramas, from thrilling romances to epic stories. Stay updated with the latest recommendations, ratings, and reviews for your favorite Kdrama and Cdrama series.">
+<meta name="keywords" content="Kdrama, Cdrama, Kdrama lovers, Cdrama lovers, best Kdrama series, best Cdrama series, Dramalite, Kdrama and Cdrama recommendations, top Kdrama, top Cdrama, Kdrama and Cdrama 2024, Korean dramas, Chinese dramas, romantic Kdrama, romantic Cdrama, drama recommendations, drama lovers, Kdrama and Cdrama hub">
+
 <link rel="canonical" href="https://dramalite.com">
+
+<!-------------------------------Ongoing Drama---------------------------->
+<div class="other-sec">
+    <div class="left-blue-header">
+        <h2>Ongoing Dramas</h2>
+        <a href="/ongoing-dramas">View all</a>
+    </div>
+    <div class="swiper">
+        <div class="drama-swape">
+            <% for(var i = 0; i < ongoingDrama.length; i++) { 
+                // Define the maximum length for the title
+                let maxLength = 30; 
+                // Truncate the movie title if it exceeds maxLength
+                let truncatedName = ongoingDrama[i]?.name.length > maxLength ? ongoingDrama[i].name.substring(0, maxLength) + "..." : ongoingDrama[i].name;
+            %>
+            <div class="dramas">
+                <a href="/drama/<%= ongoingDrama[i].dramalink %>">
+                    <div class="drama-s">
+                        <% if( ongoingDrama[i].moviePoster && String(ongoingDrama[i].moviePoster).trim()) { %>
+                            <img data-src="/<%= ongoingDrama[i].moviePoster %>" alt="" class="lazy-photo">
+                        <% }else { %>
+                            <img data-src="/images/other/poster-not-available.jpg" alt=" <%= ongoingDrama[i].name %> Poster" class="lazy-photo">
+                        <% } %>
+                        
+                        <h2 id="drama-title"><%= truncatedName %></h2>
+                        <p><%= ongoingDrama[i].category %></p>
+                        <p>Episodes :<%= ongoingDrama[i].episodes ? ongoingDrama[i].episodes : 0%></p>
+                    </div>
+                </a>
+            </div>
+            <% } %>
+        </div>
+    </div>
+    
+</div> 
+
+<!-------------------------------Upcoming Drama---------------------------->
+<div class="other-sec">
+    <div class="left-blue-header">
+        <h2>Upcoming Drama</h2>
+        <a href="/upcoming-dramas">View all</a>
+    </div>
+    <div class="swiper">
+        <div class="drama-swape">
+            <% for(var i = 0; i < upcomingDramas.length; i++) { 
+                // Define the maximum length for the title
+                let maxLength = 30; 
+                // Truncate the movie title if it exceeds maxLength
+                let truncatedName = upcomingDramas[i]?.name.length > maxLength ? upcomingDramas[i].name.substring(0, maxLength) + "..." : upcomingDramas[i].name;
+            %>
+            <div class="dramas">
+                <a href="/drama/<%= upcomingDramas[i].dramalink %>">
+                    <div class="drama-s">
+                        <% if( upcomingDramas[i].moviePoster && String(upcomingDramas[i].moviePoster).trim()) { %>
+                            <img data-src="/<%= upcomingDramas[i].moviePoster %>" alt="" class="lazy-photo">
+                        <% }else { %>
+                            <img data-src="/images/other/poster-not-available.jpg" alt=" <%= upcomingDramas[i].name %> Poster" class="lazy-photo">
+                        <% } %>
+                        <h2 id="drama-title"><%= truncatedName %></h2>
+                        <p><%= upcomingDramas[i].category %></p>
+                        <p><%= upcomingDramas[i].releasedate %></p>
+                    </div>
+                </a>
+            </div>
+            <% } %>
+        </div>
+    </div>
+    
+</div> 
+
+<!-------------------------------Recently Completed Dramas---------------------------->
+<div class="other-sec">
+    <div class="left-blue-header">
+        <h2>Recently Completed</h2>
+        <a href="/recently-completed">View all</a>
+    </div>
+    <div class="swiper">
+        <div class="drama-swape">
+            <% for(var i = 0; i < recentlyCompletedDrama.length; i++) { 
+                // Define the maximum length for the title
+                let maxLength = 30; 
+                // Truncate the movie title if it exceeds maxLength
+                let truncatedName = recentlyCompletedDrama[i]?.name.length > maxLength ? recentlyCompletedDrama[i].name.substring(0, maxLength) + "..." : recentlyCompletedDrama[i].name; %>
+            <div class="dramas">
+                <a href="/drama/<%= recentlyCompletedDrama[i].dramalink %>">
+                    <div class="drama-s">
+                        <% if( recentlyCompletedDrama[i].moviePoster && String(recentlyCompletedDrama[i].moviePoster).trim()) { %>
+                            <img data-src="/<%= recentlyCompletedDrama[i].moviePoster %>" alt="" class="lazy-photo">
+                        <% }else { %>
+                            <img data-src="/images/other/poster-not-available.jpg" alt=" <%= recentlyCompletedDrama[i].name %> Poster" class="lazy-photo">
+                        <% } %>
+                        <h2 id="drama-title"><%= truncatedName %></h2>
+                        <p><%= recentlyCompletedDrama[i].category %></p>
+                        <p>Episodes :<%= recentlyCompletedDrama[i].episodes ? recentlyCompletedDrama[i].episodes : 0%></p>
+                    </div>
+                </a>
+            </div>
+            <% } %>
+        </div>
+    </div>
+    
+</div> 
+
 <!-------------------------------LATEST UPDATE---------------------------->
 <div class="other-sec">
     <div class="left-blue-header">
@@ -9,81 +114,43 @@
         <a href="/latest-update">View all</a>
     </div>
     <div class="swiper">
-        <div class="movie-swape">
-            <% for(var i=0; i<latestUpdate.length; i++){%>
-        <div class="movies">
-          <a  href="/drama/<%= latestUpdate[i]._id %>">
-          <div class="movie-s">
-            <img src="/<%= latestUpdate[i].moviePoster %>" alt="">
-            <h2><%= latestUpdate[i].name %></h2>
-            <p><%= latestUpdate[i].category %></p>
-          </div>
-          </a>
-        </div>
-        <% } %>
+        <div class="drama-swape">
+            <% for(var i = 0; i < latestUpdate.length; i++) { 
+                // Define the maximum length for the title 
+                let maxLength = 30; 
+           %>
+           <div class="dramas">
+             <a href="/drama/<%= latestUpdate[i].dramalink %>">
+               <div class="drama-s">
+                <% if( latestUpdate[i].moviePoster && String(latestUpdate[i].moviePoster).trim()) { %>
+                    <img data-src="/<%= latestUpdate[i].moviePoster %>" alt="" class="lazy-photo">
+                <% }else { %>
+                    <img data-src="/images/other/poster-not-available.jpg" alt=" <%= latestUpdate[i].name %> Poster" class="lazy-photo">
+                <% } %>
+                 <h2 id="drama-title">
+                   <%= latestUpdate[i].name.length > maxLength 
+                       ? latestUpdate[i].name.substring(0, maxLength) + "..." 
+                       : latestUpdate[i].name %>
+                 </h2>
+                 <p><%= latestUpdate[i].category %></p>
+               </div>
+             </a>
+           </div>
+           <% } %>
+           
     </div>
     </div>  
 </div>  
 
-<!-------------------------------NEXT RELEASE---------------------------->
 <div class="other-sec">
     <div class="left-blue-header">
-        <h2>Next Release</h2>
-        <a href="/upcoming-releases">View all</a>
-    </div>
-    <div class="swiper">
-        <div class="movie-swape">
-            <% for(var i=0; i<nextRelease.length; i++){%>
-        <div class="movies">
-          <a  href="/drama/<%= nextRelease[i]._id %>">
-          <div class="movie-s">
-            <img src="/<%= nextRelease[i].moviePoster %>" alt="">
-            <h2><%= nextRelease[i].name %></h2>
-            <p><%= nextRelease[i].releasedate %></p>
-          </div>
-          </a>
-        </div>
-        <% } %>
-    </div>
-    </div>  
-</div> 
-
-<!-------------------------------Last RELEASEd MOVIES---------------------------->
-<div class="other-sec">
-    <div class="left-blue-header">
-        <h2>Last Released Movies</h2>
-        <a href="/last-released-movies">View all</a>
-    </div>
-    <div class="swiper">
-        <div class="movie-swape">
-            <% for(var i=0; i<lastReleasedMovies.length; i++){%>
-        <div class="movies">
-          <a  href="/drama/<%= lastReleasedMovies[i]._id %>">
-          <div class="movie-s">
-            <img src="/<%= lastReleasedMovies[i].moviePoster %>" alt="">
-            <h2><%= lastReleasedMovies[i].name %></h2>
-            <p><%= lastReleasedMovies[i].releasedate %></p>
-          </div>
-          </a>
-        </div>
-        <% } %>
-    </div>
-    </div>  
-</div> 
-
-<div class="other-sec">
-    <div class="left-blue-header">
-        <h2>Movies category</h2>
+        <h2>Drama category</h2>
     </div>
 
     <div class="movies-list-section">
-        <div class="white-link"><a href="/malayalam-movies" class="dflexx"  title="Best Malayalam Movies Categorized List" > <i class="fas fa-chevron-circle-right"></i>Malayalam Movies</a></div>
-        <div class="white-link"><a href="/tamil-movies" class="dflexx" title="Best Tamil Movies Categorized List"> <i class="fas fa-chevron-circle-right"></i>Tamil Movies</a></div>
-        <div class="white-link"><a href="/hindi-movies" class="dflexx" title="Best Hindi Movies Categorized List"> <i class="fas fa-chevron-circle-right"></i>Hindi Movies</a></div>
-        <div class="white-link"><a href="/telugu-movies" class="dflexx" title="Best Telugu Movies Categorized List"> <i class="fas fa-chevron-circle-right"></i>Telugu Movies</a></div>
-        <div class="white-link"><a href="/english-movies" class="dflexx" title="Best Hollywood Movies Categorized List"> <i class="fas fa-chevron-circle-right"></i>Hollywood Movies</a></div>
-        <div class="white-link"><a href="kannada-movies" class="dflexx" title="Best Kannada  Movies Categorized List"> <i class="fas fa-chevron-circle-right"></i>Kannada Movies</a></div>
-
+        <div class="white-link"><a href="/korean-drama" class="dflexx"  title="Best Korean Drama" > <i class="fas fa-chevron-circle-right"></i>Korean Drama</a></div>
+        <div class="white-link"><a href="/chinese-drama" class="dflexx" title="Best Cinese Drama List"> <i class="fas fa-chevron-circle-right"></i>Chinese Drama</a></div>
+        <div class="white-link"><a href="#" class="dflexx"  title="Best Korean Drama" > <i class="fas fa-chevron-circle-right"></i>Thai Drama</a></div>
       </div>
 </div>
 

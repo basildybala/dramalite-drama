@@ -1,83 +1,94 @@
 <%- include('../partials/header'); -%>
-<link rel="stylesheet" href="/css/movies-list.css">
-  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css">
-  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
+<!-- Meta Title -->
+<title>Upcoming Kdramas & Cdramas - New Drama Premieres & Release Dates</title>
+
+<!-- Meta Description -->
+<meta name="description" content="Discover the latest updates on upcoming Korean and Chinese dramas. Stay informed about new Kdramas and Cdramas, release schedules, and much-anticipated premieres.">
+
+<!-- Meta Keywords -->
+<meta name="keywords" content="upcoming Kdramas, upcoming Cdramas, new Kdrama releases, new Cdrama releases, Kdrama release dates, Cdrama release dates, upcoming Korean dramas, upcoming Chinese dramas, drama premieres">
 
 
-  <div class="other-sec">
-    <table id="sample-table" style="width:100%;text-align:left">
-      <thead>
-        <tr>
-          <th class="fst-table-header" style="width: 103px;">
-            <h1>Upcoming </h1></th>
-          <th class="nd-table-header">
-            <h1>Movies List</h1>
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <% nextRelease.forEach (function (m){%>
-          <tr>
-            <td class="td-class">
-              <a href="/drama/<%= m._id  %>" title="<%= m.name %> Movie Details Page">
-                <div>
-                  <% if(m.moviePoster) {%> 
-                     <img class="table-img lazy-photo" data-src="/<%= m.moviePoster %>" alt="<%= m.name %> Movie Poster">
-                     <%}else{%>
-                      <img class="table-img lazy-photo" data-src="/images/movies/id/<%= m._id  %>.jpg" alt="<%= m.name %>  Movie Poster">
-                  <%}%>
-
-                </div>
-              </a>
-            </td>
-            <td class="td-class">
-              <div class="movies-table">
-                <div class="t-col"><i class="fa fa-star" aria-hidden="true"></i> <a href="/drama/<%= m._id %>">
-                    <h2 title="<%= m.name %> Movie Page">
-                      <%= m.name %>
-                    </h2>
-                  </a></div>
-                <div class="t-col">
-                  <h3>Cast :</h3>
-                  <h6> <a href="/celebs/<%= m.actid1 %>" title="<%= m.actorname1 %> Actor Details Page">
-                      <%= m.actorname1 %>,
-                    </a><a href="/celebs/<%= m.actid2 %>" title="<%= m.actorname2 %> Actor Details Page">
-                      <%= m.actorname2 %>
-                    </a> </h6>
-                </div>
-                <div class="t-col">
-                  <h3>Genre :</h3>
-                  <h6>
-                    <%= m.genre %>
-                  </h6>
-                </div>
-                <div class="t-col">
-                  <h5>Release Date :</h5>
-                  <% if(m.releasedate) {%>
-                    <p>
-                      <%= m.releasedate %>
-                    </p>
-                    <%}else{%>
-                      <p>Date Not Confirm</p>
-                      <%}%>
-                </div>
-
-              </div>
-            </td>
-          </tr>
-          <% });%>
-      </tbody>
-    </table>
-
-  </div>
-
-  <script>
-    $(function () {
-      $('#sample-table').DataTable();
-    });
-  </script>
+<link rel="stylesheet" href="/css/movie-list-new.css" />
+<!-- <link
+  rel="stylesheet"
+  type="text/css"
+  href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css"
+/>
+<script
+  type="text/javascript"
+  charset="utf8"
+  src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"
+></script> -->
 
 
+<div class="blue-header">
+    <!-- Header Title -->
+    <div class="blue-header-heading">
+        <h1>Upcoming Dramas</h1>
+    </div>
+
+</div>
+
+<!-- Display the list of movies -->
+<% if (drama.length > 0) { %>
+    <div class="flex">
+        <% drama.forEach(function(drama) { %>
+            <div class="dramas">
+                <a  href="/drama/<%= drama.dramalink %>">
+                    <div class="drama-s">
+                        <img data-src="/<%= drama.moviePoster %>" alt="" class="lazy-photo">
+                        <h2><%= drama.name %></h2>
+                        <p><%= drama.releasedate %></p>
+                        <p>Episodes: <%= drama.episodes %></p>
+                    </div>
+                </a>
+            </div>
+        <% }) %>
+</div>
+
+<!-- Responsive Pagination -->
+<div class="pagination">
+  <% if (currentPage > 1) { %>
+      <a href="?page=<%= currentPage - 1 %>" class="pagination-link"> ❮ </a>
+  <% } %>
+
+  <!-- Always show the first page -->
+  <a href="?page=1" class="pagination-link <%= currentPage === 1 ? 'active' : '' %>">1</a>
+
+  <!-- Ellipsis before the current page if necessary -->
+  <% if (currentPage > 3) { %>
+      <span class="pagination-ellipsis">...</span>
+  <% } %>
+
+  <!-- Show only a few neighbors around the current page -->
+  <% for (let i = Math.max(2, currentPage - 1); i <= Math.min(currentPage + 1, totalPages - 1); i++) { %>
+      <a href="?page=<%= i %>" class="pagination-link <%= currentPage === i ? 'active' : '' %>">
+          <%= i %>
+      </a>
+  <% } %>
+
+  <!-- Ellipsis after the current page if necessary -->
+  <% if (currentPage < totalPages - 2) { %>
+      <span class="pagination-ellipsis">...</span>
+  <% } %>
+
+  <!-- Always show the last page -->
+  <% if (totalPages > 1) { %>
+      <a href="?page=<%= totalPages %>" class="pagination-link <%= currentPage === totalPages ? 'active' : '' %>">
+          <%= totalPages %>
+      </a>
+  <% } %>
+
+  <% if (currentPage < totalPages) { %>
+      <a href="?page=<%= currentPage + 1 %>" class="pagination-link"> ❯</a>
+  <% } %>
+</div>
+
+
+<% } else { %>
+<p>No dramas found.</p>
+<% } %>
 
 
 <%- include('../partials/footer'); -%>

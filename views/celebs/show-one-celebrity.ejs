@@ -1,22 +1,35 @@
 <%- include('../partials/header'); -%>
 
 
-<title><%= celebrity.actorname %> <%= celebrity.occupation %> Wiki, Age, Images, Movies list</title>
-<meta name="description" content="<%= celebrity.biography %>">
+<title><%= celebrity.actorname %>: Age, Biography,Top TV Shows and More</title>
 
-<meta property="og:site_name" content="DramaLite.Com Actor Section ">
-<meta property="og:url" content="https://dramalite.com/celebs/<%= celebrity._id %>">
-<meta property="og:description" content="<%= celebrity.biography %>">
-<meta property="og:type" content="video.movie">
-<% if(celebrity.profilePic ) { %>
-    <meta property="og:image" content="https://dramalite.com/public/images/actor/profilePic/<%= celebrity.profilePic %>.jpg">
-<% }else { %>
-    <meta property="og:image" content="https://dramalite.com/public/images/actor/id/<%= celebrity._id %>.jpg">
-<% } %>
-<meta property="og:image:width" content="1920" />
-<meta property="og:image:height" content="1080" />
+<meta name="title" content="<%= celebrity.actorname %>: Age, Biography, Top TV Shows and More"/>
+<meta name="description" content="Dive deep into the career of <%= celebrity.actorname %>.<%= celebrity.biography %>">
+<meta property="og:url" content="https://dramalite.com/celebs/<%= celebrity.celeblink %>">
+<meta property="og:description" content="Dive deep into the career of <%= celebrity.actorname %>.<%= celebrity.biography %>">
+<meta property="og:image" content="https://dramalite.com/<%= celebrity.profilePic %>">
 <meta property="og:image:alt" content="<%= celebrity.actorname %>" />
-<meta property="og:image:type" content="image/jpeg" />
+<meta property="og:image:type" content="image/jpeg" /> 
+
+<script type="application/ld+json" async>
+    {
+        "@context": "https://schema.org/",
+        "@type": "Person",
+        "name": "<%= celebrity.actorname %>",
+        "image": "https://dramalite.com/<%= celebrity.profilePic %>", 
+        "birthDate": "<%- celebrity.age %>", 
+        "occupation": "<%- celebrity.occupation %>",
+        "knownFor": [
+                <% dramaList.forEach(function(drama, index) { %>
+                {
+                    "@type": "TVSeries", 
+                    "name": "<%= drama.name %>"
+                }<% if (index < dramaList.length - 1) { %>,<% } %>
+                <% }); %>
+            ],
+        "description": "<%= celebrity.biography %>" 
+    }
+</script>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
         integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
@@ -32,10 +45,14 @@
     .celeb-img{
         width: 100%;
         height: auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
     .celeb-img img{
-        width: 100%;
+        width: 330px;
         height: auto;
+        max-height: 530px;
         object-fit: cover;
     }
 </style>
@@ -49,44 +66,10 @@
                     </h1>
                 </div>
                 <div class="celeb-img">
-                    <% if(celebrity.profilePic ) { %>
-                        <img class="lazy-photo" data-src="/<%= celebrity.profilePic %>" alt=" <%= celebrity.actorname %> Profile"
-                        srcset="">
-                    <% }else { %>
-                        <img class="lazy-photo" data-src="/images/actor/id/<%= celebrity._id %>.jpg" alt=" <%= celebrity.actorname %> Profile"
-                        srcset="">
-                    <% } %>
+                    <img class="lazy-photo" data-src="/<%= celebrity.profilePic %>" alt=" <%= celebrity.actorname %> Profile" srcset="">
                 </div>
             </div>
-            <!-- <div class="actor-card">
-                <div class="part-one">
-                    <% if(celebrity.profilePic ) { %>
-                        <img class="lazy-photo" data-src="/<%= celebrity.profilePic %>" alt=" <%= celebrity.actorname %> Profile"
-                        srcset="">
-                    <% }else { %>
-                        <img class="lazy-photo" data-src="/images/actor/id/<%= celebrity._id %>.jpg" alt=" <%= celebrity.actorname %> Profile"
-                        srcset="">
-                    <% } %>
-                   
-                </div>
-                <div class="part-two">
-                    <div class="name-part">
-                        <h1>
-                            <%= celebrity.actorname %>
-                        </h1>
-                        <p>
-                            <%= celebrity.occupation %>
-                        </p>
-                    </div>
-                    <div class="center-part">
-                        <p>Age:</p><span id="age"></span>
-                    </div>
-                    <div class="button-part">
-                        <a  href="#images-sec" class="btn btn-outline-primary me-1 flex-grow-1">Images</a>
-                        <a href="#movies-sec" class="btn btn-primary flex-grow-1">Movies</a>
-                    </div>
-                </div>
-            </div> -->
+   
         </div>
         <div class="scd-sec">
 
@@ -107,98 +90,137 @@
                         <h2>Nick Name</h2>
                     </div>
                     <div class="dettails">
-                        <h3> <%- celebrity.nickname%></h3>
+                        <h3>
+                            <%= celebrity.nickname && String(celebrity.nickname).trim() ? celebrity.nickname : '-' %>
+                        </h3>
                     </div>
                 </div>
                 <hr>
-                <% } %>
-                <% if( celebrity.nationality) { %>
-                    <div class="actor-dettails">
-                        <div class="dettails-name">
-                            <h2>Nationality</h2>
-                        </div>
-                        <div class="dettails">
-                            <h3> <%- celebrity.nationality%></h3>
-                        </div>
-                    </div>
-                    <hr>
-                <% } %>
-            <% if( celebrity.age) { %>
-            <div class="actor-dettails">
-                <div class="dettails-name">
-                    <h2>Age</h2>
-                </div>
-                <div class="dettails">
-                    <h3 id="ages"> </h3>
-                </div>
-            </div>
-            <hr>
-            <div class="actor-dettails">
-                <div class="dettails-name">
-                    <h2>Date of Birth</h2>
-                </div>
-                <div class="dettails">
-                    <h3 id="born"><%- celebrity.age%></h3>
-                </div>
-            </div>
-
-            <hr>
             <% } %>
+            
             <div class="actor-dettails">
                 <div class="dettails-name">
                     <h2>Occupation</h2>
                 </div>
                 <div class="dettails">
                     <h3>
-                        <%= celebrity.occupation %>
+                        <%= celebrity.occupation && String(celebrity.occupation).trim() ? celebrity.occupation : '-' %>
                     </h3>
                 </div>
             </div>
             <hr>
+            <% if( celebrity.yearactive) { %>
+                <div class="actor-dettails">
+                    <div class="dettails-name">
+                        <h2>Year Of Active</h2>
+                    </div>
+                    <div class="dettails">
+                        <h3>
+                            <%= celebrity.yearactive && String(celebrity.yearactive).trim() ? celebrity.yearactive : '-' %>
+                        </h3>
+                    </div>
+                </div>
+                <hr>
+            <% } %>
+            <% if( celebrity.age) { %>
+                <div class="actor-dettails">
+                    <div class="dettails-name">
+                        <h2>Age</h2>
+                    </div>
+                    <div class="dettails">
+                        <h3 id="ages"> </h3>
+                    </div>
+                </div>
+                <hr>
+                <div class="actor-dettails">
+                    <div class="dettails-name">
+                        <h2>Date of Birth</h2>
+                    </div>
+                    <div class="dettails">
+                        <h3 id="born"><%- celebrity.age%></h3>
+                    </div>
+                </div>
+    
+                <hr>
+            <% } %>
+            <% if( celebrity.gender) { %>
+                <div class="actor-dettails">
+                    <div class="dettails-name">
+                        <h2>Gender</h2>
+                    </div>
+                    <div class="dettails">
+                        <h3>
+                            <%= celebrity.gender && String(celebrity.gender).trim() ? celebrity.gender : '-' %>
+                        </h3>
+                    </div>
+                </div>
+                <hr>
+            <% } %>
+
+                <% if( celebrity.nationality) { %>
+                    <div class="actor-dettails">
+                        <div class="dettails-name">
+                            <h2>Nationality</h2>
+                        </div>
+                        <div class="dettails">
+                            <h3> 
+                                <%= celebrity.nationality && String(celebrity.nationality).trim() ? celebrity.nationality : '-' %>
+                            </h3>
+                        </div>
+                    </div>
+                    <hr>
+                <% } %>   
+
+            <!-- <div class="actor-dettails">
+                <div class="dettails-name">
+                    <% if (String(celebrity.gender).trim() === 'Male') { %>
+                        <h2>Girlfriend</h2>
+                    <% } else if (String(celebrity.gender).trim() === 'Female') { %>
+                        <h2>Boyfriend</h2>
+                    <% } else { %>
+                        <h2>Partner</h2>
+                    <% } %>
+                </div>
+                <div class="dettails">
+                    <h3>
+                        <%= celebrity.lover && String(celebrity.lover).trim() ? celebrity.lover : '-' %>
+                    </h3>
+                </div>
+            </div> -->
+
             <div class="actor-dettails">
                 <div class="dettails-name">
                     <h2>Language</h2>
                 </div>
                 <div class="dettails">
                     <h3>
-                        <%= celebrity.language %>
+                        <%= celebrity.language && String(celebrity.language).trim() ? celebrity.language : '-' %>
                     </h3>
                 </div>
             </div>
             <hr>
-            <% if( celebrity.hometown) { %>
-                <div class="actor-dettails">
-                    <div class="dettails-name">
-                        <h2>Home Town</h2>
-                    </div>
-                    <div class="dettails">
-                        <h3> <%- celebrity.hometown%></h3>
-                    </div>
-                </div>
-                <hr>
-            <% } %>
-            <div class="about-dettails">
-                <div class="dettails-name">
-                    <h2>About</h2>
-                </div>
-                <div class="dettails">
-                    <p class="cutoff-text">
-                        <%- celebrity.biography %>
-                    </p>
-                    <!-- <input class="expand-btn" type="checkbox"> -->
-                </div>
-            </div>
-            <% if( celebrity.instalink) { %>
-            <hr>
             <div class="actor-dettails">
                 <div class="dettails-name">
-                    <h2><i class="fab fa-instagram fa-lg" style="color: #ac2bac;"></i></h2>
+                    <h2>Instagram </h2>
                 </div>
                 <div class="dettails">
-                <a href="<%= celebrity.instalink %>"><%= celebrity.instalink %></a>
+                <% if( celebrity.instalink) { %>
+                    <a href="<%= celebrity.instalink %>"><i class="fa-brands fa-instagram"></i> <%= celebrity.instalink.substring(26) %></a>
+                <% }else { %>
+                    <h3>-</h3>
+                <% }%>    
                 </div>
             </div>
-            <% } %>
+            <hr>
+            <div class="about-dettails">
+                    <h2>Biography</h2>
+                    <span>
+                        <%= celebrity.biography && String(celebrity.biography).trim() ? celebrity.biography : '-' %>
+                    </span>
+            </div>
+            
+
+            
             <% if( celebrity.twitlink) { %>
             <hr>
             <div class="actor-dettails">
@@ -215,14 +237,14 @@
     <div class="img-sec" id="images-sec">
         <div class="left-blue-header">
             <h2>Images</h2>
-            <% if(celebrity.images.length >6) { %> <a href="/celebs/all-images/<%= celebrity._id%>">View all</a> <% } %>
+            <% if(celebrity.images.length >6) { %> <a href="/celebs/celeb-images/<%= celebrity.celeblink %>">View all</a> <% } %>
         </div>
         <div class="images">
             <% if(celebrity.images.length >0) { %>
                 <% var length= celebrity.images.length >6?6:celebrity.images.length %>
                 <% for(var i=0; i<length; i++){%>
             <div class="image">
-                <a href="/image/download?imgUrl=<%= celebrity.images[i] %>"><img data-src="/<%= celebrity.images[i] %>" alt="<%= celebrity.actorname %> <%= celebrity.images[i] %>" class="lazy-photo"></a>
+                <a href="/image/download?imgUrl=<%= celebrity.images[i] %>&name=<%= celebrity.actorname %>"><img data-src="/<%= celebrity.images[i] %>" alt="<%= celebrity.actorname %> <%= celebrity.images[i] %>" class="lazy-photo"></a>
             </div>
             <% } %>
             <% }else{ %>
@@ -234,30 +256,27 @@
 
     <div class="img-sec" id="movies-sec">
         <div class="left-blue-header">
-            <h2>Movies List</h2>
-            <a href="">View all</a>
+            <h2>TV Shows</h2>
+            <a href="#">View all</a>
         </div>
         <div class="movies-list">
-            <% for(var i=0; i<moviesList.length; i++){%>
+            <% for(var i=0; i<dramaList.length; i++){%>
                 
                 <div class="movie">
-                    <a href="/drama/<%= moviesList[i]._id %> " class="movie-body">
+                    <a href="/drama/<%= dramaList[i].dramalink %> " class="movie-body">
                         <div class="movie-img">
-                            <% if(moviesList[i].moviePoster) { %>
-                                <img class="lazy-photo" data-src="/<%= moviesList[i].moviePoster %>"
-                                    alt=" <%= moviesList[i].name %> Poster" srcset="">
-                                <% }else { %>
-                                    <img class="lazy-photo"
-                                        data-src="/images/dramas/id/<%= moviesList[i]._id  %>.jpg"
-                                        alt=" <%= moviesList[i].name %> poster" srcset="">
+                            <% if( dramaList[i].moviePoster && String(dramaList[i].dramaList).trim()) { %>
+                                <img data-src="/<%= dramaList[i].moviePoster %>" alt="" class="lazy-photo">
+                            <% }else { %>
+                                <img data-src="/images/other/poster-not-available.jpg" alt=" <%= dramaList[i].name %> Poster" class="lazy-photo">
                             <% } %>
                         </div>
                         <div class="movie-text">
                             <h3>
-                                <%= moviesList[i].name %>
+                                <%= dramaList[i].name %>
                             </h3>
                             <p>
-                                <%= moviesList[i].year %>
+                                <%= dramaList[i].year %>
                             </p>
                         </div>
                     </a>

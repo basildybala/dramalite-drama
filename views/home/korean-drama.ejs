@@ -1,16 +1,13 @@
 <%- include('../partials/header'); -%>
-<title>New Full Tamil Movies 2021-2022 Where To Watch</title>
-<meta
-  name="description"
-  content="Upcoming Hit Tamil Movies Release  in Theater Hotstar Netflix Full Check Now. Films Cast & Crew Trailer Release date Story News Images"
-/>
-<meta
-  name="keywords"
-  content="Upcoming Tamil Movies, Tamil Latest Release Movies, Tamil New Movies, Tamil Movies, Tamil Movies Downlaod, Tamil movies free, Tamil Movies Hd"
-/>
+
+<title>Latest Korean Drama Series to Watch in 2025</title>
+<meta name="description" content="Discover the latest Korean drama series to watch in 2025. Explore top picks, exciting new releases, and the best K-dramas for this year. Stay updated with our curated list of must-see dramas!">
+
+<meta name="keywords" content="latest Korean drama, Korean drama series, 2025 Korean dramas, best Korean dramas, Korean drama list, top Korean dramas 2025, watch Korean dramas 2025">
+
 
 <link rel="stylesheet" href="/css/movie-list-new.css" />
-<link
+<!-- <link
   rel="stylesheet"
   type="text/css"
   href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css"
@@ -19,7 +16,7 @@
   type="text/javascript"
   charset="utf8"
   src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"
-></script>
+></script> -->
 
 
 <div class="blue-header">
@@ -41,21 +38,25 @@
 </div>
 
 <!-- Display the list of movies -->
-<% if (movies.length > 0) { %>
+<% if (drama.length > 0) { %>
     <div class="flex">
-        <% movies.forEach(function(movie) { %>
+        <% drama.forEach(function(drama) { %>
             <div class="dramas">
-                <a  href="/drama/<%= movie._id %>">
+                <a  href="/drama/<%= drama.dramalink %>">
                     <div class="drama-s">
-                        <img data-src="/<%= movie.moviePoster %>" alt="" class="lazy-photo">
-                        <h2><%= movie.name %></h2>
-                        <p>Year: <%= movie.year %></p>
-                        <p>Episodes: <%= movie.year %></p>
+                        <% if( drama.moviePoster && String(drama.moviePoster).trim()) { %>
+                            <img data-src="/<%= drama.moviePoster %>" alt="" class="lazy-photo">
+                        <% }else { %>
+                            <img data-src="/images/other/poster-not-available.jpg" alt=" <%= drama.name %> Poster" class="lazy-photo">
+                        <% } %>
+                        <h2><%= drama.name %></h2>
+                        <p><%= drama.releasedate%></p>
+                        <!-- <p>Episodes: <%= drama.episodes %></p> -->
                     </div>
                 </a>
             </div>
         <% }) %>
-    </div>
+</div>
 
 <!-- Responsive Pagination -->
 <div class="pagination">
@@ -116,22 +117,28 @@
         function sortBy(type,event) {
             //event.preventDefault()
             $.ajax({
-                    url: `/tamil-movies?sort=${type}`,
+                    url: `/korean-drama?sort=${type}`,
                     type: 'GET',
                     success: function (data) {
                         
                          // Use data to update the movies section on the page
                         const moviesContainer = $(".flex"); // Target the container that holds the movie list
                         moviesContainer.empty(); // Clear current movie list
-                        data.movies.forEach(function(movie) {
+                        data.drama.forEach(function(drama) {
+                        let moviePoster
+                        if(drama.moviePoster && String(drama.moviePoster).trim()){
+                            moviePoster=drama.moviePoster
+                        }else{
+                            moviePoster='images/other/poster-not-available.jpg'
+                        }
                         const movieHTML = `
                             <div class="dramas">
-                                <a href="/drama/${movie._id}">
+                                <a href="/drama/${drama.dramalink}">
                                     <div class="drama-s">
-                                        <img data-src="/${movie.moviePoster}" alt="" class="lazy-photo">
-                                        <h2>${movie.name}</h2>
-                                        <p>Year: ${movie.year}</p>
-                                        <p>Episodes: ${movie.year}</p>
+                                        <img src="/${moviePoster}" alt="" class="lazy-photo">
+                                        <h2>${drama.name}</h2>
+                                        <p>${drama.releasedate}</p>
+                                        <p>Episodes: ${drama.episodes}</p>
                                     </div>
                                 </a>
                             </div>

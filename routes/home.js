@@ -1,34 +1,47 @@
 const { homePage ,downloadImage,malayalamMoviesPage, tamilMoviesPage, hindiMoviesPage, teluguMoviesPage, englishMoviesPage, kannadaMoviesPage
-,adminPage} = require('../controller/home');
-const { searchMoviePage, searchMovie, termsConditionsPage, privacyPolicyPage, contactPage, latestUpdate, nextRelease, lastRelease } = require('../controller/movies');
+,adminPage,
+koreanDramaPage,chineseDramaPage,
+viewAllDrama} = require('../controller/home');
+const { searchMoviePage, searchMovie, termsConditionsPage, privacyPolicyPage, contactPage, latestUpdate, nextRelease, lastRelease, ongoingDramas, recentlyCompletedDramaPage, getNextRelease, upcomingDramas } = require('../controller/movies');
 const { isUser, isAdmin, isAuth } = require('../middlewares/auth');
 
 const router = require('express').Router()
 
 router.get('/',isUser,homePage)
 
-//MALAYALAM MOVIES
-router.get('/malayalam-movies',isUser,malayalamMoviesPage)
+// //MALAYALAM MOVIES
+// router.get('/malayalam-movies',isUser,malayalamMoviesPage)
 
-//TAMIL MOVIES
-router.get('/tamil-movies',isUser,tamilMoviesPage)
+// //TAMIL MOVIES
+// router.get('/tamil-movies',isUser,tamilMoviesPage)
 
-//HINDI MOVIES
-router.get('/hindi-movies',isUser,hindiMoviesPage)
+//KOREAN DRAMA
+router.get('/korean-drama',isUser,koreanDramaPage)
 
-//TELUGU MOVIES
-router.get('/telugu-movies',isUser,teluguMoviesPage)
 
-//ENGLISH MOVIES
-router.get('/english-movies',isUser,englishMoviesPage)
+//Chinese DRAMA
+router.get('/chinese-drama',isUser,chineseDramaPage) 
 
-//KANNADA MOVIES
-router.get('/kannada-movies',isUser,kannadaMoviesPage)
+//View ALL Drama
+router.get('/view-all-drama',viewAllDrama)
+
+// //HINDI MOVIES
+// router.get('/hindi-movies',isUser,hindiMoviesPage)
+
+// //TELUGU MOVIES
+// router.get('/telugu-movies',isUser,teluguMoviesPage)
+
+// //ENGLISH MOVIES
+// router.get('/english-movies',isUser,englishMoviesPage)
+
+// //KANNADA MOVIES
+// router.get('/kannada-movies',isUser,kannadaMoviesPage)
 
 router.get('/image/download',isUser,downloadImage)
 
-//ADMIN PAGE
-router.get('/devadmin',isAuth,isAdmin,adminPage)
+// //ADMIN PAGE
+// // router.get('/devadmin',isAuth,isAdmin,adminPage)
+// router.get('/devadmin',adminPage)
 
 //SEARCH MOVIE
 router.get('/search-movie',isUser,searchMoviePage)
@@ -37,10 +50,15 @@ router.get('/search-movie',isUser,searchMoviePage)
 router.get('/latest-update',isUser,latestUpdate)
 
 //Upcoming Release movies List
-router.get('/upcoming-releases',isUser,nextRelease)
+// router.get('/upcoming-releases',isUser,nextRelease)
 
 //Upcoming Release movies List
-router.get('/last-released-movies',isUser,lastRelease)
+router.get('/recently-completed',isUser,recentlyCompletedDramaPage)
+
+router.get('/ongoing-dramas',isUser,ongoingDramas)
+
+//UPCOMING Drama
+router.get('/upcoming-dramas',isUser,upcomingDramas)
 
 //SEARCH MOVIE
 router.post('/search-movie',searchMovie)
@@ -52,7 +70,9 @@ router.get('/terms-conditions',isUser,termsConditionsPage)
 router.get('/privacy-policy',isUser,privacyPolicyPage)
 
 //CONTACT
-router.get('/contact',isUser,contactPage)
+router.get('/contact',isUser,contactPage) 
+
+
 
 
 module.exports = router;

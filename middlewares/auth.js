@@ -30,7 +30,6 @@ exports.isAuth = async (req, res, next) => {
 
 exports.isAdmin = async (req, res, next) => {
   const { user } = req;
-  console.log(user)
   if (user.role !== "admin")  return res.redirect('/auth/login')
   next();
 };
@@ -49,9 +48,14 @@ exports.isUser = async (req, res, next) => {
     }
     const { userId } = decode;
     const user = await User.findById(userId);
-    if (!user) return res.render('err-find',{error:{msg:"unauthorized access!!",link:'/auth/login'}}) 
-    req.user = user;
-    next();
+    if(user){
+      req.user = user;
+      next();
+    }else{
+      req.user = null;
+      next()
+    }
+
   }else{
     req.user = null;
     next();

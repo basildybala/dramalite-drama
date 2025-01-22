@@ -6,8 +6,65 @@
         integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="/css/auth.css">
     <script src="https://cdn.ckeditor.com/4.20.1/standard/ckeditor.js"></script>
+    <style>
+        #suggestions {
+      border: 1px solid #ccc;
+      max-width: 300px;
+      margin-top: 5px;
+      position: absolute;
+      background-color: #fff;
+      z-index: 1000;
+    }
+    .suggestion {
+      padding: 8px;
+      cursor: pointer;
+    }
+    .suggestion:hover {
+      background-color: #f0f0f0;
+    }
+    #selectedTags span {
+      margin-right: 10px;
+      padding: 5px;
+      background-color: #e0e0e0;
+      border-radius: 5px;
+      display: inline-block;
+    }
+    #selectedTags button {
+      margin-left: 5px;
+      border: none;
+      background: none;
+      cursor: pointer;
+      color: red;
+    }
+
+    #suggestionsGenre {
+      border: 1px solid #ccc;
+      max-width: 300px;
+      margin-top: 5px;
+      position: absolute;
+      background-color: #fff;
+      z-index: 1000;
+    }
+    .suggestion:hover {
+      background-color: #f0f0f0;
+    }
+    #selectedGenres span {
+      margin-right: 10px;
+      padding: 5px;
+      background-color: #e0e0e0;
+      border-radius: 5px;
+      display: inline-block;
+    }
+    #selectedGenres button {
+      margin-left: 5px;
+      border: none;
+      background: none;
+      cursor: pointer;
+      color: red;
+    }
+    </style>
     <div class="signup-form">
-        <form enctype="multipart/form-data" id="signup-form" action="/movie/edit-movie/<%= movie._id %>" method="post">
+        <form enctype="multipart/form-data" id="signup-form" action="/drama/edit-movie/<%= movie._id %>" method="post">
             <h2>Edit Movie</h2>
             <hr>
             <div class="form-group">
@@ -36,19 +93,25 @@
                 <div class="input-group">
                     <select class="form-control" name="category" required>
                         <option value="<%= movie.category %>"><%= movie.category %></option>
-                        <option value="Malayalam">Malayalam</option>
-                        <option value="Tamil">Tamil</option>
-                        <option value="Hindi">Hindi</option>
-                        <option value="Telugu">Telugu</option>
-                        <option value="Kannada">Kannada</option>
-                        <option value="English">English</option>
+                        <option value="Korean">Korean</option>
+                        <option value="Chinese">Chinese</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="name">Country</label>
+                <div class="input-group">
+                    <select class="form-control" name="country" required>
+                        <option value="<%= movie.country %>"><%= movie.country %></option>
+                        <option value="Korea">Korea</option>
+                        <option value="China">China</option>
                     </select>
                 </div>
             </div>
             <div class="form-group">
                 <label for="name">Year:</label>
                 <div class="input-group">
-                    <input type="number" class="form-control" name="year" placeholder="Year">
+                    <input type="number" class="form-control" name="year" placeholder="Year"  value="<%= movie.year %>">
                 </div>
             </div>
 
@@ -60,15 +123,25 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="name">OTT Release Date:</label>
+                <label for="name">Episode End Date:</label>
                 <div class="input-group">
-                    <input class="form-control" name="ottreleasedate" placeholder="Release Date" value="<%= movie.ottreleasedate %>">
+                    <input class="form-control" name="episodeEndDate" placeholder="Episode End Date" value="<%= movie.episodeEndDate %>">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="name">Episodes:</label>
+                <div class="input-group">
+                    <input type="number" class="form-control" name="episodes" placeholder="Episodes" value="<%= movie.episodes %>">
                 </div>
             </div>
             <div class="form-group">
                 <label for="name">Genre:</label>
                 <div class="input-group">
-                    <input type="text" class="form-control" name="genre" placeholder="genre" value="<%= movie.genre %>">
+                    <input type="text" id="genreInput" autocomplete="off" placeholder="Start typing genres..." />
+                    <div id="suggestionsGenre"></div>
+                    <div id="selectedGenres"></div>
+                    <div id="hiddenSelectedGenres"></div>
+                    <!-- <input type="text" class="form-control" name="genre" placeholder="genre" value="<%= movie.genre %>"> -->
                 </div>
             </div>
             <div class="form-group">
@@ -98,7 +171,7 @@
                         value="<%= movie.writtenlink %>">
                 </div>
             </div>
-
+<!-- 
             <div class="form-group">
                 <label for="name">Producer:</label>
                 <div class="input-group">
@@ -107,17 +180,23 @@
                     <input type="text" class="form-control" name="producedbylink" placeholder="Producer Link"
                         value="<%= movie.producedbylink %>">
                 </div>
-            </div>
+            </div> -->
             <div class="form-group">
                 <label for="name">Youtube Trailer:</label>
                 <div class="input-group">
-                    <input type="text" class="form-control" name="ytlink" placeholder="Producer Name"
+                    <input type="text" class="form-control" name="ytlink" placeholder="Youtube Link"
                         value="<%= movie.ytlink %>">
                 </div>
             </div>
             <div class="form-group">
                 <label for="name">Tags</label>
-                <div class="cate-array">
+                <div class="input-group">
+                    <input type="text" id="tagInput" autocomplete="off" placeholder="Start typing..." />
+                    <div id="suggestions"></div>
+                    <div id="selectedTags"></div>
+                    <div id="hiddenSelectedTags"></div>
+                </div>
+                <!-- <div class="cate-array">
                     <% for(var i=0; i<movie.tags.length; i++){%>
                         <div class="cate-div">
                             <input type="text" class="form-control" placeholder="Tag" name="tags"
@@ -125,10 +204,10 @@
                             <button class="btn btn-danger remove-btn m-2"><i class="fa-solid fa-trash"></i></button>
                         </div>
                         <%}%>
-                </div>
+                </div> -->
             </div>
-            <button id="add-label" class="btn btn-success mb-2">Add</button>
-            <% if(movie.moviePoster){%>
+            <!-- <button id="add-label" class="btn btn-success mb-2">Add</button> -->
+            <% if(movie.whereToWatch){%>
                 <div class="form-group">
                     <label for="name">Ott:</label>
                     <select class="form-control" name="ottName">
@@ -145,7 +224,7 @@
                                         </option>
                                         <% } %>
                     </select>
-                    <select class="form-control" name="ottImg" style="margin: 7px 0px;">
+                    <!-- <select class="form-control" name="ottImg" style="margin: 7px 0px;">
                         <% if(movie.whereToWatch.ottImg){%>
                             <option value="<%= movie.whereToWatch.ottImg%>">
                                 <%= movie.whereToWatch.ottName%>
@@ -158,7 +237,7 @@
                                             <%= ott[i].name %>
                                         </option>
                                         <% } %>
-                    </select>
+                    </select> -->
                     <div class="input-group">
                         <input type="text" class="form-control" name="ottUrl" placeholder="OTT url"
                             value="<%= movie.whereToWatch.ottUrl %>">
@@ -168,7 +247,7 @@
                     <div class="form-group">
                         <label for="name">Story:</label>
                         <div class="input-group">
-                            <textarea name="story"><%= movie.story %></textarea>
+                            <textarea name="story" class="form-control" style="height: 180px;"><%= movie.story %></textarea>
                         </div>
                     </div>
 
@@ -177,6 +256,9 @@
                         <div class="input-group">
                             <input type="text" class="form-control" name="actid1" placeholder="ID"
                                 value="<%= movie.actid1 %>">
+
+                            <input type="text" class="form-control" name="celeblink1" placeholder="Celeb Link"value="<%= movie.celeblink1 %>">    
+
                             <input type="text" class="form-control" name="actorname1" placeholder="Name"
                                 value="<%= movie.actorname1 %>">
 
@@ -184,6 +266,12 @@
                         <div class="input-group" style="margin: 5px 0px;">
                             <input type="text" class="form-control" name="actimg1" placeholder="Img Url"
                                 value="<%= movie.actimg1 %>">
+                            <select class="form-control" name="celebrole1">
+                                <option value="<%= movie.celebrole1 %>"><%= movie.celebrole1 && String(movie.celebrole1).trim()?movie.celebrole1: 'Role' %></option>
+                                <option value="Main Role">Main Role</option>
+                                <option value="Support Role">Support Role</option>
+                                <option value="Guest Role">Guest Role</option> 
+                            </select>
                             <input type="text" class="form-control" name="mvactorname1" placeholder="Mv Name"
                                 value="<%= movie.mvactorname1 %>">
                         </div>
@@ -193,12 +281,19 @@
                         <div class="input-group">
                             <input type="text" class="form-control" name="actid2" placeholder="ID"
                                 value="<%= movie.actid2 %>">
+                            <input type="text" class="form-control" name="celeblink2" placeholder="Celeb Link"value="<%= movie.celeblink2 %>">  
                             <input type="text" class="form-control" name="actorname2" placeholder="Name"
                                 value="<%= movie.actorname2 %>">
                         </div>
                         <div class="input-group" style="margin: 5px 0px;">
                             <input type="text" class="form-control" name="actimg2" placeholder="Img Url"
                                 value="<%= movie.actimg2 %>">
+                                <select class="form-control" name="celebrole2">
+                                    <option value="<%= movie.celebrole2 %>"><%= movie.celebrole2 && String(movie.celebrole2).trim()?movie.celebrole2: 'Role' %></option>
+                                    <option value="Main Role">Main Role</option>
+                                    <option value="Support Role">Support Role</option>
+                                    <option value="Guest Role">Guest Role</option> 
+                                </select>    
                             <input type="text" class="form-control" name="mvactorname2" placeholder="Mv Name"
                                 value="<%= movie.mvactorname2 %>">
                         </div>
@@ -208,12 +303,19 @@
                         <div class="input-group">
                             <input type="text" class="form-control" name="actid3" placeholder="ID"
                                 value="<%= movie.actid3 %>">
+                            <input type="text" class="form-control" name="celeblink3" placeholder="Celeb Link"value="<%= movie.celeblink3 %>">  
                             <input type="text" class="form-control" name="actorname3" placeholder="Name"
                                 value="<%= movie.actorname3 %>">
                         </div>
                         <div class="input-group" style="margin: 5px 0px;">
                             <input type="text" class="form-control" name="actimg3" placeholder="Img Url"
                                 value="<%= movie.actimg3 %>">
+                                <select class="form-control" name="celebrole3">
+                                    <option value="<%= movie.celebrole3 %>"><%= movie.celebrole3 && String(movie.celebrole3).trim()?movie.celebrole3: 'Role' %></option>
+                                    <option value="Main Role">Main Role</option>
+                                    <option value="Support Role">Support Role</option>
+                                    <option value="Guest Role">Guest Role</option> 
+                                </select>
                             <input type="text" class="form-control" name="mvactorname3" placeholder="Mv Name"
                                 value="<%= movie.mvactorname3 %>">
                         </div>
@@ -223,6 +325,7 @@
                         <div class="input-group">
                             <input type="text" class="form-control" name="actid4" placeholder="ID"
                                 value="<%= movie.actid4 %>">
+                            <input type="text" class="form-control" name="celeblink4" placeholder="Celeb Link"value="<%= movie.celeblink4 %>">  
                             <input type="text" class="form-control" name="actorname4" placeholder="Name"
                                 value="<%= movie.actorname4 %>">
 
@@ -230,6 +333,12 @@
                         <div class="input-group" style="margin: 5px 0px;">
                             <input type="text" class="form-control" name="actimg4" placeholder="Img Url"
                                 value="<%= movie.actimg4 %>">
+                                <select class="form-control" name="celebrole4">
+                                    <option value="<%= movie.celebrole4 %>"><%= movie.celebrole4 && String(movie.celebrole4).trim()?movie.celebrole4: 'Role' %></option>
+                                    <option value="Main Role">Main Role</option>
+                                    <option value="Support Role">Support Role</option>
+                                    <option value="Guest Role">Guest Role</option> 
+                                </select>
                             <input type="text" class="form-control" name="mvactorname4" placeholder="Mv Name"
                                 value="<%= movie.mvactorname4 %>">
                         </div>
@@ -239,6 +348,7 @@
                         <div class="input-group">
                             <input type="text" class="form-control" name="actid5" placeholder="ID"
                                 value="<%= movie.actid5 %>">
+                            <input type="text" class="form-control" name="celeblink5" placeholder="Celeb Link"value="<%= movie.celeblink5 %>">  
                             <input type="text" class="form-control" name="actorname5" placeholder="Name"
                                 value="<%= movie.actorname5 %>">
 
@@ -246,6 +356,12 @@
                         <div class="input-group" style="margin: 5px 0px;">
                             <input type="text" class="form-control" name="actimg5" placeholder="Img Url"
                                 value="<%= movie.actimg5 %>">
+                                <select class="form-control" name="celebrole5">
+                                    <option value="<%= movie.celebrole5 %>"><%= movie.celebrole5 && String(movie.celebrole5).trim()?movie.celebrole5: 'Role' %></option>
+                                    <option value="Main Role">Main Role</option>
+                                    <option value="Support Role">Support Role</option>
+                                    <option value="Guest Role">Guest Role</option> 
+                                </select>
                             <input type="text" class="form-control" name="mvactorname5" placeholder="Mv Name"
                                 value="<%= movie.mvactorname5 %>">
                         </div>
@@ -255,6 +371,7 @@
                         <div class="input-group">
                             <input type="text" class="form-control" name="actid6" placeholder="ID"
                                 value="<%= movie.actid6 %>">
+                            <input type="text" class="form-control" name="celeblink6" placeholder="Celeb Link"value="<%= movie.celeblink6 %>">  
                             <input type="text" class="form-control" name="actorname6" placeholder="Name"
                                 value="<%= movie.actorname6 %>">
 
@@ -262,6 +379,12 @@
                         <div class="input-group" style="margin: 5px 0px;">
                             <input type="text" class="form-control" name="actimg6" placeholder="Img Url"
                                 value="<%= movie.actimg6 %>">
+                                <select class="form-control" name="celebrole6">
+                                    <option value="<%= movie.celebrole6 %>"><%= movie.celebrole6 && String(movie.celebrole6).trim()?movie.celebrole6: 'Role' %></option>
+                                    <option value="Main Role">Main Role</option>
+                                    <option value="Support Role">Support Role</option>
+                                    <option value="Guest Role">Guest Role</option> 
+                                </select>
                             <input type="text" class="form-control" name="mvactorname6" placeholder="Mv Name"
                                 value="<%= movie.mvactorname6 %>">
                         </div>
@@ -272,6 +395,7 @@
                         <div class="input-group">
                             <input type="text" class="form-control" name="actid7" placeholder="ID"
                                 value="<%= movie.actid7 %>">
+                            <input type="text" class="form-control" name="celeblink7" placeholder="Celeb Link"value="<%= movie.celeblink7 %>">  
                             <input type="text" class="form-control" name="actorname7" placeholder="Name"
                                 value="<%= movie.actorname7 %>">
 
@@ -279,6 +403,12 @@
                         <div class="input-group" style="margin: 5px 0px;">
                             <input type="text" class="form-control" name="actimg7" placeholder="Img Url"
                                 value="<%= movie.actimg7 %>">
+                                <select class="form-control" name="celebrole7">
+                                    <option value="<%= movie.celebrole7 %>"><%= movie.celebrole7 && String(movie.celebrole7).trim()?movie.celebrole7: 'Role' %></option>
+                                    <option value="Main Role">Main Role</option>
+                                    <option value="Support Role">Support Role</option>
+                                    <option value="Guest Role">Guest Role</option> 
+                                </select>
                             <input type="text" class="form-control" name="mvactorname7" placeholder="Mv Name"
                                 value="<%= movie.mvactorname7 %>">
                         </div>
@@ -313,44 +443,214 @@
                                 <% }%>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary btn-lg blue-backgroud">Add Movie</button>
+                    <button type="submit" class="btn btn-primary  blue-backgroud">Edit Drama</button>
         </form>
     </div>
-    =
+    
     <script>
-        CKEDITOR.replace('story');
+    //============================GENREE=============================
+    const genreInput = document.getElementById('genreInput');
+    const suggestionsGenreDiv = document.getElementById('suggestionsGenre');
+    const selectedGenresDiv = document.getElementById('selectedGenres');
+    const hiddenSelectedGenres = document.getElementById('hiddenSelectedGenres');
 
-        let addBtn = document.getElementById('add-label');
-        let cateArray = document.querySelector('.cate-array');
-        let CateDiv = document.querySelectorAll('.cate-div')[0];
+    let selectedGenres = [];
+    let newGenre = []
+    newGenre = ' <%- JSON.stringify(movie.genre) %>';
 
-        addBtn.addEventListener('click', function (e) {
-            e.preventDefault()
-            let value = CateDiv.cloneNode(true);
-            let input = value.getElementsByTagName('input')[0];
-            input.value = '';
-            cateArray.appendChild(value);
+    newGenre = JSON.parse(newGenre);
+    
+    // Handle autocomplete
+    genreInput.addEventListener('input', async () => {
+      const query = genreInput.value.trim();
+      if (!query) {
+        suggestionsGenreDiv.innerHTML = '';
+        return;
+      }
+
+      // Fetch matching genres from the server
+      const response = await fetch(`/drama/genre-available?q=${query}&filter=Genre`);
+      const genres = await response.json();
+
+      // Populate suggestions
+      suggestionsGenreDiv.innerHTML = '';
+      genres.forEach(genre => {
+        const suggestion = document.createElement('div');
+        suggestion.className = 'suggestion';
+        suggestion.textContent = genre.name;
+        suggestion.addEventListener('click', () => selectGenre(genre.name));
+        suggestionsGenreDiv.appendChild(suggestion);
+      });
+    });
+
+    // Add selected genre
+    function selectGenre(genreName) {
+      if (!selectedGenres.includes(genreName)) {
+        selectedGenres.push(genreName);
+        updateSelectedGenres();
+      }
+      genreInput.value = '';
+      suggestionsGenreDiv.innerHTML = '';
+    }
+    if(newGenre.length > 0){
+        // Already added tag showing
+        newGenre.forEach(async (genre) => {
+            if (!selectedGenres.includes(genre)) {
+            selectedGenres.push(genre);
+            await updateSelectedGenres(); // Call the async function
+        }
+        tagInput.value = '';
+        suggestionsDiv.innerHTML = '';
         });
-        $(document).on('click', '.remove-btn', function (e) {
+    }
+
+    // Update the selected genres UI and hidden inputs
+    function updateSelectedGenres() {
+      selectedGenresDiv.innerHTML = '';
+      hiddenSelectedGenres.innerHTML = '';
+
+      selectedGenres.forEach(genre => {
+        // Update UI
+        const genreElement = document.createElement('span');
+        genreElement.innerHTML = `${genre} <button type="button" onclick="removeGenre('${genre}')">x</button>`;
+        selectedGenresDiv.appendChild(genreElement);
+
+        // Add a hidden input for each selected genre
+        const input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = 'genre[]'; // Ensure the backend receives an array
+        input.value = genre;
+        hiddenSelectedGenres.appendChild(input);
+      });
+    }
+
+    // Remove a genre
+    function removeGenre(genreName) {
+      selectedGenres = selectedGenres.filter(genre => genre !== genreName);
+      updateSelectedGenres();
+    }
+   
+    //=======================================TAGS SETUP CODE==============================
+    const tagInput = document.getElementById('tagInput');
+    const suggestionsDiv = document.getElementById('suggestions');
+    const selectedTagsDiv = document.getElementById('selectedTags');
+    const hiddenSelectedTags = document.getElementById('hiddenSelectedTags');
+
+    let selectedTags =[];
+    let newTags = ' <%- JSON.stringify(movie.tags) %>';
+    newTags = JSON.parse(newTags);
+
+    // Handle autocomplete
+    tagInput.addEventListener('input', async () => {
+      const query = tagInput.value.trim();
+      if (!query) {
+        suggestionsDiv.innerHTML = '';
+        return;
+      }
+
+      // Fetch matching tags from the server
+      const response = await fetch(`/drama/tags-available?q=${query}&filter=Tags`);
+      const tags = await response.json();
+
+      // Populate suggestions
+      suggestionsDiv.innerHTML = '';
+      tags.forEach(tag => {
+        const suggestion = document.createElement('div');
+        suggestion.className = 'suggestion';
+        suggestion.textContent = tag.name;
+        suggestion.addEventListener('click', () => selectTag(tag.name));
+        suggestionsDiv.appendChild(suggestion);
+      });
+    });
+    if(newTags.length > 0){
+
+        // Already added tag showing
+        newTags.forEach(async (tag) => {
+            if (!selectedTags.includes(tag)) {
+                selectedTags.push(tag);
+                await updateSelectedTags(); // Call the async function
+            }
+            tagInput.value = '';
+            suggestionsDiv.innerHTML = '';
+        });
+    }
+
+
+    // Add selected tag
+    function selectTag(tagName) {
+      if (!selectedTags.includes(tagName)) {
+        selectedTags.push(tagName);
+        updateSelectedTags();
+      }
+      tagInput.value = '';
+      suggestionsDiv.innerHTML = '';
+    }
+
+    // Update the selected tags UI and hidden inputs
+    function updateSelectedTags() {
+      selectedTagsDiv.innerHTML = '';
+      hiddenSelectedTags.innerHTML = '';
+
+      selectedTags.forEach(tag => {
+        // Update UI
+        const tagElement = document.createElement('span');
+        tagElement.innerHTML = `${tag} <button type="button" onclick="removeTag('${tag}')">x</button>`;
+        selectedTagsDiv.appendChild(tagElement);
+
+        // Add a hidden input for each selected tag
+        const input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = 'tags[]'; // Ensure the backend receives an array
+        input.value = tag;
+        hiddenSelectedTags.appendChild(input);
+      });
+    }
+
+    // Remove a tag
+    function removeTag(tagName) {
+        console.log(tagName,selectedTags)
+      selectedTags = selectedTags.filter(tag => tag !== tagName);
+      updateSelectedTags();
+    }
+
+    $(document).on('click', '.remove-btn', function (e) {
             e.preventDefault();
             let rowItem = $(this).parent();
             $(rowItem).remove();
-        })
-        let addIngredientsBtn = document.getElementById('addIngredientsBtn');
-        let ingredientList = document.querySelector('.ingredientList');
-        let ingredeintDiv = document.querySelectorAll('.ingredeintDiv')[0];
-        addIngredientsBtn.addEventListener('click', function () {
-            let newIngredients = ingredeintDiv.cloneNode(true);
-            let input = newIngredients.getElementsByTagName('input')[0];
-            input.value = '';
-            ingredientList.appendChild(newIngredients);
-        });
+    })
+        // CKEDITOR.replace('story');
 
-        $(document).on('click', '.remove-btn', function (e) {
-            e.preventDefault();
-            let rowItem = $(this).parent();
-            $(rowItem).remove();
-        })
+        // let addBtn = document.getElementById('add-label');
+        // let cateArray = document.querySelector('.cate-array');
+        // let CateDiv = document.querySelectorAll('.cate-div')[0];
+
+        // addBtn.addEventListener('click', function (e) {
+        //     e.preventDefault()
+        //     let value = CateDiv.cloneNode(true);
+        //     let input = value.getElementsByTagName('input')[0];
+        //     input.value = '';
+        //     cateArray.appendChild(value);
+        // });
+        // $(document).on('click', '.remove-btn', function (e) {
+        //     e.preventDefault();
+        //     let rowItem = $(this).parent();
+        //     $(rowItem).remove();
+        // })
+        // let addIngredientsBtn = document.getElementById('addIngredientsBtn');
+        // let ingredientList = document.querySelector('.ingredientList');
+        // let ingredeintDiv = document.querySelectorAll('.ingredeintDiv')[0];
+        // addIngredientsBtn.addEventListener('click', function () {
+        //     let newIngredients = ingredeintDiv.cloneNode(true);
+        //     let input = newIngredients.getElementsByTagName('input')[0];
+        //     input.value = '';
+        //     ingredientList.appendChild(newIngredients);
+        // });
+
+        // $(document).on('click', '.remove-btn', function (e) {
+        //     e.preventDefault();
+        //     let rowItem = $(this).parent();
+        //     $(rowItem).remove();
+        // })
     </script>
 
     <%- include('../partials/footer'); -%>
