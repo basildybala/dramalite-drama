@@ -1,8 +1,7 @@
 <%- include('../partials/header'); -%>
-    <link rel="stylesheet" href="/css/movie.css">
-    
-
-
+<!-- Video.js Stylesheet -->
+<link href="https://vjs.zencdn.net/7.10.2/video-js.css" rel="stylesheet" />
+<link rel="stylesheet" href="/css/movie.css">
 <title><%= movie.engname %> <%= dramaTitle %>: Release Date, Episodes, Cast, Reviews and More</title>
 <meta name="title" content="<%= movie.engname %> <%= dramaTitle %>: Release Date, Episodes, Cast, Reviews and More"/>
 <meta name="description" content="<%= movie.genre %> <%= movie.engname %> <%= dramaTitle %>. <%= movie.story %>">
@@ -453,11 +452,30 @@
         </div>
     <div class="drama-trailer">
         <iframe 
-        data-src="<%= movie.ytlink%>" class="lazy-photo"> 
+        data-src="<%= movie.ytlink%>" class="drama-trailer-iframe lazy-photo"> 
         </iframe>
     </div>
     </div>
     <% } %>
+    <!--------------------------------VIDEO SECTION---------------->
+
+    <div class="other-sec">
+        <div class="left-blue-header">
+            <h2>Videos</h2>
+        </div>
+        <div class="drama-videos">
+            <video id="my-video" class="video-js vjs-default-skin" controls>
+                <source src="https://video.twimg.com/amplify_video/1881596230054064128/pl/DKU3b0vhxoai-2ky.m3u8?tag=14&v=cb5" type="application/x-mpegURL">
+            </video>
+
+            <video id="my-video1" class="video-js vjs-default-skin" controls>
+                <source src="https://video.twimg.com/amplify_video/1881596230054064128/pl/DKU3b0vhxoai-2ky.m3u8?tag=14&v=cb5" type="application/x-mpegURL">
+            </video>
+            
+
+        </div>
+    </div>
+
     <% if(movie.releaseDate < dateNow){%>
     <!----------------------NEW REVIEW SECTION----------------->
     <div class="other-sec" id="review">
@@ -644,8 +662,12 @@
 
 
 
-
+    <!-- Video.js Script (Load this before your custom JS) -->
+    <script src="https://vjs.zencdn.net/7.10.2/video.js"></script>
     <script async>
+        // Initialize Video.js Player
+        var player = videojs('my-video');
+        var player = videojs('my-video1');
         const movieRating = document.getElementById('movie-rating')
 
         const movieRatingValue = document.getElementById('drama-rating-value')

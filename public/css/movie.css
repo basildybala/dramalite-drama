@@ -552,6 +552,30 @@
     justify-content: center;
     align-items: center;
 }
+.drama-trailer-iframe{
+    width: 95%;
+    height: 200px;
+}
+.drama-videos{
+    width: 100%;
+    padding: 5px 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+.video-js .vjs-big-play-button {
+    top:44%;
+    left: 36%;
+  }
+  .video-js{
+    margin-bottom: 7px;
+  } 
+.video-js .vjs-big-play-button {
+    top:44%;
+    left: 36%;
+}
 .whereToWatch{
     width: 100%;
     padding: 10px;
