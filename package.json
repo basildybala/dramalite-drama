@@ -37,6 +37,7 @@
     "passport-google-oauth20": "^2.0.0",
     "path": "^0.12.7",
     "shortid": "^2.2.16",
-    "slugify": "^1.6.5"
+    "slugify": "^1.6.5",
+    "twitter-api-v2": "^1.19.0"
   }
 }

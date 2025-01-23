@@ -1,50 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <!-- Google Tag Manager -->
-        <script async>(function (w, d, s, l, i) {
-            w[l] = w[l] || []; w[l].push({
-              'gtm.start':
-                new Date().getTime(), event: 'gtm.js'
-            }); var f = d.getElementsByTagName(s)[0],
-              j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
-                'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
-          })(window, document, 'script', 'dataLayer', 'GTM-5VRBV3N');</script>
-        <!-- End Google Tag Manager -->
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="shortcut icon" href="/images/logo/dramalite-icon.png" type="image/x-icon">
-        <!-- <link rel="apple-touch-icon" sizes="180x180" href="/images/logo/dramalite-icon.png">
-        <link rel="icon" href="/images/logo/dramalite-icon.png" type="image/x-icon"> -->
-        <link rel="icon" sizes="32x32" href="/images/logo/dramalite-icon.png" type="image/x-icon">
-        <link rel="icon" type="image/png" sizes="16x16" href="/images/logo/dramalite-icon.png">
-        <link rel="stylesheet" href="/css/style.css">
-        <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
-          integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
-          crossorigin="anonymous" referrerpolicy="no-referrer" />
-      
-        <meta name="msapplication-TileColor" content="#da532c">
-        <meta name="theme-color" content="#ffffff"> -->
-        <script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@17.3.1/dist/lazyload.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
-      </head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Player</title>
+    
+    <!-- Video.js Stylesheet -->
+    <link href="https://vjs.zencdn.net/7.10.2/video-js.css" rel="stylesheet" />
+    
+    <!-- Custom CSS for Mobile-First Design -->
+    <style>
+
+        .video-container {
+            max-width: 100%;
+            margin: 20px auto;
+            padding: 10px;
+            background-color: #000;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: relative; /* Ensure that play button can be centered within this container */
+        }
+        
+        #my-video {
+            width: 100%;
+            border-radius: 10px;
+        }
+        .vjs-big-play-button {
+            position: absolute !important; /* Position relative to video container */
+            top: 43% !important;
+            left: 37% !important;
+
+        }
+
+        /* Video player responsiveness */
+        @media (max-width: 768px) {
+            .video-container {
+                margin: 10px;
+                padding: 5px;
+            }
+
+            #my-video {
+                border-radius: 5px;
+            }
+        }
+
+
+    </style>
+
+    <!-- Video.js and HLS Plugin -->
+    <script src="https://vjs.zencdn.net/7.10.2/video.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/videojs-contrib-hls@5.13.0/dist/videojs-contrib-hls.js"></script>
+</head>
 <body>
-
-
-    <div class="blue-header">
-        <h1>
-            Saniya
-        </h1>
+    <!-- Video Container with Styled Player -->
+    <div class="video-container">
+        <video id="my-video" class="video-js vjs-default-skin" controls>
+            <source src="https://video.twimg.com/amplify_video/1881596230054064128/pl/DKU3b0vhxoai-2ky.m3u8?tag=14&v=cb5" type="application/x-mpegURL">
+        </video>
     </div>
 
+    <script>
+        // Initialize Video.js Player
+        var player = videojs('my-video');
 
+        // Hide the play button once the video starts playing
+        player.on('play', function() {
+            // Add the hidden class to hide the play button
+            player.controlBar.bigPlayButton.hide();
+        });
 
-
-
-    <div>
-
-        <img style="width: 320px;" src="/images/actor/Shinweb.webp" alt="" srcset="">
-    </div>
+        // You can also ensure that when the video ends, it comes back (optional)
+        player.on('ended', function() {
+            // Show the play button again if needed
+            player.controlBar.bigPlayButton.show();
+        });
+    </script>
 </body>
 </html>
