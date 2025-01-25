@@ -1,20 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://vjs.zencdn.net/7.10.2/video-js.css" rel="stylesheet">
+    <title>Video Player</title>
+</head>
+<body>
 
-<script src="https://vjs.zencdn.net/7.10.2/video.js" async></script>
+    <video id="my-video" class="video-js vjs-default-skin" controls preload="auto" width="640" height="360">
+        <source src="https://video.twimg.com/amplify_video/1882003484985450496/pl/qXSSU2u5pbrMtLQP.m3u8?tag=16&v=a31" type="application/x-mpegURL">
+    </video>
 
-<form action="/devadmin/sample" method="POST">
+    <video id="my-video1" class="video-js vjs-default-skin" controls preload="auto" width="640" height="360">
+        <source src="https://video.twimg.com/amplify_video/1882003484985450496/pl/qXSSU2u5pbrMtLQP.m3u8?tag=16&v=a31" type="application/x-mpegURL">
+    </video>
 
-    <label for="tags">Tags (comma-separated):</label>
-    <input type="text" id="tags" name="tags" placeholder="Enter tags, e.g., 1882598588204896722,1882598588204896721" >
-    <button type="submit">Submit</button>
- 
-</form>
+    <script src="https://vjs.zencdn.net/7.10.2/video.js" defer></script>
+    <script>
+                var player1 = videojs('my-video');  // First player
+                var player2 = videojs('my-video1'); // Second player
 
-<video id="my-video1" class="video-js vjs-default-skin" controls>
-    <source src="https://video.twimg.com/amplify_video/1882003484985450496/pl/qXSSU2u5pbrMtLQP.m3u8?tag=16&v=a31" type="application/x-mpegURL" class="lazy-photo">
-</video> 
+    </script>
 
-<script>
-            // Initialize Video.js Player
-            var player = videojs('my-video');
-        var player = videojs('my-video1');
-</script>
+</body>
+</html>

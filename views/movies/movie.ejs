@@ -21,8 +21,7 @@
 <meta name="twitter:image" content="https://dramalite.com/<%= movie.moviePoster %>">
 <meta name="twitter:url" content="https://dramalite.com/drama/<%= movie.dramalink %>">
 <link rel="canonical" href="https://dramalite.com/drama/<%= movie.dramalink %>"/>
-<!-- Video.js and HLS Plugin -->
-<script src="https://vjs.zencdn.net/7.10.2/video.js" async></script>
+
 
 <script type="application/ld+json" async>
     {"@context":"http://schema.org",
@@ -435,29 +434,23 @@
     </div>
     </div>
     <% } %>
+    <% if(movie.twitLink[0]){%>
     <!--------------------------------VIDEO SECTION---------------->
-
     <div class="other-sec">
         <div class="left-blue-header">
             <h2>Videos</h2>
         </div>
         <div class="drama-videos">
-            <!-- <% for(var i = 0; i < movie?.twitLink; i++) { 
-                <video id="my-video" class="video-js vjs-default-skin" controls>
-                    <source src="movie[i].twitLink" type="application/x-mpegURL" class="lazy-photo">
-                </video>
-            <% } %> -->
-
-            <video id="my-video" class="video-js vjs-default-skin" controls>
-                <source src="https://video.twimg.com/ext_tw_video/1882787646260248576/pu/pl/6hGVkUzjRWzWAbrh.m3u8?tag=12&v=cf" type="application/x-mpegURL" class="lazy-photo">
-            </video>
-
-            <video id="my-video1" class="video-js vjs-default-skin" controls>
-                <source src="https://video.twimg.com/amplify_video/1882003484985450496/pl/qXSSU2u5pbrMtLQP.m3u8?tag=16&v=a31" type="application/x-mpegURL" class="lazy-photo">
-            </video> 
+            
+                <% for (var i = 0; i < movie.twitLink.length; i++) { %>
+                    <video id="my-video-<%= i %>" class="video-js vjs-default-skin" controls>
+                        <source src="<%= movie.twitLink[i] %>" type="application/x-mpegURL" class="lazy-photo" />
+                    </video>
+                <% } %>
+                
         </div>
     </div>
-
+    <% } %>
     <% if(movie.releaseDate < dateNow){%>
     <!----------------------NEW REVIEW SECTION----------------->
     <div class="other-sec" id="review">
@@ -644,9 +637,21 @@
 
 
 
-
+<!-- Video.js and HLS Plugin -->
+<script src="https://vjs.zencdn.net/7.10.2/video.js" async></script>
     <script async>
-
+        // Wait until the DOM is fully loaded
+        document.addEventListener("DOMContentLoaded", function () {
+            // Get all video elements with the 'video-js' class
+            var videoElements = document.querySelectorAll(".video-js");
+            
+            // Initialize Video.js players for each video element
+            videoElements.forEach(function (videoElement, index) {
+                var player = videojs(videoElement);
+                console.log(`Video player initialized for element ${index + 1}:`, player);
+            });
+        });
+        
         const movieRating = document.getElementById('movie-rating')
 
         const movieRatingValue = document.getElementById('drama-rating-value')
@@ -690,9 +695,7 @@
                 })
             })
         })
-        // Initialize Video.js Player
-        var player = videojs('my-video');
-        var player = videojs('my-video1');
+
 
     </script>
 

@@ -225,6 +225,7 @@ exports.updateMovie = async (req, res) => {
         if(twitCode){
             let getOldTwitCode = await Movie.findById(movieId, 'twitCode');
             console.log("Get Schema twit code",getOldTwitCode)
+            console.log("Get Schema twit code",twitCode)
             // Parse the tags field into an array
             twitCode = twitCode.split(',').map(tag => tag.trim());
             if(!Array.isArray(twitLink)){
