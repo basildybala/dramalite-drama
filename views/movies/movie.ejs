@@ -21,7 +21,8 @@
 <meta name="twitter:image" content="https://dramalite.com/<%= movie.moviePoster %>">
 <meta name="twitter:url" content="https://dramalite.com/drama/<%= movie.dramalink %>">
 <link rel="canonical" href="https://dramalite.com/drama/<%= movie.dramalink %>"/>
-
+<!-- Video.js and HLS Plugin -->
+<script src="https://vjs.zencdn.net/7.10.2/video.js" async></script>
 
 <script type="application/ld+json" async>
     {"@context":"http://schema.org",
@@ -303,57 +304,34 @@
             <div class="actor-swp">
                 <% if(movie.actorname1) { %>
                 <div class="actorswp">
-                    <!-- <% if(movie.actid1) { %> -->
                     <a href="/celebs/<%= movie.celeblink1%>" title="{{movie.actorname1}} Page">
                         <img class="lazy-photo" data-src="/<%= movie.actimg1 %>" alt=" {{movie.actorname1}}.jpg" />
                         <h6><%= movie.actorname1 %></h6>
                         <p><%= movie.celebrole1 %></p>
                         <p><%= movie.mvactorname1 %></p>
                     </a>
-                    <!-- <% } else{%>
-                        <a href="#" title="{{movie.actorname1}} Page">
-                            <img class="lazy-photo" data-src="<%= movie.actimg1 %>" alt=" {{movie.actorname1}}.jpg" />
-                            <h6><%= movie.actorname1 %></h6>
-                            <p><%= movie.mvactorname1 %></p>
-                            <p><%= movie.celebrole1 %></p>
-                        </a>
-                    <% } %>    -->
                 </div>
                 <% } %>
                 <% if(movie.actorname2) { %>
                     <div class="actorswp">
-                        <!-- <% if(movie.actid2) { %> -->
                         <a href="/celebs/<%= movie.celeblink2 %>" title="{{movie.actorname2}} Page">
                             <img class="lazy-photo" data-src="/<%= movie.actimg2 %>" alt=" {{movie.actorname2}}.jpg" />
                             <h6><%= movie.actorname2 %></h6>
                             <p><%= movie.celebrole2 %></p>
                             <p><%= movie.mvactorname2 %></p>
                         </a>
-                        <!-- <% } else{%>
-                            <a href="#" title="{{movie.actorname2}} Page">
-                                <img class="lazy-photo" data-src="<%= movie.actimg2 %>" alt=" {{movie.actorname2}}.jpg" />
-                                <h6><%= movie.actorname2 %></h6>
-                                <p><%= movie.mvactorname2 %></p>
-                            </a>
-                        <% } %>    -->
                     </div>
                 <% } %>
                 <% if(movie.actorname3) { %>
                     <div class="actorswp">
-                        <!-- <% if(movie.actid3) { %> -->
+
                         <a href="/celebs/<%= movie.celeblink3 %>" title="{{movie.actorname3}} Page">
                             <img class="lazy-photo" data-src="/<%= movie.actimg3 %>" alt=" {{movie.actorname3}}.jpg" /> 
                             <h6><%= movie.actorname3 %></h6>
                             <p><%= movie.celebrole3 %></p>
                             <p><%= movie.mvactorname3 %></p>
                         </a>
-                        <!-- <% } else{%>
-                            <a href="#" title="{{movie.actorname3}} Page">
-                                <img class="lazy-photo" data-src="<%= movie.actimg3 %>" alt=" {{movie.actorname3}}.jpg" />
-                                <h6><%= movie.actorname3 %></h6>
-                                <p><%= movie.mvactorname3 %></p>
-                            </a>
-                        <% } %>    -->
+
                     </div>
                     <% } %>
                 <% if(movie.actorname4) { %>
@@ -464,9 +442,19 @@
             <h2>Videos</h2>
         </div>
         <div class="drama-videos">
+            <!-- <% for(var i = 0; i < movie?.twitLink; i++) { 
+                <video id="my-video" class="video-js vjs-default-skin" controls>
+                    <source src="movie[i].twitLink" type="application/x-mpegURL" class="lazy-photo">
+                </video>
+            <% } %> -->
+
             <video id="my-video" class="video-js vjs-default-skin" controls>
-                <source src="https://video.twimg.com/amplify_video/1881596230054064128/pl/DKU3b0vhxoai-2ky.m3u8?tag=14&v=cb5" type="application/x-mpegURL">
+                <source src="https://video.twimg.com/ext_tw_video/1882787646260248576/pu/pl/6hGVkUzjRWzWAbrh.m3u8?tag=12&v=cf" type="application/x-mpegURL" class="lazy-photo">
             </video>
+
+            <video id="my-video1" class="video-js vjs-default-skin" controls>
+                <source src="https://video.twimg.com/amplify_video/1882003484985450496/pl/qXSSU2u5pbrMtLQP.m3u8?tag=16&v=a31" type="application/x-mpegURL" class="lazy-photo">
+            </video> 
         </div>
     </div>
 
@@ -656,11 +644,9 @@
 
 
 
-    <!-- Video.js Script (Load this before your custom JS) -->
-    <script src="https://vjs.zencdn.net/7.10.2/video.js"></script>
+
     <script async>
-        // Initialize Video.js Player
-        var player = videojs('my-video');
+
         const movieRating = document.getElementById('movie-rating')
 
         const movieRatingValue = document.getElementById('drama-rating-value')
@@ -704,6 +690,9 @@
                 })
             })
         })
+        // Initialize Video.js Player
+        var player = videojs('my-video');
+        var player = videojs('my-video1');
 
     </script>
 

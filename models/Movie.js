@@ -35,6 +35,8 @@ const movieSchema = mongoose.Schema(
     tags: { type: [String],trim: true,},
     episodes: {type: Number,trim: true,},
     country: {type: String,trim:true},
+    twitCode: { type: [String],trim: true,},
+    twitLink: { type: [String],trim: true,},
     actid1: {type: String,trim: true,},
     actid2: {type: String,trim: true,},
     actid3: {type: String,trim: true,},

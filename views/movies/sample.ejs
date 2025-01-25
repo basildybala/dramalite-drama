@@ -1,79 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Video Player</title>
-    
-    <!-- Video.js Stylesheet -->
-    <link href="https://vjs.zencdn.net/7.10.2/video-js.css" rel="stylesheet" />
-    
-    <!-- Custom CSS for Mobile-First Design -->
-    <style>
 
-        .video-container {
-            max-width: 100%;
-            margin: 20px auto;
-            padding: 10px;
-            background-color: #000;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            position: relative; /* Ensure that play button can be centered within this container */
-        }
-        
-        #my-video {
-            width: 100%;
-            border-radius: 10px;
-        }
-        .vjs-big-play-button {
-            position: absolute !important; /* Position relative to video container */
-            top: 43% !important;
-            left: 37% !important;
+<script src="https://vjs.zencdn.net/7.10.2/video.js" async></script>
 
-        }
+<form action="/devadmin/sample" method="POST">
 
-        /* Video player responsiveness */
-        @media (max-width: 768px) {
-            .video-container {
-                margin: 10px;
-                padding: 5px;
-            }
+    <label for="tags">Tags (comma-separated):</label>
+    <input type="text" id="tags" name="tags" placeholder="Enter tags, e.g., 1882598588204896722,1882598588204896721" >
+    <button type="submit">Submit</button>
+ 
+</form>
 
-            #my-video {
-                border-radius: 5px;
-            }
-        }
+<video id="my-video1" class="video-js vjs-default-skin" controls>
+    <source src="https://video.twimg.com/amplify_video/1882003484985450496/pl/qXSSU2u5pbrMtLQP.m3u8?tag=16&v=a31" type="application/x-mpegURL" class="lazy-photo">
+</video> 
 
-
-    </style>
-
-    <!-- Video.js and HLS Plugin -->
-    <script src="https://vjs.zencdn.net/7.10.2/video.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/videojs-contrib-hls@5.13.0/dist/videojs-contrib-hls.js"></script>
-</head>
-<body>
-    <!-- Video Container with Styled Player -->
-    <div class="video-container">
-        <video id="my-video" class="video-js vjs-default-skin" controls>
-            <source src="https://video.twimg.com/amplify_video/1881596230054064128/pl/DKU3b0vhxoai-2ky.m3u8?tag=14&v=cb5" type="application/x-mpegURL">
-        </video>
-    </div>
-
-    <script>
-        // Initialize Video.js Player
-        var player = videojs('my-video');
-
-        // Hide the play button once the video starts playing
-        player.on('play', function() {
-            // Add the hidden class to hide the play button
-            player.controlBar.bigPlayButton.hide();
-        });
-
-        // You can also ensure that when the video ends, it comes back (optional)
-        player.on('ended', function() {
-            // Show the play button again if needed
-            player.controlBar.bigPlayButton.show();
-        });
-    </script>
-</body>
-</html>
+<script>
+            // Initialize Video.js Player
+            var player = videojs('my-video');
+        var player = videojs('my-video1');
+</script>

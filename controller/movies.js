@@ -9,7 +9,8 @@ var slugify = require('slugify');
 const { fileUploadToDrive } = require("../config/googleDriveUpload")
 const Redis = require('ioredis');
 const redis =new Redis()
-let Platform=require('../models/WhereToWatch')
+let Platform=require('../models/WhereToWatch');
+const { getVidoFromTwitter } = require("../config/twitterHandle");
 exports.addMoviePage = async (req, res) => {
     try {
         let user = req.user
@@ -40,7 +41,7 @@ exports.addMovie = async (req, res) => {
             actorname7, mvactorname1, mvactorname2, mvactorname3, mvactorname4, mvactorname5, mvactorname6, mvactorname7,
             actimg1, actimg2, actimg3, actimg4, actimg5, actimg6, actimg7,episodes,country,episodeEndDate,celeblink1,
             celeblink2,celeblink3,celeblink4,celeblink5,celeblink6,celeblink7,celebrole1,celebrole2,celebrole3,celebrole4,celebrole5,
-            celebrole6,celebrole7,ytlink } = req.body
+            celebrole6,celebrole7,ytlink,twitCode } = req.body
         var moviePoster;
         var releaseDate;
         let dramalink;
@@ -72,6 +73,18 @@ exports.addMovie = async (req, res) => {
                 ottName: ottName, ottImg: platform.image, ottUrl: ottUrl
             }
         }
+        let twitLink=[]
+        //Get Twitter Video 
+        if(twitCode){
+            // Parse the tags field into an array
+            twitCode = twitCode.split(',').map(tag => tag.trim());
+            for (let index = 0; index < twitCode.length; index++) {
+                let link= await getVidoFromTwitter(twitCode[index])
+                if(link.videoUrl){
+                    twitLink.push(link.videoUrl)
+                }
+            }
+        }
 
         if (req.files.movieImages?.length > 0) {
             let path = "";
@@ -96,7 +109,7 @@ exports.addMovie = async (req, res) => {
                 actimg1, actimg2, actimg3, actimg4, actimg5, actimg6, actimg7, whereToWatch, moviePoster, images: movieImages,dramalink,episodes,country,
                 episodeEndDate,episodeEndDateStamp,celeblink1,
                 celeblink2,celeblink3,celeblink4,celeblink5,celeblink6,celeblink7,celebrole1,celebrole2,celebrole3,celebrole4,celebrole5,
-                celebrole6,celebrole7,ytlink
+                celebrole6,celebrole7,ytlink,twitLink,twitCode
             })
             
             let saveMovie=await movie.save()
@@ -113,7 +126,7 @@ exports.addMovie = async (req, res) => {
                 actimg1, actimg2, actimg3, actimg4, actimg5, actimg6, actimg7, whereToWatch, moviePoster,dramalink,episodes,country,episodeEndDate,
                 episodeEndDateStamp,celeblink1,
                 celeblink2,celeblink3,celeblink4,celeblink5,celeblink6,celeblink7,celebrole1,celebrole2,celebrole3,celebrole4,celebrole5,
-                celebrole6,celebrole7,ytlink
+                celebrole6,celebrole7,ytlink,twitLink,twitCode
                 })
                 let saveMovie=await movie.save()
                 if(req.files.moviePoster[0]){
@@ -129,7 +142,7 @@ exports.addMovie = async (req, res) => {
                 actimg1, actimg2, actimg3, actimg4, actimg5, actimg6, actimg7, whereToWatch,dramalink,episodes,country,episodeEndDate,
                 episodeEndDateStamp,celeblink1,celeblink2,celeblink3,celeblink4,celeblink5,celeblink6,celeblink7,celebrole1,celebrole2,
                 celebrole3,celebrole4,celebrole5,
-                celebrole6,celebrole7,ytlink
+                celebrole6,celebrole7,ytlink,twitLink,twitCode
                 })
                 let saveMovie=await movie.save()
                 return res.redirect(`/drama/${saveMovie.dramalink}`)
@@ -175,7 +188,7 @@ exports.updateMovie = async (req, res) => {
             actid1, actid2, actid3, actid4, actid6, actid7, actorname1, actorname2, actorname3, actorname4, actorname5, actorname6,
             actorname7, mvactorname1, mvactorname2, mvactorname3, mvactorname4, mvactorname5, mvactorname6, mvactorname7,
             actimg1, actimg2, actimg3, actimg4, actimg5, actimg6, actimg7, actorImages,episodes,country,episodeEndDate,celebrole1,celebrole2,celebrole3,
-            celebrole4,celebrole5,celebrole6,celebrole7,celeblink1,celeblink2,celeblink3,celeblink4,celeblink5,celeblink6,celeblink7,ytlink } = req.body
+            celebrole4,celebrole5,celebrole6,celebrole7,celeblink1,celeblink2,celeblink3,celeblink4,celeblink5,celeblink6,celeblink7,ytlink,twitLink,twitCode } = req.body
         var moviePoster;
         var releaseDate;
         let episodeEndDateStamp;
@@ -207,9 +220,37 @@ exports.updateMovie = async (req, res) => {
                 ottName: ottName, ottImg: platform.image, ottUrl: ottUrl
             }
         }
-        // var whereToWatch = {
-        //     ottName: ottName, ottImg: ottImg, ottUrl: ottUrl
-        // }
+
+        //Get Twitter Video 
+        if(twitCode){
+            let getOldTwitCode = await Movie.findById(movieId, 'twitCode');
+            console.log("Get Schema twit code",getOldTwitCode)
+            // Parse the tags field into an array
+            twitCode = twitCode.split(',').map(tag => tag.trim());
+            if(!Array.isArray(twitLink)){
+                twitLink = twitLink.split(',')
+            }
+
+                for (let code of twitCode) {
+
+                    if (!getOldTwitCode.twitCode.includes(code)) {
+
+                         let link = await getVidoFromTwitter(code);  // use the tag instead of twitCode[index]
+                        // let link
+                        // link='https://video.twimg.com/ext_tw_video/1882787646260248576/pu/pl/6hGVkUzjRWzWAbrh.m3u8?tag=12&v=cfc'
+                        // console.log("VIDEO URL======================",link)
+                        // if(link){
+                        //     twitLink.push(link)
+                        // }
+                        if (link.videoUrl) {
+                            twitLink.push(link.videoUrl);
+                        }
+                    }
+                }
+            
+
+        }
+
         if (req.files.movieImages?.length > 0) {
             let path = "";
             req.files.movieImages.forEach(function (files, index, arr) {
@@ -227,7 +268,7 @@ exports.updateMovie = async (req, res) => {
                 actorname7, mvactorname1, mvactorname2, mvactorname3, mvactorname4, mvactorname5, mvactorname6, mvactorname7,
                 actimg1, actimg2, actimg3, actimg4, actimg5, actimg6, actimg7, whereToWatch, images: movieImages,episodes,country,episodeEndDate,
                 episodeEndDateStamp,celebrole1,celebrole2,celebrole3,celebrole4,celebrole5,
-                celebrole6,celebrole7,celeblink1,celeblink2,celeblink3,celeblink4,celeblink5,celeblink6,celeblink7,ytlink
+                celebrole6,celebrole7,celeblink1,celeblink2,celeblink3,celeblink4,celeblink5,celeblink6,celeblink7,ytlink,twitLink,twitCode
             })
             await Movie.findByIdAndUpdate(
                 movieId, {
@@ -246,10 +287,10 @@ exports.updateMovie = async (req, res) => {
                 actorname7, mvactorname1, mvactorname2, mvactorname3, mvactorname4, mvactorname5, mvactorname6, mvactorname7,
                 actimg1, actimg2, actimg3, actimg4, actimg5, actimg6, actimg7, whereToWatch, moviePoster, images: actorImages,
                 episodes,country,episodeEndDate,episodeEndDateStamp,celebrole1,celebrole2,celebrole3,celebrole4,celebrole5,
-                celebrole6,celebrole7,celeblink1,celeblink2,celeblink3,celeblink4,celeblink5,celeblink6,celeblink7,ytlink
+                celebrole6,celebrole7,celeblink1,celeblink2,celeblink3,celeblink4,celeblink5,celeblink6,celeblink7,ytlink,twitLink,twitCode
             })
             if(req.files.moviePoster[0]){
-                fileUploadToDrive(process.env.DRAMA_POSTER_DRIVE,req.files.moviePoster[0].filename,req.files.moviePoster[0].mimetype,req.files.moviePoster[0].path)
+                ////fileUploadToDrive(process.env.DRAMA_POSTER_DRIVE,req.files.moviePoster[0].filename,req.files.moviePoster[0].mimetype,req.files.moviePoster[0].path)
             }
             return res.redirect(`/drama/${movie.dramalink}`)
         } else {
@@ -260,7 +301,7 @@ exports.updateMovie = async (req, res) => {
                 actorname7, mvactorname1, mvactorname2, mvactorname3, mvactorname4, mvactorname5, mvactorname6, mvactorname7,
                 actimg1, actimg2, actimg3, actimg4, actimg5, actimg6, actimg7, whereToWatch, images: actorImages,
                 episodes,country,episodeEndDate,episodeEndDateStamp,celebrole1,celebrole2,celebrole3,celebrole4,celebrole5,
-                celebrole6,celebrole7,celeblink1,celeblink2,celeblink3,celeblink4,celeblink5,celeblink6,celeblink7,ytlink
+                celebrole6,celebrole7,celeblink1,celeblink2,celeblink3,celeblink4,celeblink5,celeblink6,celeblink7,ytlink,twitLink,twitCode
             })
             return res.redirect(`/drama/${movie.dramalink}`)
         }

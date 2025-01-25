@@ -163,7 +163,7 @@
             </div>
 
             <div class="form-group">
-                <label for="name">Wriiten:</label>
+                <label for="name">Written:</label>
                 <div class="input-group">
                     <input type="text" class="form-control" name="written" placeholder="Wriiten Name"
                         value="<%= movie.written %>">
@@ -171,6 +171,7 @@
                         value="<%= movie.writtenlink %>">
                 </div>
             </div>
+
 <!-- 
             <div class="form-group">
                 <label for="name">Producer:</label>
@@ -440,7 +441,21 @@
                                     <!-- <a href="" class="remove-btn">R</a> -->
                                     <!-- <button class="btn btn-danger remove-btn m-2">Delete</button> -->
                                 </div>
-                                <% }%>
+                            <% }%>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Twitter Video:</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="twitCode" placeholder="Twitter Code" value="<%= movie.twitCode %>">
+                        </div>
+                        <div class="twit-video">
+                            <% for(var i=0; i<movie.twitLink.length; i++){%>
+                                <div class="twit-codeOne" style="display: flex;align-items: center;">
+                                    <input class="form-control" type="text" name="twitLink" value="<%= movie.twitLink[i] %>" style="width: 89%" >
+                                    <i class="fa-solid fa-rectangle-xmark remove-btnOne" style="font-size: 32px;margin-left: 3px;"></i>
+                                </div>
+                            <% }%>    
                         </div>
                     </div>
                     <button type="submit" class="btn btn-primary  blue-backgroud">Edit Drama</button>
@@ -614,6 +629,11 @@
     }
 
     $(document).on('click', '.remove-btn', function (e) {
+            e.preventDefault();
+            let rowItem = $(this).parent();
+            $(rowItem).remove();
+    })
+    $(document).on('click', '.remove-btnOne', function (e) {
             e.preventDefault();
             let rowItem = $(this).parent();
             $(rowItem).remove();
