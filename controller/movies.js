@@ -227,7 +227,11 @@ exports.updateMovie = async (req, res) => {
             console.log("Get Schema twit code",getOldTwitCode)
             console.log("Get Schema twit code",twitCode)
             // Parse the tags field into an array
-            twitCode = twitCode.split(',').map(tag => tag.trim());
+            // Parse the tags field into an array, removing empty strings
+            twitCode = twitCode
+            .split(',')
+            .map(tag => tag.trim()) // Trim whitespace from each tag
+            .filter(tag => tag !== ""); // Remove empty strings
             if(!Array.isArray(twitLink)){
                 twitLink = twitLink.split(',')
             }
