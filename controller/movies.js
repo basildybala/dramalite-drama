@@ -224,16 +224,14 @@ exports.updateMovie = async (req, res) => {
         //Get Twitter Video 
         if(twitCode){
             let getOldTwitCode = await Movie.findById(movieId, 'twitCode');
-            console.log("Get Schema twit code",getOldTwitCode)
-            console.log("Get Schema twit code",twitCode)
-            // Parse the tags field into an array
+
             // Parse the tags field into an array, removing empty strings
             twitCode = twitCode
             .split(',')
             .map(tag => tag.trim()) // Trim whitespace from each tag
             .filter(tag => tag !== ""); // Remove empty strings
-            if(!Array.isArray(twitLink)){
-                twitLink = twitLink.split(',')
+            if (!Array.isArray(twitLink)) {
+                twitLink = twitLink !== undefined && twitLink !== null ? [twitLink] : [];
             }
 
                 for (let code of twitCode) {
@@ -241,12 +239,7 @@ exports.updateMovie = async (req, res) => {
                     if (!getOldTwitCode.twitCode.includes(code)) {
 
                          let link = await getVidoFromTwitter(code);  // use the tag instead of twitCode[index]
-                        // let link
-                        // link='https://video.twimg.com/ext_tw_video/1882787646260248576/pu/pl/6hGVkUzjRWzWAbrh.m3u8?tag=12&v=cfc'
-                        // console.log("VIDEO URL======================",link)
-                        // if(link){
-                        //     twitLink.push(link)
-                        // }
+
                         if (link.videoUrl) {
                             twitLink.push(link.videoUrl);
                         }
