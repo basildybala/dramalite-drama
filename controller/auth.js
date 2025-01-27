@@ -191,7 +191,7 @@ exports.login = async (req, res, next) => {
    // if (!isVerified) return res.redirect(`/auth/verify-otp/${_id}`)
     if (!isVerified) return res.send({complete:false,msg:"Email verification failed. Please try again.",id:_id})
 
-    //JWT ACCESS TOKEN
+    //JWT ACCESS TOKEN--------------------------------------------------------------v 
     const token = jwt.sign(
         {
             userId: user._id
@@ -203,7 +203,7 @@ exports.login = async (req, res, next) => {
     res.cookie("dltoken", token, {
         httpOnly: true,
         secure: true,
-        maxAge: 1900000,
+        maxAge: 30 * 24 * 60 * 60 * 1000,
         //signed:true,
     });
     res.json({ complete: true, msg: "Success",url:redirectUrl });

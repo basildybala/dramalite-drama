@@ -3,25 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://vjs.zencdn.net/7.10.2/video-js.css" rel="stylesheet">
-    <title>Video Player</title>
+    <title>Video.js Player</title>
+    <link href="https://vjs.zencdn.net/8.3.0/video-js.css" rel="stylesheet">
+    <script src="https://vjs.zencdn.net/8.3.0/video.min.js"></script>
 </head>
 <body>
-
-    <video id="my-video" class="video-js vjs-default-skin" controls preload="auto" width="640" height="360">
+    <video id="videoPlayer" class="video-js vjs-default-skin" controls autoplay preload="auto">
         <source src="https://video.twimg.com/amplify_video/1882003484985450496/pl/qXSSU2u5pbrMtLQP.m3u8?tag=16&v=a31" type="application/x-mpegURL">
     </video>
 
-    <video id="my-video1" class="video-js vjs-default-skin" controls preload="auto" width="640" height="360">
-        <source src="https://video.twimg.com/amplify_video/1882003484985450496/pl/qXSSU2u5pbrMtLQP.m3u8?tag=16&v=a31" type="application/x-mpegURL">
-    </video>
-
-    <script src="https://vjs.zencdn.net/7.10.2/video.js" defer></script>
     <script>
-                var player1 = videojs('my-video');  // First player
-                var player2 = videojs('my-video1'); // Second player
-
+        // Initialize the Video.js player
+        const player = videojs('videoPlayer');
     </script>
-
 </body>
 </html>

@@ -1,6 +1,5 @@
 <%- include('../partials/header'); -%>
-<!-- Video.js Stylesheet -->
-<link href="https://vjs.zencdn.net/7.10.2/video-js.css" rel="stylesheet" />
+
 <link rel="stylesheet" href="/css/movie.css">
 <title><%= movie.engname %> <%= dramaTitle %>: Release Date, Episodes, Cast, Reviews and More</title>
 <meta name="title" content="<%= movie.engname %> <%= dramaTitle %>: Release Date, Episodes, Cast, Reviews and More"/>
@@ -21,6 +20,8 @@
 <meta name="twitter:image" content="https://dramalite.com/<%= movie.moviePoster %>">
 <meta name="twitter:url" content="https://dramalite.com/drama/<%= movie.dramalink %>">
 <link rel="canonical" href="https://dramalite.com/drama/<%= movie.dramalink %>"/>
+<link href="https://vjs.zencdn.net/8.3.0/video-js.css" rel="stylesheet" >
+<script src="https://vjs.zencdn.net/8.3.0/video.min.js"></script>
 
 
 <script type="application/ld+json" async>
@@ -443,11 +444,14 @@
         <div class="drama-videos">
             
                 <% for (var i = 0; i < movie.twitLink.length; i++) { %>
-                    <video id="my-video-<%= i %>" class="video-js vjs-default-skin" controls>
-                        <source src="<%= movie.twitLink[i] %>" type="application/x-mpegURL" class="lazy-photo" />
+                    <video id="videoPlayer" class="video-js vjs-default-skin" controls preload="auto">
+                        <source src="<%= movie.twitLink[i] %>" type="application/x-mpegURL">
                     </video>
+                    <!-- <video id="my-video-<%= i %>" class="video-js vjs-default-skin" controls>
+                        <source src="<%= movie.twitLink[i] %>" type="application/x-mpegURL" class="lazy-photo" />
+                    </video> -->
                 <% } %>
-                
+
         </div>
     </div>
     <% } %>
@@ -637,21 +641,12 @@
 
 
 
-<!-- Video.js and HLS Plugin -->
-<script src="https://vjs.zencdn.net/7.10.2/video.js" async></script>
+
     <script async>
-        // Wait until the DOM is fully loaded
-        document.addEventListener("DOMContentLoaded", function () {
-            // Get all video elements with the 'video-js' class
-            var videoElements = document.querySelectorAll(".video-js");
-            
-            // Initialize Video.js players for each video element
-            videoElements.forEach(function (videoElement, index) {
-                var player = videojs(videoElement);
-                console.log(`Video player initialized for element ${index + 1}:`, player);
-            });
-        });
-        
+        // Initialize the Video.js player
+        const player = videojs('videoPlayer');
+
+ 
         const movieRating = document.getElementById('movie-rating')
 
         const movieRatingValue = document.getElementById('drama-rating-value')
