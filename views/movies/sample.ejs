@@ -5,8 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dynamic Form</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js"></script>
+
 </head>
 <style>
+    .sortable-ghost {
+    background: #f8d7da; /* Light red background while dragging */
+    opacity: 0.7;
+    }
+    .sortable-chosen {
+        background: #cce5ff; /* Light blue background when selected */
+    }
     .autocomplete-results {
     position: absolute;
     background-color: white;
@@ -57,6 +66,15 @@
     </div>
 
     <script>
+
+document.addEventListener("DOMContentLoaded", function() {
+        new Sortable(document.getElementById("formContainer"), {
+            animation: 150, // Smooth animation
+            ghostClass: "sortable-ghost", // Class added while dragging
+            handle: ".form-group", // Use the entire div as a handle
+            chosenClass: "sortable-chosen"
+        });
+});
    document.addEventListener('DOMContentLoaded', function () {
     const formContainer = document.getElementById('formContainer');
     const actorForm = document.getElementById('actorForm');
