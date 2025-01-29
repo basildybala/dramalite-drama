@@ -3,18 +3,101 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Video.js Player</title>
-    <link href="https://vjs.zencdn.net/8.3.0/video-js.css" rel="stylesheet">
-    <script src="https://vjs.zencdn.net/8.3.0/video.min.js"></script>
+    <title>Dynamic Form</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css">
 </head>
 <body>
-    <video id="videoPlayer" class="video-js vjs-default-skin" controls autoplay preload="auto">
-        <source src="https://video.twimg.com/amplify_video/1882003484985450496/pl/qXSSU2u5pbrMtLQP.m3u8?tag=16&v=a31" type="application/x-mpegURL">
-    </video>
+    <div class="container mt-4">
+        <form id="actorForm">
+            <div id="formContainer">
+                <div class="form-group mb-3">
+                    <label for="name">Actor</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="actid" placeholder="ID">
+                        <input type="text" class="form-control" name="celeblink" placeholder="Celeb Link">
+                        <input type="text" class="form-control" name="actorname" placeholder="Name">
+                    </div>
+                    <div class="input-group mt-2">
+                        <input type="text" class="form-control" name="actimg" placeholder="Img Url">
+                        <input type="text" class="form-control" name="mvactorname" placeholder="Mv Name">
+                        <input type="text" class="form-control" name="mvrole" placeholder="Mv Role">
+                    </div>
+                    <button type="button" class="btn btn-danger mt-2 remove-btn">Remove</button>
+                </div>
+            </div>
+            <button type="button" id="addBtn" class="btn btn-success">Add Actor</button>
+            <button type="submit" class="btn btn-primary mt-3">Submit</button>
+        </form>
+        <pre id="output" class="mt-4"></pre>
+    </div>
 
     <script>
-        // Initialize the Video.js player
-        const player = videojs('videoPlayer');
+        const formContainer = document.getElementById('formContainer');
+        const addBtn = document.getElementById('addBtn');
+        const actorForm = document.getElementById('actorForm');
+        const output = document.getElementById('output');
+
+        // Add a new form group with a "Remove" button
+        addBtn.addEventListener('click', () => {
+            const formGroup = document.querySelector('.form-group');
+            const clone = formGroup.cloneNode(true);
+
+            // Clear all input values in the cloned form
+            const inputs = clone.querySelectorAll('input');
+            inputs.forEach(input => input.value = '');
+
+            // Add event listener to the "Remove" button in the cloned form
+            const removeBtn = clone.querySelector('.remove-btn');
+            removeBtn.addEventListener('click', () => {
+                clone.remove();
+            });
+
+            formContainer.appendChild(clone);
+        });
+
+        // Add event listener to the initial "Remove" button
+        document.querySelector('.remove-btn').addEventListener('click', function () {
+            this.closest('.form-group').remove();
+        });
+
+        // Handle form submission
+        actorForm.addEventListener('submit', async (event) => {
+            event.preventDefault(); // Prevent default form submission
+
+            const formGroups = document.querySelectorAll('.form-group');
+            const data = Array.from(formGroups).map(group => {
+                const inputs = group.querySelectorAll('input');
+                return {
+                    actid: inputs[0].value,
+                    celeblink: inputs[1].value,
+                    actorname: inputs[2].value,
+                    actimg: inputs[3].value,
+                    mvactorname: inputs[4].value,
+                    mvrole: inputs[5].value
+                };
+            });
+
+            output.textContent = JSON.stringify(data, null, 2); // Display the JSON
+
+            try {
+                const response = await fetch('/devadmin/sample', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data),
+                });
+
+                const result = await response.json();
+                if (response.ok) {
+                    alert(result.message);
+                } else {
+                    console.error(result);
+                    alert('Failed to submit data!');
+                }
+            } catch (error) {
+                console.error('Error submitting form:', error);
+                alert('An error occurred while submitting the form.');
+            }
+        });
     </script>
 </body>
 </html>

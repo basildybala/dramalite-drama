@@ -9,25 +9,15 @@ const router = require('express').Router()
 
 //SAMPLE 
 router.get('/sample',(req,res)=>{
-    console.log("HAIIII")
+
     let twitlink = "https://x.com/kdramadaisy/status/1882598588204896722?s=46";
     let code = twitlink.match(/status\/(\d+)/)[1]; // Extract the numeric part
     res.render('movies/sample.ejs')
 })
 
 router.post('/sample',(req,res)=>{
-    let oldCode=['1882598588204896722','1882598588204896721']
-
-    // Parse the tags field into an array
-    const bodyTwitCode = req.body.tags.split(',').map(tag => tag.trim());
-
-    bodyTwitCode.forEach(tag => {
-    if (!oldCode.includes(tag)) {
-        console.log('New Tag:', tag);
-    }
-    });
-
-    console.log(tagsArray)
+    console.log("called")
+    console.log(req.body)
     res.send(req.body)
 })
 //ADMIN PAGE
