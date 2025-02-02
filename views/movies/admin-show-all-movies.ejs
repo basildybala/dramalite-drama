@@ -35,7 +35,7 @@ crossorigin="anonymous">
     <tbody>
         <% movie.forEach (function (m){%>
     <tr>
-      <td class="td-class" style="font-weight: 600;"><%= m.name %></td>
+      <td class="td-class" style="font-weight: 600;"><%= m.name %> <a style="color: rgb(101, 6, 243);margin-right: 5px;" href="/devadmin/map-celebrity/<%= m._id %>"><i class="fas fa-user-edit"></i></a></td>
       <td class="td-class"><%= m.category %></td>
       <!-- <td class="td-class" style="max-width:40%;"><%= m._id %></td> -->
        <!-- <td class="td-class"><input style="width: 90%;" type="text" value="<%= m._id %>"> </td> -->

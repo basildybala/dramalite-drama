@@ -1,4 +1,4 @@
-const { masterPage, addMasterDataPage, addMasterData, editMasterDataPage, editMasterData, deleteMasterData, showAllPlatform, addPlatformPage, addPlatForm, editPlatFormPage, editPlatForm, deletePlatForm } = require('../controller/admin');
+const { masterPage, addMasterDataPage, addMasterData, editMasterDataPage, editMasterData, deleteMasterData, showAllPlatform, addPlatformPage, addPlatForm, editPlatFormPage, editPlatForm, deletePlatForm, mapCelebrityPage, actorsMaping } = require('../controller/admin');
 const { showAllCelebrityPage } = require('../controller/celeb');
 const { adminPage } = require('../controller/home');
 const { showAllMoviesPage } = require('../controller/movies');
@@ -55,7 +55,9 @@ router.get('/edit-platform/:id',isAuth,isAdmin,editPlatFormPage)
 router.post('/edit-platform/:id',isAuth,isAdmin,uploadImage.single('platformPic'),editPlatForm)
 router.get('/delete-platform/:id',isAuth,isAdmin,deletePlatForm)  
 
-
+//Maping celeb to drama
+router.get('/map-celebrity/:movieId',isAuth,isAdmin,mapCelebrityPage)
+router.post('/map-celebrity/:movieId',isAuth,isAdmin,actorsMaping)
 
 
 module.exports = router;

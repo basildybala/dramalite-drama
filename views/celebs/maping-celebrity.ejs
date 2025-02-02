@@ -59,23 +59,24 @@
     <div class="movie-container">
         <div class="blue-header">
             <h1>
-                Helo movie
+                <%= movie.name %>
             </h1>
         </div>
     </div>
     <div class="container mt-2">
         <form id="actorForm">
             <div id="formContainer">
+                <% for(var i=0; i<actors?.length; i++){%>
                 <div class="form-group mb-3">
                     <label for="name">Actor</label>
                     <div class="input-group">
-                        <input type="text" class="form-control" name="actid" placeholder="ID" hidden>
+                        <input type="text" class="form-control" name="actid" placeholder="ID" hidden value="<%= actors[i].actorid._id %>">
                         <input type="text" class="form-control" name="celeblink" placeholder="Celeb Link" hidden>
                         <div style="width: 15%;">
-                            <input type="text" class="form-control position-input" name="position" >
+                            <input type="text" class="form-control position-input" name="position" value="<%= actors[i].position %>">
                         </div>
                         <div style="width: 85%;">
-                            <input type="text" class="form-control actor-name-input" name="actorname" placeholder="Name">
+                            <input type="text" class="form-control actor-name-input" name="actorname" placeholder="Name" value="<%= actors[i].actorid.actorname %>">
                             <div class="autocomplete-results"></div> <!-- Container for search results -->
                         </div>
                         
@@ -83,9 +84,9 @@
                     
                     <div class="input-group mt-2">
                         <input type="text" class="form-control" name="actimg" placeholder="Img Url" hidden>
-                        <input type="text" class="form-control" name="mvactorname" placeholder="Mv Name">
-                        <select class="form-control" name="actorrole">
-                            <option value="">Role</option>
+                        <input type="text" class="form-control" name="actordramaname" placeholder="Mv Name" value="<%= actors[i].actordramaname %>">
+                        <select class="form-control" name="actorrole" >
+                            <option value="<%= actors[i].actorrole %>"><%= actors[i].actorrole %></option>
                             <option value="Main Role">Main Role</option>
                             <option value="Support Role">Support Role</option>
                             <option value="Guest Role">Guest Role</option>
@@ -93,9 +94,10 @@
                         <button type="button" class="btn btn-danger  remove-btn">Remove</button>
                     </div>
                     <div class="input-group mt-2">
-                        <input type="text" class="form-control" name="description" placeholder="Description">
+                        <input type="text" class="form-control" name="description" placeholder="Description" value="<%= actors[i].description %>">
                     </div>
                 </div>
+                <% } %>
             </div>
             <button type="button" id="addBtn" class="btn btn-success">Add Actor</button>
             <br>
@@ -208,10 +210,10 @@
 
         formGroups.forEach(formGroup => {
             const actor = {
-            _id: formGroup.querySelector('input[name="actid"]').value,
-            actorname: formGroup.querySelector('input[name="actorname"]').value,
-            celeblink: formGroup.querySelector('input[name="celeblink"]').value,
-            profilePic: formGroup.querySelector('input[name="actimg"]').value,
+            actorid: formGroup.querySelector('input[name="actid"]').value,
+            // actorname: formGroup.querySelector('input[name="actorname"]').value,
+            // celeblink: formGroup.querySelector('input[name="celeblink"]').value,
+            // profilePic: formGroup.querySelector('input[name="actimg"]').value,
             actordramaname: formGroup.querySelector('input[name="actordramaname"]').value, // Include actordramaname
             actorrole: formGroup.querySelector('select[name="actorrole"]').value, // Corrected to actorrole
             position: formGroup.querySelector('input[name="position"]').value, // Corrected to position
@@ -224,7 +226,7 @@
         console.log('Form Data:', actors); // Debugging: Log the collected data
 
         // Send the data to the API
-        fetch('/devadmin/sample', {
+        fetch('/devadmin/map-celebrity/<%= movie._id %>', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -245,32 +247,3 @@
     </script>
 </body>
 </html>
-<!-- // POST /actors
-app.post('/actors', async (req, res) => {
-    const newActors = req.body;
-
-    if (!Array.isArray(newActors)) {
-        return res.status(400).json({ message: "Invalid request body. Expected an array of actors." });
-    }
-
-    try {
-        // Save or update each actor
-        const savedActors = await Promise.all(newActors.map(async actor => {
-            const existingActor = await Actor.findById(actor._id);
-            if (existingActor) {
-                // Update existing actor
-                existingActor.set(actor); // Update fields
-                return await existingActor.save();
-            } else {
-                // Create new actor
-                const newActor = new Actor(actor);
-                return await newActor.save();
-            }
-        }));
-
-        res.status(200).json({ message: "Actors created/updated successfully", data: savedActors });
-    } catch (error) {
-        console.error('Error saving actors:', error);
-        res.status(500).json({ message: "Failed to save actors", error: error.message });
-    }
-}); -->
