@@ -200,7 +200,7 @@ exports.mapCelebrityPage=async(req,res)=>{
             path: 'actors.actorid', // Path to populate
             select: 'actorname'     // Select only the 'actorname' field from the Actor collection
         }).exec(); // Execute the query;
-        console.log(actors)
+
         if(actors){
             actors=actors?.actors
         }else{

@@ -1,18 +1,69 @@
+const { default: mongoose } = require('mongoose');
 const { masterPage, addMasterDataPage, addMasterData, editMasterDataPage, editMasterData, deleteMasterData, showAllPlatform, addPlatformPage, addPlatForm, editPlatFormPage, editPlatForm, deletePlatForm, mapCelebrityPage, actorsMaping } = require('../controller/admin');
 const { showAllCelebrityPage } = require('../controller/celeb');
 const { adminPage } = require('../controller/home');
 const { showAllMoviesPage } = require('../controller/movies');
 const { isUser, isAdmin, isAuth } = require('../middlewares/auth');
 const { uploadImage } = require('../middlewares/multer');
+const ActorsMaping = require('../models/ActorsMaping');
 
 const router = require('express').Router()
 
 //SAMPLE 
-router.get('/sample',(req,res)=>{
+router.get('/sample',async (req,res)=>{
+    let movieId='6787bf79e7b5a22c4c8cd7ac'
+    let actors 
+    actors = await ActorsMaping.aggregate([
+        {
+            $match: { movieId: mongoose.Types.ObjectId(movieId) } // Filter by movieId
+        },
+        {
+            $unwind: "$actors" // Unwind the actors array
+        },
+        {
+            $lookup: {
+                from: "actors", // Collection to join (Actor collection)
+                localField: "actors.actorid", // Field in ActorsMaping
+                foreignField: "_id", // Field in Actor
+                as: "actorDetails" // Output array field
+            }
+        },
+        {
+            $unwind: "$actorDetails" // Unwind the joined actor details
+        },
+        {
+            $project: {
+                _id: 1,
+                movieId: 1,
+                actors: {
+                    actordramaname: "$actors.actordramaname",
+                    actorrole: "$actors.actorrole",
+                    position: "$actors.position",
+                    description: "$actors.description",
+                    actorname: "$actorDetails.actorname", // Include actorname from Actor
+                    celeblink: "$actorDetails.celeblink",
+                    profilePic: "$actorDetails.profilePic"
+                }
+            }
+        },
+        {
+            $sort: { "actors.position": 1 } // Sort by position in ascending order
+        },
+        {
+            $group: {
+                _id: "$_id",
+                movieId: { $first: "$movieId" },
+                actors: { $push: "$actors" } // Group actors back into an array
+            }
+        }
+    ]).exec();
+    if(actors){
+        actors=actors[0]?.actors
+    }else{
+        actors=[]
+    }
 
-    let twitlink = "https://x.com/kdramadaisy/status/1882598588204896722?s=46";
-    let code = twitlink.match(/status\/(\d+)/)[1]; // Extract the numeric part
-    res.render('movies/sample.ejs')
+    res.render('movies/sample.ejs',{actors})
 })
 
 router.post('/sample',(req,res)=>{

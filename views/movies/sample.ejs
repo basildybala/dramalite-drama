@@ -1,276 +1,245 @@
-<%- include('../partials/admin-header'); -%>
-<link rel="stylesheet" href="/css/auth.css">
-<title>Add movie -Dramalite</title>
-<meta name="description" content="Malayalam Movies and Tamil Telugu Hindi Webseries  Release Date Reviews Videos  Cast & Crew  Film Poster">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/auth.css">
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="shortcut icon"
+      href="/images/logo/dramalite-icon.png"
+      type="image/x-icon"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/images/logo/dramalite-icon.png"
+    />
+    <link
+      rel="icon"
+      href="/images/logo/dramalite-icon.png"
+      type="image/x-icon"
+    />
+    <link
+      rel="icon"
+      sizes="32x32"
+      href="/images/logo/dramalite-icon.png"
+      type="image/x-icon"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/images/logo/dramalite-icon.png"
+    />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+      integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js"></script>
-</html>
+    <meta name="msapplication-TileColor" content="#da532c" />
+    <meta name="theme-color" content="#ffffff" />
+    <script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@17.3.1/dist/lazyload.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+    <!-- Google Tag Manager -->
+    <!-- <script async defer>(function (w, d, s, l, i) {
+      w[l] = w[l] || []; w[l].push({
+        'gtm.start':
+          new Date().getTime(), event: 'gtm.js'
+      }); var f = d.getElementsByTagName(s)[0],
+        j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+          'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+    })(window, document, 'script', 'dataLayer', 'GTM-5VRBV3N');</script> -->
+    <!-- End Google Tag Manager -->
+    <!-- Google tag (gtag.js) -->
+    <script
+      src="https://www.googletagmanager.com/gtag/js?id=G-YZT6F353TN"
+      async
+      defer
+    ></script>
+    <script async defer>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
 
-<style>
-     .blue-header {
-            width: 100%;
-            height: 35px; /* Fixed height */
-            /* background-color: #4fa0f7; */
-            background-color: #0050C2; /* Blue color */
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 15px;
-            color: white;
-        }
-
-        /* Heading */
-        .blue-header-heading h1 {
-            font-size: 16px;
-            font-weight: bold;
-            font-family: 'Varela Round', sans-serif;
-        }
-    .sortable-ghost {
-    background: #f8d7da; /* Light red background while dragging */
-    opacity: 0.7;
+      gtag("config", "G-YZT6F353TN");
+    </script>
+  </head>
+  <style>
+    .cast-image {
+        width: 100px;
+        height: 125px;
+        object-fit: cover;
+        border-radius: 4px;
     }
-    .sortable-chosen {
-        background: #cce5ff; /* Light blue background when selected */
+    .new-cas-section{
+        padding: 5px;
     }
-    .autocomplete-results {
-    position: absolute;
-    background-color: white;
-    max-height: 150px;
-    overflow-y: auto;
-    z-index: 1000;
-    width: 100%;
-    margin-top: 5px; /* Add some spacing below the input */
-}
-
-.autocomplete-item {
-    padding: 8px;
-    cursor: pointer;
-}
-
-.autocomplete-item:hover {
-    background-color: #f0f0f0;
-}
-
+    .cast-section{
+        display: flex;
+    }
+    .cast-data-section{
+        margin-left: 4px;
+    }
+    .cast-data-section h3{
+        margin: 2px 0px;
+        padding: 0;
+        font-size: 13px;
+        font-family: 'Poppins', sans-serif;
+        color: #0050C2;
+        font-weight: 600px;
+    }
+    .cast-data-section :nth-child(2){
+        margin: 2px 0px;
+        padding: 0;
+        font-size: 11px;
+        font-family: 'Poppins', sans-serif;
+        color: #211818;
+        font-weight: 600px;
+    }
+    .cast-data-section :nth-child(3){
+        margin: 2px 0px;
+        padding: 0;
+        font-size: 11px;
+        font-family: 'Poppins', sans-serif;
+        color: #211818;
+        opacity: 0.6;
+    }
+    .cast-data-section :nth-child(4){
+        margin: 2px 0px;
+        padding: 0;
+        font-size: 11px;
+        font-family: 'Poppins', sans-serif;
+        color: #211818;
+        opacity: 0.6;
+    }
 </style>
-<body>
-    <div class="movie-container">
-        <div class="blue-header">
-            <h1>
-                Helo movie
-            </h1>
+  <body>
+    <!-- Google Tag Manager (noscript) ---->
+    <!-- <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5VRBV3N" height="0" width="0"
+      style="display:none;visibility:hidden"></iframe></noscript> -->
+    <!-- End Google Tag Manager (noscript) -->
+
+    <div class="web-nav-bar">
+      <% if(user){%>
+      <a href="/" class="logo" style="margin-left: -160px">
+        <!-- <img data-src="/images/logo/dramalitelogo.png" alt="Dramalite" class="lazy-photo" srcset=""> -->
+        <h2><span>D</span>ramalite</h2>
+        <span>.com</span>
+      </a>
+      <%}else{%>
+      <a href="/" class="logo">
+        <!-- <img data-src="/images/logo/dramalitelogo.png" alt="Dramalite" class="lazy-photo" srcset=""> -->
+        <h2><span>D</span>ramalite</h2>
+        <span>.com</span>
+      </a>
+      <% }%> <% if(user){%>
+      <div class="action">
+        <div class="profile" onclick="menuToggle();">
+          <img data-src="<%= user.profilePic %>" class="lazy-photo" />
         </div>
+        <div class="menu">
+          <h3><%= user.name %><br /></h3>
+          <ul>
+            <li>
+              <i class="fa fa-user"></i
+              ><a href="/user/my-profile">My profile</a>
+            </li>
+            <li>
+              <i class="fa fa-user-pen"></i
+              ><a href="/user/edit-profile">Edit profile</a>
+            </li>
+            <li><i class="fa fa-circle-info"></i><a href="#">Help</a></li>
+            <li>
+              <i class="fa fa-right-from-bracket"></i
+              ><a href="/user/logout">Logout</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <%}else{%>
+      <div class="signup">
+        <!-- <a href="#"><i class="fa fa-solid fa-user-plus"></i></a> -->
+        <a href="/auth/login">Log in</a>
+        <a href="/auth/signup">Signup</a>
+      </div>
+      <% }%>
     </div>
-    <div class="container mt-2">
-        <form id="actorForm">
-            <div id="formContainer">
-                <div class="form-group mb-3">
-                    <label for="name">Actor</label>
-                    <div class="input-group">
-                        <input type="text" class="form-control" name="actid" placeholder="ID" hidden>
-                        <input type="text" class="form-control" name="celeblink" placeholder="Celeb Link" hidden>
-                        <div style="width: 15%;">
-                            <input type="text" class="form-control position-input" name="position" >
-                        </div>
-                        <div style="width: 85%;">
-                            <input type="text" class="form-control actor-name-input" name="actorname" placeholder="Name">
-                            <div class="autocomplete-results"></div> <!-- Container for search results -->
-                        </div>
-                        
-                    </div>
-                    
-                    <div class="input-group mt-2">
-                        <input type="text" class="form-control" name="actimg" placeholder="Img Url" hidden>
-                        <input type="text" class="form-control" name="mvactorname" placeholder="Mv Name">
-                        <select class="form-control" name="actorrole">
-                            <option value="">Role</option>
-                            <option value="Main Role">Main Role</option>
-                            <option value="Support Role">Support Role</option>
-                            <option value="Guest Role">Guest Role</option>
-                        </select>
-                        <button type="button" class="btn btn-danger  remove-btn">Remove</button>
-                    </div>
-                    <div class="input-group mt-2">
-                        <input type="text" class="form-control" name="description" placeholder="Description">
-                    </div>
-                </div>
-            </div>
-            <button type="button" id="addBtn" class="btn btn-success">Add Actor</button>
-            <br>
-            <button type="submit" class="btn btn-primary mt-3">Submit</button>
+    <div class="search-sec">
+      <div class="search-bar">
+        <form action="/search-movie" method="post">
+          <input
+            class="form-control"
+            type="text"
+            name="search"
+            placeholder="Type drama name"
+            required
+          />
+          <button class="search-btn" type="submit">Search</button>
         </form>
-        <pre id="output" class="mt-4"></pre>
+      </div>
+    </div>
+
+    <!--------------------------------Movies Categories Swipe---------------------->
+    <div class="other-sec">
+      <div class="nav-bar-sticky">
+        <ul>
+          <span>Drama</span>
+          <div class="nav-swiper">
+            <li><a href="/" title="Home Page">Home</a></li>
+            <li>
+              <a href="/korean-drama" title="Korean Dramas list"
+                >Korean Drama</a
+              >
+            </li>
+            <li>
+              <a href="/chinese-drama" title="Chinese Dramas list"
+                >Chinese Drama</a
+              >
+            </li>
+            <li><a href="#" title="Japanese Drama list">Japanese </a></li>
+            <li><a href="#" title="Hollywood Movies Page">Thai</a></li>
+            <li><a href="#" title="Other Movies Page">Other</a></li>
+          </div>
+        </ul>
+      </div>
     </div>
 
     <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        let actorContainer = document.getElementById("formContainer");
-
-        let sortable = new Sortable(actorContainer, {
-            animation: 150,
-            ghostClass: "sortable-ghost",
-            handle: ".form-group",
-            chosenClass: "sortable-chosen",
-            onEnd: function () {
-                updatePositions(); // Update positions after drag ends
-            }
-        });
-
-        function updatePositions() {
-            document.querySelectorAll("#formContainer .form-group").forEach((item, index) => {
-                item.querySelector(".position-input").value = index + 1; // Set position number
-            });
-        }
-
-        // Initialize positions on page load
-        updatePositions();
-    });
-
-   document.addEventListener('DOMContentLoaded', function () {
-    const formContainer = document.getElementById('formContainer');
-    const actorForm = document.getElementById('actorForm');
-
-    // Event delegation for dynamically added input fields
-    formContainer.addEventListener('input', function (event) {
-        if (event.target.classList.contains('actor-name-input')) {
-            const query = event.target.value;
-            const resultsContainer = event.target.closest('.input-group').querySelector('.autocomplete-results');
-
-            if (query.length > 2) { // Only search if the query is longer than 2 characters
-                fetch(`/celebs/search-actors?q=${encodeURIComponent(query)}`)
-                    .then(response => response.json())
-                    .then(data => {
-                        console.log('API Response:', data); // Debugging: Log the API response
-
-                        // Clear previous results
-                        resultsContainer.innerHTML = '';
-
-                        // Display new results
-                        if (data.length > 0) {
-                            data.forEach(actor => {
-                                const resultItem = document.createElement('div');
-                                resultItem.textContent = actor.actorname; // Use actor.actorname from the response
-                                resultItem.classList.add('autocomplete-item');
-
-                                // Add click event to populate the form fields
-                                resultItem.addEventListener('click', () => {
-                                    const formGroup = event.target.closest('.form-group');
-
-                                    // Populate the input fields
-                                    formGroup.querySelector('input[name="actorname"]').value = actor.actorname;
-                                    formGroup.querySelector('input[name="actid"]').value = actor._id;
-                                    formGroup.querySelector('input[name="celeblink"]').value = actor.celeblink;
-                                    formGroup.querySelector('input[name="actimg"]').value = actor.profilePic;
-
-                                    // Clear the dropdown results
-                                    resultsContainer.innerHTML = '';
-                                });
-
-                                resultsContainer.appendChild(resultItem);
-                            });
-                        } else {
-                            resultsContainer.innerHTML = '<div class="autocomplete-item">No results found</div>';
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error fetching actors:', error); // Debugging: Log any errors
-                        resultsContainer.innerHTML = '<div class="autocomplete-item">Error loading results</div>';
-                    });
-            } else {
-                resultsContainer.innerHTML = ''; // Clear results if the query is too short
-            }
-        }
-    });
-
-    // Add new actor form group
-    document.getElementById('addBtn').addEventListener('click', function () {
-        const newFormGroup = formContainer.firstElementChild.cloneNode(true);
-        newFormGroup.querySelectorAll('input').forEach(input => input.value = ''); // Clear input values
-        formContainer.appendChild(newFormGroup);
-    });
-
-    // Remove actor form group
-    formContainer.addEventListener('click', function (event) {
-        if (event.target.classList.contains('remove-btn')) {
-            event.target.closest('.form-group').remove();
-        }
-    });
-
-    // Handle form submission
-    actorForm.addEventListener('submit', function (event) {
-        event.preventDefault();
-
-        // Collect data from all actor form groups
-        const actors = [];
-        const formGroups = formContainer.querySelectorAll('.form-group');
-
-        formGroups.forEach(formGroup => {
-            const actor = {
-            _id: formGroup.querySelector('input[name="actid"]').value,
-            actorname: formGroup.querySelector('input[name="actorname"]').value,
-            celeblink: formGroup.querySelector('input[name="celeblink"]').value,
-            profilePic: formGroup.querySelector('input[name="actimg"]').value,
-            actordramaname: formGroup.querySelector('input[name="actordramaname"]').value, // Include actordramaname
-            actorrole: formGroup.querySelector('select[name="actorrole"]').value, // Corrected to actorrole
-            position: formGroup.querySelector('input[name="position"]').value, // Corrected to position
-            description: formGroup.querySelector('input[name="description"]').value // Corrected to position
-        };
-
-        actors.push(actor);
-    });
-
-        console.log('Form Data:', actors); // Debugging: Log the collected data
-
-        // Send the data to the API
-        fetch('/devadmin/sample', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(actors)
-        })
-            .then(response => response.json())
-            .then(data => {
-                console.log('API Response:', data); // Debugging: Log the API response
-                alert('Data submitted successfully!');
-            })
-            .catch(error => {
-                console.error('Error submitting data:', error); // Debugging: Log any errors
-                alert('Error submitting data. Please try again.');
-            });
-    });
-});
+      function menuToggle() {
+        const toggleMenu = document.querySelector(".menu");
+        toggleMenu.classList.toggle("active");
+      }
     </script>
-</body>
+
+    <link rel="stylesheet" href="/css/movie.css" />
+
+    <!-------------------CAST SECTION------------------------>
+    <div class="other-sec">
+      <div class="left-blue-header">
+        <h2>Cast</h2>
+      </div>
+
+      <div class="new-cas-section">
+        <% for(var i=0; i<actors?.length; i++){%>
+        <div class="cast-section">
+            <a href="/<%= actors[i].celeblink %>">
+                <img src="/<%= actors[i].profilePic %>" alt="<%= actors[i].profilePic %>" srcset="" class="cast-image">
+            </a>
+            <div class="cast-data-section">
+                <a href="/<%= actors[i].celeblink %>"> <h3><%= actors[i].actorname %></h3></a>
+                <p><%= actors[i].actordramaname %></p>
+                <p><%= actors[i].actorrole %></p>
+                <p><%= actors[i].description %> </p>
+            </div>
+        </div>
+        <% } %>
+      </div>
+    </div>
+  </body>
 </html>
-<!-- // POST /actors
-app.post('/actors', async (req, res) => {
-    const newActors = req.body;
-
-    if (!Array.isArray(newActors)) {
-        return res.status(400).json({ message: "Invalid request body. Expected an array of actors." });
-    }
-
-    try {
-        // Save or update each actor
-        const savedActors = await Promise.all(newActors.map(async actor => {
-            const existingActor = await Actor.findById(actor._id);
-            if (existingActor) {
-                // Update existing actor
-                existingActor.set(actor); // Update fields
-                return await existingActor.save();
-            } else {
-                // Create new actor
-                const newActor = new Actor(actor);
-                return await newActor.save();
-            }
-        }));
-
-        res.status(200).json({ message: "Actors created/updated successfully", data: savedActors });
-    } catch (error) {
-        console.error('Error saving actors:', error);
-        res.status(500).json({ message: "Failed to save actors", error: error.message });
-    }
-}); -->
