@@ -260,11 +260,11 @@
         </div>
         <div class="new-cas-section">
             <% for(var i=0; i<dramaList?.length; i++){%>
-            <div class="cast-section">
+            <div class="drama-section">
                 <a href="/drama/<%= dramaList[i].movieDetails.dramalink %>">
-                    <img src="/<%= dramaList[i].movieDetails.moviePoster %>" alt="<%= dramaList[i].movieDetails.moviePoster %>"  class="cast-image">
+                    <img data-src="/<%= dramaList[i].movieDetails.moviePoster %>" alt="<%= dramaList[i].movieDetails.moviePoster %>"  class="drama-image lazy-photo">
                 </a>
-                <div class="cast-data-section">
+                <div class="drama-data-section">
                     <a href="/drama/<%= dramaList[i].movieDetails.dramalink %>"> <h3><%= dramaList[i].movieDetails.name %></h3></a>
                     <p><%= dramaList[i].movieDetails.year %></p>
                     <!-- <% for(var k=0; k<dramaList[i]?.movieDetails.genre.length; k++){%>

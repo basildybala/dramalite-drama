@@ -278,7 +278,7 @@ hr {
 
   }
 
-  .cast-image {
+.drama-image {
     width: 100px;
     height: 125px;
     object-fit: cover;
@@ -287,13 +287,14 @@ hr {
 .new-cas-section{
     padding: 5px;
 }
-.cast-section{
+.drama-section{
     display: flex;
+    margin-top: 3px;
 }
-.cast-data-section{
+.drama-data-section{
     margin-left: 4px;
 }
-.cast-data-section h3{
+.drama-data-section h3{
     margin: 2px 0px;
     padding: 0;
     font-size: 13px;
@@ -301,7 +302,7 @@ hr {
     color: #0050C2;
     font-weight: 600px;
 }
-.cast-data-section :nth-child(2){
+.drama-data-section :nth-child(2){
     margin: 2px 0px;
     padding: 0;
     font-size: 11px;
@@ -309,7 +310,7 @@ hr {
     color: #211818;
     font-weight: 600px;
 }
-.cast-data-section :nth-child(3){
+.drama-data-section :nth-child(3){
     margin: 2px 0px;
     padding: 0;
     font-size: 11px;
@@ -317,7 +318,7 @@ hr {
     color: #211818;
     opacity: 0.6;
 }
-.cast-data-section :nth-child(4){
+.drama-data-section :nth-child(4){
     margin: 2px 0px;
     padding: 0;
     font-size: 11px;

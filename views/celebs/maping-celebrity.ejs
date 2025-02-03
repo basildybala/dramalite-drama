@@ -267,7 +267,7 @@
             .then(response => response.json())
             .then(data => {
                 console.log('API Response:', data); // Debugging: Log the API response
-                alert('Data submitted successfully!');
+                window.location.replace(`/drama/<%= movie.dramalink %>`)
             })
             .catch(error => {
                 console.error('Error submitting data:', error); // Debugging: Log any errors

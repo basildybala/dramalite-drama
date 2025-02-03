@@ -191,7 +191,7 @@ exports.mapCelebrityPage=async(req,res)=>{
     try {
         let actors
         let movieId=req.params.movieId
-        const movie = await Movie.findById(movieId, { _id: 1, name: 1 });
+        const movie = await Movie.findById(movieId, { _id: 1, name: 1,dramalink:1 });
         actors =await ActorsMaping.findOne({ movieId })
         .populate({
             path: 'actors.actorid', // Path to populate

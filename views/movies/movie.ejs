@@ -304,7 +304,7 @@
               <% for(var i=0; i<actors?.length; i++){%>
               <div class="cast-section">
                   <a href="/celebs/<%= actors[i].celeblink %>">
-                      <img src="/<%= actors[i].profilePic %>" alt="<%= actors[i].profilePic %>" srcset="" class="cast-image">
+                      <img data-src="/<%= actors[i].profilePic %>" alt="<%= actors[i].profilePic %>" srcset="" class="cast-image lazy-photo">
                   </a>
                   <div class="cast-data-section">
                       <a href="/celebs/<%= actors[i].celeblink %>"> <h3><%= actors[i].actorname %></h3></a>

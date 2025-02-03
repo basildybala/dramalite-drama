@@ -114,7 +114,7 @@ exports.addMovie = async (req, res) => {
             })
             
             let saveMovie=await movie.save()
-            return res.redirect(`/drama/${saveMovie.dramalink}`)
+            return res.redirect(`/devadmin/map-celebrity/${saveMovie._id}`)
         } else {
             if(req.files.moviePoster){
 
@@ -133,7 +133,7 @@ exports.addMovie = async (req, res) => {
                 if(req.files.moviePoster[0]){
                     fileUploadToDrive(process.env.DRAMA_POSTER_DRIVE,req.files.moviePoster[0].filename,req.files.moviePoster[0].mimetype,req.files.moviePoster[0].path)
                 }
-                return res.redirect(`/drama/${saveMovie.dramalink}`)
+                return res.redirect(`/devadmin/map-celebrity/${saveMovie._id}`)
             }else{
                 let movie = await new Movie({
                 name, engname, category, year, releasedate,releaseDate,ottreleasedate, genre, duration, director, directorlink,
@@ -146,7 +146,7 @@ exports.addMovie = async (req, res) => {
                 celebrole6,celebrole7,ytlink,twitLink,twitCode
                 })
                 let saveMovie=await movie.save()
-                return res.redirect(`/drama/${saveMovie.dramalink}`)
+                return res.redirect(`/devadmin/map-celebrity/${saveMovie._id}`)
             }
         }
 
