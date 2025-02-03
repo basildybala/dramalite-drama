@@ -565,6 +565,9 @@
     align-items: center;
 
 }
+.video-js{
+    max-width: 100%;
+}
 .video-js .vjs-big-play-button {
     top:44%;
     left: 36%;
