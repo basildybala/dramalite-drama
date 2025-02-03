@@ -252,14 +252,30 @@
             <% } %>
         </div>
     </div>
-   
 
     <div class="img-sec" id="movies-sec">
         <div class="left-blue-header">
-            <h2>TV Shows</h2>
+            <h2>Drama List</h2>
             <a href="#">View all</a>
         </div>
-        <div class="movies-list">
+        <div class="new-cas-section">
+            <% for(var i=0; i<dramaList?.length; i++){%>
+            <div class="cast-section">
+                <a href="/drama/<%= dramaList[i].movieDetails.dramalink %>">
+                    <img src="/<%= dramaList[i].movieDetails.moviePoster %>" alt="<%= dramaList[i].movieDetails.moviePoster %>"  class="cast-image">
+                </a>
+                <div class="cast-data-section">
+                    <a href="/drama/<%= dramaList[i].movieDetails.dramalink %>"> <h3><%= dramaList[i].movieDetails.name %></h3></a>
+                    <p><%= dramaList[i].movieDetails.year %></p>
+                    <!-- <% for(var k=0; k<dramaList[i]?.movieDetails.genre.length; k++){%>
+                        <p><%= dramaList[i].movieDetails.genre[k] %></p>
+                    <% } %>    -->
+                    
+                </div>
+            </div>
+            <% } %>
+        </div>
+        <!-- <div class="movies-list">
             <% for(var i=0; i<dramaList.length; i++){%>
                 
                 <div class="movie">
@@ -282,7 +298,7 @@
                     </a>
                 </div>
              <% }%>
-        </div>
+        </div> -->
     </div>
     <script>
 

@@ -98,7 +98,7 @@
                     <div class="rate-dettails">
                         <div class="rate-form">
                             <form id="drama-rating-form" action="" method="post">
-                                <input id="movie-rating" type="range" min="1" max="10" step="0.5" class="form-control-rate"
+                                <input id="movie-rating" type="range" min="4" max="10" step="0.5" class="form-control-rate"
                                     name="ratingValue" required="required">
                                 <div id="drama-rating-value" class="value">
                                     100
@@ -665,8 +665,7 @@
 
 
     <script async>
-        // Initialize the Video.js player
-        const player = videojs('videoPlayer');
+
 
  
         const movieRating = document.getElementById('movie-rating')
@@ -713,7 +712,8 @@
             })
         })
 
-
+        // Initialize the Video.js player
+        const player = videojs('videoPlayer');
     </script>
 
 

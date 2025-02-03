@@ -278,3 +278,50 @@ hr {
 
   }
 
+  .cast-image {
+    width: 100px;
+    height: 125px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+.new-cas-section{
+    padding: 5px;
+}
+.cast-section{
+    display: flex;
+}
+.cast-data-section{
+    margin-left: 4px;
+}
+.cast-data-section h3{
+    margin: 2px 0px;
+    padding: 0;
+    font-size: 13px;
+    font-family: 'Poppins', sans-serif;
+    color: #0050C2;
+    font-weight: 600px;
+}
+.cast-data-section :nth-child(2){
+    margin: 2px 0px;
+    padding: 0;
+    font-size: 11px;
+    font-family: 'Poppins', sans-serif;
+    color: #211818;
+    font-weight: 600px;
+}
+.cast-data-section :nth-child(3){
+    margin: 2px 0px;
+    padding: 0;
+    font-size: 11px;
+    font-family: 'Poppins', sans-serif;
+    color: #211818;
+    opacity: 0.6;
+}
+.cast-data-section :nth-child(4){
+    margin: 2px 0px;
+    padding: 0;
+    font-size: 11px;
+    font-family: 'Poppins', sans-serif;
+    color: #211818;
+    opacity: 0.6;
+}

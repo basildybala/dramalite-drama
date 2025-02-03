@@ -1,10 +1,11 @@
-const { isValidObjectId } = require("mongoose")
+const { isValidObjectId, default: mongoose } = require("mongoose")
 const Actor = require("../models/Actor")
 const Movie = require('../models/Movie')
 const { generateOTP } = require("../utils/mail")
 const slugify=require('slugify')
 const { fileUploadToDrive } = require("../config/googleDriveUpload")
 const Redis = require('ioredis');
+const ActorsMaping = require("../models/ActorsMaping")
 const redis =new Redis()
 
 exports.addCelebPage = async (req, res) => {
@@ -206,7 +207,8 @@ exports.showOneCelebrity=async(req,res)=>{
             await redis.set(cacheKey, JSON.stringify(celebrity), 'EX', 7200);
         }
 
-        let dramaList=await this.getCelebrityMoviesList(celebrity.celeblink)
+        let dramaList= await this.getCelebrityDrama(celebrity._id)
+        //await this.getCelebrityMoviesList(celebrity.celeblink)
 
         // let celebrity ={...celebrityDettails,moviesList}
         res.render('celebs/show-one-celebrity',{user,celebrity,dramaList})
@@ -284,5 +286,54 @@ exports.getCelebsDettailsForAddMovie=async(req,res)=>{
     } catch (error) {
         console.log("err in show all celeb Page", error)
         return res.render('utils/err-handle-page', { error: { msg: "something wrong pls inform to admin", link: '/contact' } })
+    }
+}
+exports.getCelebrityDrama=async (celebId)=>{
+    try {
+        console.log(celebId)
+        const result = await ActorsMaping.aggregate([
+            // Unwind the actors array
+            { $unwind: "$actors" },
+            
+            // Match the actorId
+            { $match: { "actors.actorid": mongoose.Types.ObjectId(celebId) } },
+            
+            // Lookup to join the Movie collection
+            {
+                $lookup: {
+                    from: "movies", // The name of the Movie collection
+                    localField: "movieId",
+                    foreignField: "_id",
+                    as: "movieDetails"
+                }
+            },
+            
+            // Unwind the movieDetails array (since lookup returns an array)
+            { $unwind: "$movieDetails" },
+            
+            // Project the required fields
+            {
+                $project: {
+                    _id: 0,
+                    movieId: 1,
+                    "actors.actorid": 1,
+                    "actors.actordramaname": 1,
+                    "actors.actorrole": 1,
+                    "actors.description": 1,
+                    "actors.position": 1,
+                    "movieDetails.name": 1,
+                    "movieDetails.dramalink": 1,
+                    "movieDetails.genre": 1,
+                    "movieDetails.story": 1,
+                    "movieDetails.moviePoster": 1,
+                    "movieDetails.year": 1
+                }
+            }
+        ]);
+
+        return result;
+    } catch (error) {
+        console.log(error)
+        return
     }
 }
