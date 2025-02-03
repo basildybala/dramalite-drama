@@ -156,9 +156,7 @@ exports.deletePlatForm=async(req,res)=>{
 }
 
 exports.actorsMaping = async (req, res) => {
-    console.log("ahia", req.params.movieId);
-    console.log("BODYYYYYYYYYYYY",req.body);
-    
+
     const actorData = req.body;
     const movieId = req.params.movieId;
 
@@ -168,7 +166,6 @@ exports.actorsMaping = async (req, res) => {
 
 
         if (actorsMaping) {
-            console.log("Already had actors data", actorsMaping);
             // Step 1: Remove all existing actors from the array
             actorsMaping.actors = []; // Clear the actors array
             // If the document exists, push the new actor data to the actors array
@@ -207,7 +204,6 @@ exports.mapCelebrityPage=async(req,res)=>{
             actors=[]
         }
 
-        console.log(actors)
         res.render('celebs/maping-celebrity.ejs',{movie,actors})
     } catch (error) {
         console.log("err in add celeb page", error)

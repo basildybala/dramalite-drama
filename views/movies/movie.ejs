@@ -294,8 +294,30 @@
         </div>
     </div>
 
+        <!-------------------CAST SECTION------------------------>
+        <div class="other-sec">
+            <div class="left-blue-header">
+              <h2>Cast</h2>
+            </div>
+      
+            <div class="new-cas-section">
+              <% for(var i=0; i<actors?.length; i++){%>
+              <div class="cast-section">
+                  <a href="/celebs/<%= actors[i].celeblink %>">
+                      <img src="/<%= actors[i].profilePic %>" alt="<%= actors[i].profilePic %>" srcset="" class="cast-image">
+                  </a>
+                  <div class="cast-data-section">
+                      <a href="/celebs/<%= actors[i].celeblink %>"> <h3><%= actors[i].actorname %></h3></a>
+                      <p><%= actors[i].actordramaname %></p>
+                      <p><%= actors[i].actorrole %></p>
+                      <p><%= actors[i].description %> </p>
+                  </div>
+              </div>
+              <% } %>
+            </div>
+        </div>
     <!-------------------CAST SECTION------------------------>
-    <div class="other-sec">
+    <!-- <div class="other-sec">
         <div class="left-blue-header">
             <h2>Cast</h2>
         </div>
@@ -377,7 +399,7 @@
             </div>
         </div>
 
-    </div>
+    </div> -->
 
     <!--------------------------IMAGE SECTION------------->
     <div class="other-sec">

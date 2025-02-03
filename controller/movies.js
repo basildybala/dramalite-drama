@@ -11,6 +11,7 @@ const Redis = require('ioredis');
 const redis =new Redis()
 let Platform=require('../models/WhereToWatch');
 const { getVidoFromTwitter } = require("../config/twitterHandle");
+const ActorsMaping = require("../models/ActorsMaping");
 exports.addMoviePage = async (req, res) => {
     try {
         let user = req.user
@@ -377,6 +378,8 @@ exports.showOneMovie = async (req, res) => {
             rating.rating = rating.rating.toPrecision(2)
         }
 
+        //GET ACTORS 
+        let actors=await this.getActorsFromMapingTable(movie._id)
         //Handle Seo Title
         let dramaTitle;
         if(movie.category == 'Korean'){
@@ -386,7 +389,7 @@ exports.showOneMovie = async (req, res) => {
         }else{
             dramaTitle='Drama'
         }
-        res.render('movies/movie', { movie, rating, review, user,dateNow ,reviews,ongoingDrama,recentlyCompletedDrama,upcomingDramas,dramaTitle})
+        res.render('movies/movie', { movie, rating, review, user,dateNow ,reviews,ongoingDrama,recentlyCompletedDrama,upcomingDramas,dramaTitle,actors})
     } catch (error) {
         console.log("err in MOVIE Page", error)
         return res.render('utils/err-handle-page', { error: { msg: "something wrong pls inform to admin", link: '/contact' } })
@@ -1351,4 +1354,60 @@ exports.getTagsAndGenreData=async(req,res)=>{
         return res.render('utils/err-handle-page', { error: { msg: "something wrong pls inform to admin", link: '/contact' } })
     }
 }
-
+exports.getActorsFromMapingTable=async (movieId)=>{
+    try {
+     let actors 
+         actors = await ActorsMaping.aggregate([
+             {
+                 $match: { movieId: mongoose.Types.ObjectId(movieId) } // Filter by movieId
+             },
+             {
+                 $unwind: "$actors" // Unwind the actors array
+             },
+             {
+                 $lookup: {
+                     from: "actors", // Collection to join (Actor collection)
+                     localField: "actors.actorid", // Field in ActorsMaping
+                     foreignField: "_id", // Field in Actor
+                     as: "actorDetails" // Output array field
+                 }
+             },
+             {
+                 $unwind: "$actorDetails" // Unwind the joined actor details
+             },
+             {
+                 $project: {
+                     _id: 1,
+                     movieId: 1,
+                     actors: {
+                         actordramaname: "$actors.actordramaname",
+                         actorrole: "$actors.actorrole",
+                         position: "$actors.position",
+                         description: "$actors.description",
+                         actorname: "$actorDetails.actorname", // Include actorname from Actor
+                         celeblink: "$actorDetails.celeblink",
+                         profilePic: "$actorDetails.profilePic"
+                     }
+                 }
+             },
+             {
+                 $sort: { "actors.position": 1 } // Sort by position in ascending order
+             },
+             {
+                 $group: {
+                     _id: "$_id",
+                     movieId: { $first: "$movieId" },
+                     actors: { $push: "$actors" } // Group actors back into an array
+                 }
+             }
+         ]).exec();
+         if(actors){
+            return actors=actors[0]?.actors
+         }else{
+            return actors=[]
+         }   
+    } catch (error) {
+        console.log(error)
+        return
+    }
+}
