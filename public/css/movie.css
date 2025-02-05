@@ -868,7 +868,7 @@ font-weight: bold;
     opacity: 0.6;
 }
 .other-sec-two{
-    border: 1px solid rgba(0, 0, 0, .125);
+    border-bottom: 1px solid rgba(0, 0, 0, .125);
     width: 360px;
     margin: 0px auto;
     /* position: sticky;
