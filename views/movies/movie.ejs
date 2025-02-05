@@ -65,12 +65,31 @@
     <div class="err-msg">
         <div class="msg "></div>
     </div>
-    <div class="drama-main">
+    <div class="drama-main" id="#overview">
         <div class="blue-header">
             <h1>
                 <%= movie.name %>
             </h1>
         </div>
+          <!--------------------------------Movie Sub header---------------------->
+  <div class="other-sec-two">
+    <div class="nav-bar-sticky ">
+      <ul>
+        
+        <div class="nav-swiper">
+          <li><a href="#overview" title="Drama Overview">Overview</a></li>
+          <li><a href="#cast-section-two" title="Drama Cast Section">Cast</a></li>
+          <li><a href="#images-section" title="Drama Images section link">Images</a></li>
+          <% if(movie.ytlink) { %>
+            <li><a href="#trailer-section" title="Drama Trailer section link">Trailer </a></li>
+            <% } %>
+          
+          <li><a href="#video-section" title="Drama Video section link">Videos</a></li>
+          <li><a href="#review" title="Drama Review Section link">Reviews</a></li>
+        </div>
+      </ul>
+    </div>
+  </div>
         <div class="fst-sec">
             <div class="drama-poster">
                 <% if( movie.moviePoster && String(movie.moviePoster).trim()) { %>
@@ -295,7 +314,7 @@
     </div>
 
         <!-------------------CAST SECTION------------------------>
-        <div class="other-sec">
+        <div class="other-sec" id="cast-section-two">
             <div class="left-blue-header">
               <h2>Cast</h2>
             </div>
@@ -402,7 +421,7 @@
     </div> -->
 
     <!--------------------------IMAGE SECTION------------->
-    <div class="other-sec">
+    <div class="other-sec" id="images-section">
         <div class="left-blue-header">
             <h2>Images</h2>
             <a href="/drama/<%= movie.dramalink%>/drama-images">View all</a>
@@ -446,7 +465,7 @@
     
     <!-----------------------TRAILER SECTION------------------->
     <% if(movie.ytlink) { %>
-    <div class="other-sec">
+    <div class="other-sec" id="trailer-section">
         <div class="left-blue-header">
             <h2>Trailer</h2>
         </div>
@@ -459,7 +478,7 @@
     <% } %>
     <% if(movie.twitLink[0]){%>
     <!--------------------------------VIDEO SECTION---------------->
-    <div class="other-sec">
+    <div class="other-sec" id="video-section">
         <div class="left-blue-header">
             <h2>Videos</h2>
         </div>

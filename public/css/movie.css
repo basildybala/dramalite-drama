@@ -867,3 +867,12 @@ font-weight: bold;
     color: #211818;
     opacity: 0.6;
 }
+.other-sec-two{
+    border: 1px solid rgba(0, 0, 0, .125);
+    width: 360px;
+    margin: 0px auto;
+    /* position: sticky;
+    top: 61px;
+    z-index: 9999999; */
+
+}
