@@ -1,21 +1,21 @@
 <%- include('../partials/header'); -%>
 
 <link rel="stylesheet" href="/css/movie.css">
-<title><%= movie.engname %> <%= dramaTitle %>: Release Date, Episodes, Cast, Reviews and More</title>
-<meta name="title" content="<%= movie.engname %> <%= dramaTitle %>: Release Date, Episodes, Cast, Reviews and More"/>
+<title><%= movie.engname %> <%= dramaTitle %>: Episodes, Cast,Release Date, Reviews and More</title>
+<meta name="title" content="<%= movie.engname %> <%= dramaTitle %>: Episodes, Cast,Release Date, Reviews and More"/>
 <meta name="description" content="<%= movie.genre %> <%= movie.engname %> <%= dramaTitle %>. <%= movie.story %>">
+<meta property="og:image" itemid="image" content="https://dramalite.com/<%= movie.moviePoster %>">
 <meta name="keywords" content="<%= movie.engname %> Kdrama, <%= movie.engname %> <%= movie.category %>, <%= movie.engname %> Release Date, <%= movie.engname %> Episodes, <%= movie.engname %> Cast, <%= movie.engname %> Reviews, <%= movie.category %> Drama, <%= movie.dramaTitle%>, <%= movie.engname %> <%= movie.genre %>">
 
 <meta name="news_keywords" content="<%= movie.engname %> Kdrama, <%= movie.engname %> <%= movie.category %>, <%= movie.engname %> Release Date, <%= movie.engname %> Episodes, <%= movie.engname %> Cast, <%= movie.engname %> Reviews, <%= movie.category %> Drama, <%= movie.dramaTitle%>, <%= movie.engname %> <%= movie.genre %>"/>
-<meta property="og:title" content="<%= movie.engname %> <%= dramaTitle %>: Release Date, Episodes, Cast, Reviews & More ">
+<meta property="og:title" content="<%= movie.engname %> <%= dramaTitle %>: Episodes, Cast,Release Date, Reviews and More ">
 <meta property="og:site_name" content="DramaLite.Com ">
 <meta property="og:url" content="https://dramalite.com/drama/<%= movie.dramalink %>">
 <meta property="og:description" content="<%= movie.genre %> <%= movie.engname %> <%= dramaTitle %>. <%= movie.story %>">
 <meta property="og:type" content="video.movie">
-<meta property="og:image" itemid="image" content="https://dramalite.com/<%= movie.moviePoster %>">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:site" content="Dramalite.com">
-<meta name="twitter:title" content="<%= movie.engname %> <%= dramaTitle %>: Release Date, Episodes, Cast, Reviews & More ">
+<meta name="twitter:title" content="<%= movie.engname %> <%= dramaTitle %>: Episodes, Cast,Release Date, Reviews and More ">
 <meta name="twitter:description" content="<%= movie.genre %> <%= movie.engname %> <%= dramaTitle %>. <%= movie.story %>">
 <meta name="twitter:image" content="https://dramalite.com/<%= movie.moviePoster %>">
 <meta name="twitter:url" content="https://dramalite.com/drama/<%= movie.dramalink %>">
