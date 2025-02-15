@@ -1027,12 +1027,15 @@ exports.getOngoingDrama = async (page = 1, limit = 15) => {
                     {
                         // Case 1: episodeEndDate exists, and current date is within the range
                         releaseDate: { $lte: dateNow },
-                        episodeEndDateStamp: { $gte: oneDayAgo }
+                        episodeEndDateStamp: { $gte: oneDayAgo, $exists: true }
                     },
                     {
-                        // Case 2: episodeEndDate is missing and release date is within the last 30 days
-                        episodeEndDateStamp: { $exists: false },
-                        releaseDate: { $lte: thirtyDaysAgo }
+                        // Case 2: episodeEndDate is missing or null, and release date is within the last 30 days
+                        $or: [
+                            { episodeEndDateStamp: { $exists: false } },
+                            { episodeEndDateStamp: null }
+                        ],
+                        releaseDate: { $lte: dateNow, $gte: thirtyDaysAgo }
                     }
                 ]
             })

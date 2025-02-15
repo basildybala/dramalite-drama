@@ -10,7 +10,7 @@ const movieSchema = mongoose.Schema(
     moviePoster: {type: String},
     releasedate: {type: String,trim: true,},
     episodeEndDate: {type: String,trim: true,},
-    episodeEndDateStamp: {type: Number,trim: true,},
+    episodeEndDateStamp: {type: Number,trim: true,default: null },
     releaseDate: {type: Number,trim: true,},
     year: {type: Number,trim: true,},
     readmorestory: {type: String,trim: true,},
