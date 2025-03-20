@@ -57,8 +57,7 @@ A dynamic web platform for rating and reviewing Korean Dramas and Chinese Dramas
 <br>
 
 ### Live Demo - [DRAMALITE.COM](https://dramalite.com/)
-- [Express](https://expressjs.com/)
-- [Redis](https://redis.io/)
+
 
 ### Technologies
 
@@ -171,18 +170,13 @@ A dynamic web platform for rating and reviewing Korean Dramas and Chinese Dramas
     └───view-all  
   
 
-```
 
 ## References
-
 - [EJS](https://ejs.co/)
 - [MongoDB](https://www.mongodb.com/)
 - [JWT](https://jwt.io/)
 - [Express](https://expressjs.com/)
 - [Redis](https://redis.io/)
-
----
-
 
 
 
