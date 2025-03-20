@@ -179,13 +179,11 @@ A dynamic web platform for rating and reviewing Korean Dramas and Chinese Dramas
 - [JWT](https://jwt.io/)
 - [Express](https://expressjs.com/)
 - [Redis](https://redis.io/)
+- [DRAMALITE.COM](https://dramalite.com/)
 
 ---
 
-## Author Info
 
-- LinkedIn - [Harshid Basil](https://www.linkedin.com/in/harshidbasil)
-- Github - [Basil](https://github.com/basildybala)
 
 
 #### [Back To The Top](#DRAMALITE.COM)
