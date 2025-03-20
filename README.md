@@ -4,7 +4,7 @@
 ## Demo
 <br>
 <p align="center">
-  <img  src="/images/other/ScreenShot4.jpg"  > 
+  <img  src="/public/images/other/ScreenShot4.jpg"  > 
 </p>
 <br>
 
@@ -13,14 +13,14 @@
 📖 **How to Use the Drama Website** 
 <br>
 <p align="center">
-  <img  src="/images/other/ScreenShot1.png"  > 
+  <img  src="/public/images/other/ScreenShot1.png"  > 
 </p>
 <br>
 
 1️⃣ **Add a New Drama**
 <br>
 <p align="center">
-  <img  src="/images/other/ScreenShot2.png"  > 
+  <img  src="/public/images/other/ScreenShot2.png"  > 
 </p>
 <br>
 Navigate to the "Add Drama" page.
@@ -31,7 +31,7 @@ The Genre and Tags fields will automatically display available options for easy 
 
 <br>
 <p align="center">
-  <img  src="/images/other/ScreenShot3.png"  > 
+  <img  src="/public/images/other/ScreenShot3.png"  > 
 </p>
 <br>
 Go to the "Map Drama to Cast" page.
@@ -176,9 +176,10 @@ A dynamic web platform for rating and reviewing Korean Dramas and Chinese Dramas
 
 - [EJS](https://ejs.co/)
 - [MongoDB](https://www.mongodb.com/)
-- [JWT](https://jwt.io//)
+- [JWT](https://jwt.io/)
 - [Express](https://expressjs.com/)
 - [Redis](https://redis.io/)
+
 
 ---
 
