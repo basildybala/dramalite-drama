@@ -381,14 +381,18 @@ exports.showOneMovie = async (req, res) => {
         //GET ACTORS 
         let actors=await this.getActorsFromMapingTable(movie._id)
         //Handle Seo Title
-        let dramaTitle;
+        let dramaTitle={};
+
         if(movie.category == 'Korean'){
-            dramaTitle='Kdrama'
+            dramaTitle.v1='Kdrama'
+            dramaTitle.v2='Korean Drama'
         }else if(movie.category =='Chinese'){
-            dramaTitle='Cdrama'
+            dramaTitle.v1='Cdrama'
+            dramaTitle.v2='Chinese Drama'
         }else{
-            dramaTitle='Drama'
+            dramaTitle.v1='Drama'
         }
+
         res.render('movies/movie', { movie, rating, review, user,dateNow ,reviews,ongoingDrama,recentlyCompletedDrama,upcomingDramas,dramaTitle,actors})
     } catch (error) {
         console.log("err in MOVIE Page", error)
