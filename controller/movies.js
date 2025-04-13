@@ -349,7 +349,8 @@ exports.showOneMovie = async (req, res) => {
             // Cache the movie data with a 1-hour expiration
             await redis.set(cacheKey, JSON.stringify(movie), 'EX', 3600);
         }
-        let dateNow=Date.now()
+        let dateNow = Date.now(); // current timestamp in ms
+        let oneDayAgo = dateNow - (24 * 60 * 60 * 1000); // subtract 1 day in ms
 
         //GET ALL REVIEWS AGGREGaTION
         
@@ -393,7 +394,7 @@ exports.showOneMovie = async (req, res) => {
             dramaTitle.v1='Drama'
         }
 
-        res.render('movies/movie', { movie, rating, review, user,dateNow ,reviews,ongoingDrama,recentlyCompletedDrama,upcomingDramas,dramaTitle,actors})
+        res.render('movies/movie', { movie, rating, review, user,oneDayAgo ,reviews,ongoingDrama,recentlyCompletedDrama,upcomingDramas,dramaTitle,actors})
     } catch (error) {
         console.log("err in MOVIE Page", error)
         return res.render('utils/err-handle-page', { error: { msg: "something wrong pls inform to admin", link: '/contact' } })
@@ -922,7 +923,8 @@ exports.searchMovie= async (req,res)=>{
                          year:1,
                          genre:1,
                          moviePoster:1,
-                        episodes:1
+                        episodes:1,
+                        dramalink:1,
 
                     }
             },

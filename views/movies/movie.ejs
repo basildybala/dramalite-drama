@@ -98,7 +98,7 @@
                         <img data-src="/images/other/poster-not-available.jpg" alt=" <%= movie.name %> Poster" class="lazy-photo">
                 <% } %>
             </div>
-            <% if(movie.releaseDate < dateNow){%>
+            <% if(movie.releaseDate < oneDayAgo){%>
             <!--------RATE SECTION-------------------------------->
           
                 <div class="rate-section">
@@ -497,7 +497,7 @@
         </div>
     </div>
     <% } %>
-    <% if(movie.releaseDate < dateNow){%>
+    <% if(movie.releaseDate < oneDayAgo){%>
     <!----------------------NEW REVIEW SECTION----------------->
     <div class="other-sec" id="review">
         <div class="left-blue-header">

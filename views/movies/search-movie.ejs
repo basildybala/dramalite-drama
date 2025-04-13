@@ -22,7 +22,7 @@
   <div class="flex">
       <% drama.forEach(function(drama) { %>
           <div class="dramas">
-              <a  href="/drama/<%= drama._id %>">
+              <a  href="/drama/<%= drama.dramalink %>">
                   <div class="drama-s">
                       <img data-src="/<%= drama.moviePoster %>" alt="" class="lazy-photo">
                       <h2><%= drama.name %></h2>
