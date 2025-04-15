@@ -194,12 +194,12 @@
                         if (data.complete) {
                             $('.msg').addClass('success').text(data.msg);
                             setTimeout(function () {
-                                window.location.replace(`/drama/<%= movie._id %>#review`)
+                                window.location.replace(`/drama/<%= movie.dramalink %>#review`)
                             }, 1500)
                         } else {
                             $('.msg').addClass('error').text(data.msg);
                             setTimeout(function () {
-                                window.location.replace(`/drama/write-review/<%= movie._id %>`)
+                                window.location.replace(`/drama/write-review/<%= movie.dramalink %>`)
                             }, 3000)
                         }
 

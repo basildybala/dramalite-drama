@@ -530,6 +530,7 @@ exports.likeReview= async (req,res)=>{
         let reviewUserId = req.body.reviewUserId
         let movieId = req.body.movieId
         let review = await Review.findOne({ movieId: movieId })
+        let movie = await Movie.findOne({ _id: movieId })
         if (review) {
             let likedReview = await review.review.find(
                 (u) => u.userId == reviewUserId
@@ -538,7 +539,7 @@ exports.likeReview= async (req,res)=>{
                 (u) => u == currentUserId
             )
             if (liked) {
-                return res.redirect(`/drama/${movieId}#review`)
+                return res.redirect(`/drama/${movie.dramalink}#review`)
             } else {
                 await Review.findOneAndUpdate(
                     {
@@ -557,11 +558,11 @@ exports.likeReview= async (req,res)=>{
                         new: true,
                     }
                 )
-                return res.redirect(`/drama/${movieId}#review`)
+                return res.redirect(`/drama/${movie.dramalink}#review`)
             }
     
         } else {
-            return res.redirect(`/drama/${movieId}#review`)
+            return res.redirect(`/drama/${movie.dramalink}#review`)
         }
     } catch (error) {
         console.log("err in like review", error)
@@ -575,6 +576,7 @@ exports.dislikeReview= async (req,res)=>{
         let reviewUserId = req.body.reviewUserId
         let movieId = req.body.movieId
         let review = await Review.findOne({ movieId: movieId })
+        let movie = await Movie.findOne({ _id: movieId })
         if (review) {
             let unlikedReview = await review.review.find(
                 (u) => u.userId == reviewUserId
@@ -583,7 +585,7 @@ exports.dislikeReview= async (req,res)=>{
                 (u) => u == currentUserId
             )
             if (liked) {
-                return res.redirect(`/drama/${movieId}#review`)
+                return res.redirect(`/drama/${movie.dramalink}#review`)
             } else {
                 await Review.findOneAndUpdate(
                     {
@@ -602,7 +604,7 @@ exports.dislikeReview= async (req,res)=>{
                         new: true,
                     }
                 )
-                return res.redirect(`/drama/${movieId}#review`)
+                return res.redirect(`/drama/${movie.dramalink}#review`)
                 // }
             }
     
@@ -1418,5 +1420,75 @@ exports.getActorsFromMapingTable=async (movieId)=>{
     } catch (error) {
         console.log(error)
         return
+    }
+}
+exports.tagsDramaPage= async (req,res)=>{
+    try {
+        let user=req.user
+        let tags=req.params.tags
+
+         // Get page and limit parameters from the query string
+             const page = parseInt(req.query.page) || 1;  // Default to page 1 if no page param
+             const limit = 15;  // Default to 10 items per page
+             const sort=req.query.sort
+
+             const aggregationPipeline = [
+                 {  $match: {
+                    tags: { $elemMatch: { $regex: tags, $options: "i" } }
+                } },  // Filter by category 'Malayalam'
+                 {$project:
+                     {
+                         _id:1,
+                         name:1,
+                         category:1,
+                         releasedate:1,
+                         year:1,
+                         genre:1,
+                         moviePoster:1,
+                        episodes:1,
+                        dramalink:1,
+                        releaseDate:1
+
+                    }
+            },
+            {
+                $sort: {
+                  releaseDate: -1 // -1 for newest first, 1 for oldest first
+                }
+            },
+            {
+                $facet: {
+                    movies: [  // Paginate the movies
+                        { $skip: (page - 1) * limit },  // Skip based on the current page
+                        { $limit: limit },  // Limit the number of items per page
+                    ],
+                    total: [  // Count the total number of movies matching the filter (without pagination)
+                        { $count: 'totalCount' }
+                    ]
+                }
+            }
+        ];
+                    
+        // Perform the aggregation query
+        const result = await Movie.aggregate(aggregationPipeline);
+                    
+        // Get the paginated movies and total count
+        const movies = result[0].movies;
+        const totalMovies = result[0].total.length ? result[0].total[0].totalCount : 0;
+        const totalPages = Math.ceil(totalMovies / limit);
+        
+        
+
+        res.render('movies/tags-drama', {
+            drama: movies,
+            currentPage: page,
+            totalPages: totalPages,
+            totalMovies: totalMovies,
+            limit: limit,user,tags
+        });
+
+    } catch (error) {
+        console.log("err in show all celeb Page", error)
+        return res.render('utils/err-handle-page', { error: { msg: "something wrong pls inform to admin", link: '/contact' } })
     }
 }

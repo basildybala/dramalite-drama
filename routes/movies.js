@@ -1,7 +1,8 @@
 const { addCelebPage, addCeleb, editCelebrityPage, editCelebrity, showAllCelebrityPage, deleteCelebrity,showOneCelebrity } = require('../controller/celeb');
 const { addMoviePage, addMovie, updateMovie, editMoviePage, deleteMovie, showAllMoviesPage ,showOneMovie,getAllMovieReview,writeReviewPage,writeReview,
     addRating,likeReview,dislikeReview, movieAllImages,searchMovie, searchMoviePage,
-    getTagsAndGenreData} = require('../controller/movies');
+    getTagsAndGenreData,
+    tagsDramaPage} = require('../controller/movies');
 const { isUser, isAdmin, isAuth, ajaxIsAuth } = require('../middlewares/auth');
 const { uploadImage } = require('../middlewares/multer');
 
@@ -73,8 +74,8 @@ router.get('/:dramalink/drama-images/',isUser,movieAllImages)
 //GET ONE Movie
 router.get('/:dramalink',isUser,showOneMovie) 
 
-
-
+//Get Tags wise Darama
+router.get('/tags/:tags',isUser,tagsDramaPage)
 
 
 

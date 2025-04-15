@@ -303,7 +303,8 @@
                                     <h4>Themes</h4>
                                     <span style="margin-left: 5px;">
                                         <% for (var i = 0; i < movie.tags.length; i++) { %>
-                                            <%= movie.tags[i] %><%= (i < movie.tags.length - 1 ? ', ' : '') %>
+                                            <a href="/drama/tags/<%= movie.tags[i] %>"><%= movie.tags[i] %><%= (i < movie.tags.length - 1 ? ', ' : '') %></a>
+                                            
                                         <% } %>
                                     </span>
                                 </div>
