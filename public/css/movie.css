@@ -238,6 +238,14 @@
     color: #0050C2 !important;
     font-weight: 400;
 }
+.tags-header a{
+    font-size: 15px;
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    --mdb-text-opacity: 1;
+    color: #0050C2 !important;
+    font-weight: 400;
+}
 .dettails-tag {
     width: 70%;
     display: flex;
