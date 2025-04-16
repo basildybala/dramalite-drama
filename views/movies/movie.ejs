@@ -687,52 +687,53 @@
 
     <script async>
 
+        const isReleased = "<%= movie.releaseDate < oneDayAgo ? 'true' : 'false' %>";
+        if(isReleased === 'true'){
+            const movieRating = document.getElementById('movie-rating')
+            
+            const movieRatingValue = document.getElementById('drama-rating-value')
+            
+            movieRatingValue.textContent = 0
+    
+            movieRating.oninput = function () {
+                movieRatingValue.textContent = this.value
+            }
 
- 
-        const movieRating = document.getElementById('movie-rating')
+            $(document).ready(function () {
+                $('#drama-rating-form').submit(function (event) {
+                    event.preventDefault()
+                    var formData = $(this).serialize();
+                    $.ajax({
+                        url: `/drama/add-rating`,
+                        type: 'POST',
+                        headers:"Authorization",
+                        data: formData,
+                        success: function (data) {
 
-        const movieRatingValue = document.getElementById('drama-rating-value')
-
-        movieRatingValue.textContent = 0
-  
-        movieRating.oninput = function () {
-            movieRatingValue.textContent = this.value
-        }
-
-        $(document).ready(function () {
-            $('#drama-rating-form').submit(function (event) {
-                event.preventDefault()
-                var formData = $(this).serialize();
-                $.ajax({
-                    url: `/drama/add-rating`,
-                    type: 'POST',
-                    headers:"Authorization",
-                    data: formData,
-                    success: function (data) {
-
-                        
-                        if (data.complete) {
-                            $('.msg').addClass('success').text(data.msg);
-                            setTimeout(function () {
-                                $('.msg').removeClass('success').text('');
-                            }, 1500)
-                        } else if(data.auth){
-                            $('.msg').addClass('error').text(data.msg);
-                            setTimeout(function(){
-                            	window.location.replace(`/auth/login`)
-                            },2000)
-                        } else{
-                            $('.msg').addClass('error').text(data.msg);
-                            setTimeout(function () {
-                                $('.msg').removeClass('error').text('');
-                            }, 3000)
+                            
+                            if (data.complete) {
+                                $('.msg').addClass('success').text(data.msg);
+                                setTimeout(function () {
+                                    $('.msg').removeClass('success').text('');
+                                }, 1500)
+                            } else if(data.auth){
+                                $('.msg').addClass('error').text(data.msg);
+                                setTimeout(function(){
+                                    window.location.replace(`/auth/login`)
+                                },2000)
+                            } else{
+                                $('.msg').addClass('error').text(data.msg);
+                                setTimeout(function () {
+                                    $('.msg').removeClass('error').text('');
+                                }, 3000)
+                            }
+                            
                         }
-
-                    }
+                    })
                 })
             })
-        })
 
+        }
         // Initialize the Video.js player
         const player = videojs('videoPlayer');
     </script>

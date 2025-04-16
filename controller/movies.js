@@ -173,7 +173,7 @@ exports.updateMovie = async (req, res) => {
     try {
         let movieId = req.params.movieId
         let findMovie=await Movie.findById(movieId)
-
+    
         //Deleting redis cache
         const cacheKey = `drama:${findMovie.dramalink}`;
         const cacheKeyOfNexRelease = `nextrelease_page_1_limit_6`; 
