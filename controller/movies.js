@@ -1269,7 +1269,7 @@ exports.nextRelease= async (req,res)=>{
 exports.recentlyCompletedDramaPage= async (req,res)=>{
     try {
         let user=req.user
-        let dramas=await this.recentlyCompletedDramas()
+        let dramas=await this.recentlyCompletedDramas(req.query.page)
 
         res.render('view-all/last-released.ejs', {
             drama: dramas.dramas,
