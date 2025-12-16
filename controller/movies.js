@@ -1492,3 +1492,14 @@ exports.tagsDramaPage= async (req,res)=>{
         return res.render('utils/err-handle-page', { error: { msg: "something wrong pls inform to admin", link: '/contact' } })
     }
 }
+
+//About us Page
+exports.aboutUsPage= async (req,res)=>{
+    try {
+        let user=req.user
+        res.render('utils/about-us',{user})
+    } catch (error) {
+        console.log("err in about us page", error)
+        return res.render('utils/err-handle-page', { error: { msg: "something wrong pls inform to admin", link: '/contact' } })
+    }
+}

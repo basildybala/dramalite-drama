@@ -2,7 +2,7 @@ const { homePage ,downloadImage,malayalamMoviesPage, tamilMoviesPage, hindiMovie
 ,adminPage,
 koreanDramaPage,chineseDramaPage,
 viewAllDrama} = require('../controller/home');
-const { searchMoviePage, searchMovie, termsConditionsPage, privacyPolicyPage, contactPage, latestUpdate, nextRelease, lastRelease, ongoingDramas, recentlyCompletedDramaPage, getNextRelease, upcomingDramas } = require('../controller/movies');
+const { searchMoviePage, searchMovie, termsConditionsPage, privacyPolicyPage, contactPage, latestUpdate, nextRelease, lastRelease, ongoingDramas, recentlyCompletedDramaPage, getNextRelease, upcomingDramas, aboutUsPage } = require('../controller/movies');
 const { isUser, isAdmin, isAuth } = require('../middlewares/auth');
 
 const router = require('express').Router()
@@ -68,6 +68,9 @@ router.get('/terms-conditions',isUser,termsConditionsPage)
 
 //PRICVACY POLICY
 router.get('/privacy-policy',isUser,privacyPolicyPage)
+
+//ABOUT US
+router.get('/about-us',isUser,aboutUsPage)
 
 //CONTACT
 router.get('/contact',isUser,contactPage) 
