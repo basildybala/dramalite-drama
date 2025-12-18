@@ -22,6 +22,23 @@
 <link rel="canonical" href="https://dramalite.com/drama/<%= movie.dramalink %>"/>
 <link href="https://vjs.zencdn.net/8.3.0/video-js.css" rel="stylesheet" >
 <script src="https://vjs.zencdn.net/8.3.0/video.min.js"></script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6183162891331331"
+     crossorigin="anonymous"></script>
+<!------------------AD RUN Only when Cusotmer is scroll--------------->
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  let ads = document.querySelectorAll('.adsbygoogle');
+  let observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        (adsbygoogle = window.adsbygoogle || []).push({});
+        observer.unobserve(entry.target);
+      }
+    });
+  });
+  ads.forEach(ad => observer.observe(ad));
+});
+</script>
 
 
 <script type="application/ld+json" async>
@@ -160,6 +177,8 @@
 
                     </div>
 
+                    <!-------------------AD SECTION ARTICLE-->
+                    <%- include('../utils/ad-article'); -%>
                     <hr>
 
                     <div class="dettails-section">
@@ -320,7 +339,8 @@
             <div class="left-blue-header">
               <h2>Cast</h2>
             </div>
-      
+            <!-------------------AD SECTION ARTICLE-->
+            <%- include('../utils/ad-320x50'); -%>
             <div class="new-cas-section">
               <% for(var i=0; i<actors?.length; i++){%>
               <div class="cast-section">
