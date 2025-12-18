@@ -1,19 +1,36 @@
 <style>
-    .ad-section{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
+ /* === AdSense Fix === */
+.ad-container {
+  width: 100%;
+  overflow: hidden;
+  margin: 24px 0;
+  display: block;
+  clear: both;
+}
+
+/* In-article ads */
+.ad-in-article {
+  min-height: 250px; /* VERY IMPORTANT */
+}
+
+/* Mobile safety */
+@media (max-width: 768px) {
+  .ad-in-article {
+    min-height: 280px;
+  }
+}
+
 </style>
 
 
-<div class="ad-section">
+<div class="ad-container ad-in-article">
     <!-- 320.50 -->
     <ins class="adsbygoogle"
     style="display:inline-block;width:320px;height:50px"
     data-ad-client="ca-pub-6183162891331331"
     data-ad-slot="3345546232"></ins>
+</div>
+
     <script>
         (adsbygoogle = window.adsbygoogle || []).push({});
     </script>
-</div>
