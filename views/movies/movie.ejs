@@ -339,8 +339,6 @@ document.addEventListener("DOMContentLoaded", function () {
             <div class="left-blue-header">
               <h2>Cast</h2>
             </div>
-            <!-------------------AD SECTION ARTICLE-->
-            <%- include('../utils/ad-320x50'); -%>
             <div class="new-cas-section">
               <% for(var i=0; i<actors?.length; i++){%>
               <div class="cast-section">
@@ -356,7 +354,10 @@ document.addEventListener("DOMContentLoaded", function () {
               </div>
               <% } %>
             </div>
+            <!-------------------AD DISPALAY RESPONSIVE-->
+            <%- include('../utils/ad-display-responsive'); -%>
         </div>
+            
     <!-------------------CAST SECTION------------------------>
     <!-- <div class="other-sec">
         <div class="left-blue-header">
